@@ -252,7 +252,15 @@ Void TSysuAnalyzerOutput::xWriteOutTUInfo  ( TComDataCU* pcCU, Int iLength, Int 
 Void TSysuAnalyzerOutput::writeOutSps   ( TComSPS* pcSPS )
 {
 #if (HM_VERSION >= 100)
-  m_cSpsOut << "Resolution:"   << pcSPS->getPicWidthInLumaSamples() << "x" << pcSPS->getPicHeightInLumaSamples() << endl;
+    m_cSpsOut << "Resolution:"
+              << (pcSPS->getPicWidthInLumaSamples()
+                  - pcSPS->getConformanceWindow().getWindowLeftOffset()
+                  - pcSPS->getConformanceWindow().getWindowRightOffset())
+              << "x"
+              << (pcSPS->getPicHeightInLumaSamples()
+                  - pcSPS->getConformanceWindow().getWindowTopOffset()
+                  - pcSPS->getConformanceWindow().getWindowBottomOffset())
+              << endl;
 #else
   m_cSpsOut << "Resolution:"   << pcSPS->getWidth() << "x" << pcSPS->getHeight() << endl;
 #endif
@@ -270,6 +278,14 @@ Void TSysuAnalyzerOutput::writeOutSps   ( TComSPS* pcSPS )
 
   m_cSpsOut << "Input Bit Depth:"  << iInputBitDepth  << endl;
 
+#if HM_VERSION >= 100
+  m_cSpsOut << "Input Chroma Format:" << pcSPS->getChromaFormatIdc() << endl;
+  m_cSpsOut << "Input Conformance Window: l " << pcSPS->getConformanceWindow().getWindowLeftOffset()
+            << ", r " << pcSPS->getConformanceWindow().getWindowRightOffset() << ", t "
+            << pcSPS->getConformanceWindow().getWindowTopOffset() << ", b "
+            << pcSPS->getConformanceWindow().getWindowBottomOffset() << endl;
+#endif
+  m_cSpsOut << "HM_VERSOIN: " << HM_VERSION << endl;
 }
 
 
