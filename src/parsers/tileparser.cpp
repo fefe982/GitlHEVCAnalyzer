@@ -1,6 +1,6 @@
 #include "tileparser.h"
 #include <QRegExp>
-
+#include <QIODevice>
 
 TileParser::TileParser(QObject *parent) :
     QObject(parent)

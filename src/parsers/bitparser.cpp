@@ -1,5 +1,6 @@
 #include "bitparser.h"
 #include <QRegExp>
+#include <QIODevice>
 
 BitParser::BitParser(QObject *parent) :
     QObject(parent)

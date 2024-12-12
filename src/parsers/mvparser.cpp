@@ -1,5 +1,6 @@
 #include "mvparser.h"
 #include <QRegExp>
+#include <QIODevice>
 
 MVParser::MVParser(QObject *parent) :
     QObject(parent)

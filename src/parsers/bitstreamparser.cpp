@@ -7,6 +7,7 @@
 #include <QFileInfo>
 #include <QDebug>
 #include <QApplication>
+#include <QRegExp>
 
 BitstreamParser::BitstreamParser(QObject *parent):
     m_cDecoderProcess(this)

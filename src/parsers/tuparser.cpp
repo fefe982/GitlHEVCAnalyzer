@@ -1,6 +1,7 @@
 #include "tuparser.h"
 #include <QRegExp>
 #include <QDebug>
+#include <QIODevice>
 
 #define TU_SLIPT_FLAG 99
 

@@ -3,6 +3,7 @@
 #include <QRegExp>
 #include <QtAlgorithms>
 #include <QDebug>
+#include <QIODevice>
 #define CU_SLIPT_FLAG 99      ///< CU splitting flag in file
 
 /// for CU sorting in Addr ascending order
@@ -73,7 +74,7 @@ bool CUPUParser::parseFile(QTextStream* pcInputStream, ComSequence* pcSequence)
         }        
 
         /// sort LCU in ascendning order
-        qSort(pcFrame->getLCUs().begin(), pcFrame->getLCUs().end(), xCUSortingOrder);
+        std::sort(pcFrame->getLCUs().begin(), pcFrame->getLCUs().end(), xCUSortingOrder);
 
     }
 

@@ -127,7 +127,7 @@ void DecoderGeneralParser::xSortByFrameCount( ComSequence* pcSequence )
 
     /// sort each IDRGroup
     for(int i = 0; i < cIDRGroup.size()-1; i++)
-        qSort(cIDRGroup[i], cIDRGroup[i+1], xFrameSortingOrder);
+        std::sort(cIDRGroup[i], cIDRGroup[i+1], xFrameSortingOrder);
 
     /// assign frame num
     for(int i = 0; i < pcSequence->getFramesInDisOrder().size(); i++)

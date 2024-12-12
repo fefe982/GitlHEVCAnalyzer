@@ -1,6 +1,8 @@
 #include "intraparser.h"
 #include <QRegExp>
 #include <QDebug>
+#include <QIODevice>
+
 IntraParser::IntraParser(QObject *parent) :
     QObject(parent)
 {
