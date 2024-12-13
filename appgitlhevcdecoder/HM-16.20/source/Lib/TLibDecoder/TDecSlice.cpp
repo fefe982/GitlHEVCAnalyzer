@@ -37,7 +37,9 @@
 
 #include "TDecSlice.h"
 #include "TDecConformance.h"
-
+#if ENABLE_ANAYSIS_OUTPUT
+#include "TLibSysuAnalyzer/TSysuAnalyzerOutput.h"
+#endif
 //! \ingroup TLibDecoder
 //! \{
 
@@ -85,8 +87,10 @@ Void TDecSlice::decompressSlice(TComInputBitstream** ppcSubstreams, TComPic* pcP
   m_pcEntropyDecoder->resetEntropy      (pcSlice);
 
   // decoder doesn't need prediction & residual frame buffer
+#if !ENABLE_ANAYSIS_OUTPUT
   pcPic->setPicYuvPred( 0 );
   pcPic->setPicYuvResi( 0 );
+#endif
 
 #if ENC_DEC_TRACE
   g_bJustDoIt = g_bEncDecTraceEnable;
@@ -210,9 +214,14 @@ Void TDecSlice::decompressSlice(TComInputBitstream** ppcSubstreams, TComPic* pcP
         pcSbacDecoder->parseSAOBlkParam( saoblkParam, sliceEnabled, leftMergeAvail, aboveMergeAvail, pcSlice->getSPS()->getBitDepths());
       }
     }
-
+#if ENABLE_ANAYSIS_OUTPUT
+    UInt uiBefore = ppcSubstreams[uiSubStrm]->getByteLocation();
+    TSysuAnalyzerOutput::getInstance()->aiCUBits.clear();
+    m_pcCuDecoder->decodeCtu(ppcSubstreams[uiSubStrm], pCtu, isLastCtuOfSliceSegment);
+    pCtu->getTotalBits() = ppcSubstreams[uiSubStrm]->getByteLocation() - uiBefore;
+#else
     m_pcCuDecoder->decodeCtu     ( pCtu, isLastCtuOfSliceSegment );
-
+#endif
 #if DECODER_PARTIAL_CONFORMANCE_CHECK != 0
     const UInt numRemainingBitsPostCtu=ppcSubstreams[uiSubStrm]->getNumBitsLeft(); // NOTE: Does not account for changes in buffered bits in CABAC decoder, although it's probably good enough.
     if (TDecConformanceCheck::doChecking() && m_pDecConformanceCheck)

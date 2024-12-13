@@ -101,6 +101,14 @@ Void TComPic::create( const TComSPS &sps, const TComPPS &pps, const Bool bIsVirt
 #if REDUCED_ENCODER_MEMORY
   }
 #endif
+#if ENABLE_ANAYSIS_OUTPUT
+  m_pcPicYuvPred = new TComPicYuv;
+  m_pcPicYuvPred
+      ->create(iWidth, iHeight, chromaFormatIDC, uiMaxCuWidth, uiMaxCuHeight, uiMaxDepth, true);
+  m_pcPicYuvResi = new TComPicYuv;
+  m_pcPicYuvResi
+      ->create(iWidth, iHeight, chromaFormatIDC, uiMaxCuWidth, uiMaxCuHeight, uiMaxDepth, true);
+#endif
 
   // there are no SEI messages associated with this picture initially
   if (m_SEIs.size() > 0)
@@ -199,7 +207,19 @@ Void TComPic::destroy()
       m_apcPicYuv[i]  = NULL;
     }
   }
+#if ENABLE_ANAYSIS_OUTPUT
+  if (m_pcPicYuvPred) {
+      m_pcPicYuvPred->destroy();
+      delete m_pcPicYuvPred;
+      m_pcPicYuvPred = NULL;
+  }
 
+  if (m_pcPicYuvResi) {
+      m_pcPicYuvResi->destroy();
+      delete m_pcPicYuvResi;
+      m_pcPicYuvResi = NULL;
+  }
+#endif
   deleteSEIs(m_SEIs);
 }
 

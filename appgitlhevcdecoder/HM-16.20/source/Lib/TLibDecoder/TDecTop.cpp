@@ -38,7 +38,9 @@
 #include "NALread.h"
 #include "TDecTop.h"
 #include "TDecConformance.h"
-
+#if ENABLE_ANAYSIS_OUTPUT
+#include "TLibSysuAnalyzer/TSysuAnalyzerOutput.h"
+#endif
 //! \ingroup TLibDecoder
 //! \{
 
@@ -768,7 +770,9 @@ Bool TDecTop::xDecodeSlice(InputNALUnit &nalu, Int &iSkipFrame, Int iPOCLastDisp
 
   //  Decode a picture
   m_cGopDecoder.decompressSlice(&(nalu.getBitstream()), m_pcPic);
-
+#if ENABLE_ANAYSIS_OUTPUT
+  TSysuAnalyzerOutput::getInstance()->writeOutTileInfo(m_pcPic);
+#endif
   m_bFirstSliceInPicture = false;
   m_uiSliceIdx++;
 
@@ -791,6 +795,9 @@ Void TDecTop::xDecodeSPS(const std::vector<UChar> &naluData)
 #endif
   m_cEntropyDecoder.decodeSPS( sps );
   m_parameterSetManager.storeSPS(sps, naluData);
+#if ENABLE_ANAYSIS_OUTPUT
+  TSysuAnalyzerOutput::getInstance()->writeOutSps(sps);
+#endif
 }
 
 Void TDecTop::xDecodePPS(const std::vector<UChar> &naluData)

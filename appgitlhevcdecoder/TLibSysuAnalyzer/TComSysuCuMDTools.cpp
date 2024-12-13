@@ -76,7 +76,7 @@ Bool TComSysuCuMDTools::compareSplitMode ( TComDataCU* pcRecursive, TComDataCU* 
     return bIsSame;
 }
 
-Void TComSysuCuMDTools::printCUModeForLCU   ( TComDataCU* pcCU, Char* phMessage, bool bCost )
+Void TComSysuCuMDTools::printCUModeForLCU(TComDataCU *pcCU, char *phMessage, bool bCost)
 {
   if( bCost ) 
     cout << phMessage << "Cost: " << pcCU->getTotalCost() << endl;

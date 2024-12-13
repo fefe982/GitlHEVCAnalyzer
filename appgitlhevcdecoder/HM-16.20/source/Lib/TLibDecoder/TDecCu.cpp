@@ -38,6 +38,9 @@
 #include "TDecCu.h"
 #include "TLibCommon/TComTU.h"
 #include "TLibCommon/TComPrediction.h"
+#if ENABLE_ANAYSIS_OUTPUT
+#include "TLibSysuAnalyzer/TSysuAnalyzerOutput.h"
+#endif
 
 //! \ingroup TLibDecoder
 //! \{
@@ -139,7 +142,13 @@ Void TDecCu::destroy()
  \param    pCtu                      [in/out] pointer to CTU data structure
  \param    isLastCtuOfSliceSegment   [out]    true, if last CTU of the slice segment
  */
+#ifdef ENABLE_ANAYSIS_OUTPUT
+Void TDecCu::decodeCtu(TComInputBitstream *pcSubstreams,
+                       TComDataCU *pCtu,
+                       Bool &isLastCtuOfSliceSegment)
+#else
 Void TDecCu::decodeCtu( TComDataCU* pCtu, Bool& isLastCtuOfSliceSegment )
+#endif
 {
   if ( pCtu->getSlice()->getPPS()->getUseDQP() )
   {
@@ -152,7 +161,11 @@ Void TDecCu::decodeCtu( TComDataCU* pCtu, Bool& isLastCtuOfSliceSegment )
   }
 
   // start from the top level CU
-  xDecodeCU( pCtu, 0, 0, isLastCtuOfSliceSegment);
+#ifdef ENABLE_ANAYSIS_OUTPUT
+  xDecodeCU(pcSubstreams, pCtu, 0, 0, isLastCtuOfSliceSegment);
+#else
+  xDecodeCU(pCtu, 0, 0, isLastCtuOfSliceSegment);
+#endif
 }
 
 /** 
@@ -162,6 +175,9 @@ Void TDecCu::decodeCtu( TComDataCU* pCtu, Bool& isLastCtuOfSliceSegment )
 Void TDecCu::decompressCtu( TComDataCU* pCtu )
 {
   xDecompressCU( pCtu, 0,  0 );
+#if ENABLE_ANAYSIS_OUTPUT
+  TSysuAnalyzerOutput::getInstance()->writeOutCUInfo(pCtu);
+#endif
 }
 
 // ====================================================================================================================
@@ -186,7 +202,15 @@ Bool TDecCu::xDecodeSliceEnd( TComDataCU* pcCU, UInt uiAbsPartIdx )
 }
 
 //! decode CU block recursively
+#if ENABLE_ANAYSIS_OUTPUT
+Void TDecCu::xDecodeCU(TComInputBitstream *pcSubstreams,
+                       TComDataCU *const pcCU,
+                       const UInt uiAbsPartIdx,
+                       const UInt uiDepth,
+                       Bool &isLastCtuOfSliceSegment)
+#else
 Void TDecCu::xDecodeCU( TComDataCU*const pcCU, const UInt uiAbsPartIdx, const UInt uiDepth, Bool &isLastCtuOfSliceSegment)
+#endif
 {
   TComPic* pcPic        = pcCU->getPic();
   const TComSPS &sps    = pcPic->getPicSym()->getSPS();
@@ -232,11 +256,18 @@ Void TDecCu::xDecodeCU( TComDataCU*const pcCU, const UInt uiAbsPartIdx, const UI
 
       if ( !isLastCtuOfSliceSegment && ( uiLPelX < sps.getPicWidthInLumaSamples() ) && ( uiTPelY < sps.getPicHeightInLumaSamples() ) )
       {
-        xDecodeCU( pcCU, uiIdx, uiDepth+1, isLastCtuOfSliceSegment );
+#ifdef ENABLE_ANAYSIS_OUTPUT
+          xDecodeCU(pcSubstreams, pcCU, uiIdx, uiDepth + 1, isLastCtuOfSliceSegment);
+#else
+          xDecodeCU(pcCU, uiIdx, uiDepth + 1, isLastCtuOfSliceSegment);
+#endif
       }
       else
       {
         pcCU->setOutsideCUPart( uiIdx, uiDepth+1 );
+#if ENABLE_ANAYSIS_OUTPUT
+        TSysuAnalyzerOutput::getInstance()->aiCUBits.push_back(0); ///< 0 bit for out of image cus
+#endif
       }
 
       uiIdx += uiQNumParts;
@@ -251,7 +282,9 @@ Void TDecCu::xDecodeCU( TComDataCU*const pcCU, const UInt uiAbsPartIdx, const UI
     }
     return;
   }
-
+#if ENABLE_ANAYSIS_OUTPUT
+  UInt uiByteLocation = pcSubstreams->getByteLocation();
+#endif
   if( uiDepth <= pps.getMaxCuDQPDepth() && pps.getUseDQP())
   {
     setdQPFlag(true);
@@ -312,6 +345,10 @@ Void TDecCu::xDecodeCU( TComDataCU*const pcCU, const UInt uiAbsPartIdx, const UI
       }
     }
     xFinishDecodeCU( pcCU, uiAbsPartIdx, uiDepth, isLastCtuOfSliceSegment );
+#if ENABLE_ANAYSIS_OUTPUT
+    UInt iByteConsumed = pcSubstreams->getByteLocation() - uiByteLocation;
+    TSysuAnalyzerOutput::getInstance()->aiCUBits.push_back(iByteConsumed);
+#endif
     return;
   }
 
@@ -325,6 +362,10 @@ Void TDecCu::xDecodeCU( TComDataCU*const pcCU, const UInt uiAbsPartIdx, const UI
     if(pcCU->getIPCMFlag(uiAbsPartIdx))
     {
       xFinishDecodeCU( pcCU, uiAbsPartIdx, uiDepth, isLastCtuOfSliceSegment );
+#if ENABLE_ANAYSIS_OUTPUT
+      UInt iByteConsumed = pcSubstreams->getByteLocation() - uiByteLocation;
+      TSysuAnalyzerOutput::getInstance()->aiCUBits.push_back(iByteConsumed);
+#endif
       return;
     }
   }
@@ -339,6 +380,10 @@ Void TDecCu::xDecodeCU( TComDataCU*const pcCU, const UInt uiAbsPartIdx, const UI
   setIsChromaQpAdjCoded( isChromaQpAdjCoded );
   setdQPFlag( bCodeDQP );
   xFinishDecodeCU( pcCU, uiAbsPartIdx, uiDepth, isLastCtuOfSliceSegment );
+#if ENABLE_ANAYSIS_OUTPUT
+  UInt iByteConsumed = pcSubstreams->getByteLocation() - uiByteLocation;
+  TSysuAnalyzerOutput::getInstance()->aiCUBits.push_back(iByteConsumed);
+#endif
 }
 
 Void TDecCu::xFinishDecodeCU( TComDataCU* pcCU, UInt uiAbsPartIdx, UInt uiDepth, Bool &isLastCtuOfSliceSegment)
@@ -753,7 +798,9 @@ Void TDecCu::xCopyToPic( TComDataCU* pcCU, TComPic* pcPic, UInt uiZorderIdx, UIn
   UInt uiCtuRsAddr = pcCU->getCtuRsAddr();
 
   m_ppcYuvReco[uiDepth]->copyToPicYuv  ( pcPic->getPicYuvRec (), uiCtuRsAddr, uiZorderIdx );
-
+#if ENABLE_ANAYSIS_OUTPUT
+  m_ppcYuvResi[uiDepth]->copyToPicYuv(pcPic->getPicYuvResi(), uiCtuRsAddr, uiZorderIdx);
+#endif
   return;
 }
 

@@ -52,7 +52,7 @@ bool DecoderGeneralParser::parseFile(QTextStream* pcInputStream, ComSequence* pc
 
     ComFrame *pcFrame = NULL;
     cMatchTarget.setPattern("POC *(-?[0-9]+).*\\[DT *([0-9.]+) *\\] \\[L0(( -?[0-9]+){0,}) \\] \\[L1(( -?[0-9]+){0,}) \\] (\\[LC(( -?[0-9]+){0,}) \\])?");
-    pcInputStream->readLine();///< Skip a empty line
+    // pcInputStream->readLine();///< Skip a empty line
     while( !pcInputStream->atEnd() )
     {
 

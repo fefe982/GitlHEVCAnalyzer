@@ -91,37 +91,69 @@ public:
   Void  destroy                 ();
 
   /// decode Ctu information
+#if ENABLE_ANAYSIS_OUTPUT
+  Void decodeCtu(TComInputBitstream *pcSubstreams, TComDataCU *pcCU, Bool &isLastCtuOfSliceSegment);
+#else
   Void  decodeCtu               ( TComDataCU* pCtu, Bool &isLastCtuOfSliceSegment );
+#endif
 
   /// reconstruct Ctu information
   Void  decompressCtu           ( TComDataCU* pCtu );
 
 protected:
+#if ENABLE_ANAYSIS_OUTPUT
+    Void xDecodeCU(TComInputBitstream *pcSubstreams,
+                   TComDataCU *const pcCU,
+                   const UInt uiAbsPartIdx,
+                   const UInt uiDepth,
+                   Bool &isLastCtuOfSliceSegment);
+#else
+    Void xDecodeCU(TComDataCU *const pcCU,
+                   const UInt uiAbsPartIdx,
+                   const UInt uiDepth,
+                   Bool &isLastCtuOfSliceSegment);
+#endif
+    Void xFinishDecodeCU(TComDataCU *pcCU,
+                         UInt uiAbsPartIdx,
+                         UInt uiDepth,
+                         Bool &isLastCtuOfSliceSegment);
+    Bool xDecodeSliceEnd(TComDataCU *pcCU, UInt uiAbsPartIdx);
+    Void xDecompressCU(TComDataCU *pCtu, UInt uiAbsPartIdx, UInt uiDepth);
 
-  Void xDecodeCU                ( TComDataCU* const pcCU, const UInt uiAbsPartIdx, const UInt uiDepth, Bool &isLastCtuOfSliceSegment);
-  Void xFinishDecodeCU          ( TComDataCU* pcCU, UInt uiAbsPartIdx, UInt uiDepth, Bool &isLastCtuOfSliceSegment);
-  Bool xDecodeSliceEnd          ( TComDataCU* pcCU, UInt uiAbsPartIdx );
-  Void xDecompressCU            ( TComDataCU* pCtu, UInt uiAbsPartIdx, UInt uiDepth );
+    Void xReconInter(TComDataCU *pcCU, UInt uiDepth);
 
-  Void xReconInter              ( TComDataCU* pcCU, UInt uiDepth );
+    Void xReconIntraQT(TComDataCU *pcCU, UInt uiDepth);
+    Void xIntraRecBlk(TComYuv *pcRecoYuv,
+                      TComYuv *pcPredYuv,
+                      TComYuv *pcResiYuv,
+                      const ComponentID component,
+                      TComTU &rTu);
+    Void xIntraRecQT(TComYuv *pcRecoYuv,
+                     TComYuv *pcPredYuv,
+                     TComYuv *pcResiYuv,
+                     const ChannelType chType,
+                     TComTU &rTu);
 
-  Void xReconIntraQT            ( TComDataCU* pcCU, UInt uiDepth );
-  Void xIntraRecBlk             ( TComYuv* pcRecoYuv, TComYuv* pcPredYuv, TComYuv* pcResiYuv, const ComponentID component, TComTU &rTu );
-  Void xIntraRecQT              ( TComYuv* pcRecoYuv, TComYuv* pcPredYuv, TComYuv* pcResiYuv, const ChannelType chType, TComTU &rTu );
+    Void xReconPCM(TComDataCU *pcCU, UInt uiDepth);
 
-  Void xReconPCM                ( TComDataCU* pcCU, UInt uiDepth );
+    Void xDecodeInterTexture(TComDataCU *pcCU, UInt uiDepth);
+    Void xDecodePCMTexture(TComDataCU *pcCU,
+                           const UInt uiPartIdx,
+                           const Pel *piPCM,
+                           Pel *piReco,
+                           const UInt uiStride,
+                           const UInt uiWidth,
+                           const UInt uiHeight,
+                           const ComponentID compID);
 
-  Void xDecodeInterTexture      ( TComDataCU* pcCU, UInt uiDepth );
-  Void xDecodePCMTexture        ( TComDataCU* pcCU, const UInt uiPartIdx, const Pel *piPCM, Pel* piReco, const UInt uiStride, const UInt uiWidth, const UInt uiHeight, const ComponentID compID);
+    Void xCopyToPic(TComDataCU *pcCU, TComPic *pcPic, UInt uiZorderIdx, UInt uiDepth);
 
-  Void xCopyToPic               ( TComDataCU* pcCU, TComPic* pcPic, UInt uiZorderIdx, UInt uiDepth );
+    Bool getdQPFlag() { return m_bDecodeDQP; }
+    Void setdQPFlag(Bool b) { m_bDecodeDQP = b; }
+    Bool getIsChromaQpAdjCoded() { return m_IsChromaQpAdjCoded; }
+    Void setIsChromaQpAdjCoded(Bool b) { m_IsChromaQpAdjCoded = b; }
 
-  Bool getdQPFlag               ()                        { return m_bDecodeDQP;        }
-  Void setdQPFlag               ( Bool b )                { m_bDecodeDQP = b;           }
-  Bool getIsChromaQpAdjCoded    ()                        { return m_IsChromaQpAdjCoded;        }
-  Void setIsChromaQpAdjCoded    ( Bool b )                { m_IsChromaQpAdjCoded = b;           }
-
-  Void xFillPCMBuffer           (TComDataCU* pCU, UInt depth);
+    Void xFillPCMBuffer(TComDataCU *pCU, UInt depth);
 };
 
 //! \}

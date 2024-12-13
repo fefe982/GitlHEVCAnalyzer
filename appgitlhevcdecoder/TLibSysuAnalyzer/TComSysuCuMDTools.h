@@ -23,7 +23,7 @@ public:
     Void setAllDepthTo       ( TComDataCU* pcCU, UInt uiDepth );
     Bool compareSplitMode    ( TComDataCU* pcRecursive, TComDataCU* pcFast );
 
-    Void printCUModeForLCU   ( TComDataCU* pcCU, Char* phMessage, bool bCost = true);
+    Void printCUModeForLCU(TComDataCU *pcCU, char *phMessage, bool bCost = true);
     Void xPrintCUModeForLCU  ( UChar* pcCU, Int iLength, UInt iDepth );
 
     Void printCUStatistic    ();

@@ -984,6 +984,10 @@ public:
 };
 typedef std::vector<RNSEIWindow> RNSEIWindowVec;
 #endif
+
+#define ENABLE_ANAYSIS_OUTPUT 1 ///< Analyzer output
+#define HM_VERSION 160          ///< Current software version (16.20)
+
 //! \}
 
 #endif

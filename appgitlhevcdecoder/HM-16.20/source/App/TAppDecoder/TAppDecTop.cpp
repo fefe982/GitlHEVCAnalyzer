@@ -218,6 +218,14 @@ Void TAppDecTop::decode()
 
         m_cTVideoIOYuvReconFile.open( m_reconFileName, true, m_outputBitDepth, m_outputBitDepth, bitDepths.recon ); // write mode
         openedReconFile = true;
+#if ENABLE_ANAYSIS_OUTPUT
+        Int yuvBitDepth[MAX_NUM_CHANNEL_TYPE] = {16, 16};
+        m_cTVideoIOYuvResiFile.open("resi_yuv.yuv",
+                                    true,
+                                    yuvBitDepth,
+                                    yuvBitDepth,
+                                    yuvBitDepth); // residual yuv file (16bit ***8bit-8bit = 16bit**)
+#endif
       }
       // write reconstruction to file
       if( bNewPicture )
@@ -274,6 +282,9 @@ Void TAppDecTop::xDestroyDecLib()
   if ( !m_reconFileName.empty() )
   {
     m_cTVideoIOYuvReconFile.close();
+#if ENABLE_ANAYSIS_OUTPUT
+    m_cTVideoIOYuvResiFile.close();
+#endif
   }
 
   // destroy decoder class
@@ -404,6 +415,19 @@ Void TAppDecTop::xWriteOutput( TComList<TComPic*>* pcListPic, UInt tId )
                                            conf.getWindowRightOffset() + defDisp.getWindowRightOffset(),
                                            conf.getWindowTopOffset() + defDisp.getWindowTopOffset(),
                                            conf.getWindowBottomOffset() + defDisp.getWindowBottomOffset(), NUM_CHROMA_FORMAT, isTff );
+#if ENABLE_ANAYSIS_OUTPUT
+            m_cTVideoIOYuvResiFile.write(pcPicTop->getPicYuvResi(),
+                                         pcPicBottom->getPicYuvResi(),
+                                         IPCOLOURSPACE_UNCHANGED,
+                                         conf.getWindowLeftOffset() + defDisp.getWindowLeftOffset(),
+                                         conf.getWindowRightOffset()
+                                             + defDisp.getWindowRightOffset(),
+                                         conf.getWindowTopOffset() + defDisp.getWindowTopOffset(),
+                                         conf.getWindowBottomOffset()
+                                             + defDisp.getWindowBottomOffset(),
+                                         NUM_CHROMA_FORMAT,
+                                         isTff);
+#endif
           }
         }
 
@@ -460,6 +484,17 @@ Void TAppDecTop::xWriteOutput( TComList<TComPic*>* pcListPic, UInt tId )
                                          conf.getWindowTopOffset() + defDisp.getWindowTopOffset(),
                                          conf.getWindowBottomOffset() + defDisp.getWindowBottomOffset(),
                                          NUM_CHROMA_FORMAT, m_bClipOutputVideoToRec709Range  );
+#if ENABLE_ANAYSIS_OUTPUT
+          m_cTVideoIOYuvResiFile.write(pcPic->getPicYuvResi(),
+                                       IPCOLOURSPACE_UNCHANGED,
+                                       conf.getWindowLeftOffset() + defDisp.getWindowLeftOffset(),
+                                       conf.getWindowRightOffset() + defDisp.getWindowRightOffset(),
+                                       conf.getWindowTopOffset() + defDisp.getWindowTopOffset(),
+                                       conf.getWindowBottomOffset()
+                                           + defDisp.getWindowBottomOffset(),
+                                       NUM_CHROMA_FORMAT,
+                                       m_bClipOutputVideoToRec709Range);
+#endif
         }
 
         if (!m_colourRemapSEIFileName.empty())
@@ -524,6 +559,19 @@ Void TAppDecTop::xFlushOutput( TComList<TComPic*>* pcListPic )
                                          conf.getWindowRightOffset() + defDisp.getWindowRightOffset(),
                                          conf.getWindowTopOffset() + defDisp.getWindowTopOffset(),
                                          conf.getWindowBottomOffset() + defDisp.getWindowBottomOffset(), NUM_CHROMA_FORMAT, isTff );
+#if ENABLE_ANAYSIS_OUTPUT
+          m_cTVideoIOYuvResiFile.write(pcPicTop->getPicYuvResi(),
+                                       pcPicBottom->getPicYuvResi(),
+                                       IPCOLOURSPACE_UNCHANGED,
+                                       conf.getWindowLeftOffset() + defDisp.getWindowLeftOffset(),
+                                       conf.getWindowRightOffset() + defDisp.getWindowRightOffset(),
+                                       conf.getWindowTopOffset() + defDisp.getWindowTopOffset(),
+                                       conf.getWindowBottomOffset()
+                                           + defDisp.getWindowBottomOffset(),
+                                       NUM_CHROMA_FORMAT,
+                                       isTff);
+
+#endif
         }
 
         // update POC of display order
@@ -583,6 +631,17 @@ Void TAppDecTop::xFlushOutput( TComList<TComPic*>* pcListPic )
                                          conf.getWindowTopOffset() + defDisp.getWindowTopOffset(),
                                          conf.getWindowBottomOffset() + defDisp.getWindowBottomOffset(),
                                          NUM_CHROMA_FORMAT, m_bClipOutputVideoToRec709Range );
+#if ENABLE_ANAYSIS_OUTPUT
+          m_cTVideoIOYuvResiFile.write(pcPic->getPicYuvResi(),
+                                       IPCOLOURSPACE_UNCHANGED,
+                                       conf.getWindowLeftOffset() + defDisp.getWindowLeftOffset(),
+                                       conf.getWindowRightOffset() + defDisp.getWindowRightOffset(),
+                                       conf.getWindowTopOffset() + defDisp.getWindowTopOffset(),
+                                       conf.getWindowBottomOffset()
+                                           + defDisp.getWindowBottomOffset(),
+                                       NUM_CHROMA_FORMAT,
+                                       m_bClipOutputVideoToRec709Range);
+#endif
         }
 
         if (!m_colourRemapSEIFileName.empty())

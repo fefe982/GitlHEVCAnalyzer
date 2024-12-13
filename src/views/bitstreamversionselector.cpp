@@ -39,7 +39,10 @@ void BitstreamVersionSelector::on_version120_clicked()
 {
     m_iBitstreamVersion = 120;
 }
-
+void BitstreamVersionSelector::on_version160_clicked()
+{
+    m_iBitstreamVersion = 160;
+}
 void BitstreamVersionSelector::showEvent(QShowEvent * event)
 {
     /// restore last selection
@@ -57,6 +60,9 @@ void BitstreamVersionSelector::showEvent(QShowEvent * event)
         break;
     case 120:
         ui->version120->setChecked(true);
+        break;
+    case 160:
+        ui->version160->setChecked(true);
         break;
     default:
         ui->version100->setChecked(true);

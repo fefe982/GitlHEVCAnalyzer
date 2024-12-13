@@ -29,31 +29,54 @@ TSysuAnalyzerOutput::TSysuAnalyzerOutput()
 void TSysuAnalyzerOutput::writeOutTileInfo(TComPic * pcPic)
 {
     int iPoc = pcPic ->getPOC();
-    int iTileNumRows =  pcPic ->getPicSym() ->getNumRowsMinus1()+1;
-    int iTileNumCols = pcPic ->getPicSym() ->getNumColumnsMinus1()+1;
+    int iTileNumRows = pcPic->getPicSym()->
+#if HM_VERSION >= 160
+                       getNumTileRowsMinus1()
+#else
+                       getNumRowsMinus1()
+#endif
+                       + 1;
+    int iTileNumCols = pcPic->getPicSym()->
+#if HM_VERSION >= 160
+                       getNumTileColumnsMinus1()
+#else
+                       getNumColumnsMinus1()
+#endif
+                       + 1;
 
+    for (int uiRowIdx = 0; uiRowIdx < iTileNumRows; uiRowIdx++)
+        for (int uiColumnIdx = 0; uiColumnIdx < iTileNumCols; uiColumnIdx++) {
+            int uiTileIdx = uiRowIdx * (iTileNumCols) + uiColumnIdx;
 
-    for( int uiRowIdx=0; uiRowIdx < iTileNumRows; uiRowIdx++ )
-           for( int uiColumnIdx=0; uiColumnIdx <iTileNumCols ; uiColumnIdx++ )
-           {
-             int uiTileIdx = uiRowIdx * (iTileNumCols) + uiColumnIdx;
+            //information for each tile
+            int uiTileWidth = 0;
+            int uiTileHeight = 0;
+            int uiFirstCUAddr = 0;
 
-             //information for each tile
-             int uiTileWidth = 0;
-             int uiTileHeight = 0;
-             int uiFirstCUAddr = 0;
+            uiTileWidth = pcPic->getPicSym()->getTComTile(uiTileIdx)->
+#if HM_VERSION >= 160
+                          getTileWidthInCtus();
+#else
+                          getTileWidth();
+#endif
+            uiTileHeight = pcPic->getPicSym()->getTComTile(uiTileIdx)->
+#if HM_VERSION >= 160
+                           getTileHeightInCtus();
+#else
+                           getTileHeight();
+#endif
 
-             uiTileWidth = pcPic ->getPicSym()->getTComTile(uiTileIdx)->getTileWidth();
+            uiFirstCUAddr = pcPic->getPicSym()->getTComTile(uiTileIdx)->
+#if HM_VERSION >= 160
+                            getFirstCtuRsAddr();
+#else
+                            getFirstCUAddr();
+#endif
 
-             uiTileHeight = pcPic ->getPicSym()->getTComTile(uiTileIdx)->getTileHeight();
-
-             uiFirstCUAddr = pcPic ->getPicSym()->getTComTile(uiTileIdx) ->getFirstCUAddr();
-
-             m_cTileOutPut << "<" << iPoc << "," << (iTileNumCols )* (iTileNumRows )<< ">"
-                  << " " << uiFirstCUAddr << " " << uiTileWidth << " " << uiTileHeight << endl;
-
-
-           }
+            m_cTileOutPut << "<" << iPoc << "," << (iTileNumCols) * (iTileNumRows) << ">"
+                          << " " << uiFirstCUAddr << " " << uiTileWidth << " " << uiTileHeight
+                          << endl;
+        }
 }
 
 #endif
@@ -64,7 +87,12 @@ void TSysuAnalyzerOutput::writeOutTileInfo(TComPic * pcPic)
 void TSysuAnalyzerOutput::writeOutCUInfo   ( TComDataCU* pcCU )
 {
   Int iPoc = pcCU->getSlice()->getPOC();
-  Int iAddr = pcCU->getAddr();
+  Int iAddr = pcCU->
+#if HM_VERSION >= 160
+              getCtuRsAddr();
+#else
+              getAddr();
+#endif
   Int iTotalNumPart = pcCU->getTotalNumPart();
 
 
@@ -98,7 +126,13 @@ void TSysuAnalyzerOutput::xWriteOutCUInfo  ( TComDataCU* pcCU, Int iLength, Int 
 {
   
   UChar* puhDepth    = pcCU->getDepth();
-  Char*  puhPartSize = pcCU->getPartitionSize();
+#if HM_VERSION >= 160
+  SChar *
+#else
+  Char *
+#endif
+      puhPartSize
+      = pcCU->getPartitionSize();
 
   TComMv rcMV;
 
@@ -168,8 +202,10 @@ void TSysuAnalyzerOutput::xWriteOutCUInfo  ( TComDataCU* pcCU, Int iLength, Int 
         iPred = 1;
       else if(ePred == MODE_INTRA)
         iPred = 2;
-      else if(ePred == MODE_NONE)
-        iPred = 15;
+#if HM_VERSION < 160
+      else if (ePred == MODE_NONE)
+          iPred = 15;
+#endif
       m_cPredOutput << iPred << " ";
 
       /// Write merge info
@@ -211,12 +247,14 @@ void TSysuAnalyzerOutput::xWriteOutCUInfo  ( TComDataCU* pcCU, Int iLength, Int 
       }    
 
       /// Write Intra info
-      Int iLumaIntraDir   = pcCU->getLumaIntraDir(iOffset+iPartAddOffset);
-      Int iChromaIntraDir = pcCU->getChromaIntraDir(iOffset+iPartAddOffset);
+#if HM_VERSION >= 160
+      Int iLumaIntraDir = pcCU->getIntraDir(CHANNEL_TYPE_LUMA, iOffset + iPartAddOffset);
+      Int iChromaIntraDir = pcCU->getIntraDir(CHANNEL_TYPE_CHROMA, iOffset + iPartAddOffset);
+#else
+      Int iLumaIntraDir = pcCU->getLumaIntraDir(iOffset + iPartAddOffset);
+      Int iChromaIntraDir = pcCU->getChromaIntraDir(iOffset + iPartAddOffset);
+#endif
       m_cIntraOutput << iLumaIntraDir << " " << iChromaIntraDir << " ";
-
-
-
 
     } /// PU end
   }
@@ -266,11 +304,16 @@ Void TSysuAnalyzerOutput::writeOutSps   ( TComSPS* pcSPS )
 #endif
 
   m_cSpsOut << "Max CU Size:"  << pcSPS->getMaxCUHeight() << endl;
+#if HM_VERSION >= 160
+  m_cSpsOut << "Max CU Depth:" << pcSPS->getMaxTotalCUDepth() << endl;
+#else
   m_cSpsOut << "Max CU Depth:" << pcSPS->getMaxCUDepth() << endl;
+#endif
   m_cSpsOut << "Max Inter TU Depth:" << pcSPS->getQuadtreeTUMaxDepthInter() << endl;
   m_cSpsOut << "Max Intra TU Depth:" << pcSPS->getQuadtreeTUMaxDepthIntra() << endl;
-
-#if (HM_VERSION >= 100)
+#if HM_VERSION >= 160
+  int iInputBitDepth = pcSPS->getBitDepth(CHANNEL_TYPE_LUMA);
+#elif (HM_VERSION >= 100)
   int iInputBitDepth = pcSPS->getBitDepthY();
 #else
   int iInputBitDepth = pcSPS->getBitDepth();
