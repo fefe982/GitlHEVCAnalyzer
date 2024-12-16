@@ -1,0 +1,62 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libtudisplayfilter", "D:/work/hevc/GitlHEVCAnalyzer/libplugins/libtudisplayfilter\libtudisplayfilter.vcxproj", "{7BF6154A-474C-3716-9B31-60EA263CC14F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcudisplayfilter", "D:/work/hevc/GitlHEVCAnalyzer/libplugins/libcudisplayfilter\libcudisplayfilter.vcxproj", "{04174CDD-562B-3070-BC48-AD67FA3A84B0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmergedisplayfilter", "D:/work/hevc/GitlHEVCAnalyzer/libplugins/libmergedisplayfilter\libmergedisplayfilter.vcxproj", "{207AB973-C815-367A-8C56-65F077B171A8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmvdisplayfilter", "D:/work/hevc/GitlHEVCAnalyzer/libplugins/libmvdisplayfilter\libmvdisplayfilter.vcxproj", "{79249910-985C-383C-BC58-8DF518E75072}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libintradisplayfilter", "D:/work/hevc/GitlHEVCAnalyzer/libplugins/libintradisplayfilter\libintradisplayfilter.vcxproj", "{4E21D7D1-9781-3248-B398-F6DEDFC58563}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libpreddisplayfilter", "D:/work/hevc/GitlHEVCAnalyzer/libplugins/libpreddisplayfilter\libpreddisplayfilter.vcxproj", "{4CC5F252-2A76-3C91-9188-C7F25D926C5B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libbitdisplayfilter", "D:/work/hevc/GitlHEVCAnalyzer/libplugins/libbitdisplayfilter\libbitdisplayfilter.vcxproj", "{15E11536-E28F-3C19-97F8-412206EC26B9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libtiledisplayfilter", "D:/work/hevc/GitlHEVCAnalyzer/libplugins/libtiledisplayfilter\libtiledisplayfilter.vcxproj", "{342B4EF8-9E9A-379F-97BF-8DA5CF13DAB9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7BF6154A-474C-3716-9B31-60EA263CC14F}.Debug|x64.ActiveCfg = Debug|x64
+		{7BF6154A-474C-3716-9B31-60EA263CC14F}.Debug|x64.Build.0 = Debug|x64
+		{7BF6154A-474C-3716-9B31-60EA263CC14F}.Release|x64.ActiveCfg = Release|x64
+		{7BF6154A-474C-3716-9B31-60EA263CC14F}.Release|x64.Build.0 = Release|x64
+		{04174CDD-562B-3070-BC48-AD67FA3A84B0}.Debug|x64.ActiveCfg = Debug|x64
+		{04174CDD-562B-3070-BC48-AD67FA3A84B0}.Debug|x64.Build.0 = Debug|x64
+		{04174CDD-562B-3070-BC48-AD67FA3A84B0}.Release|x64.ActiveCfg = Release|x64
+		{04174CDD-562B-3070-BC48-AD67FA3A84B0}.Release|x64.Build.0 = Release|x64
+		{207AB973-C815-367A-8C56-65F077B171A8}.Debug|x64.ActiveCfg = Debug|x64
+		{207AB973-C815-367A-8C56-65F077B171A8}.Debug|x64.Build.0 = Debug|x64
+		{207AB973-C815-367A-8C56-65F077B171A8}.Release|x64.ActiveCfg = Release|x64
+		{207AB973-C815-367A-8C56-65F077B171A8}.Release|x64.Build.0 = Release|x64
+		{79249910-985C-383C-BC58-8DF518E75072}.Debug|x64.ActiveCfg = Debug|x64
+		{79249910-985C-383C-BC58-8DF518E75072}.Debug|x64.Build.0 = Debug|x64
+		{79249910-985C-383C-BC58-8DF518E75072}.Release|x64.ActiveCfg = Release|x64
+		{79249910-985C-383C-BC58-8DF518E75072}.Release|x64.Build.0 = Release|x64
+		{4E21D7D1-9781-3248-B398-F6DEDFC58563}.Debug|x64.ActiveCfg = Debug|x64
+		{4E21D7D1-9781-3248-B398-F6DEDFC58563}.Debug|x64.Build.0 = Debug|x64
+		{4E21D7D1-9781-3248-B398-F6DEDFC58563}.Release|x64.ActiveCfg = Release|x64
+		{4E21D7D1-9781-3248-B398-F6DEDFC58563}.Release|x64.Build.0 = Release|x64
+		{4CC5F252-2A76-3C91-9188-C7F25D926C5B}.Debug|x64.ActiveCfg = Debug|x64
+		{4CC5F252-2A76-3C91-9188-C7F25D926C5B}.Debug|x64.Build.0 = Debug|x64
+		{4CC5F252-2A76-3C91-9188-C7F25D926C5B}.Release|x64.ActiveCfg = Release|x64
+		{4CC5F252-2A76-3C91-9188-C7F25D926C5B}.Release|x64.Build.0 = Release|x64
+		{15E11536-E28F-3C19-97F8-412206EC26B9}.Debug|x64.ActiveCfg = Debug|x64
+		{15E11536-E28F-3C19-97F8-412206EC26B9}.Debug|x64.Build.0 = Debug|x64
+		{15E11536-E28F-3C19-97F8-412206EC26B9}.Release|x64.ActiveCfg = Release|x64
+		{15E11536-E28F-3C19-97F8-412206EC26B9}.Release|x64.Build.0 = Release|x64
+		{342B4EF8-9E9A-379F-97BF-8DA5CF13DAB9}.Debug|x64.ActiveCfg = Debug|x64
+		{342B4EF8-9E9A-379F-97BF-8DA5CF13DAB9}.Debug|x64.Build.0 = Debug|x64
+		{342B4EF8-9E9A-379F-97BF-8DA5CF13DAB9}.Release|x64.ActiveCfg = Release|x64
+		{342B4EF8-9E9A-379F-97BF-8DA5CF13DAB9}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,608 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="views\aboutdialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="commands\appfrontcontroller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parsers\bitparser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parsers\bitstreamparser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="views\bitstreamversionselector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="views\busydialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="commands\checkupdatecommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="commands\cleancachecommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="commands\closebitstreamcommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model\common\comcu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model\common\comframe.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model\common\comrom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model\common\comsequence.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model\common\comtile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model\common\comtu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="commands\configfiltercommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parsers\cupuparser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parsers\decodergeneralparser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model\drawengine\drawengine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="views\filterconfigcheckbox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="views\filterconfigcombobox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="views\filterconfigdialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="views\filterconfigradios.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="views\filterconfigslider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="commands\filterkeypresscommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model\drawengine\filterloader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="commands\filtermousepresscommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="views\frameview.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="views\gitlcolorpicker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parsers\intraparser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model\io\ioyuv.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="commands\jumptoframecommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="commands\jumptopercentcommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="views\mainwindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parsers\mergeparser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="views\messageviewer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model\modellocator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="commands\modifypreferencescommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parsers\mvparser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="commands\nextframecommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="commands\openbitstreamcommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="views\pluginfilteritem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="views\pluginfilterlist.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parsers\predparser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="views\preferencedialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model\preferences.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="commands\prevframecommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="commands\printscreencommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="commands\querypreferencescommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="commands\refreshscreencommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="commands\reloadfilterscommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="commands\savefilterordercommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model\selectionmanager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="views\sequencelist.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="views\sequencelistitem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model\sequencemanager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parsers\spsparser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="commands\switchfiltercommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="commands\switchsequencecommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="commands\switchthemecommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="commands\switchyuvcommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parsers\tileparser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="views\timelineframeitem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="views\timelineindicatoritem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="views\timelineview.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parsers\tuparser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model\io\yuv420rgbbuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="commands\zoomframecommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="views\aboutdialog.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClInclude Include="model\drawengine\abstractfilter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="commands\appfrontcontroller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="parsers\bitparser.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClInclude Include="exceptions\bitstreamnotfoundexception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="parsers\bitstreamparser.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="views\bitstreamversionselector.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="views\busydialog.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="commands\checkupdatecommand.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="commands\cleancachecommand.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="commands\closebitstreamcommand.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClInclude Include="model\common\comcu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\common\comframe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\common\commv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\common\compu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\common\comrom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\common\comsequence.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\common\comtile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\common\comtu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="commands\configfiltercommand.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="parsers\cupuparser.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="parsers\decodergeneralparser.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClInclude Include="exceptions\decodernotfoundexception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="exceptions\decodingfailexception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="model\drawengine\drawengine.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="views\filterconfigcheckbox.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="views\filterconfigcombobox.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="views\filterconfigdialog.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="views\filterconfigradios.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="views\filterconfigslider.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="commands\filterkeypresscommand.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClInclude Include="model\drawengine\filterloader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="commands\filtermousepresscommand.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="views\frameview.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="views\gitlcolorpicker.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="parsers\intraparser.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClInclude Include="exceptions\invaildfilterindexexception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="model\io\ioyuv.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="commands\jumptoframecommand.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="commands\jumptopercentcommand.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="views\mainwindow.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="parsers\mergeparser.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="views\messageviewer.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClInclude Include="model\modellocator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="commands\modifypreferencescommand.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="parsers\mvparser.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="commands\nextframecommand.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClInclude Include="exceptions\nosequencefoundexception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="commands\openbitstreamcommand.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="views\pluginfilteritem.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="views\pluginfilterlist.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="parsers\predparser.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="views\preferencedialog.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClInclude Include="model\preferences.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="commands\prevframecommand.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="commands\printscreencommand.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="commands\querypreferencescommand.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="commands\refreshscreencommand.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="commands\reloadfilterscommand.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="commands\savefilterordercommand.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClInclude Include="model\selectionmanager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="views\sequencelist.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="views\sequencelistitem.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClInclude Include="model\sequencemanager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="parsers\spsparser.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="commands\switchfiltercommand.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="commands\switchsequencecommand.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="commands\switchthemecommand.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="commands\switchyuvcommand.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="parsers\tileparser.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="views\timelineframeitem.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClInclude Include="views\timelineindicatoritem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="views\timelineview.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="parsers\tuparser.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="model\io\yuv420rgbbuffer.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="commands\zoomframecommand.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="debug\moc_predefs.h.cbt">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="release\moc_predefs.h.cbt">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="views\aboutdialog.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="views\bitstreamversionselector.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="views\busydialog.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="views\filterconfigcheckbox.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="views\filterconfigcombobox.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="views\filterconfigdialog.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="views\filterconfigradios.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="views\filterconfigslider.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="views\gitlcolorpicker.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="views\mainwindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="views\messageviewer.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="views\pluginfilteritem.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="views\preferencedialog.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="views\sequencelist.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="views\sequencelistitem.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\UI\arrow_down_V2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\UI\arrow_left_V2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\UI\arrow_right_V2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\UI\arrow_up_V2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\UI\checkbox_checked.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\UI\checkbox_checked_disabled.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\UI\checkbox_unchecked.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\UI\checkbox_unchecked_disabled.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\UI\default.qss">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\UI\dropdown_arrow.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\UI\radiobutton_checked.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\UI\radiobutton_checked_disabled.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\UI\radiobutton_unchecked.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\UI\radiobutton_unchecked_disabled.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <QtRcc Include="resources\resources.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+    <None Include="resources\UI\spinbox_down.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\UI\spinbox_up.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\UI\style_sheet.qss">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\UI\treeview_arrow_down.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\UI\treeview_arrow_right.png">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resources\icons\appicon.rc" />
+  </ItemGroup>
+</Project>

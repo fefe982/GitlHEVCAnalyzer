@@ -1,0 +1,149 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TAppCommon", "appgitlhevcdecoder\HM-16.20\build\HM\TAppCommon.vcxproj", "{B1E0586B-1D00-34BC-8506-005BD65FF5A2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TLibCommon", "appgitlhevcdecoder\HM-16.20\build\HM\TLibCommon.vcxproj", "{EF7DC7E9-2347-3568-A9A4-D6AE8296BE13}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TLibDecoder", "appgitlhevcdecoder\HM-16.20\build\HM\TLibDecoder.vcxproj", "{C036706A-E5F3-3ED3-8983-8A5D80707ACC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TLibVideoIO", "appgitlhevcdecoder\HM-16.20\build\HM\TLibVideoIO.vcxproj", "{233547BB-1E2F-303A-B67C-E857FF0A3506}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TLibSysuAnalyzer", "appgitlhevcdecoder\HM-16.20\build\HM\TLibSysuAnalyzer.vcxproj", "{93D1E4DC-D7E3-3ECE-8169-DEC938B98A3F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HM_160", "appgitlhevcdecoder\HM-16.20\build\HM\HM_160.vcxproj", "{B9E1AB3B-7EB3-330C-9FA3-5ECCDEE36019}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C036706A-E5F3-3ED3-8983-8A5D80707ACC} = {C036706A-E5F3-3ED3-8983-8A5D80707ACC}
+		{B1E0586B-1D00-34BC-8506-005BD65FF5A2} = {B1E0586B-1D00-34BC-8506-005BD65FF5A2}
+		{93D1E4DC-D7E3-3ECE-8169-DEC938B98A3F} = {93D1E4DC-D7E3-3ECE-8169-DEC938B98A3F}
+		{233547BB-1E2F-303A-B67C-E857FF0A3506} = {233547BB-1E2F-303A-B67C-E857FF0A3506}
+		{EF7DC7E9-2347-3568-A9A4-D6AE8296BE13} = {EF7DC7E9-2347-3568-A9A4-D6AE8296BE13}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GitlEvtBus", "libgitlmvc\libgitlevtbus\src\GitlEvtBus.vcxproj", "{2A19E503-D4BD-321B-A49A-2E0C5733C951}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestGitlEvtBus", "libgitlmvc\libgitlevtbus\test\TestGitlEvtBus.vcxproj", "{C8D2CEE1-1D14-3851-9C26-649DE2C5230B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2A19E503-D4BD-321B-A49A-2E0C5733C951} = {2A19E503-D4BD-321B-A49A-2E0C5733C951}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "examples", "libgitlmvc\libgitlevtbus\examples\examples.vcxproj", "{3EB40975-879F-3FF4-A24E-1263E830A46A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2A19E503-D4BD-321B-A49A-2E0C5733C951} = {2A19E503-D4BD-321B-A49A-2E0C5733C951}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GitlMVC", "libgitlmvc\src\GitlMVC.vcxproj", "{7A6126C9-AB50-3061-BCC0-E36B5237C2B0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2A19E503-D4BD-321B-A49A-2E0C5733C951} = {2A19E503-D4BD-321B-A49A-2E0C5733C951}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Gitl_HEVC_Analyzer", "src\Gitl_HEVC_Analyzer.vcxproj", "{E17F1277-A20A-3BFA-B492-76870B70251A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7A6126C9-AB50-3061-BCC0-E36B5237C2B0} = {7A6126C9-AB50-3061-BCC0-E36B5237C2B0}
+		{2A19E503-D4BD-321B-A49A-2E0C5733C951} = {2A19E503-D4BD-321B-A49A-2E0C5733C951}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libtudisplayfilter", "libplugins\libtudisplayfilter\libtudisplayfilter.vcxproj", "{7BF6154A-474C-3716-9B31-60EA263CC14F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcudisplayfilter", "libplugins\libcudisplayfilter\libcudisplayfilter.vcxproj", "{04174CDD-562B-3070-BC48-AD67FA3A84B0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmergedisplayfilter", "libplugins\libmergedisplayfilter\libmergedisplayfilter.vcxproj", "{207AB973-C815-367A-8C56-65F077B171A8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmvdisplayfilter", "libplugins\libmvdisplayfilter\libmvdisplayfilter.vcxproj", "{79249910-985C-383C-BC58-8DF518E75072}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libintradisplayfilter", "libplugins\libintradisplayfilter\libintradisplayfilter.vcxproj", "{4E21D7D1-9781-3248-B398-F6DEDFC58563}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libpreddisplayfilter", "libplugins\libpreddisplayfilter\libpreddisplayfilter.vcxproj", "{4CC5F252-2A76-3C91-9188-C7F25D926C5B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libbitdisplayfilter", "libplugins\libbitdisplayfilter\libbitdisplayfilter.vcxproj", "{15E11536-E28F-3C19-97F8-412206EC26B9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libtiledisplayfilter", "libplugins\libtiledisplayfilter\libtiledisplayfilter.vcxproj", "{342B4EF8-9E9A-379F-97BF-8DA5CF13DAB9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1E0586B-1D00-34BC-8506-005BD65FF5A2}.Debug|x64.ActiveCfg = Debug|x64
+		{B1E0586B-1D00-34BC-8506-005BD65FF5A2}.Debug|x64.Build.0 = Debug|x64
+		{B1E0586B-1D00-34BC-8506-005BD65FF5A2}.Release|x64.ActiveCfg = Release|x64
+		{B1E0586B-1D00-34BC-8506-005BD65FF5A2}.Release|x64.Build.0 = Release|x64
+		{EF7DC7E9-2347-3568-A9A4-D6AE8296BE13}.Debug|x64.ActiveCfg = Debug|x64
+		{EF7DC7E9-2347-3568-A9A4-D6AE8296BE13}.Debug|x64.Build.0 = Debug|x64
+		{EF7DC7E9-2347-3568-A9A4-D6AE8296BE13}.Release|x64.ActiveCfg = Release|x64
+		{EF7DC7E9-2347-3568-A9A4-D6AE8296BE13}.Release|x64.Build.0 = Release|x64
+		{C036706A-E5F3-3ED3-8983-8A5D80707ACC}.Debug|x64.ActiveCfg = Debug|x64
+		{C036706A-E5F3-3ED3-8983-8A5D80707ACC}.Debug|x64.Build.0 = Debug|x64
+		{C036706A-E5F3-3ED3-8983-8A5D80707ACC}.Release|x64.ActiveCfg = Release|x64
+		{C036706A-E5F3-3ED3-8983-8A5D80707ACC}.Release|x64.Build.0 = Release|x64
+		{233547BB-1E2F-303A-B67C-E857FF0A3506}.Debug|x64.ActiveCfg = Debug|x64
+		{233547BB-1E2F-303A-B67C-E857FF0A3506}.Debug|x64.Build.0 = Debug|x64
+		{233547BB-1E2F-303A-B67C-E857FF0A3506}.Release|x64.ActiveCfg = Release|x64
+		{233547BB-1E2F-303A-B67C-E857FF0A3506}.Release|x64.Build.0 = Release|x64
+		{93D1E4DC-D7E3-3ECE-8169-DEC938B98A3F}.Debug|x64.ActiveCfg = Debug|x64
+		{93D1E4DC-D7E3-3ECE-8169-DEC938B98A3F}.Debug|x64.Build.0 = Debug|x64
+		{93D1E4DC-D7E3-3ECE-8169-DEC938B98A3F}.Release|x64.ActiveCfg = Release|x64
+		{93D1E4DC-D7E3-3ECE-8169-DEC938B98A3F}.Release|x64.Build.0 = Release|x64
+		{B9E1AB3B-7EB3-330C-9FA3-5ECCDEE36019}.Debug|x64.ActiveCfg = Debug|x64
+		{B9E1AB3B-7EB3-330C-9FA3-5ECCDEE36019}.Debug|x64.Build.0 = Debug|x64
+		{B9E1AB3B-7EB3-330C-9FA3-5ECCDEE36019}.Release|x64.ActiveCfg = Release|x64
+		{B9E1AB3B-7EB3-330C-9FA3-5ECCDEE36019}.Release|x64.Build.0 = Release|x64
+		{2A19E503-D4BD-321B-A49A-2E0C5733C951}.Debug|x64.ActiveCfg = Debug|x64
+		{2A19E503-D4BD-321B-A49A-2E0C5733C951}.Debug|x64.Build.0 = Debug|x64
+		{2A19E503-D4BD-321B-A49A-2E0C5733C951}.Release|x64.ActiveCfg = Release|x64
+		{2A19E503-D4BD-321B-A49A-2E0C5733C951}.Release|x64.Build.0 = Release|x64
+		{C8D2CEE1-1D14-3851-9C26-649DE2C5230B}.Debug|x64.ActiveCfg = Debug|x64
+		{C8D2CEE1-1D14-3851-9C26-649DE2C5230B}.Debug|x64.Build.0 = Debug|x64
+		{C8D2CEE1-1D14-3851-9C26-649DE2C5230B}.Release|x64.ActiveCfg = Release|x64
+		{C8D2CEE1-1D14-3851-9C26-649DE2C5230B}.Release|x64.Build.0 = Release|x64
+		{3EB40975-879F-3FF4-A24E-1263E830A46A}.Debug|x64.ActiveCfg = Debug|x64
+		{3EB40975-879F-3FF4-A24E-1263E830A46A}.Debug|x64.Build.0 = Debug|x64
+		{3EB40975-879F-3FF4-A24E-1263E830A46A}.Release|x64.ActiveCfg = Release|x64
+		{3EB40975-879F-3FF4-A24E-1263E830A46A}.Release|x64.Build.0 = Release|x64
+		{7A6126C9-AB50-3061-BCC0-E36B5237C2B0}.Debug|x64.ActiveCfg = Debug|x64
+		{7A6126C9-AB50-3061-BCC0-E36B5237C2B0}.Debug|x64.Build.0 = Debug|x64
+		{7A6126C9-AB50-3061-BCC0-E36B5237C2B0}.Release|x64.ActiveCfg = Release|x64
+		{7A6126C9-AB50-3061-BCC0-E36B5237C2B0}.Release|x64.Build.0 = Release|x64
+		{E17F1277-A20A-3BFA-B492-76870B70251A}.Debug|x64.ActiveCfg = Debug|x64
+		{E17F1277-A20A-3BFA-B492-76870B70251A}.Debug|x64.Build.0 = Debug|x64
+		{E17F1277-A20A-3BFA-B492-76870B70251A}.Release|x64.ActiveCfg = Release|x64
+		{E17F1277-A20A-3BFA-B492-76870B70251A}.Release|x64.Build.0 = Release|x64
+		{7BF6154A-474C-3716-9B31-60EA263CC14F}.Debug|x64.ActiveCfg = Debug|x64
+		{7BF6154A-474C-3716-9B31-60EA263CC14F}.Debug|x64.Build.0 = Debug|x64
+		{7BF6154A-474C-3716-9B31-60EA263CC14F}.Release|x64.ActiveCfg = Release|x64
+		{7BF6154A-474C-3716-9B31-60EA263CC14F}.Release|x64.Build.0 = Release|x64
+		{04174CDD-562B-3070-BC48-AD67FA3A84B0}.Debug|x64.ActiveCfg = Debug|x64
+		{04174CDD-562B-3070-BC48-AD67FA3A84B0}.Debug|x64.Build.0 = Debug|x64
+		{04174CDD-562B-3070-BC48-AD67FA3A84B0}.Release|x64.ActiveCfg = Release|x64
+		{04174CDD-562B-3070-BC48-AD67FA3A84B0}.Release|x64.Build.0 = Release|x64
+		{207AB973-C815-367A-8C56-65F077B171A8}.Debug|x64.ActiveCfg = Debug|x64
+		{207AB973-C815-367A-8C56-65F077B171A8}.Debug|x64.Build.0 = Debug|x64
+		{207AB973-C815-367A-8C56-65F077B171A8}.Release|x64.ActiveCfg = Release|x64
+		{207AB973-C815-367A-8C56-65F077B171A8}.Release|x64.Build.0 = Release|x64
+		{79249910-985C-383C-BC58-8DF518E75072}.Debug|x64.ActiveCfg = Debug|x64
+		{79249910-985C-383C-BC58-8DF518E75072}.Debug|x64.Build.0 = Debug|x64
+		{79249910-985C-383C-BC58-8DF518E75072}.Release|x64.ActiveCfg = Release|x64
+		{79249910-985C-383C-BC58-8DF518E75072}.Release|x64.Build.0 = Release|x64
+		{4E21D7D1-9781-3248-B398-F6DEDFC58563}.Debug|x64.ActiveCfg = Debug|x64
+		{4E21D7D1-9781-3248-B398-F6DEDFC58563}.Debug|x64.Build.0 = Debug|x64
+		{4E21D7D1-9781-3248-B398-F6DEDFC58563}.Release|x64.ActiveCfg = Release|x64
+		{4E21D7D1-9781-3248-B398-F6DEDFC58563}.Release|x64.Build.0 = Release|x64
+		{4CC5F252-2A76-3C91-9188-C7F25D926C5B}.Debug|x64.ActiveCfg = Debug|x64
+		{4CC5F252-2A76-3C91-9188-C7F25D926C5B}.Debug|x64.Build.0 = Debug|x64
+		{4CC5F252-2A76-3C91-9188-C7F25D926C5B}.Release|x64.ActiveCfg = Release|x64
+		{4CC5F252-2A76-3C91-9188-C7F25D926C5B}.Release|x64.Build.0 = Release|x64
+		{15E11536-E28F-3C19-97F8-412206EC26B9}.Debug|x64.ActiveCfg = Debug|x64
+		{15E11536-E28F-3C19-97F8-412206EC26B9}.Debug|x64.Build.0 = Debug|x64
+		{15E11536-E28F-3C19-97F8-412206EC26B9}.Release|x64.ActiveCfg = Release|x64
+		{15E11536-E28F-3C19-97F8-412206EC26B9}.Release|x64.Build.0 = Release|x64
+		{342B4EF8-9E9A-379F-97BF-8DA5CF13DAB9}.Debug|x64.ActiveCfg = Debug|x64
+		{342B4EF8-9E9A-379F-97BF-8DA5CF13DAB9}.Debug|x64.Build.0 = Debug|x64
+		{342B4EF8-9E9A-379F-97BF-8DA5CF13DAB9}.Release|x64.ActiveCfg = Release|x64
+		{342B4EF8-9E9A-379F-97BF-8DA5CF13DAB9}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

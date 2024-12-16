@@ -1,0 +1,57 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TAppCommon", "D:/work/hevc/GitlHEVCAnalyzer/appgitlhevcdecoder/HM-10.0/build/HM\TAppCommon.vcxproj", "{7DC05E5E-78EF-3A54-9FC8-6FC605CDB329}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TLibCommon", "D:/work/hevc/GitlHEVCAnalyzer/appgitlhevcdecoder/HM-10.0/build/HM\TLibCommon.vcxproj", "{C7565D1B-C3E0-3F6F-8997-503E6E9B8EC6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TLibDecoder", "D:/work/hevc/GitlHEVCAnalyzer/appgitlhevcdecoder/HM-10.0/build/HM\TLibDecoder.vcxproj", "{D7890E98-AB22-37FF-9F95-E71F46387244}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TLibVideoIO", "D:/work/hevc/GitlHEVCAnalyzer/appgitlhevcdecoder/HM-10.0/build/HM\TLibVideoIO.vcxproj", "{124DA942-00C5-352C-AF1A-1766AD6416BC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TLibSysuAnalyzer", "D:/work/hevc/GitlHEVCAnalyzer/appgitlhevcdecoder/HM-10.0/build/HM\TLibSysuAnalyzer.vcxproj", "{6E2CC612-79BC-31EC-A2C1-57E5F3955467}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HM_100", "D:/work/hevc/GitlHEVCAnalyzer/appgitlhevcdecoder/HM-10.0/build/HM\HM_100.vcxproj", "{7CA3B4A2-61D5-32EE-B2B6-028CD94C683A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D7890E98-AB22-37FF-9F95-E71F46387244} = {D7890E98-AB22-37FF-9F95-E71F46387244}
+		{7DC05E5E-78EF-3A54-9FC8-6FC605CDB329} = {7DC05E5E-78EF-3A54-9FC8-6FC605CDB329}
+		{6E2CC612-79BC-31EC-A2C1-57E5F3955467} = {6E2CC612-79BC-31EC-A2C1-57E5F3955467}
+		{124DA942-00C5-352C-AF1A-1766AD6416BC} = {124DA942-00C5-352C-AF1A-1766AD6416BC}
+		{C7565D1B-C3E0-3F6F-8997-503E6E9B8EC6} = {C7565D1B-C3E0-3F6F-8997-503E6E9B8EC6}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7DC05E5E-78EF-3A54-9FC8-6FC605CDB329}.Debug|x64.ActiveCfg = Debug|x64
+		{7DC05E5E-78EF-3A54-9FC8-6FC605CDB329}.Debug|x64.Build.0 = Debug|x64
+		{7DC05E5E-78EF-3A54-9FC8-6FC605CDB329}.Release|x64.ActiveCfg = Release|x64
+		{7DC05E5E-78EF-3A54-9FC8-6FC605CDB329}.Release|x64.Build.0 = Release|x64
+		{C7565D1B-C3E0-3F6F-8997-503E6E9B8EC6}.Debug|x64.ActiveCfg = Debug|x64
+		{C7565D1B-C3E0-3F6F-8997-503E6E9B8EC6}.Debug|x64.Build.0 = Debug|x64
+		{C7565D1B-C3E0-3F6F-8997-503E6E9B8EC6}.Release|x64.ActiveCfg = Release|x64
+		{C7565D1B-C3E0-3F6F-8997-503E6E9B8EC6}.Release|x64.Build.0 = Release|x64
+		{D7890E98-AB22-37FF-9F95-E71F46387244}.Debug|x64.ActiveCfg = Debug|x64
+		{D7890E98-AB22-37FF-9F95-E71F46387244}.Debug|x64.Build.0 = Debug|x64
+		{D7890E98-AB22-37FF-9F95-E71F46387244}.Release|x64.ActiveCfg = Release|x64
+		{D7890E98-AB22-37FF-9F95-E71F46387244}.Release|x64.Build.0 = Release|x64
+		{124DA942-00C5-352C-AF1A-1766AD6416BC}.Debug|x64.ActiveCfg = Debug|x64
+		{124DA942-00C5-352C-AF1A-1766AD6416BC}.Debug|x64.Build.0 = Debug|x64
+		{124DA942-00C5-352C-AF1A-1766AD6416BC}.Release|x64.ActiveCfg = Release|x64
+		{124DA942-00C5-352C-AF1A-1766AD6416BC}.Release|x64.Build.0 = Release|x64
+		{6E2CC612-79BC-31EC-A2C1-57E5F3955467}.Debug|x64.ActiveCfg = Debug|x64
+		{6E2CC612-79BC-31EC-A2C1-57E5F3955467}.Debug|x64.Build.0 = Debug|x64
+		{6E2CC612-79BC-31EC-A2C1-57E5F3955467}.Release|x64.ActiveCfg = Release|x64
+		{6E2CC612-79BC-31EC-A2C1-57E5F3955467}.Release|x64.Build.0 = Release|x64
+		{7CA3B4A2-61D5-32EE-B2B6-028CD94C683A}.Debug|x64.ActiveCfg = Debug|x64
+		{7CA3B4A2-61D5-32EE-B2B6-028CD94C683A}.Debug|x64.Build.0 = Debug|x64
+		{7CA3B4A2-61D5-32EE-B2B6-028CD94C683A}.Release|x64.ActiveCfg = Release|x64
+		{7CA3B4A2-61D5-32EE-B2B6-028CD94C683A}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
