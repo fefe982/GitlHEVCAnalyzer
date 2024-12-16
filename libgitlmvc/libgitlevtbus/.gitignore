@@ -13,3 +13,6 @@
 *.a
 
 *.user
+
+**/debug
+**/release

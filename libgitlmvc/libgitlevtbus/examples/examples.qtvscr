@@ -1,0 +1,1011 @@
+<FlowDocument xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" FontFamily="Segoe UI" FontSize="12">
+  <FlowDocument.Tag><![CDATA[{
+  "timestamp": "2024-12-16 16:04:49",
+  "files": {
+    "D:\\work\\hevc\\GitlHEVCAnalyzer\\libgitlmvc\\libgitlevtbus\\examples\\examples.vcxproj": {
+      "before": "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",
+      "after": "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"
+    },
+    "D:\\work\\hevc\\GitlHEVCAnalyzer\\libgitlmvc\\libgitlevtbus\\examples\\examples.vcxproj.user": {
+      "before": "tZE9a8MwEIbTtdD/IETAyVDL/aCUYiVDCl06JG3obstnW0XWGekUUsgf7r+o7OItYzvee8f7PHDfF7NZvj52hh3AeY1W8ps04wyswkrbRvJA9fUjX6+uLvOtw09QxPaIxn9M95vgHFjiLLZYL3lL1D8J4VULXeHTTiuHHmtKFXaiggMY7MGJzpdBm0rcZtkdj+2MDf1xQ18vDkPPxLnwtSjBSL6jdyCKfp6zDdpK06iezBdxqnUTXDEky9N8sTUF1ei6ZSJl8gxlaE7Hh/vkFxmhO9pjUO3EHqExFufyXExno+I/CL6BgcLDXyqO0sPfVj8=",
+      "after": "tZHNSsNAFIXrVvAdhqGQdmEm/iAimXRRwY2LVov7ZHKTjMzkhpk7pUJf1XdxEulGXOrynns454PzeTab5auDNWwPzmvsJb9KM86gV1jrvpU8UHN5z1fFxXm+cfgOitgO0fi3k38dnIOeOIspvZe8IxoehPCqA1v61Grl0GNDqUIratiDwQGcsL4K2tTiOstueExnbMyPH/p4chgGJn4Tn8sKjORbegWiyOc5W2Nfa5rQk/kiXo1ugytHZXmcLzampAadXSZSJo9QhfZ4uLtNvitj6ZZ2GFR36i5y8VOZ2MTJMMH9A9oLGCg9/A1cPuKOWxVf"
+    }
+  }
+}]]></FlowDocument.Tag>
+  <Section Margin="0,24" TextAlignment="Center">
+    <Paragraph FontSize="24" FontWeight="Bold" Margin="12,0">
+      <LineBreak />
+      <Span Foreground="Gray">Qt Visual Studio Tools</Span>
+    </Paragraph>
+    <Paragraph FontSize="42" Margin="12,0" FontWeight="Bold">
+      <Span TextDecorations="Underline">Project Format Conversion</Span>
+    </Paragraph>
+    <Paragraph Margin="12,8" FontSize="18">
+      <Span>Report generated on 2024-12-16 16:04:49</Span>
+    </Paragraph>
+  </Section>
+  <Section>
+    <Paragraph FontSize="32" FontWeight="Bold" Margin="12,0">
+      <Span>Files</Span>
+    </Paragraph>
+    <Paragraph Margin="24,12,0,0">
+      <Span FontFamily="Consolas" FontSize="14" Background="WhiteSmoke"><![CDATA[D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\examples\examples.vcxproj]]></Span>
+      <LineBreak />
+      <Hyperlink NavigateUri="file://D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\examples\examples.vcxproj?before">[Before]</Hyperlink>
+      <Hyperlink NavigateUri="file://D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\examples\examples.vcxproj?after">[After]</Hyperlink>
+      <Hyperlink NavigateUri="file://D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\examples\examples.vcxproj?diff&amp;before&amp;after">
+                        [Diff before/after]
+                    </Hyperlink>
+      <Hyperlink NavigateUri="file://D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\examples\examples.vcxproj?diff&amp;before&amp;current">
+                        [Diff before/current]
+                    </Hyperlink>
+      <Hyperlink NavigateUri="file://D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\examples\examples.vcxproj?diff&amp;after&amp;current">
+                        [Diff after/current]
+                    </Hyperlink>
+      <LineBreak />
+    </Paragraph>
+    <Paragraph Margin="24,12,0,0">
+      <Span FontFamily="Consolas" FontSize="14" Background="WhiteSmoke"><![CDATA[D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\examples\examples.vcxproj.user]]></Span>
+      <LineBreak />
+      <Hyperlink NavigateUri="file://D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\examples\examples.vcxproj.user?before">[Before]</Hyperlink>
+      <Hyperlink NavigateUri="file://D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\examples\examples.vcxproj.user?after">[After]</Hyperlink>
+      <Hyperlink NavigateUri="file://D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\examples\examples.vcxproj.user?diff&amp;before&amp;after">
+                        [Diff before/after]
+                    </Hyperlink>
+      <Hyperlink NavigateUri="file://D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\examples\examples.vcxproj.user?diff&amp;before&amp;current">
+                        [Diff before/current]
+                    </Hyperlink>
+      <Hyperlink NavigateUri="file://D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\examples\examples.vcxproj.user?diff&amp;after&amp;current">
+                        [Diff after/current]
+                    </Hyperlink>
+      <LineBreak />
+    </Paragraph>
+  </Section>
+  <Section>
+    <Paragraph FontSize="32" FontWeight="Bold" Margin="12,0">
+      <Span>Changes</Span>
+    </Paragraph>
+    <Paragraph FontSize="20" FontWeight="Bold" Margin="12">
+      <Span><![CDATA[🡺 Replacing paths with "$(QTDIR)"]]></Span>
+    </Paragraph>
+    <Table CellSpacing="0" BorderBrush="Gray" BorderThickness="0.5">
+      <Table.Columns>
+        <TableColumn />
+        <TableColumn />
+      </Table.Columns>
+      <TableRowGroup>
+        <TableRow Background="Orange">
+          <TableCell ColumnSpan="2" BorderThickness="0.5" BorderBrush="Gray">
+            <Paragraph Margin="10,5" FontWeight="Bold">
+              <Span><![CDATA[D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\examples\examples.vcxproj]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <AdditionalIncludeDirectories>.;..\..\libgitlevtbus\src;]]></Span><Span Background="LightCoral"><![CDATA[D:\Qt\6.8.1\msvc2022_64\include]]></Span><Span><![CDATA[;]]></Span><Span Background="LightCoral"><![CDATA[D:\Qt\6.8.1\msvc2022_64\include\QtCore]]></Span><Span><![CDATA[;release;]]></Span><Span Background="LightCoral"><![CDATA[D:\Qt\6.8.1\msvc2022_64\mkspecs\win32-msvc]]></Span><Span><![CDATA[;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>]]></Span>
+            </Paragraph>
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <AdditionalIncludeDirectories>.;..\..\libgitlevtbus\src;]]></Span><Span Background="LightGreen"><![CDATA[$(QTDIR)\include]]></Span><Span><![CDATA[;]]></Span><Span Background="LightGreen"><![CDATA[$(QTDIR)\include\QtCore]]></Span><Span><![CDATA[;release;]]></Span><Span Background="LightGreen"><![CDATA[$(QTDIR)\mkspecs\win32-msvc]]></Span><Span><![CDATA[;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <AdditionalDependencies>GitlEvtBus.lib;]]></Span><Span Background="LightCoral"><![CDATA[D:\Qt\6.8.1\msvc2022_64\lib\Qt6Core]]></Span><Span><![CDATA[.lib;%(AdditionalDependencies)</AdditionalDependencies>]]></Span>
+            </Paragraph>
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <AdditionalDependencies>GitlEvtBus.lib;]]></Span><Span Background="LightGreen"><![CDATA[$(QTDIR)\lib\Qt6Core]]></Span><Span><![CDATA[.lib;%(AdditionalDependencies)</AdditionalDependencies>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <AdditionalIncludeDirectories>.;..\..\libgitlevtbus\src;]]></Span><Span Background="LightCoral"><![CDATA[D:\Qt\6.8.1\msvc2022_64\include]]></Span><Span><![CDATA[;]]></Span><Span Background="LightCoral"><![CDATA[D:\Qt\6.8.1\msvc2022_64\include\QtCore]]></Span><Span><![CDATA[;debug;]]></Span><Span Background="LightCoral"><![CDATA[D:\Qt\6.8.1\msvc2022_64\mkspecs\win32-msvc]]></Span><Span><![CDATA[;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>]]></Span>
+            </Paragraph>
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <AdditionalIncludeDirectories>.;..\..\libgitlevtbus\src;]]></Span><Span Background="LightGreen"><![CDATA[$(QTDIR)\include]]></Span><Span><![CDATA[;]]></Span><Span Background="LightGreen"><![CDATA[$(QTDIR)\include\QtCore]]></Span><Span><![CDATA[;debug;]]></Span><Span Background="LightGreen"><![CDATA[$(QTDIR)\mkspecs\win32-msvc]]></Span><Span><![CDATA[;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <AdditionalDependencies>D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\GitlEvtBusd.lib;]]></Span><Span Background="LightCoral"><![CDATA[D:\Qt\6.8.1\msvc2022_64\lib\Qt6Cored]]></Span><Span><![CDATA[.lib;%(AdditionalDependencies)</AdditionalDependencies>]]></Span>
+            </Paragraph>
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <AdditionalDependencies>D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\GitlEvtBusd.lib;]]></Span><Span Background="LightGreen"><![CDATA[$(QTDIR)\lib\Qt6Cored]]></Span><Span><![CDATA[.lib;%(AdditionalDependencies)</AdditionalDependencies>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <AdditionalInputs Condition="'$(Configuration)|$(Platform)]]></Span><Span Background="LightCoral"><![CDATA['=='Debug|x64'">D:\Qt\6.8.1\msvc2022_64\mkspecs\features\data\dummy]]></Span><Span><![CDATA[.cpp;%(AdditionalInputs)</AdditionalInputs>]]></Span>
+            </Paragraph>
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <AdditionalInputs Condition="'$(Configuration)|$(Platform)]]></Span><Span Background="LightGreen"><![CDATA['=='Debug|x64'">$(QTDIR)\mkspecs\features\data\dummy]]></Span><Span><![CDATA[.cpp;%(AdditionalInputs)</AdditionalInputs>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cl -Bx"$(QTDIR)\bin\qmake.exe" -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -Zi -MDd -std:c++17 -utf-8 -W3 -w34100 -w34189 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E ]]></Span><Span Background="LightCoral"><![CDATA[D:\Qt\6.8.1\msvc2022_64\mkspecs\features\data\dummy]]></Span><Span><![CDATA[.cpp 2&gt;NUL &gt;debug\moc_predefs.h</Command>]]></Span>
+            </Paragraph>
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cl -Bx"$(QTDIR)\bin\qmake.exe" -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -Zi -MDd -std:c++17 -utf-8 -W3 -w34100 -w34189 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E ]]></Span><Span Background="LightGreen"><![CDATA[$(QTDIR)\mkspecs\features\data\dummy]]></Span><Span><![CDATA[.cpp 2&gt;NUL &gt;debug\moc_predefs.h</Command>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <AdditionalInputs Condition="'$(Configuration)|$(Platform)]]></Span><Span Background="LightCoral"><![CDATA['=='Release|x64'">D:\Qt\6.8.1\msvc2022_64\mkspecs\features\data\dummy]]></Span><Span><![CDATA[.cpp;%(AdditionalInputs)</AdditionalInputs>]]></Span>
+            </Paragraph>
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <AdditionalInputs Condition="'$(Configuration)|$(Platform)]]></Span><Span Background="LightGreen"><![CDATA['=='Release|x64'">$(QTDIR)\mkspecs\features\data\dummy]]></Span><Span><![CDATA[.cpp;%(AdditionalInputs)</AdditionalInputs>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">cl -Bx"$(QTDIR)\bin\qmake.exe" -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -O2 -MD -std:c++17 -utf-8 -W3 -w34100 -w34189 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E ]]></Span><Span Background="LightCoral"><![CDATA[D:\Qt\6.8.1\msvc2022_64\mkspecs\features\data\dummy]]></Span><Span><![CDATA[.cpp 2&gt;NUL &gt;release\moc_predefs.h</Command>]]></Span>
+            </Paragraph>
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">cl -Bx"$(QTDIR)\bin\qmake.exe" -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -O2 -MD -std:c++17 -utf-8 -W3 -w34100 -w34189 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E ]]></Span><Span Background="LightGreen"><![CDATA[$(QTDIR)\mkspecs\features\data\dummy]]></Span><Span><![CDATA[.cpp 2&gt;NUL &gt;release\moc_predefs.h</Command>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+      </TableRowGroup>
+    </Table>
+    <Paragraph FontSize="20" FontWeight="Bold" Margin="12">
+      <Span><![CDATA[🡺 Converting custom build steps to Qt/MSBuild items]]></Span>
+    </Paragraph>
+    <Table CellSpacing="0" BorderBrush="Gray" BorderThickness="0.5">
+      <Table.Columns>
+        <TableColumn />
+        <TableColumn />
+      </Table.Columns>
+      <TableRowGroup>
+        <TableRow Background="Orange">
+          <TableCell ColumnSpan="2" BorderThickness="0.5" BorderBrush="Gray">
+            <Paragraph Margin="10,5" FontWeight="Bold">
+              <Span><![CDATA[D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\examples\examples.vcxproj]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      ]]></Span><Span Background="LightCoral"><![CDATA[<AdditionalIncludeDirectories>.;..]]></Span><Span><![CDATA[\..\libgitlevtbus\src;$(QTDIR)\include;$(QTDIR)\include\QtCore;release;$(QTDIR)\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>]]></Span>
+            </Paragraph>
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      ]]></Span><Span Background="LightGreen"><![CDATA[<AdditionalIncludeDirectories>GeneratedFiles\$(ConfigurationName);GeneratedFiles;.;..]]></Span><Span><![CDATA[\..\libgitlevtbus\src;$(QTDIR)\include;$(QTDIR)\include\QtCore;release;$(QTDIR)\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      ]]></Span><Span Background="LightCoral"><![CDATA[<AdditionalIncludeDirectories>.;..]]></Span><Span><![CDATA[\..\libgitlevtbus\src;$(QTDIR)\include;$(QTDIR)\include\QtCore;debug;$(QTDIR)\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>]]></Span>
+            </Paragraph>
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      ]]></Span><Span Background="LightGreen"><![CDATA[<AdditionalIncludeDirectories>GeneratedFiles\$(ConfigurationName);GeneratedFiles;.;..]]></Span><Span><![CDATA[\..\libgitlevtbus\src;$(QTDIR)\include;$(QTDIR)\include\QtCore;debug;$(QTDIR)\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span Background="LightCoral"><![CDATA[      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>]]></Span>
+            </Paragraph>
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0" />
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cl -Bx"$(QTDIR)\bin\qmake.exe" -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -Zi -MDd -std:c++17 -utf-8 -W3 -w34100 -w34189 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E $(QTDIR)\mkspecs\features\data\dummy.cpp 2&gt;NUL &gt;]]></Span><Span Background="LightCoral"><![CDATA[debug\moc_predefs]]></Span><Span><![CDATA[.h</Command>]]></Span>
+            </Paragraph>
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cl -Bx"$(QTDIR)\bin\qmake.exe" -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -Zi -MDd -std:c++17 -utf-8 -W3 -w34100 -w34189 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E $(QTDIR)\mkspecs\features\data\dummy.cpp 2&gt;NUL &gt;]]></Span><Span Background="LightGreen"><![CDATA[$(IntDir)\moc_predefs]]></Span><Span><![CDATA[.h</Command>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <Outputs Condition="'$(Configuration)|$(Platform)]]></Span><Span Background="LightCoral"><![CDATA['=='Debug|x64'">debug\moc_predefs]]></Span><Span><![CDATA[.h;%(Outputs)</Outputs>]]></Span>
+            </Paragraph>
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <Outputs Condition="'$(Configuration)|$(Platform)]]></Span><Span Background="LightGreen"><![CDATA['=='Debug|x64'">$(IntDir)\moc_predefs]]></Span><Span><![CDATA[.h;%(Outputs)</Outputs>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">cl -Bx"$(QTDIR)\bin\qmake.exe" -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -O2 -MD -std:c++17 -utf-8 -W3 -w34100 -w34189 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E $(QTDIR)\mkspecs\features\data\dummy.cpp 2&gt;NUL &gt;]]></Span><Span Background="LightCoral"><![CDATA[release\moc_predefs]]></Span><Span><![CDATA[.h</Command>]]></Span>
+            </Paragraph>
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">cl -Bx"$(QTDIR)\bin\qmake.exe" -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -O2 -MD -std:c++17 -utf-8 -W3 -w34100 -w34189 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E $(QTDIR)\mkspecs\features\data\dummy.cpp 2&gt;NUL &gt;]]></Span><Span Background="LightGreen"><![CDATA[$(IntDir)\moc_predefs]]></Span><Span><![CDATA[.h</Command>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <Outputs Condition="'$(Configuration)|$(Platform)]]></Span><Span Background="LightCoral"><![CDATA['=='Release|x64'">release\moc_predefs]]></Span><Span><![CDATA[.h;%(Outputs)</Outputs>]]></Span>
+            </Paragraph>
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <Outputs Condition="'$(Configuration)|$(Platform)]]></Span><Span Background="LightGreen"><![CDATA['=='Release|x64'">$(IntDir)\moc_predefs]]></Span><Span><![CDATA[.h;%(Outputs)</Outputs>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span Background="LightCoral"><![CDATA[      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>]]></Span>
+            </Paragraph>
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0" />
+          </TableCell>
+        </TableRow>
+      </TableRowGroup>
+    </Table>
+    <Paragraph FontSize="20" FontWeight="Bold" Margin="12">
+      <Span><![CDATA[🡺 Enabling multi-processor compilation]]></Span>
+    </Paragraph>
+    <Table CellSpacing="0" BorderBrush="Gray" BorderThickness="0.5">
+      <Table.Columns>
+        <TableColumn />
+        <TableColumn />
+      </Table.Columns>
+      <TableRowGroup>
+        <TableRow Background="Orange">
+          <TableCell ColumnSpan="2" BorderThickness="0.5" BorderBrush="Gray">
+            <Paragraph Margin="10,5" FontWeight="Bold">
+              <Span><![CDATA[D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\examples\examples.vcxproj]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0" />
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span Background="LightGreen"><![CDATA[      <MultiProcessorCompilation>true</MultiProcessorCompilation>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0" />
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span Background="LightGreen"><![CDATA[      <MultiProcessorCompilation>true</MultiProcessorCompilation>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+      </TableRowGroup>
+    </Table>
+    <Paragraph FontSize="20" FontWeight="Bold" Margin="12">
+      <Span><![CDATA[🡺 Project format version]]></Span>
+    </Paragraph>
+    <Table CellSpacing="0" BorderBrush="Gray" BorderThickness="0.5">
+      <Table.Columns>
+        <TableColumn />
+        <TableColumn />
+      </Table.Columns>
+      <TableRowGroup>
+        <TableRow Background="Orange">
+          <TableCell ColumnSpan="2" BorderThickness="0.5" BorderBrush="Gray">
+            <Paragraph Margin="10,5" FontWeight="Bold">
+              <Span><![CDATA[D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\examples\examples.vcxproj]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[    ]]></Span><Span Background="LightCoral"><![CDATA[<Keyword>Qt4VSv1.0</Keyword>]]></Span>
+            </Paragraph>
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[    ]]></Span><Span Background="LightGreen"><![CDATA[<Keyword>QtVS_v304</Keyword>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+      </TableRowGroup>
+    </Table>
+    <Paragraph FontSize="20" FontWeight="Bold" Margin="12">
+      <Span><![CDATA[🡺 Fallback for QTMSBUILD environment variable]]></Span>
+    </Paragraph>
+    <Table CellSpacing="0" BorderBrush="Gray" BorderThickness="0.5">
+      <Table.Columns>
+        <TableColumn />
+        <TableColumn />
+      </Table.Columns>
+      <TableRowGroup>
+        <TableRow Background="Orange">
+          <TableCell ColumnSpan="2" BorderThickness="0.5" BorderBrush="Gray">
+            <Paragraph Margin="10,5" FontWeight="Bold">
+              <Span><![CDATA[D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\examples\examples.vcxproj]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0" />
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span Background="LightGreen"><![CDATA[    <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+      </TableRowGroup>
+    </Table>
+    <Paragraph FontSize="20" FontWeight="Bold" Margin="12">
+      <Span><![CDATA[🡺 Default Qt properties]]></Span>
+    </Paragraph>
+    <Table CellSpacing="0" BorderBrush="Gray" BorderThickness="0.5">
+      <Table.Columns>
+        <TableColumn />
+        <TableColumn />
+      </Table.Columns>
+      <TableRowGroup>
+        <TableRow Background="Orange">
+          <TableCell ColumnSpan="2" BorderThickness="0.5" BorderBrush="Gray">
+            <Paragraph Margin="10,5" FontWeight="Bold">
+              <Span><![CDATA[D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\examples\examples.vcxproj]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0" />
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span Background="LightGreen"><![CDATA[  <Import Project="$(QtMsBuild)\qt_defaults.props" Condition="Exists('$(QtMsBuild)\qt_defaults.props')" />]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+      </TableRowGroup>
+    </Table>
+    <Paragraph FontSize="20" FontWeight="Bold" Margin="12">
+      <Span><![CDATA[🡺 Qt build settings]]></Span>
+    </Paragraph>
+    <Table CellSpacing="0" BorderBrush="Gray" BorderThickness="0.5">
+      <Table.Columns>
+        <TableColumn />
+        <TableColumn />
+      </Table.Columns>
+      <TableRowGroup>
+        <TableRow Background="Orange">
+          <TableCell ColumnSpan="2" BorderThickness="0.5" BorderBrush="Gray">
+            <Paragraph Margin="10,5" FontWeight="Bold">
+              <Span><![CDATA[D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\examples\examples.vcxproj]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0" />
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span Background="LightGreen"><![CDATA[  <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0" />
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span Background="LightGreen"><![CDATA[  <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+      </TableRowGroup>
+    </Table>
+    <Paragraph FontSize="20" FontWeight="Bold" Margin="12">
+      <Span><![CDATA[🡺 Warn if Qt/MSBuild is not found]]></Span>
+    </Paragraph>
+    <Table CellSpacing="0" BorderBrush="Gray" BorderThickness="0.5">
+      <Table.Columns>
+        <TableColumn />
+        <TableColumn />
+      </Table.Columns>
+      <TableRowGroup>
+        <TableRow Background="Orange">
+          <TableCell ColumnSpan="2" BorderThickness="0.5" BorderBrush="Gray">
+            <Paragraph Margin="10,5" FontWeight="Bold">
+              <Span><![CDATA[D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\examples\examples.vcxproj]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0" />
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span Background="LightGreen"><![CDATA[  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') OR !Exists('$(QtMsBuild)\Qt.props')">]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0" />
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span Background="LightGreen"><![CDATA[    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0" />
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span Background="LightGreen"><![CDATA[  </Target>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+      </TableRowGroup>
+    </Table>
+    <Paragraph FontSize="20" FontWeight="Bold" Margin="12">
+      <Span><![CDATA[🡺 Qt property sheet]]></Span>
+    </Paragraph>
+    <Table CellSpacing="0" BorderBrush="Gray" BorderThickness="0.5">
+      <Table.Columns>
+        <TableColumn />
+        <TableColumn />
+      </Table.Columns>
+      <TableRowGroup>
+        <TableRow Background="Orange">
+          <TableCell ColumnSpan="2" BorderThickness="0.5" BorderBrush="Gray">
+            <Paragraph Margin="10,5" FontWeight="Bold">
+              <Span><![CDATA[D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\examples\examples.vcxproj]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0" />
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span Background="LightGreen"><![CDATA[    <Import Project="$(QtMsBuild)\Qt.props" />]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0" />
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span Background="LightGreen"><![CDATA[    <Import Project="$(QtMsBuild)\Qt.props" />]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+      </TableRowGroup>
+    </Table>
+    <Paragraph FontSize="20" FontWeight="Bold" Margin="12">
+      <Span><![CDATA[🡺 Qt targets]]></Span>
+    </Paragraph>
+    <Table CellSpacing="0" BorderBrush="Gray" BorderThickness="0.5">
+      <Table.Columns>
+        <TableColumn />
+        <TableColumn />
+      </Table.Columns>
+      <TableRowGroup>
+        <TableRow Background="Orange">
+          <TableCell ColumnSpan="2" BorderThickness="0.5" BorderBrush="Gray">
+            <Paragraph Margin="10,5" FontWeight="Bold">
+              <Span><![CDATA[D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\examples\examples.vcxproj]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0" />
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span Background="LightGreen"><![CDATA[  <Import Project="$(QtMsBuild)\qt.targets" Condition="Exists('$(QtMsBuild)\qt.targets')" />]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+      </TableRowGroup>
+    </Table>
+    <Paragraph FontSize="20" FontWeight="Bold" Margin="12">
+      <Span><![CDATA[🡺 Copying Qt build reference to QtInstall project property]]></Span>
+    </Paragraph>
+    <Table CellSpacing="0" BorderBrush="Gray" BorderThickness="0.5">
+      <Table.Columns>
+        <TableColumn />
+        <TableColumn />
+      </Table.Columns>
+      <TableRowGroup>
+        <TableRow Background="Orange">
+          <TableCell ColumnSpan="2" BorderThickness="0.5" BorderBrush="Gray">
+            <Paragraph Margin="10,5" FontWeight="Bold">
+              <Span><![CDATA[D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\examples\examples.vcxproj]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[  <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)]]></Span><Span Background="LightCoral"><![CDATA['=='Release|x64'" />]]></Span>
+            </Paragraph>
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[  <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)]]></Span><Span Background="LightGreen"><![CDATA['=='Release|x64'">]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[  ]]></Span><Span Background="LightCoral"><![CDATA[<PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />]]></Span>
+            </Paragraph>
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[    ]]></Span><Span Background="LightGreen"><![CDATA[<QtInstall>6.8.1</QtInstall>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0" />
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span Background="LightGreen"><![CDATA[  </PropertyGroup>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0" />
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span Background="LightGreen"><![CDATA[  <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0" />
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span Background="LightGreen"><![CDATA[    <QtInstall>6.8.1</QtInstall>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0" />
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span Background="LightGreen"><![CDATA[  </PropertyGroup>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+      </TableRowGroup>
+    </Table>
+    <Paragraph FontSize="20" FontWeight="Bold" Margin="12">
+      <Span><![CDATA[🡺 Removing Qt module macros from compiler properties]]></Span>
+    </Paragraph>
+    <Table CellSpacing="0" BorderBrush="Gray" BorderThickness="0.5">
+      <Table.Columns>
+        <TableColumn />
+        <TableColumn />
+      </Table.Columns>
+      <TableRowGroup>
+        <TableRow Background="Orange">
+          <TableCell ColumnSpan="2" BorderThickness="0.5" BorderBrush="Gray">
+            <Paragraph Margin="10,5" FontWeight="Bold">
+              <Span><![CDATA[D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\examples\examples.vcxproj]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <PreprocessorDefinitions>_CONSOLE;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;NDEBUG;QT_NO_DEBUG;]]></Span><Span Background="LightCoral"><![CDATA[QT_CORE_LIB;]]></Span><Span><![CDATA[%(PreprocessorDefinitions)</PreprocessorDefinitions>]]></Span>
+            </Paragraph>
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <PreprocessorDefinitions>_CONSOLE;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;NDEBUG;QT_NO_DEBUG;]]></Span><Span><![CDATA[%(PreprocessorDefinitions)</PreprocessorDefinitions>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <PreprocessorDefinitions>_CONSOLE;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;]]></Span><Span Background="LightCoral"><![CDATA[QT_CORE_LIB;]]></Span><Span><![CDATA[%(PreprocessorDefinitions)</PreprocessorDefinitions>]]></Span>
+            </Paragraph>
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <PreprocessorDefinitions>_CONSOLE;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;]]></Span><Span><![CDATA[%(PreprocessorDefinitions)</PreprocessorDefinitions>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+      </TableRowGroup>
+    </Table>
+    <Paragraph FontSize="20" FontWeight="Bold" Margin="12">
+      <Span><![CDATA[🡺 Removing Qt module include paths from compiler properties]]></Span>
+    </Paragraph>
+    <Table CellSpacing="0" BorderBrush="Gray" BorderThickness="0.5">
+      <Table.Columns>
+        <TableColumn />
+        <TableColumn />
+      </Table.Columns>
+      <TableRowGroup>
+        <TableRow Background="Orange">
+          <TableCell ColumnSpan="2" BorderThickness="0.5" BorderBrush="Gray">
+            <Paragraph Margin="10,5" FontWeight="Bold">
+              <Span><![CDATA[D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\examples\examples.vcxproj]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <AdditionalIncludeDirectories>GeneratedFiles\$(ConfigurationName);GeneratedFiles;.;..\..\libgitlevtbus\src;]]></Span><Span Background="LightCoral"><![CDATA[$(QTDIR)\include;$(QTDIR)\include\QtCore;]]></Span><Span><![CDATA[release]]></Span><Span Background="LightCoral"><![CDATA[;$(QTDIR)\mkspecs\win32-msvc]]></Span><Span><![CDATA[;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>]]></Span>
+            </Paragraph>
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <AdditionalIncludeDirectories>GeneratedFiles\$(ConfigurationName);GeneratedFiles;.;..\..\libgitlevtbus\src;]]></Span><Span><![CDATA[release]]></Span><Span><![CDATA[;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <AdditionalIncludeDirectories>GeneratedFiles\$(ConfigurationName);GeneratedFiles;.;..\..\libgitlevtbus\src;]]></Span><Span Background="LightCoral"><![CDATA[$(QTDIR)\include;$(QTDIR)\include\QtCore;]]></Span><Span><![CDATA[debug]]></Span><Span Background="LightCoral"><![CDATA[;$(QTDIR)\mkspecs\win32-msvc]]></Span><Span><![CDATA[;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>]]></Span>
+            </Paragraph>
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <AdditionalIncludeDirectories>GeneratedFiles\$(ConfigurationName);GeneratedFiles;.;..\..\libgitlevtbus\src;]]></Span><Span><![CDATA[debug]]></Span><Span><![CDATA[;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+      </TableRowGroup>
+    </Table>
+    <Paragraph FontSize="20" FontWeight="Bold" Margin="12">
+      <Span><![CDATA[🡺 Removing Qt module libraries from linker properties]]></Span>
+    </Paragraph>
+    <Table CellSpacing="0" BorderBrush="Gray" BorderThickness="0.5">
+      <Table.Columns>
+        <TableColumn />
+        <TableColumn />
+      </Table.Columns>
+      <TableRowGroup>
+        <TableRow Background="Orange">
+          <TableCell ColumnSpan="2" BorderThickness="0.5" BorderBrush="Gray">
+            <Paragraph Margin="10,5" FontWeight="Bold">
+              <Span><![CDATA[D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\examples\examples.vcxproj]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <AdditionalDependencies>GitlEvtBus.lib;]]></Span><Span Background="LightCoral"><![CDATA[$(QTDIR)\lib\Qt6Core.lib;]]></Span><Span><![CDATA[%(AdditionalDependencies)</AdditionalDependencies>]]></Span>
+            </Paragraph>
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <AdditionalDependencies>GitlEvtBus.lib;]]></Span><Span><![CDATA[%(AdditionalDependencies)</AdditionalDependencies>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <AdditionalDependencies>D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\GitlEvtBusd.lib;]]></Span><Span Background="LightCoral"><![CDATA[$(QTDIR)\lib\Qt6Cored.lib;]]></Span><Span><![CDATA[%(AdditionalDependencies)</AdditionalDependencies>]]></Span>
+            </Paragraph>
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <AdditionalDependencies>D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\GitlEvtBusd.lib;]]></Span><Span><![CDATA[%(AdditionalDependencies)</AdditionalDependencies>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+      </TableRowGroup>
+    </Table>
+    <Paragraph FontSize="20" FontWeight="Bold" Margin="12">
+      <Span><![CDATA[🡺 Removing Qt lib path from linker properties]]></Span>
+    </Paragraph>
+    <Table CellSpacing="0" BorderBrush="Gray" BorderThickness="0.5">
+      <Table.Columns>
+        <TableColumn />
+        <TableColumn />
+      </Table.Columns>
+      <TableRowGroup>
+        <TableRow Background="Orange">
+          <TableCell ColumnSpan="2" BorderThickness="0.5" BorderBrush="Gray">
+            <Paragraph Margin="10,5" FontWeight="Bold">
+              <Span><![CDATA[D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\examples\examples.vcxproj]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      ]]></Span><Span Background="LightCoral"><![CDATA[<AdditionalLibraryDirectories>$(QTDIR)\lib;D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus]]></Span><Span><![CDATA[;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>]]></Span>
+            </Paragraph>
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      ]]></Span><Span Background="LightGreen"><![CDATA[<AdditionalLibraryDirectories>D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus]]></Span><Span><![CDATA[;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      ]]></Span><Span Background="LightCoral"><![CDATA[<AdditionalLibraryDirectories>$(QTDIR)\lib;D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus]]></Span><Span><![CDATA[;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>]]></Span>
+            </Paragraph>
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      ]]></Span><Span Background="LightGreen"><![CDATA[<AdditionalLibraryDirectories>D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus]]></Span><Span><![CDATA[;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+      </TableRowGroup>
+    </Table>
+    <Paragraph FontSize="20" FontWeight="Bold" Margin="12">
+      <Span><![CDATA[🡺 Removing Qt module macros from resource compiler properties]]></Span>
+    </Paragraph>
+    <Table CellSpacing="0" BorderBrush="Gray" BorderThickness="0.5">
+      <Table.Columns>
+        <TableColumn />
+        <TableColumn />
+      </Table.Columns>
+      <TableRowGroup>
+        <TableRow Background="Orange">
+          <TableCell ColumnSpan="2" BorderThickness="0.5" BorderBrush="Gray">
+            <Paragraph Margin="10,5" FontWeight="Bold">
+              <Span><![CDATA[D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\examples\examples.vcxproj]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <PreprocessorDefinitions>_CONSOLE;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;NDEBUG;QT_NO_DEBUG;]]></Span><Span Background="LightCoral"><![CDATA[QT_CORE_LIB;]]></Span><Span><![CDATA[%(PreprocessorDefinitions)</PreprocessorDefinitions>]]></Span>
+            </Paragraph>
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <PreprocessorDefinitions>_CONSOLE;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;NDEBUG;QT_NO_DEBUG;]]></Span><Span><![CDATA[%(PreprocessorDefinitions)</PreprocessorDefinitions>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <PreprocessorDefinitions>_CONSOLE;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;]]></Span><Span Background="LightCoral"><![CDATA[QT_CORE_LIB;]]></Span><Span><![CDATA[_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>]]></Span>
+            </Paragraph>
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span><![CDATA[      <PreprocessorDefinitions>_CONSOLE;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;]]></Span><Span><![CDATA[_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+      </TableRowGroup>
+    </Table>
+    <Paragraph FontSize="20" FontWeight="Bold" Margin="12">
+      <Span><![CDATA[🡺 Adding Qt module names to QtModules project property]]></Span>
+    </Paragraph>
+    <Table CellSpacing="0" BorderBrush="Gray" BorderThickness="0.5">
+      <Table.Columns>
+        <TableColumn />
+        <TableColumn />
+      </Table.Columns>
+      <TableRowGroup>
+        <TableRow Background="Orange">
+          <TableCell ColumnSpan="2" BorderThickness="0.5" BorderBrush="Gray">
+            <Paragraph Margin="10,5" FontWeight="Bold">
+              <Span><![CDATA[D:\work\hevc\GitlHEVCAnalyzer\libgitlmvc\libgitlevtbus\examples\examples.vcxproj]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0" />
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span Background="LightGreen"><![CDATA[    <QtModules>core</QtModules>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell ColumnSpan="2" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0.5" />
+        </TableRow>
+        <TableRow>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0" />
+          </TableCell>
+          <TableCell BorderThickness="0, 0, 0.5, 0" BorderBrush="Gray">
+            <Paragraph FontFamily="Consolas" Margin="4, 0">
+              <Span Background="LightGreen"><![CDATA[    <QtModules>core</QtModules>]]></Span>
+            </Paragraph>
+          </TableCell>
+        </TableRow>
+      </TableRowGroup>
+    </Table>
+  </Section>
+  <Section>
+    <Paragraph />
+  </Section>
+</FlowDocument>
+<!--IkKtWR1JNDyrjMdR7jFadRbYgmUGqgpw/noCmKH+fv8=-->
