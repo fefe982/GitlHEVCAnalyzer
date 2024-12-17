@@ -500,6 +500,9 @@ Bool TDecTop::xDecodeSlice(InputNALUnit &nalu, Int &iSkipFrame, Int iPOCLastDisp
 Bool TDecTop::xDecodeSlice(InputNALUnit &nalu, Int &iSkipFrame, Int iPOCLastDisplay)
 #endif
 {
+    if (m_parameterSetManager.getFirstPPS() == NULL) {
+        return false;
+    }
   m_apcSlicePilot->initSlice(); // the slice pilot is an object to prepare for a new slice
                                 // it is not associated with picture, sps or pps structures.
 
@@ -822,7 +825,7 @@ Bool TDecTop::decode(InputNALUnit& nalu, Int& iSkipFrame, Int& iPOCLastDisplay)
   // Initialize entropy decoder
   m_cEntropyDecoder.setEntropyDecoder (&m_cCavlcDecoder);
   m_cEntropyDecoder.setBitstream      (&(nalu.getBitstream()));
-
+  printf("%d\n", nalu.m_nalUnitType);
   switch (nalu.m_nalUnitType)
   {
     case NAL_UNIT_VPS:
