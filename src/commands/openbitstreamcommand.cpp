@@ -37,7 +37,8 @@ bool OpenBitstreamCommand::execute( GitlCommandParameter& rcInputArg, GitlComman
     QString strDecoderPath = "./decoders";
     QString strDecoderOutputPath = pModel->getPreferences().getCacheFolder();
     int iSequenceIndex = pModel->getSequenceManager().getAllSequences().size();
-    strDecoderOutputPath += QString("/%1").arg(iSequenceIndex);
+    QFileInfo infoStreamFile = QFileInfo(strFilename);
+    strDecoderOutputPath += QString("/%1").arg(infoStreamFile.baseName());
 
 
 

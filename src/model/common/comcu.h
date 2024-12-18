@@ -51,12 +51,12 @@ public:
      * Regular infomations of CU
      */
     ADD_CLASS_FIELD(ComFrame*, pcFrame, getFrame, setFrame)                     ///< parent frame that holds this CU
-    ADD_CLASS_FIELD(int, iX, getX, setX)                                        ///< X Position in frame
-    ADD_CLASS_FIELD(int, iY, getY, setY)                                        ///< Y Position in frame
+    ADD_CLASS_FIELD(short, iX, getX, setX)                                        ///< X Position in frame
+    ADD_CLASS_FIELD(short, iY, getY, setY)                                        ///< Y Position in frame
     ADD_CLASS_FIELD(int, iSize, getSize, setSize)                               ///< CU Size
     ADD_CLASS_FIELD(int, iAddr, getAddr, setAddr)                               ///< Raster index of LCU (which the sub-CU belongs to)
-    ADD_CLASS_FIELD(int, iZorder, getZorder, setZorder)                         ///< Z-Order of CU
-    ADD_CLASS_FIELD(int, iDepth, getDepth, setDepth)                            ///< Depth of CU
+    ADD_CLASS_FIELD(short, iZorder, getZorder, setZorder)                         ///< Z-Order of CU
+    ADD_CLASS_FIELD(short, iDepth, getDepth, setDepth)                            ///< Depth of CU
 
     /*!
      * Bit info (only for LCU)

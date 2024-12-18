@@ -74,7 +74,7 @@ bool CUPUParser::parseFile(QTextStream* pcInputStream, ComSequence* pcSequence)
         }        
 
         /// sort LCU in ascendning order
-        std::sort(pcFrame->getLCUs().begin(), pcFrame->getLCUs().end(), xCUSortingOrder);
+        // std::sort(pcFrame->getLCUs().begin(), pcFrame->getLCUs().end(), xCUSortingOrder);
 
     }
 

@@ -50,3 +50,7 @@ void ComSequence::init()
     m_dSameCUModePercent = -1;
     m_dMeanCUDepthError = -1;
 }
+
+int ComSequence::getNumberMaxCu() const {
+    return ((m_iWidth + m_iMaxCUSize - 1) / m_iMaxCUSize) * ((m_iHeight + m_iMaxCUSize) / m_iMaxCUSize);
+}

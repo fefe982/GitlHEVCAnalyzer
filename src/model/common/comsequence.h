@@ -64,7 +64,8 @@ public:
     ADD_CLASS_FIELD(double, dSameCUModePercent, getSameCUModePercent, setSameCUModePercent)
     ADD_CLASS_FIELD(double, dMeanCUDepthError, getMeanCUDepthError, setMeanCUDepthError)
 
-
+public:
+    int getNumberMaxCu()const;
 };
 
 #endif // COMSEQUENCE_H

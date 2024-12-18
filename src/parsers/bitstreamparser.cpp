@@ -31,6 +31,17 @@ bool BitstreamParser::parseFile(QString strDecoderFolder,
                                 ComSequence* pcSequence)
 {
     QDir cCurDir = QDir::current();
+
+    pcSequence->setDecodingFolder(strOutputPath);
+    /// check if output folder exist
+    if (!cCurDir.exists(strOutputPath))
+    {
+        cCurDir.mkpath(strOutputPath);
+    }
+    else {
+        return true;
+    }
+
     /// check if decoder exist
     QString strDecoderPath;
     QStringList cCandidateDecoderList;
@@ -60,12 +71,6 @@ bool BitstreamParser::parseFile(QString strDecoderFolder,
         throw BitstreamNotFoundException();
     }
 
-    /// check if output folder exist
-    if( !cCurDir.exists(strOutputPath) )
-    {
-        cCurDir.mkpath(strOutputPath);
-    }
-
     m_cDecoderProcess.setWorkingDirectory(strOutputPath);
     QString strStandardOutputFile = strOutputPath+"/decoder_general.txt";
     m_cStdOutputFile.setFileName(strStandardOutputFile);
@@ -80,8 +85,6 @@ bool BitstreamParser::parseFile(QString strDecoderFolder,
     m_cDecoderProcess.waitForFinished(-1);
 
     m_cStdOutputFile.close();
-
-    pcSequence->setDecodingFolder(strOutputPath);
 
     return (m_cDecoderProcess.exitCode() == 0);
 }

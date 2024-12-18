@@ -87,7 +87,7 @@ bool YUV420RGBBuffer::xReadFrame(int iFrameCount)
         return false;
     m_iFrameCount = iFrameCount;
     int iFrameSizeInByte = (m_iBufferWidth*m_iBufferHeight*3/2)*i16BitMultiplier;
-    if( m_cIOYUV.seekTo(iFrameCount*iFrameSizeInByte) == false )
+    if( m_cIOYUV.seekTo(iFrameCount*(qint64)iFrameSizeInByte) == false )
         return false;
     int iReadBytes = 0;   ///read
 
