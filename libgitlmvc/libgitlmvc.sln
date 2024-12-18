@@ -1,0 +1,67 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GitlEvtBus", "D:/work/hevc/GitlHEVCAnalyzer/libgitlmvc/libgitlevtbus/src\GitlEvtBus.vcxproj", "{2A19E503-D4BD-321B-A49A-2E0C5733C951}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestGitlEvtBus", "D:/work/hevc/GitlHEVCAnalyzer/libgitlmvc/libgitlevtbus/test\TestGitlEvtBus.vcxproj", "{C8D2CEE1-1D14-3851-9C26-649DE2C5230B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2A19E503-D4BD-321B-A49A-2E0C5733C951} = {2A19E503-D4BD-321B-A49A-2E0C5733C951}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "examples", "D:/work/hevc/GitlHEVCAnalyzer/libgitlmvc/libgitlevtbus/examples\examples.vcxproj", "{3EB40975-879F-3FF4-A24E-1263E830A46A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2A19E503-D4BD-321B-A49A-2E0C5733C951} = {2A19E503-D4BD-321B-A49A-2E0C5733C951}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GitlMVC", "D:/work/hevc/GitlHEVCAnalyzer/libgitlmvc/src\GitlMVC.vcxproj", "{7A6126C9-AB50-3061-BCC0-E36B5237C2B0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2A19E503-D4BD-321B-A49A-2E0C5733C951} = {2A19E503-D4BD-321B-A49A-2E0C5733C951}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestGitlEvtBus", "D:/work/hevc/GitlHEVCAnalyzer/libgitlmvc/test\TestGitlEvtBus.vcxproj", "{A26BA605-2958-37BF-8057-E5E6F39ED1F1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7A6126C9-AB50-3061-BCC0-E36B5237C2B0} = {7A6126C9-AB50-3061-BCC0-E36B5237C2B0}
+		{2A19E503-D4BD-321B-A49A-2E0C5733C951} = {2A19E503-D4BD-321B-A49A-2E0C5733C951}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "examples", "D:/work/hevc/GitlHEVCAnalyzer/libgitlmvc/examples\examples.vcxproj", "{F6688221-9FC3-3608-B4F9-72013E7B2F67}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7A6126C9-AB50-3061-BCC0-E36B5237C2B0} = {7A6126C9-AB50-3061-BCC0-E36B5237C2B0}
+		{2A19E503-D4BD-321B-A49A-2E0C5733C951} = {2A19E503-D4BD-321B-A49A-2E0C5733C951}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2A19E503-D4BD-321B-A49A-2E0C5733C951}.Debug|x64.ActiveCfg = Debug|x64
+		{2A19E503-D4BD-321B-A49A-2E0C5733C951}.Debug|x64.Build.0 = Debug|x64
+		{2A19E503-D4BD-321B-A49A-2E0C5733C951}.Release|x64.ActiveCfg = Release|x64
+		{2A19E503-D4BD-321B-A49A-2E0C5733C951}.Release|x64.Build.0 = Release|x64
+		{C8D2CEE1-1D14-3851-9C26-649DE2C5230B}.Debug|x64.ActiveCfg = Debug|x64
+		{C8D2CEE1-1D14-3851-9C26-649DE2C5230B}.Debug|x64.Build.0 = Debug|x64
+		{C8D2CEE1-1D14-3851-9C26-649DE2C5230B}.Release|x64.ActiveCfg = Release|x64
+		{C8D2CEE1-1D14-3851-9C26-649DE2C5230B}.Release|x64.Build.0 = Release|x64
+		{3EB40975-879F-3FF4-A24E-1263E830A46A}.Debug|x64.ActiveCfg = Debug|x64
+		{3EB40975-879F-3FF4-A24E-1263E830A46A}.Debug|x64.Build.0 = Debug|x64
+		{3EB40975-879F-3FF4-A24E-1263E830A46A}.Release|x64.ActiveCfg = Release|x64
+		{3EB40975-879F-3FF4-A24E-1263E830A46A}.Release|x64.Build.0 = Release|x64
+		{7A6126C9-AB50-3061-BCC0-E36B5237C2B0}.Debug|x64.ActiveCfg = Debug|x64
+		{7A6126C9-AB50-3061-BCC0-E36B5237C2B0}.Debug|x64.Build.0 = Debug|x64
+		{7A6126C9-AB50-3061-BCC0-E36B5237C2B0}.Release|x64.ActiveCfg = Release|x64
+		{7A6126C9-AB50-3061-BCC0-E36B5237C2B0}.Release|x64.Build.0 = Release|x64
+		{A26BA605-2958-37BF-8057-E5E6F39ED1F1}.Debug|x64.ActiveCfg = Debug|x64
+		{A26BA605-2958-37BF-8057-E5E6F39ED1F1}.Debug|x64.Build.0 = Debug|x64
+		{A26BA605-2958-37BF-8057-E5E6F39ED1F1}.Release|x64.ActiveCfg = Release|x64
+		{A26BA605-2958-37BF-8057-E5E6F39ED1F1}.Release|x64.Build.0 = Release|x64
+		{F6688221-9FC3-3608-B4F9-72013E7B2F67}.Debug|x64.ActiveCfg = Debug|x64
+		{F6688221-9FC3-3608-B4F9-72013E7B2F67}.Debug|x64.Build.0 = Debug|x64
+		{F6688221-9FC3-3608-B4F9-72013E7B2F67}.Release|x64.ActiveCfg = Release|x64
+		{F6688221-9FC3-3608-B4F9-72013E7B2F67}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
