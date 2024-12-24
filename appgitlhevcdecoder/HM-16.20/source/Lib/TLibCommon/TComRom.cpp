@@ -573,7 +573,7 @@ SChar  g_aucConvertToBit  [ MAX_CU_SIZE+1 ];
 
 #if ENC_DEC_TRACE
 FILE*  g_hTrace = NULL; // Set to NULL to open up a file. Set to stdout to use the current output
-const Bool g_bEncDecTraceEnable  = true;
+const Bool g_bEncDecTraceEnable  = false;
 const Bool g_bEncDecTraceDisable = false;
 Bool   g_HLSTraceEnable = true;
 Bool   g_bJustDoIt = false;

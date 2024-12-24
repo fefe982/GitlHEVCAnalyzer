@@ -135,8 +135,9 @@ extern const Bool g_bEncDecTraceDisable;
 extern Bool   g_HLSTraceEnable;
 extern UInt64 g_nSymbolCounter;
 
+#define MAX_TRACE 100000
 #define COUNTER_START    1
-#define COUNTER_END      0 //( UInt64(1) << 63 )
+#define COUNTER_END      MAX_TRACE //( UInt64(1) << 63 )
 
 #define DTRACE_CABAC_F(x)     if ( ( g_nSymbolCounter >= COUNTER_START && g_nSymbolCounter <= COUNTER_END )|| g_bJustDoIt ) fprintf( g_hTrace, "%f", x );
 #define DTRACE_CABAC_V(x)     if ( ( g_nSymbolCounter >= COUNTER_START && g_nSymbolCounter <= COUNTER_END )|| g_bJustDoIt ) fprintf( g_hTrace, "%d", x );

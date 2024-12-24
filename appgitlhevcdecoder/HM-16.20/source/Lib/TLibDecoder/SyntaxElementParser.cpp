@@ -121,6 +121,7 @@ Void SyntaxElementParser::xReadSCode (UInt uiLength, Int& rValue)
   TComCodingStatistics::IncrementStatisticEP(pSymbolName, uiLength, rValue);
 #endif
 #if ENC_DEC_TRACE
+  if (g_nSymbolCounter > MAX_TRACE) return;
   fprintf( g_hTrace, "%8lld  ", g_nSymbolCounter++ );
   if (uiLength < 10)
   {
@@ -146,6 +147,7 @@ Void SyntaxElementParser::xReadCode (UInt uiLength, UInt& rValue)
   TComCodingStatistics::IncrementStatisticEP(pSymbolName, uiLength, rValue);
 #endif
 #if ENC_DEC_TRACE
+  if (g_nSymbolCounter > MAX_TRACE) return;
   fprintf( g_hTrace, "%8lld  ", g_nSymbolCounter++ );
   if (uiLength < 10)
   {
@@ -198,6 +200,7 @@ Void SyntaxElementParser::xReadUvlc( UInt& rValue)
 #endif
 
 #if ENC_DEC_TRACE
+  if (g_nSymbolCounter > MAX_TRACE) return;
   fprintf( g_hTrace, "%8lld  ", g_nSymbolCounter++ );
   fprintf( g_hTrace, "%-50s ue(v) : %u\n", pSymbolName, rValue );
   fflush ( g_hTrace );
@@ -242,6 +245,7 @@ Void SyntaxElementParser::xReadSvlc( Int& rValue)
 #endif
 
 #if ENC_DEC_TRACE
+  if (g_nSymbolCounter > MAX_TRACE) return;
   fprintf( g_hTrace, "%8lld  ", g_nSymbolCounter++ );
   fprintf( g_hTrace, "%-50s se(v) : %d\n", pSymbolName, rValue );
   fflush ( g_hTrace );
@@ -261,6 +265,7 @@ Void SyntaxElementParser::xReadFlag (UInt& rValue)
 #endif
 
 #if ENC_DEC_TRACE
+  if (g_nSymbolCounter > MAX_TRACE) return;
   fprintf( g_hTrace, "%8lld  ", g_nSymbolCounter++ );
   fprintf( g_hTrace, "%-50s u(1)  : %d\n", pSymbolName, rValue );
   fflush ( g_hTrace );
