@@ -15,7 +15,22 @@
 #include "gitlupdateuievt.h"
 #include "gitlivkcmdevt.h"
 #include <QDir>
+#include <chrono>
 
+class Timer {
+private:
+    QString msg;
+    std::chrono::steady_clock::time_point start;
+public:
+    Timer(const QString& msg_) :msg(msg_) {
+        start = std::chrono::high_resolution_clock::now();
+    };
+    ~Timer() {
+        auto end = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+        qDebug() << QString("%1s %2").arg(duration.count() / 1000000.0, 0, 'f', 4).arg(msg);
+    }
+};
 
 OpenBitstreamCommand::OpenBitstreamCommand(QObject *parent) :
     GitlAbstractCommand(parent)
@@ -71,6 +86,7 @@ bool OpenBitstreamCommand::execute( GitlCommandParameter& rcInputArg, GitlComman
     bool bSuccess = false;
     if( !bSkipDecode )
     {
+        Timer t("decoding finidshed");
         cDecodingStageInfo.setParameter("decoding_progress", "(1/11)Start Decoding Bitstream...");
         dispatchEvt(cDecodingStageInfo);
         BitstreamParser cBitstreamParser;
@@ -81,7 +97,6 @@ bool OpenBitstreamCommand::execute( GitlCommandParameter& rcInputArg, GitlComman
                                               pcSequence);
         if( !bSuccess )
             throw DecodingFailException();
-        qDebug() << "decoding finished";
     }
     else
     {
@@ -95,6 +110,7 @@ bool OpenBitstreamCommand::execute( GitlCommandParameter& rcInputArg, GitlComman
     QString strSPSFilename = strDecoderOutputPath + "/decoder_sps.txt";
     if( bSuccess )
     {
+        Timer t("SPS file parsing finished");
         cDecodingStageInfo.setParameter("decoding_progress", "(2/11)Start Parsing Sequence Parameter Set...");
         dispatchEvt(cDecodingStageInfo);
         QFile cSPSFile(strSPSFilename);
@@ -103,12 +119,12 @@ bool OpenBitstreamCommand::execute( GitlCommandParameter& rcInputArg, GitlComman
         SpsParser cSpsParser;
         bSuccess = cSpsParser.parseFile( &cSPSTextStream, pcSequence );
         cSPSFile.close();
-        qDebug() << "SPS file parsing finished";
     }
     /// Parse decoder_general.txt
     QString strGeneralFilename = strDecoderOutputPath + "/decoder_general.txt";
     if( bSuccess )
     {
+        Timer t("Decoder general file parsing finished");
         cDecodingStageInfo.setParameter("message", "(3/11)Start Parsing Decoder Std Output File...");
         dispatchEvt(cDecodingStageInfo);
         QFile cGeneralFile(strGeneralFilename);
@@ -117,13 +133,13 @@ bool OpenBitstreamCommand::execute( GitlCommandParameter& rcInputArg, GitlComman
         DecoderGeneralParser cDecoderGeneralParser;
         bSuccess = cDecoderGeneralParser.parseFile( &cGeneralTextStream, pcSequence );
         cGeneralFile.close();
-        qDebug() << "Decoder general file parsing finished";
     }
 
     /// Parse decoder_cupu.txt
     QString strCUPUFilename = strDecoderOutputPath + "/decoder_cupu.txt";
     if( bSuccess )
     {
+        Timer t("CU&PU file parsing finished");
         cDecodingStageInfo.setParameter("decoding_progress", "(4/11)Start Parsing CU & PU Structure...");
         dispatchEvt(cDecodingStageInfo);
         QFile cCUPUFile(strCUPUFilename);
@@ -132,12 +148,12 @@ bool OpenBitstreamCommand::execute( GitlCommandParameter& rcInputArg, GitlComman
         CUPUParser cCUPUParser;
         bSuccess = cCUPUParser.parseFile( &cCUPUTextStream, pcSequence );
         cCUPUFile.close();
-        qDebug() << "CU&PU file parsing finished";
     }
     /// Parse deocder_tu.txt
     QString strTUFilename = strDecoderOutputPath + "/decoder_tu.txt";
     if( bSuccess )
     {
+        Timer t("TU file parsing finished");
         cDecodingStageInfo.setParameter("decoding_progress", "(5/11)Start Parsing TU Structure...");
         dispatchEvt(cDecodingStageInfo);
         QFile cTUFile(strTUFilename);
@@ -146,13 +162,13 @@ bool OpenBitstreamCommand::execute( GitlCommandParameter& rcInputArg, GitlComman
         TUParser cTUParser;
         bSuccess = cTUParser.parseFile( &cTUTextStream, pcSequence );
         cTUFile.close();
-        qDebug() << "TU file parsing finished";
     }
 
     /// Parse decoder_pred.txt
     QString strPredFilename = strDecoderOutputPath + "/decoder_pred.txt";
     if( bSuccess )
     {
+        Timer t("TU file parsing finished");
         cDecodingStageInfo.setParameter("decoding_progress", "(6/11)Start Parsing Predction Mode...");
         dispatchEvt(cDecodingStageInfo);
         QFile cPredFile(strPredFilename);
@@ -161,13 +177,13 @@ bool OpenBitstreamCommand::execute( GitlCommandParameter& rcInputArg, GitlComman
         PredParser cPredParser;
         bSuccess = cPredParser.parseFile( &cPredTextStream, pcSequence );
         cPredFile.close();
-        qDebug() << "Prediction file parsing finished";
     }
 
     /// Parse decoder_mv.txt
     QString strMVFilename = strDecoderOutputPath + "/decoder_mv.txt";
     if( bSuccess )
     {
+        Timer t("MV file parsing finished");
         cDecodingStageInfo.setParameter("decoding_progress", "(7/11)Start Parsing Motion Vectors...");
         dispatchEvt(cDecodingStageInfo);
         QFile cMVFile(strMVFilename);
@@ -176,13 +192,13 @@ bool OpenBitstreamCommand::execute( GitlCommandParameter& rcInputArg, GitlComman
         MVParser cMVParser;
         bSuccess = cMVParser.parseFile( &cMVTextStream, pcSequence );
         cMVFile.close();
-        qDebug() << "MV file parsing finished";
     }
 
     /// Parse decoder_merge.txt
     QString strMergeFilename = strDecoderOutputPath + "/decoder_merge.txt";
     if( bSuccess )
     {
+        Timer t("Merge file parsing finished");
         cDecodingStageInfo.setParameter("decoding_progress", "(8/11)Start Parsing Motion Merge Info...");
         dispatchEvt(cDecodingStageInfo);
         QFile cMergeFile(strMergeFilename);
@@ -191,13 +207,13 @@ bool OpenBitstreamCommand::execute( GitlCommandParameter& rcInputArg, GitlComman
         MergeParser cMergeParser;
         bSuccess = cMergeParser.parseFile( &cMergeTextStream, pcSequence );
         cMergeFile.close();
-        qDebug() << "Merge file parsing finished";
     }
 
     /// Parse decoder_intra.txt
     QString strIntraFilename = strDecoderOutputPath + "/decoder_intra.txt";
     if( bSuccess )
     {
+        Timer t("Intra file parsing finished");
         cDecodingStageInfo.setParameter("decoding_progress", "(9/11)Start Parsing Intra Info...");
         dispatchEvt(cDecodingStageInfo);
         QFile cIntraFile(strIntraFilename);
@@ -206,7 +222,6 @@ bool OpenBitstreamCommand::execute( GitlCommandParameter& rcInputArg, GitlComman
         IntraParser cIntraParser;
         bSuccess = cIntraParser.parseFile( &cIntraTextStream, pcSequence );
         cIntraFile.close();
-        qDebug() << "Intra file parsing finished";
     }
 
     /// Parse decoder_bit.txt
@@ -214,6 +229,7 @@ bool OpenBitstreamCommand::execute( GitlCommandParameter& rcInputArg, GitlComman
     QString strSCUBitFilename = strDecoderOutputPath + "/decoder_bit_scu.txt";
     if( bSuccess )
     {
+        Timer t("Bit file parsing finished");
         cDecodingStageInfo.setParameter("decoding_progress", "(10/11)Start Parsing Bits Info...");
         dispatchEvt(cDecodingStageInfo);
         QFile cLCUBitFile(strLCUBitFilename);
@@ -228,7 +244,6 @@ bool OpenBitstreamCommand::execute( GitlCommandParameter& rcInputArg, GitlComman
         QTextStream cSCUBitTextStream(&cSCUBitFile);
         bSuccess = bSuccess && cBitParser.parseSCUBitFile( &cSCUBitTextStream, pcSequence );
         cSCUBitFile.close();
-        qDebug() << "Bit file parsing finished";
 
     }
 
@@ -237,6 +252,7 @@ bool OpenBitstreamCommand::execute( GitlCommandParameter& rcInputArg, GitlComman
     QString strTileFilename = strDecoderOutputPath + "/decoder_tile.txt";
     if( bSuccess )
     {
+        Timer t("Tile file parsing finished");
         cDecodingStageInfo.setParameter("decoding_progress", "(11/11)Start Parsing Tile Info...");
         dispatchEvt(cDecodingStageInfo);
         QFile cTileFile(strTileFilename);
@@ -245,7 +261,6 @@ bool OpenBitstreamCommand::execute( GitlCommandParameter& rcInputArg, GitlComman
             QTextStream cTileTextStream(&cTileFile);
             TileParser cTileParser;
             bSuccess = cTileParser.parseFile( &cTileTextStream, pcSequence );
-            qDebug() << "Tile file parsing finished";
         }
         cTileFile.close();
 
