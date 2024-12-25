@@ -52,6 +52,7 @@ public:
 
         debugCheckBox = new QCheckBox(MessageViewer);
         debugCheckBox->setObjectName("debugCheckBox");
+        debugCheckBox->setChecked(true);
 
         horizontalLayout->addWidget(debugCheckBox);
 
