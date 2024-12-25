@@ -38,7 +38,7 @@ bool BitstreamParser::parseFile(QString strDecoderFolder,
     {
         cCurDir.mkpath(strOutputPath);
     }
-    else {
+    else if (cCurDir.exists(strOutputPath + "/decoder_general.txt")) {
         return true;
     }
 

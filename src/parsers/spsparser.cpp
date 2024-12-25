@@ -1,5 +1,7 @@
 #include "spsparser.h"
 #include <QRegExp>
+#include <qjsondocument.h>
+#include <qjsonobject.h>
 
 SpsParser::SpsParser(QObject *parent) :
     QObject(parent)
@@ -20,13 +22,27 @@ bool SpsParser::parseFile(QTextStream* pcInputStream, ComSequence* pcSequence)
     Q_ASSERT( pcSequence != NULL );
 
     QString strOneLine;
+
+    strOneLine = pcInputStream->readLine();
+    if (strOneLine[0] == '{') {
+        QJsonObject doc = QJsonDocument::fromJson(strOneLine.toUtf8()).object();
+        
+        pcSequence->setWidth(doc["ResolutionX"].toInt());
+        pcSequence->setHeight(doc["ResolutionY"].toInt());
+        pcSequence->setMaxCUSize(doc["MaxCuSize"].toInt());
+        pcSequence->setMaxCUDepth(doc["MaxCuDepth"].toInt());
+        pcSequence->setMaxInterTUDepth(doc["MaxInterTUDepth"].toInt());
+        pcSequence->setMaxIntraTUDepth(doc["MaxIntraTUDepth"].toInt());
+        pcSequence->setInputBitDepth(doc["InputBitDepth"].toInt());
+        return true;
+    }
+
     QRegExp cMatchTarget;
 
 
     // Resolution:176x144
     cMatchTarget.setPattern("Resolution:([0-9]+)x([0-9]+)");
     while( !pcInputStream->atEnd() ) {
-        strOneLine = pcInputStream->readLine();
         if( cMatchTarget.indexIn(strOneLine) != -1 ) {
             int iWidth  = cMatchTarget.cap(1).toInt();
             int iHeight = cMatchTarget.cap(2).toInt();
@@ -34,6 +50,7 @@ bool SpsParser::parseFile(QTextStream* pcInputStream, ComSequence* pcSequence)
             pcSequence->setHeight(iHeight);
             break;
         }
+        strOneLine = pcInputStream->readLine();
     }
 
 

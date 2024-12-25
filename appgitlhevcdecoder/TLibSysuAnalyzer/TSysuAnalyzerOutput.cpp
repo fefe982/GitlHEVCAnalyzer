@@ -1,5 +1,13 @@
 #include "TSysuAnalyzerOutput.h"
 
+template <typename T>
+void writeOstream(std::ostream& s, const std::string &key, T val, bool first = false) {
+    if (!first) {
+        s << ",";
+    }
+    s << '"' << key << "\":" << val;
+}
+
 TSysuAnalyzerOutput* TSysuAnalyzerOutput::m_instance = NULL;
 
 TSysuAnalyzerOutput::TSysuAnalyzerOutput()
@@ -289,6 +297,32 @@ Void TSysuAnalyzerOutput::xWriteOutTUInfo  ( TComDataCU* pcCU, Int iLength, Int 
 
 Void TSysuAnalyzerOutput::writeOutSps   ( TComSPS* pcSPS )
 {
+    m_cSpsOut << "{";
+    writeOstream(m_cSpsOut, "HM_VERSION", HM_VERSION, true);
+    writeOstream(m_cSpsOut, "ResolutionX", pcSPS->getPicWidthInLumaSamples()
+        - pcSPS->getConformanceWindow().getWindowLeftOffset()
+        - pcSPS->getConformanceWindow().getWindowRightOffset());
+    writeOstream(m_cSpsOut, "ResolutionY", pcSPS->getPicHeightInLumaSamples()
+        - pcSPS->getConformanceWindow().getWindowTopOffset()
+        - pcSPS->getConformanceWindow().getWindowBottomOffset());
+    writeOstream(m_cSpsOut, "MaxCuSize", pcSPS->getMaxCUHeight());
+    writeOstream(m_cSpsOut, "MaxCuDepth", pcSPS->getMaxTotalCUDepth());
+    writeOstream(m_cSpsOut, "MaxInterTUDepth", pcSPS->getQuadtreeTUMaxDepthInter());
+    writeOstream(m_cSpsOut, "MaxIntraTUDepth", pcSPS->getQuadtreeTUMaxDepthIntra());
+    writeOstream(m_cSpsOut, "InputBitDepth", pcSPS->getBitDepth(CHANNEL_TYPE_LUMA));
+    writeOstream(m_cSpsOut, "vui_parameters_present_flag", pcSPS->getVuiParametersPresentFlag());
+    if (pcSPS->getVuiParametersPresentFlag()) {
+        auto vui = pcSPS->getVuiParameters();
+        writeOstream(m_cSpsOut, "video_signal_type_present_flag", vui->getVideoSignalTypePresentFlag());
+        if (vui->getVideoSignalTypePresentFlag()) {
+            writeOstream(m_cSpsOut, "video_full_range_flag", vui->getVideoFullRangeFlag());
+            writeOstream(m_cSpsOut, "colour_description_present_flag", vui->getColourDescriptionPresentFlag());
+            if (vui->getColourDescriptionPresentFlag()) {
+                writeOstream(m_cSpsOut, "matrix_coeffs", vui->getMatrixCoefficients());
+            }
+        }
+    }
+    m_cSpsOut << "}" << std::endl;
 #if (HM_VERSION >= 100)
     m_cSpsOut << "Resolution:"
               << (pcSPS->getPicWidthInLumaSamples()
