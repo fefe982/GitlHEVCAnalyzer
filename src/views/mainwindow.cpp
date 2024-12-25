@@ -211,15 +211,15 @@ void MainWindow::on_actionOpen_bitstream_triggered()
     }
 
     /// select HM version
-    BitstreamVersionSelector cBitstreamDig(this);
-    if( cBitstreamDig.exec() == QDialog::Rejected )
-        return;
+    // BitstreamVersionSelector cBitstreamDig(this);
+    // if( cBitstreamDig.exec() == QDialog::Rejected )
+    //     return;
 
     /// prepare & sent event to bus
     GitlIvkCmdEvt cEvt("open_bitstream");
     cEvt.setParameter("filename", strFilename);
     cEvt.setParameter("skip_decode", false);
-    cEvt.setParameter("version", cBitstreamDig.getBitstreamVersion());
+    cEvt.setParameter("version", 160);
     cEvt.dispatch();
 
 }
@@ -303,16 +303,16 @@ void MainWindow::dropEvent(QDropEvent *event)
     }
 
     /// select HM version
-    BitstreamVersionSelector cBitstreamDig(this);
-    if( cBitstreamDig.exec() == QDialog::Rejected )
-        return;
+    // BitstreamVersionSelector cBitstreamDig(this);
+    // if( cBitstreamDig.exec() == QDialog::Rejected )
+    //    return;
 
     /// prepare & sent event to bus
     /// invoke command
     GitlIvkCmdEvt cEvt("open_bitstream");
     cEvt.setParameter("filename", strFilename);
     cEvt.setParameter("skip_decode", false);
-    cEvt.setParameter("version", cBitstreamDig.getBitstreamVersion());
+    cEvt.setParameter("version", 160);
     cEvt.dispatch();
 }
 
