@@ -18,7 +18,7 @@ public:
     explicit YUV420RGBBuffer();
     ~YUV420RGBBuffer();
 
-    bool openYUVFile( const QString& strYUVPath, int iWidth, int iHeight, bool bIs16Bit = false );
+    bool openYUVFile( const QString& strYUVPath, int iWidth, int iHeight, bool bFullRange, int iMatrixCoeff, bool bIs16Bit = false );
     QPixmap* getFrame(int iFrameCount);
 
 
@@ -32,7 +32,8 @@ public:
     ADD_CLASS_FIELD_PRIVATE(uchar*,  puhYUVBuffer)
     ADD_CLASS_FIELD_PRIVATE(uchar*,  puhRGBBuffer)
     ADD_CLASS_FIELD_PRIVATE(IOYUV,   cIOYUV)
-
+    ADD_CLASS_FIELD_PRIVATE(bool, bFullRange)
+    ADD_CLASS_FIELD_PRIVATE(int, iMatrixCoeffs)
 
 
 protected:

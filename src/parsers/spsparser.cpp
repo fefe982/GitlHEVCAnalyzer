@@ -26,7 +26,7 @@ bool SpsParser::parseFile(QTextStream* pcInputStream, ComSequence* pcSequence)
     strOneLine = pcInputStream->readLine();
     if (strOneLine[0] == '{') {
         QJsonObject doc = QJsonDocument::fromJson(strOneLine.toUtf8()).object();
-        
+
         pcSequence->setWidth(doc["ResolutionX"].toInt());
         pcSequence->setHeight(doc["ResolutionY"].toInt());
         pcSequence->setMaxCUSize(doc["MaxCuSize"].toInt());
@@ -34,6 +34,14 @@ bool SpsParser::parseFile(QTextStream* pcInputStream, ComSequence* pcSequence)
         pcSequence->setMaxInterTUDepth(doc["MaxInterTUDepth"].toInt());
         pcSequence->setMaxIntraTUDepth(doc["MaxIntraTUDepth"].toInt());
         pcSequence->setInputBitDepth(doc["InputBitDepth"].toInt());
+        pcSequence->setIsFullRange(doc["video_full_range_flag"].toInt() == 1);
+        if (!doc.contains("matrix_coeffs")) {
+            qWarning("Video does not contain Matrix Coeffs, assuming BT709");
+            pcSequence->setMatrixCoeffs(1);
+        }
+        else {
+            pcSequence->setMatrixCoeffs(doc["matrix_coeffs"].toInt());
+        }
         return true;
     }
 

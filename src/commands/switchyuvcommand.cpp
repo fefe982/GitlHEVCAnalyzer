@@ -50,7 +50,7 @@ bool SwitchYUVCommand::execute( GitlCommandParameter& rcInputArg, GitlCommandPar
         //
         int iWidth = pcSequence->getWidth();
         int iHeight = pcSequence->getHeight();
-        pModel->getFrameBuffer().openYUVFile(pcSequence->getDecodingFolder()+"/"+strYUVFilename, iWidth, iHeight, bIs16Bit);
+        pModel->getFrameBuffer().openYUVFile(pcSequence->getDecodingFolder() + "/" + strYUVFilename, iWidth, iHeight, pcSequence->isFullRange(), pcSequence->getMatrixCoeffs(), bIs16Bit);
 
         /// refresh
         GitlIvkCmdEvt cRefreshEvt("refresh_screen");

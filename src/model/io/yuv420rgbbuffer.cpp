@@ -1,7 +1,12 @@
 #include "yuv420rgbbuffer.h"
 #include <QFile>
 #include <QDebug>
+#include <unordered_map>
 
+std::unordered_map<int, std::pair<double, double>> mapMatrix = {
+    {1, {0.2126, 0.0722}},
+    {5, {0.0299, 0.0114}}
+};
 
 YUV420RGBBuffer::YUV420RGBBuffer()
 {
@@ -12,6 +17,8 @@ YUV420RGBBuffer::YUV420RGBBuffer()
     m_puhYUVBuffer = NULL;
     m_puhRGBBuffer = NULL;
     m_bIs16Bit = false;
+    m_bFullRange = false;
+    m_iMatrixCoeffs = 1;
 }
 
 YUV420RGBBuffer::~YUV420RGBBuffer()
@@ -25,11 +32,8 @@ YUV420RGBBuffer::~YUV420RGBBuffer()
 }
 
 
-bool YUV420RGBBuffer::openYUVFile( const QString& strYUVPath, int iWidth, int iHeight, bool bIs16Bit)
+bool YUV420RGBBuffer::openYUVFile( const QString& strYUVPath, int iWidth, int iHeight, bool bFullRange, int iMatrixCoeffs, bool bIs16Bit)
 {
-
-
-
     /// if new size dosen't match current size, delete old one and create new one
     if( iWidth != m_iBufferWidth || iHeight != m_iBufferHeight || m_bIs16Bit != bIs16Bit)
     {
@@ -48,6 +52,12 @@ bool YUV420RGBBuffer::openYUVFile( const QString& strYUVPath, int iWidth, int iH
     m_iBufferWidth = iWidth;
     m_iBufferHeight = iHeight;
     m_bIs16Bit = bIs16Bit;
+    m_bFullRange = bFullRange;
+    if (mapMatrix.count(iMatrixCoeffs) == 0) {
+        qWarning() << QString("Matrix coeffs %1 not supported, default to BT709").arg(iMatrixCoeffs);
+        iMatrixCoeffs = 1;
+    }
+    m_iMatrixCoeffs = iMatrixCoeffs;
 
     /// set YUV file reader
     if( !m_cIOYUV.openYUVFilePath(strYUVPath) )
@@ -134,8 +144,13 @@ void YUV420RGBBuffer::xYuv2rgb(uchar* puhYUV, uchar* puhRGB, int iWidth, int iHe
     uchar* const puhV = puhYUV + uiFrameSizeInPixel*5/4;
 
     long lYOffset, lUVOffset;
-    int iY, iU, iV;
+    double iY, iU, iV;
     int tempR, tempG, tempB;
+    const auto &krkb = mapMatrix[m_iMatrixCoeffs];
+    double drv = 2.0 * (1 - krkb.first);
+    double dbu = 2.0 * (1 - krkb.second);
+    double dgv = -drv * krkb.first / (1 - krkb.first - krkb.second);
+    double dgu = -dbu * krkb.second / (1 - krkb.first - krkb.second);
 
     uchar* iCurRgbPixelOffset = 0;
     for(int y = 0; y < iHeight; ++y)
@@ -146,24 +161,18 @@ void YUV420RGBBuffer::xYuv2rgb(uchar* puhYUV, uchar* puhRGB, int iWidth, int iHe
             lUVOffset = iWidth/2*(y/2)+(x/2);
 
             iY = puhY[lYOffset];
-            iU = puhU[lUVOffset];
-            iV = puhV[lUVOffset];
+            iU = puhU[lUVOffset] - 128;
+            iV = puhV[lUVOffset] - 128;
 
-//            tempR = iY
-//                    + iV + (iV>>2) + (iV>>3) + (iV>>6)- 179;
-//            tempG = iY
-//                    - (iU>>2) - (iU>>4) - (iU>>5) + 44
-//                    - (iV>>1) - (iV>>3) - (iV>>4) - (iV>>6) + 91;
-//            tempB = iY
-//                    + iU + (iU>>1) + (iU>>2) - 227;
+            if (!m_bFullRange) {
+                iY = (iY - 16.0) / 219.0 * 255.0;
+                iU = iU / 224.0 * 255.0;
+                iV = iV / 224.0 * 255.0;
+            }
 
-            tempR = iY
-                    + 1.402 * iV - 179;
-            tempG = iY
-                    - 0.34414 * iU + 44
-                    - 0.71414 * iV + 91;
-            tempB = iY
-                    + 1.772 * iU - 227;
+            tempR = iY + drv * iV;
+            tempG = iY + dgv * iV + dgu * iU;
+            tempB = iY + dbu * iU;
 
 
             tempR = VALUE_CLIP(0,255,tempR);
