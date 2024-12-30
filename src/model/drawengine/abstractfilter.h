@@ -47,7 +47,7 @@ public:
      * \param pcContext \see FilterContext
      * \return
      */
-    virtual bool init     (FilterContext* pcContext)
+    virtual bool init     ([[maybe_unused]] FilterContext* pcContext)
     {
         return true;
     }
@@ -57,7 +57,7 @@ public:
      * \param pcContext \see FilterContext
      * \return
      */
-    virtual bool uninit    (FilterContext* pcContext)
+    virtual bool uninit    ([[maybe_unused]] FilterContext* pcContext)
     {
         return true;
     }
@@ -68,7 +68,7 @@ public:
      * \param pcContext \see FilterContext
      * \return
      */
-    virtual bool config   (FilterContext* pcContext)
+    virtual bool config   ([[maybe_unused]] FilterContext* pcContext)
     {
         return true;
     }
@@ -81,8 +81,8 @@ public:
      * \param iPoc the POC of currently displaying frame (begin with 0)
      * \return true - success   false - fail
      */
-    virtual bool drawFrame(FilterContext* pcContext, QPainter* pcPainter,
-                           ComFrame *pcFrame, double dScale, QRect* pcScaledArea)
+    virtual bool drawFrame([[maybe_unused]] FilterContext* pcContext, [[maybe_unused]] QPainter* pcPainter,
+        [[maybe_unused]] ComFrame *pcFrame, [[maybe_unused]] double dScale, [[maybe_unused]] QRect* pcScaledArea)
     {
         return true;
     }
@@ -98,7 +98,7 @@ public:
      * \param iPoc the POC of currently displaying frame (begin with 0)
      * \return true - success   false - fail
      */
-    virtual bool drawTile(FilterContext *pcContext, QPainter *pcPainter, ComTile *pcTile, double dScale, QRect *pcScaledArea)
+    virtual bool drawTile([[maybe_unused]] FilterContext *pcContext, [[maybe_unused]] QPainter *pcPainter, [[maybe_unused]] ComTile *pcTile, [[maybe_unused]] double dScale, [[maybe_unused]] QRect *pcScaledArea)
     {
         return true;
     }
@@ -114,8 +114,8 @@ public:
      * \param pcScaledArea the scaled size of current PU
      * \return
      */
-    virtual bool drawCTU(FilterContext* pcContext, QPainter* pcPainter,
-                         ComCU *pcCTU, double dScale, QRect* pcScaledArea)
+    virtual bool drawCTU([[maybe_unused]] FilterContext* pcContext, [[maybe_unused]] QPainter* pcPainter,
+        [[maybe_unused]] ComCU* pcCTU, [[maybe_unused]] double dScale, [[maybe_unused]] QRect* pcScaledArea)
     {
         return true;
     }
@@ -130,8 +130,8 @@ public:
      * \param pcScaledArea the scaled size of current PU
      * \return
      */
-    virtual bool drawCU   (FilterContext* pcContext, QPainter* pcPainter,
-                           ComCU *pcCU, double dScale,  QRect* pcScaledArea)
+    virtual bool drawCU   ([[maybe_unused]] FilterContext* pcContext, [[maybe_unused]] QPainter* pcPainter,
+        [[maybe_unused]] ComCU *pcCU, [[maybe_unused]] double dScale, [[maybe_unused]] QRect* pcScaledArea)
     {
         return true;
     }
@@ -145,8 +145,8 @@ public:
      * \param pcScaledArea the scaled size of current PU
      * \return
      */
-    virtual bool drawPU   (FilterContext* pcContext, QPainter* pcPainter,
-                           ComPU *pcPU, double dScale,  QRect* pcScaledArea)
+    virtual bool drawPU   ([[maybe_unused]] FilterContext* pcContext, [[maybe_unused]] QPainter* pcPainter,
+        [[maybe_unused]] ComPU *pcPU, [[maybe_unused]] double dScale, [[maybe_unused]] QRect* pcScaledArea)
     {
         return true;
     }
@@ -160,8 +160,8 @@ public:
      * \param pcScaledArea the scaled size of current PU
      * \return
      */
-    virtual bool drawTU   (FilterContext* pcContext, QPainter* pcPainter,
-                           ComTU *pcTU, double dScale,  QRect* pcScaledArea)
+    virtual bool drawTU   ([[maybe_unused]] FilterContext* pcContext, [[maybe_unused]] QPainter* pcPainter,
+        [[maybe_unused]] ComTU *pcTU, [[maybe_unused]] double dScale, [[maybe_unused]] QRect* pcScaledArea)
     {
         return true;
     }
@@ -178,9 +178,9 @@ public:
      * \param eMouseBtn mouse button that is pressed
      * \return
      */
-    virtual bool mousePress(FilterContext* pcContext, QPainter* pcPainter, ComFrame *pcFrame,
-                            const QPointF* pcUnscaledPos, const QPointF* pcScaledPos,
-                            double dScale, Qt::MouseButton eMouseBtn)
+    virtual bool mousePress([[maybe_unused]] FilterContext* pcContext, [[maybe_unused]] QPainter* pcPainter, [[maybe_unused]] ComFrame *pcFrame,
+        [[maybe_unused]] const QPointF* pcUnscaledPos, [[maybe_unused]] const QPointF* pcScaledPos,
+        [[maybe_unused]] double dScale, [[maybe_unused]] Qt::MouseButton eMouseBtn)
     {
         return true;
     }
@@ -192,8 +192,8 @@ public:
      * \param iKeyPressed position in the unscaled frame
      * \return
      */
-    virtual bool keyPress  (FilterContext* pcContext, QPainter* pcPainter, ComFrame *pcFrame,
-                            int iKeyPressed)
+    virtual bool keyPress  ([[maybe_unused]] FilterContext* pcContext, [[maybe_unused]] QPainter* pcPainter, [[maybe_unused]] ComFrame *pcFrame,
+        [[maybe_unused]] int iKeyPressed)
     {
         return true;
     }
