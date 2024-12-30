@@ -49,8 +49,20 @@ void ComSequence::init()
     m_dTotalEncTime = -1;
     m_dSameCUModePercent = -1;
     m_dMeanCUDepthError = -1;
+
+    m_szNextCU = 0;
 }
 
 int ComSequence::getNumberMaxCu() const {
     return ((m_iWidth + m_iMaxCUSize - 1) / m_iMaxCUSize) * ((m_iHeight + m_iMaxCUSize) / m_iMaxCUSize);
+}
+
+void ComSequence::allocComCU(size_t sz) {
+    m_vCUStore.resize(sz);
+}
+
+ComCU* ComSequence::newComCU(ComFrame* p) {
+    ComCU* pcCU = &m_vCUStore[m_szNextCU++];
+    pcCU->setFrame(p);
+    return pcCU;
 }

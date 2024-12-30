@@ -18,7 +18,7 @@ Q_DECLARE_METATYPE(YUVRole)
  * \brief This class represents a video sequence
  */
 
-    class ComSequence
+class ComSequence
 {
 public:
     explicit ComSequence();
@@ -48,10 +48,10 @@ public:
     ADD_CLASS_FIELD(bool, bFullRange, isFullRange, setIsFullRange)
     ADD_CLASS_FIELD(int, iMatrixCoeffs, getMatrixCoeffs, setMatrixCoeffs)
 
-    /*! Decoded File Location */
+        /*! Decoded File Location */
     ADD_CLASS_FIELD( QString, strDeocdingFolder, getDecodingFolder, setDecodingFolder)
 
-    /*! Currently Displaying YUV (Predicted, Residual or Reconstructed)*/
+        /*! Currently Displaying YUV (Predicted, Residual or Reconstructed)*/
     ADD_CLASS_FIELD( YUVRole, eYUVRole, getYUVRole, setYUVRole)
 
 
@@ -67,8 +67,14 @@ public:
         ADD_CLASS_FIELD(double, dSameCUModePercent, getSameCUModePercent, setSameCUModePercent)
         ADD_CLASS_FIELD(double, dMeanCUDepthError, getMeanCUDepthError, setMeanCUDepthError)
 
+    ADD_CLASS_FIELD_PRIVATE(std::vector<ComCU>, vCUStore)
+    ADD_CLASS_FIELD_PRIVATE(size_t, szNextCU)
+
 public:
     int getNumberMaxCu()const;
+    void allocComCU(size_t sz);
+    ComCU* newComCU(ComFrame* p);
 };
+
 
 #endif // COMSEQUENCE_H

@@ -24,7 +24,7 @@ public:
      */
     bool parseFile(QTextStream* pcInputStream, ComSequence* pcSequence);
 protected:
-    bool xReadInCUMode(QTextStream* pcCUInfoStream, ComCU *pcCU);
+    size_t xReadInCUMode(const std::vector<uchar>& vPCInfo, size_t s, ComSequence* sequence, ComCU* pcCU);
 signals:
 
 public slots:
