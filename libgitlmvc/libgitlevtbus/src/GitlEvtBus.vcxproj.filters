@@ -64,10 +64,10 @@
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="x64\Debug\qt\qmake\moc_predefs.h.cbt">
+    <CustomBuild Include="debug\qt\qmake\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="x64\Release\qt\qmake\moc_predefs.h.cbt">
+    <CustomBuild Include="release\qt\qmake\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>
   </ItemGroup>

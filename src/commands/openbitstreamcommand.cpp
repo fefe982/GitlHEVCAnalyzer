@@ -16,6 +16,7 @@
 #include "gitlivkcmdevt.h"
 #include <QDir>
 #include <chrono>
+#include <fstream>
 
 class Timer {
 private:
@@ -142,12 +143,9 @@ bool OpenBitstreamCommand::execute( GitlCommandParameter& rcInputArg, GitlComman
         Timer t("CU&PU file parsing finished");
         cDecodingStageInfo.setParameter("decoding_progress", "(4/11)Start Parsing CU & PU Structure...");
         dispatchEvt(cDecodingStageInfo);
-        QFile cCUPUFile(strCUPUFilename);
-        cCUPUFile.open(QIODevice::ReadOnly);
-        QTextStream cCUPUTextStream(&cCUPUFile);
+        std::ifstream cCUPUTextStream(strCUPUFilename.toStdString());
         CUPUParser cCUPUParser;
-        bSuccess = cCUPUParser.parseFile( &cCUPUTextStream, pcSequence );
-        cCUPUFile.close();
+        bSuccess = cCUPUParser.parseFile(cCUPUTextStream, pcSequence);
     }
     /// Parse deocder_tu.txt
     QString strTUFilename = strDecoderOutputPath + "/decoder_tu.txt";
@@ -168,7 +166,7 @@ bool OpenBitstreamCommand::execute( GitlCommandParameter& rcInputArg, GitlComman
     QString strPredFilename = strDecoderOutputPath + "/decoder_pred.txt";
     if( bSuccess )
     {
-        Timer t("TU file parsing finished");
+        Timer t("Pred file parsing finished");
         cDecodingStageInfo.setParameter("decoding_progress", "(6/11)Start Parsing Predction Mode...");
         dispatchEvt(cDecodingStageInfo);
         QFile cPredFile(strPredFilename);

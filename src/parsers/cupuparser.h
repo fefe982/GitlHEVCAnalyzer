@@ -22,7 +22,7 @@ public:
      * \param pcSequence output sequence
      * \return
      */
-    bool parseFile(QTextStream* pcInputStream, ComSequence* pcSequence);
+    bool parseFile(std::istream& pcInputStream, ComSequence* pcSequence);
 protected:
     size_t xReadInCUMode(const std::vector<uchar>& vPCInfo, size_t s, ComSequence* sequence, ComCU* pcCU);
 signals:

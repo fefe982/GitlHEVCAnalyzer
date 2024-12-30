@@ -1,9 +1,7 @@
 #include "cupuparser.h"
-#include <QTextStream>
-#include <QRegExp>
 #include <QtAlgorithms>
 #include <QDebug>
-#include <QIODevice>
+#include <iostream>
 #define CU_SLIPT_FLAG 99      ///< CU splitting flag in file
 
 /// for CU sorting in Addr ascending order
@@ -18,7 +16,7 @@ CUPUParser::CUPUParser(QObject *parent) :
 }
 
 
-bool CUPUParser::parseFile(QTextStream* pcInputStream, ComSequence* pcSequence)
+bool CUPUParser::parseFile(std::istream &pcInputStream, ComSequence* pcSequence)
 {
     Q_ASSERT( pcSequence != NULL );
 
@@ -28,8 +26,7 @@ bool CUPUParser::parseFile(QTextStream* pcInputStream, ComSequence* pcSequence)
     int iCUOneRow = (iSeqWidth+iMaxCUSize-1)/iMaxCUSize;
 
     ////
-    QString strOneLine;
-    QRegExp cMatchTarget;
+    std::string line;
 
     size_t cuCnt = pcSequence->getNumberMaxCu();
     size_t frames = pcSequence->getFramesInDisOrder().size();
@@ -39,11 +36,9 @@ bool CUPUParser::parseFile(QTextStream* pcInputStream, ComSequence* pcSequence)
     size_t iCU = cuCnt;
     size_t iSplitCount = 0;
     size_t iPUCount = 0;
-    while (!pcInputStream->atEnd())
+    while (std::getline(pcInputStream, line))
     {
-        strOneLine = pcInputStream->readLine();
-        std::string line = strOneLine.toStdString();
-        if (strOneLine.isEmpty() || strOneLine[0] != '<') {
+        if (line.empty() || line[0] != '<') {
             continue;
         }
         char* endPos;
