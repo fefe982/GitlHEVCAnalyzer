@@ -34,6 +34,7 @@ bool CUPUParser::parseFile(QTextStream* pcInputStream, ComSequence* pcSequence)
     int cuCnt = pcSequence->getNumberMaxCu();
     int frames = pcSequence->getFramesInDisOrder().size();
     std::vector<std::vector<std::vector<uchar>>> fileStore(frames);
+    int iLastPoc = -1;
     int iDecOrder = -1;
     int iCU = cuCnt;
     int iSplitCount = 0;
@@ -54,12 +55,16 @@ bool CUPUParser::parseFile(QTextStream* pcInputStream, ComSequence* pcSequence)
         if (iCU >= cuCnt) {
             iCU = 0;
             iDecOrder += 1;
+            Q_ASSERT(iPoc != iLastPoc);
+            iLastPoc = iPoc;
+        }
+        else {
+            Q_ASSERT(iPoc == iLastPoc);
         }
         Q_ASSERT(iCU == iAddr);
-        Q_ASSERT(iDecOrder == iPoc);
         Q_ASSERT(iPoc < frames);
-        if (fileStore[iPoc].empty()) {
-            fileStore[iPoc].resize(cuCnt);
+        if (fileStore[iDecOrder].empty()) {
+            fileStore[iDecOrder].resize(cuCnt);
         }
         char* sPos = endPos;
         for(;;) {
@@ -70,7 +75,7 @@ bool CUPUParser::parseFile(QTextStream* pcInputStream, ComSequence* pcSequence)
             if (i == CU_SLIPT_FLAG) {
                 iSplitCount++;
             }
-            fileStore[iPoc][iAddr].push_back(i);
+            fileStore[iDecOrder][iAddr].push_back(i);
             sPos = endPos;
         }
     }
