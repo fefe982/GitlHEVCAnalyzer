@@ -143,7 +143,7 @@ bool OpenBitstreamCommand::execute( GitlCommandParameter& rcInputArg, GitlComman
         Timer t("CU&PU file parsing finished");
         cDecodingStageInfo.setParameter("decoding_progress", "(4/11)Start Parsing CU & PU Structure...");
         dispatchEvt(cDecodingStageInfo);
-        std::ifstream cCUPUTextStream(strCUPUFilename.toStdString());
+        std::ifstream cCUPUTextStream(strCUPUFilename.toLocal8Bit());
         CUPUParser cCUPUParser;
         bSuccess = cCUPUParser.parseFile(cCUPUTextStream, pcSequence);
     }
