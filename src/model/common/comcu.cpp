@@ -1,8 +1,8 @@
 #include "comcu.h"
 
-ComCU::ComCU()
+ComCU::ComCU(ComFrame* pcParent)
 {
-    m_pcFrame = nullptr;
+    m_pcFrame = pcParent;
     m_iAddr = -1;
     m_iZorder = -1;
     m_iDepth = -1;
@@ -13,13 +13,12 @@ ComCU::ComCU()
     m_iBitCount = 0;
 }
 
+ComCU::ComCU() :ComCU(nullptr)
+{
+}
+
 ComCU::~ComCU()
 {
-    while( !m_apcPUs.empty() )
-    {
-        delete m_apcPUs.back();
-        m_apcPUs.pop_back();
-    }
 }
 
 int ComCU::getPUNum( PartSize ePartSize )

@@ -31,13 +31,14 @@ bool CUPUParser::parseFile(QTextStream* pcInputStream, ComSequence* pcSequence)
     QString strOneLine;
     QRegExp cMatchTarget;
 
-    int cuCnt = pcSequence->getNumberMaxCu();
-    int frames = pcSequence->getFramesInDisOrder().size();
+    size_t cuCnt = pcSequence->getNumberMaxCu();
+    size_t frames = pcSequence->getFramesInDisOrder().size();
     std::vector<std::vector<std::vector<uchar>>> fileStore(frames);
-    int iLastPoc = -1;
-    int iDecOrder = -1;
-    int iCU = cuCnt;
-    int iSplitCount = 0;
+    size_t iLastPoc = (size_t) - 1;
+    size_t iDecOrder = (size_t) - 1;
+    size_t iCU = cuCnt;
+    size_t iSplitCount = 0;
+    size_t iPUCount = 0;
     while (!pcInputStream->atEnd())
     {
         strOneLine = pcInputStream->readLine();
@@ -62,7 +63,7 @@ bool CUPUParser::parseFile(QTextStream* pcInputStream, ComSequence* pcSequence)
             Q_ASSERT(iPoc == iLastPoc);
         }
         Q_ASSERT(iCU == iAddr);
-        Q_ASSERT(iPoc < frames);
+        Q_ASSERT(iDecOrder < frames);
         if (fileStore[iDecOrder].empty()) {
             fileStore[iDecOrder].resize(cuCnt);
         }
@@ -75,6 +76,9 @@ bool CUPUParser::parseFile(QTextStream* pcInputStream, ComSequence* pcSequence)
             if (i == CU_SLIPT_FLAG) {
                 iSplitCount++;
             }
+            else {
+                iPUCount += ComCU::getPUNum((PartSize)i);
+            }
             fileStore[iDecOrder][iAddr].push_back(i);
             sPos = endPos;
         }
@@ -82,6 +86,7 @@ bool CUPUParser::parseFile(QTextStream* pcInputStream, ComSequence* pcSequence)
 
     int iLCUSize = pcSequence->getMaxCUSize();
     pcSequence->allocComCU(cuCnt * frames + iSplitCount * 4);
+    pcSequence->allocComPU(iPUCount);
     for (int iFrame = 0; iFrame < frames; iFrame++) {
         ComFrame* pcFrame = pcSequence->getFramesInDecOrder().at(iFrame);
         for (int iAddr = 0; iAddr < cuCnt; iAddr++) {
@@ -145,7 +150,7 @@ size_t CUPUParser::xReadInCUMode(const std::vector<uchar>& vPCInfo, size_t s, Co
         int iPUCount = ComCU::getPUNum((PartSize)iCUMode);
         for (int i = 0; i < iPUCount; i++)
         {
-            ComPU* pcPU = new ComPU(pcCU);
+            ComPU* pcPU = sequence->newComPU(pcCU);
             int iPUOffsetX, iPUOffsetY, iPUWidth, iPUHeight;
             ComCU::getPUOffsetAndSize(pcCU->getSize(), (PartSize)iCUMode, i, iPUOffsetX, iPUOffsetY, iPUWidth, iPUHeight);
             int iPUX = pcCU->getX() + iPUOffsetX;

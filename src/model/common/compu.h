@@ -30,6 +30,7 @@ public:
         m_iIntraDirLuma = -1;
         m_iIntraDirChroma = -1;
     }
+    ComPU() :ComPU(nullptr) {}
 
     ~ComPU()
     {

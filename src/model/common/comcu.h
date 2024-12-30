@@ -27,7 +27,8 @@ enum PartSize
 class ComCU
 {
 public:
-    explicit ComCU();
+    explicit ComCU(ComFrame* pcParent);
+    ComCU();
     ~ComCU();
 
     bool operator < (const ComCU& cOther) const

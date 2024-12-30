@@ -21,7 +21,7 @@ Q_DECLARE_METATYPE(YUVRole)
 class ComSequence
 {
 public:
-    explicit ComSequence();
+    ComSequence();
     ~ComSequence();
 
     /*! Initialization
@@ -68,12 +68,14 @@ public:
         ADD_CLASS_FIELD(double, dMeanCUDepthError, getMeanCUDepthError, setMeanCUDepthError)
 
     ADD_CLASS_FIELD_PRIVATE(std::vector<ComCU>, vCUStore)
-    ADD_CLASS_FIELD_PRIVATE(size_t, szNextCU)
+    ADD_CLASS_FIELD_PRIVATE(std::vector<ComPU>, vPUStore)
 
 public:
     int getNumberMaxCu()const;
     void allocComCU(size_t sz);
     ComCU* newComCU(ComFrame* p);
+    void allocComPU(size_t sz);
+    ComPU* newComPU(ComCU* p);
 };
 
 

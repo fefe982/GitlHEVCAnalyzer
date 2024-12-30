@@ -61,11 +61,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)build\vs\$(Platform)\$(Configuration)\plugins</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)build\vs\$(Platform)\$(Configuration)\plugins\</OutDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">libmvdisplayfilter</TargetName>
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</IgnoreImportLibrary>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)build\vs\$(Platform)\$(Configuration)\plugins</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)build\vs\$(Platform)\$(Configuration)\plugins\</OutDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">libmvdisplayfilterd</TargetName>
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</IgnoreImportLibrary>
   </PropertyGroup>

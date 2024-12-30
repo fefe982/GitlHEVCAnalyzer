@@ -63,11 +63,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)build\vs\$(Platform)\$(Configuration)\decoders</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)build\vs\$(Platform)\$(Configuration)\decoders\</OutDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">HM_160</TargetName>
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</IgnoreImportLibrary>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)build\vs\$(Platform)\$(Configuration)\decoders</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)build\vs\$(Platform)\$(Configuration)\decoders\</OutDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">HM_160</TargetName>
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</IgnoreImportLibrary>
   </PropertyGroup>

@@ -43,10 +43,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="debug\moc_predefs.h.cbt">
+    <CustomBuild Include="x64\Debug\qt\qmake\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="release\moc_predefs.h.cbt">
+    <CustomBuild Include="x64\Release\qt\qmake\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>
   </ItemGroup>
