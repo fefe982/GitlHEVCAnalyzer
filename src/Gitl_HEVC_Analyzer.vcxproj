@@ -199,6 +199,7 @@
     </QtUic>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="parsers\streamreader.cpp" />
     <ClCompile Include="views\aboutdialog.cpp" />
     <ClCompile Include="commands\appfrontcontroller.cpp" />
     <ClCompile Include="parsers\bitparser.cpp" />
@@ -341,6 +342,7 @@
     <QtMoc Include="commands\switchyuvcommand.h" />
     <QtMoc Include="parsers\tileparser.h" />
     <QtMoc Include="views\timelineframeitem.h" />
+    <ClInclude Include="parsers\streamreader.h" />
     <ClInclude Include="views\timelineindicatoritem.h" />
     <QtMoc Include="views\timelineview.h" />
     <QtMoc Include="parsers\tuparser.h" />

@@ -1,4 +1,5 @@
 #include "cupuparser.h"
+#include "streamreader.h"
 #include <QtAlgorithms>
 #include <QDebug>
 #include <iostream>
@@ -30,54 +31,15 @@ bool CUPUParser::parseFile(std::istream &pcInputStream, ComSequence* pcSequence)
 
     size_t cuCnt = pcSequence->getNumberMaxCu();
     size_t frames = pcSequence->getFramesInDisOrder().size();
-    std::vector<std::vector<std::vector<uchar>>> fileStore(frames);
-    size_t iLastPoc = (size_t) - 1;
-    size_t iDecOrder = (size_t) - 1;
-    size_t iCU = cuCnt;
     size_t iSplitCount = 0;
     size_t iPUCount = 0;
-    while (std::getline(pcInputStream, line))
-    {
-        if (line.empty() || line[0] != '<') {
-            continue;
-        }
-        char* endPos;
-        int iPoc = std::strtol(line.data() + 1, &endPos, 10);
-        Q_ASSERT(*endPos = ',');
-        int iAddr = std::strtol(endPos + 1, &endPos, 10);
-        Q_ASSERT(*endPos = '>');
-        endPos++;
-        iCU += 1;
-        if (iCU >= cuCnt) {
-            iCU = 0;
-            iDecOrder += 1;
-            Q_ASSERT(iPoc != iLastPoc);
-            iLastPoc = iPoc;
+    auto fileStore = StreamReader::parse<uchar>(pcInputStream, frames, cuCnt, [&](int i) {
+        if (i == CU_SLIPT_FLAG) {
+            iSplitCount++;
         }
         else {
-            Q_ASSERT(iPoc == iLastPoc);
-        }
-        Q_ASSERT(iCU == iAddr);
-        Q_ASSERT(iDecOrder < frames);
-        if (fileStore[iDecOrder].empty()) {
-            fileStore[iDecOrder].resize(cuCnt);
-        }
-        char* sPos = endPos;
-        for(;;) {
-            int i = std::strtol(sPos, &endPos, 10);
-            if (sPos == endPos) {
-                break;
-            }
-            if (i == CU_SLIPT_FLAG) {
-                iSplitCount++;
-            }
-            else {
-                iPUCount += ComCU::getPUNum((PartSize)i);
-            }
-            fileStore[iDecOrder][iAddr].push_back(i);
-            sPos = endPos;
-        }
-    }
+            iPUCount += ComCU::getPUNum((PartSize)i);
+        }});
 
     int iLCUSize = pcSequence->getMaxCUSize();
     pcSequence->allocComCU(cuCnt * frames + iSplitCount * 4);

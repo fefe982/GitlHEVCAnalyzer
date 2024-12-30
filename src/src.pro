@@ -89,7 +89,8 @@ SOURCES += main.cpp \
     commands/cleancachecommand.cpp \
     parsers/tileparser.cpp \
     model/common/comtile.cpp \
-    commands/savefilterordercommand.cpp
+    commands/savefilterordercommand.cpp \
+    parsers/streamreader.cpp
 
 HEADERS += \
     model/common/comsequence.h \
@@ -167,7 +168,8 @@ HEADERS += \
     commands/cleancachecommand.h \
     parsers/tileparser.h \
     model/common/comtile.h \
-    commands/savefilterordercommand.h
+    commands/savefilterordercommand.h \
+    parsers/streamreader.h
 
 
 #include & libs
