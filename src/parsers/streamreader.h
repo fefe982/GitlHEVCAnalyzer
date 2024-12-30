@@ -7,7 +7,7 @@
 
 class StreamReader {
 public:
-    template<typename T> static std::vector<std::vector<std::vector<T>>> parse(std::istream& pcInputStream, size_t frames, size_t cuCnt, std::function<void(int)> f) {
+    template<typename T> static std::vector<std::vector<std::vector<T>>> parse(std::istream& pcInputStream, size_t frames, size_t cuCnt) {
         std::vector<std::vector<std::vector<T>>> fileStore(frames);
         size_t iLastPoc = (size_t)-1;
         size_t iDecOrder = (size_t)-1;
@@ -45,7 +45,6 @@ public:
                 if (sPos == endPos) {
                     break;
                 }
-                f(i);
                 fileStore[iDecOrder][iAddr].push_back(i);
                 sPos = endPos;
             }

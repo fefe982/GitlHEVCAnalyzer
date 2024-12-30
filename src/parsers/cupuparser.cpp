@@ -33,13 +33,20 @@ bool CUPUParser::parseFile(std::istream &pcInputStream, ComSequence* pcSequence)
     size_t frames = pcSequence->getFramesInDisOrder().size();
     size_t iSplitCount = 0;
     size_t iPUCount = 0;
-    auto fileStore = StreamReader::parse<uchar>(pcInputStream, frames, cuCnt, [&](int i) {
-        if (i == CU_SLIPT_FLAG) {
-            iSplitCount++;
+    auto fileStore = StreamReader::parse<uchar>(pcInputStream, frames, cuCnt);
+    for (auto& vFrame : fileStore) {
+        for (auto& vPoc : vFrame) {
+            for (int i : vPoc) {
+                if (i == CU_SLIPT_FLAG) {
+                    iSplitCount++;
+                }
+                else {
+                    iPUCount += ComCU::getPUNum((PartSize)i);
+
+                }
+            }
         }
-        else {
-            iPUCount += ComCU::getPUNum((PartSize)i);
-        }});
+    }
 
     int iLCUSize = pcSequence->getMaxCUSize();
     pcSequence->allocComCU(cuCnt * frames + iSplitCount * 4);
