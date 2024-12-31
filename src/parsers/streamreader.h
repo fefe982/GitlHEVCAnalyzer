@@ -7,7 +7,7 @@
 
 class StreamReader {
 public:
-    static std::vector<std::vector<std::vector<int>>> parse(std::istream& pcInputStream, size_t frames, size_t cuCnt);
+    static std::vector<std::vector<std::vector<int>>> parse(std::vector<char>& pcInputStream, size_t frames, size_t cuCnt);
 };
 
 class InfoParser {
@@ -17,7 +17,7 @@ protected:
 public:
     InfoParser() = default;
     virtual ~InfoParser() = default;
-    bool parseFile(std::istream& pcInputStream, ComSequence* pcSequence);
+    bool parseFile(std::vector<char>& pcInputStream, ComSequence* pcSequence);
 protected:
     enum class ContinueFlag {
         CONTINUE,

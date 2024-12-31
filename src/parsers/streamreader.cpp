@@ -3,19 +3,39 @@
 #include <iostream>
 #include <string>
 
-std::vector<std::vector<std::vector<int>>> StreamReader::parse(std::istream& pcInputStream, size_t frames, size_t cuCnt) {
+std::vector<std::vector<std::vector<int>>> StreamReader::parse(std::vector<char>& pcInputStream, size_t frames, size_t cuCnt) {
     std::vector<std::vector<std::vector<int>>> fileStore(frames);
     size_t iLastPoc = (size_t)-1;
     size_t iDecOrder = (size_t)-1;
     size_t iCU = cuCnt;
-    std::string line;
-    while (std::getline(pcInputStream, line))
+    char* lineStart;
+    char* lineEnd = pcInputStream.data() - 1;
+    char* contentEnd = pcInputStream.data() + pcInputStream.size();
+    for(;;)
     {
-        if (line.empty() || line[0] != '<') {
+        lineStart = lineEnd + 1;
+        while (lineStart < contentEnd && (*lineStart == '\r' || *lineStart == '\n')) {
+            lineStart++;
+        }
+        if (lineStart >= contentEnd) {
+            break;
+        }
+        lineEnd = lineStart + 1;
+        int nBlank=0;
+        while (lineEnd < contentEnd && *lineEnd != '\r' && *lineEnd != '\n') {
+            if (*lineEnd == ' ') {
+                nBlank++;
+            }
+            lineEnd++;
+        }
+        if (lineEnd < contentEnd) {
+            *lineEnd = 0;
+        }
+        if (lineStart + 1 == lineEnd || *lineStart != '<') {
             continue;
         }
-        char* endPos;
-        int iPoc = std::strtol(line.data() + 1, &endPos, 10);
+        char* endPos = lineStart + 1;
+        int iPoc = std::strtol(endPos, &endPos, 10);
         Q_ASSERT(*endPos = ',');
         int iAddr = std::strtol(endPos + 1, &endPos, 10);
         Q_ASSERT(*endPos = '>');
@@ -36,7 +56,7 @@ std::vector<std::vector<std::vector<int>>> StreamReader::parse(std::istream& pcI
             fileStore[iDecOrder].resize(cuCnt);
         }
         char* sPos = endPos;
-        fileStore[iDecOrder][iAddr].reserve((&line.back() - sPos) / 2);
+        fileStore[iDecOrder][iAddr].reserve(nBlank);
         for (;;) {
             int i = std::strtol(sPos, &endPos, 10);
             if (sPos == endPos) {
@@ -50,7 +70,7 @@ std::vector<std::vector<std::vector<int>>> StreamReader::parse(std::istream& pcI
 }
 
 
-bool InfoParser::parseFile(std::istream& pcInputStream, ComSequence* pcSequence)
+bool InfoParser::parseFile(std::vector<char>& pcInputStream, ComSequence* pcSequence)
 {
     Q_ASSERT(pcSequence != NULL);
     nFrames = pcSequence->getFramesInDisOrder().size();

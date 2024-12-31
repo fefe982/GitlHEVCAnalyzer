@@ -18,6 +18,7 @@
 #include <chrono>
 #include <fstream>
 #include <memory>
+#include <filesystem>
 
 class Timer {
 private:
@@ -163,8 +164,13 @@ bool OpenBitstreamCommand::execute(GitlCommandParameter& rcInputArg, [[maybe_unu
             Timer t(parseInfo.description + " parsing finished");
             cDecodingStageInfo.setParameter("decoding_progress", QString("(%1/11)Start Parsing %2 ...").arg(step++).arg(parseInfo.description));
             dispatchEvt(cDecodingStageInfo);
-            std::ifstream stream(strFilename.toLocal8Bit());
-            bSuccess = parseInfo.pParser->parseFile(stream, pcSequence);
+            auto fileNameLocal = std::string(strFilename.toLocal8Bit());
+            size_t fileSz = std::filesystem::file_size(fileNameLocal);
+            std::ifstream stream(fileNameLocal, std::ios::binary);
+            std::vector<char> fileContent(fileSz + 1);
+            stream.read(fileContent.data(), fileSz);
+            fileContent[fileSz] = 0;
+            bSuccess = parseInfo.pParser->parseFile(fileContent, pcSequence);
         }
     }
 
