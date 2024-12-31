@@ -40,6 +40,7 @@ public:
                 fileStore[iDecOrder].resize(cuCnt);
             }
             char* sPos = endPos;
+            fileStore[iDecOrder][iAddr].reserve((&line.back() - sPos) / 2);
             for (;;) {
                 int i = std::strtol(sPos, &endPos, 10);
                 if (sPos == endPos) {
