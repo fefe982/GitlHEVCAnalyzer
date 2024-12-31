@@ -17,7 +17,7 @@ bool IntraParser::parseFile(std::istream & pcInputStream, ComSequence* pcSequenc
     for (int iFrame = 0; iFrame < frames; iFrame++) {
         ComFrame* pcFrame = pcSequence->getFramesInDecOrder().at(iFrame);
         for (int iAddr = 0; iAddr < cuCnt; iAddr++) {
-            auto pcLCU = pcFrame->getLCUs().at(iAddr);
+            auto pcLCU = &pcFrame->getLCUs()[iAddr];
             xReadIntraMode(fileStore[iFrame][iAddr], 0, pcLCU);
         }
     }

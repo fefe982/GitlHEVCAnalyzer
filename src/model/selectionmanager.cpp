@@ -17,7 +17,7 @@ ComCU *SelectionManager::getLCU(ComFrame* pcFrame, const QPointF* pcUnscaledPos)
         int iRow = qFloor( pcUnscaledPos->y()/iLCUSize );
         int iCol = qFloor( pcUnscaledPos->x()/iLCUSize );
         int iIndex = iRow*iLCUInRow + iCol;
-        return pcFrame->getLCUs().at(iIndex);
+        return &pcFrame->getLCUs()[iIndex];
     }
     return NULL;
 }

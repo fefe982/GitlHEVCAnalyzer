@@ -49,12 +49,13 @@ bool CUPUParser::parseFile(std::istream &pcInputStream, ComSequence* pcSequence)
     }
 
     int iLCUSize = pcSequence->getMaxCUSize();
-    pcSequence->allocComCU(cuCnt * frames + iSplitCount * 4);
+    pcSequence->allocComCU(iSplitCount * 4);
     pcSequence->allocComPU(iPUCount);
     for (int iFrame = 0; iFrame < frames; iFrame++) {
         ComFrame* pcFrame = pcSequence->getFramesInDecOrder().at(iFrame);
+        pcFrame->getLCUs().resize(cuCnt);
         for (int iAddr = 0; iAddr < cuCnt; iAddr++) {
-            ComCU* pcLCU = pcSequence->newComCU(pcFrame);
+            ComCU* pcLCU = &pcFrame->getLCUs()[iAddr];
             pcLCU->setAddr(iAddr);
             pcLCU->setFrame(pcFrame);
             pcLCU->setDepth(0);
@@ -68,7 +69,6 @@ bool CUPUParser::parseFile(std::istream &pcInputStream, ComSequence* pcSequence)
             if (xReadInCUMode(fileStore[iFrame][iAddr], 0, pcSequence, pcLCU) == size_t(-1)) {
                 return false;
             }
-            pcFrame->getLCUs().push_back(pcLCU);
         }
     }
     return true;

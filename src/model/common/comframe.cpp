@@ -13,11 +13,6 @@ ComFrame::ComFrame(ComSequence* pcParent)
 
 ComFrame::~ComFrame()
 {
-    for( int i = 0; i < m_cLCUs.size(); i++ )
-    {
-        delete m_cLCUs.at(i);
-    }
-
     foreach(ComTile* pcTile, m_acTiles)
     {
         delete pcTile;

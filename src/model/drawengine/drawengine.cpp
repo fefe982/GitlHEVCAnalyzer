@@ -27,7 +27,7 @@ QPixmap* DrawEngine::drawFrame( ComSequence* pcSequence, int iPoc, QPixmap *pcPi
     /// draw TU
     for( int iAddr = 0; iAddr < iLCUTotalNum; iAddr++ )
     {
-        ComCU* pcLCU = pcFrame->getLCUs().at(iAddr);
+        ComCU* pcLCU = &pcFrame->getLCUs()[iAddr];
         xDrawTU( &cPainter, pcLCU );
     }
 
@@ -35,7 +35,7 @@ QPixmap* DrawEngine::drawFrame( ComSequence* pcSequence, int iPoc, QPixmap *pcPi
     /// draw PU
     for( int iAddr = 0; iAddr < iLCUTotalNum; iAddr++ )
     {
-        ComCU* pcLCU = pcFrame->getLCUs().at(iAddr);        
+        ComCU* pcLCU = &pcFrame->getLCUs()[iAddr];        
         xDrawPU( &cPainter, pcLCU );
     }
 
@@ -43,14 +43,14 @@ QPixmap* DrawEngine::drawFrame( ComSequence* pcSequence, int iPoc, QPixmap *pcPi
     QRect cScaledCUArea;
     for( int iAddr = 0; iAddr < iLCUTotalNum; iAddr++ )
     {
-        ComCU* pcLCU = pcFrame->getLCUs().at(iAddr);
+        ComCU* pcLCU = &pcFrame->getLCUs()[iAddr];
         xDrawCU( &cPainter, pcLCU );
     }
 
     /// draw CTU (i.e. LCU)
     for( int iAddr = 0; iAddr < iLCUTotalNum; iAddr++ )
     {
-        ComCU* pcLCU = pcFrame->getLCUs().at(iAddr);
+        ComCU* pcLCU = &pcFrame->getLCUs()[iAddr];
         int iPixelX = pcLCU->getX();
         int iPixelY = pcLCU->getY();
         cScaledCUArea.setCoords( iPixelX, iPixelY, (iPixelX+pcLCU->getSize())-1, (iPixelY+pcLCU->getSize())-1 );
@@ -78,7 +78,7 @@ bool DrawEngine::xDrawTile(QPainter *pcPainter, ComFrame *pcFrame)
     {
         ComTile* pcTile = pcFrame->getTiles().at(i);
         int iAddr = pcTile->getFirstCUAddr();
-        iLCU = pcFrame ->getLCUs().at(iAddr);
+        iLCU = &pcFrame ->getLCUs()[iAddr];
         int iX = iLCU ->getX();
         int iY = iLCU ->getY();
 

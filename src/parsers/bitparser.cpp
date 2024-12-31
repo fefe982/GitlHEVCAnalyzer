@@ -17,7 +17,7 @@ bool BitParser::parseLCUBitFile(std::istream &pcInputStream, ComSequence* pcSequ
     for (int iFrame = 0; iFrame < frames; iFrame++) {
         ComFrame* pcFrame = pcSequence->getFramesInDecOrder().at(iFrame);
         for (int iAddr = 0; iAddr < cuCnt; iAddr++) {
-            auto pcLCU = pcFrame->getLCUs().at(iAddr);
+            auto pcLCU = &pcFrame->getLCUs()[iAddr];
             int iLCUBit = fileStore[iFrame][iAddr][0];
             pcLCU->setBitCount(iLCUBit);
             pcFrame->getBitCount() += iLCUBit;
@@ -37,7 +37,7 @@ bool BitParser::parseSCUBitFile(std::istream& pcInputStream, ComSequence* pcSequ
     for (int iFrame = 0; iFrame < frames; iFrame++) {
         ComFrame* pcFrame = pcSequence->getFramesInDecOrder().at(iFrame);
         for (int iAddr = 0; iAddr < cuCnt; iAddr++) {
-            auto pcLCU = pcFrame->getLCUs().at(iAddr);
+            auto pcLCU = &pcFrame->getLCUs()[iAddr];
             xParseSCUBitFile(fileStore[iFrame][iAddr], 0, pcLCU);
         }
     }
