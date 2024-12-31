@@ -7,7 +7,7 @@ RefreshScreenCommand::RefreshScreenCommand(QObject *parent) :
 
 }
 
-bool RefreshScreenCommand::execute( GitlCommandParameter& rcInputArg, GitlCommandParameter& rcOutputArg )
+bool RefreshScreenCommand::execute( GitlCommandParameter&, GitlCommandParameter& rcOutputArg )
 {
     ModelLocator* pModel = ModelLocator::getInstance();
     ComSequence *pcCurSeq = pModel->getSequenceManager().getCurrentSequence();

@@ -25,7 +25,7 @@ SwitchYUVCommand::SwitchYUVCommand(QObject *parent) :
 }
 
 
-bool SwitchYUVCommand::execute( GitlCommandParameter& rcInputArg, GitlCommandParameter& rcOutputArg )
+bool SwitchYUVCommand::execute( GitlCommandParameter& rcInputArg, GitlCommandParameter& )
 {
     ModelLocator* pModel = ModelLocator::getInstance();
     ComSequence *pcCurSeq = pModel->getSequenceManager().getCurrentSequence();

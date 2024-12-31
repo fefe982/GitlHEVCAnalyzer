@@ -6,7 +6,7 @@ NextFrameCommand::NextFrameCommand(QObject *parent) :
 
 }
 
-bool NextFrameCommand::execute( GitlCommandParameter &rcInputArg, GitlCommandParameter& rcOutputArg )
+bool NextFrameCommand::execute( GitlCommandParameter &, GitlCommandParameter& rcOutputArg )
 {
     ModelLocator* pModel = ModelLocator::getInstance();
     ComSequence *pcCurSeq = pModel->getSequenceManager().getCurrentSequence();

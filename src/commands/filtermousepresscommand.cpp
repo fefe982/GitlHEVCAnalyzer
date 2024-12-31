@@ -10,7 +10,7 @@ FilterMousePressCommand::FilterMousePressCommand(QObject *parent) :
     setInWorkerThread(false);
 }
 
-bool FilterMousePressCommand::execute(GitlCommandParameter &rcInputArg, GitlCommandParameter &rcOutputArg)
+bool FilterMousePressCommand::execute(GitlCommandParameter &rcInputArg, GitlCommandParameter &)
 {
     QPointF cScaledPoint = rcInputArg.getParameter("scaled_point").toPointF();
     Qt::MouseButton eMouseBtn = static_cast<Qt::MouseButton>(rcInputArg.getParameter("mouse_button").toInt());

@@ -6,7 +6,7 @@ CloseBitstreamCommand::CloseBitstreamCommand(QObject *parent) :
 {
 }
 
-bool CloseBitstreamCommand::execute( GitlCommandParameter &rcInputArg, GitlCommandParameter &rcOutputArg )
+bool CloseBitstreamCommand::execute( GitlCommandParameter &rcInputArg, GitlCommandParameter &)
 {
     QString strSequencePath = rcInputArg.getParameter("sequence_path").toString();
     ModelLocator* pModel = ModelLocator::getInstance();

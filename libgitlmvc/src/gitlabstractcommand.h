@@ -35,7 +35,7 @@ public:
      * \param rcOutputArg this parameter will be delivered to UI(GitlView)
      * \return
      */
-    virtual bool execute(GitlCommandParameter &rcInputArg, GitlCommandParameter &rcOutputArg)
+    virtual bool execute([[maybe_unused]] GitlCommandParameter &rcInputArg, [[maybe_unused]] GitlCommandParameter &rcOutputArg)
     {
         qCritical() << "Please reimplement <GitlAbstractCommand::execute>";
         return false;

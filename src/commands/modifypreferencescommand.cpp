@@ -7,7 +7,7 @@ ModifyPreferencesCommand::ModifyPreferencesCommand(QObject *parent) :
 {
 }
 
-bool ModifyPreferencesCommand::execute(GitlCommandParameter &rcInputArg, GitlCommandParameter &rcOutputArg)
+bool ModifyPreferencesCommand::execute(GitlCommandParameter &rcInputArg, GitlCommandParameter &)
 {
     ModelLocator* pModel = ModelLocator::getInstance();
     if( rcInputArg.hasParameter("cache_path") )

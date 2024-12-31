@@ -9,7 +9,7 @@ ConfigFilterCommand::ConfigFilterCommand(QObject *parent) :
     setInWorkerThread(false);
 }
 
-bool ConfigFilterCommand::execute( GitlCommandParameter &rcInputArg, GitlCommandParameter &rcOutputArg )
+bool ConfigFilterCommand::execute( GitlCommandParameter &rcInputArg, GitlCommandParameter &)
 {
     ModelLocator* pModel = ModelLocator::getInstance();
     QString strFiltername = rcInputArg.getParameter("filter_name").toString();

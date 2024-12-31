@@ -7,7 +7,7 @@ CheckUpdateCommand::CheckUpdateCommand(QObject *parent) :
 }
 
 
-bool CheckUpdateCommand::execute(GitlCommandParameter &rcInputArg, GitlCommandParameter &rcOutputArg)
+bool CheckUpdateCommand::execute(GitlCommandParameter&, GitlCommandParameter&)
 {
     qDebug() << "Update function is under development..";
     return true;

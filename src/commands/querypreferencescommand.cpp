@@ -7,7 +7,7 @@ QueryPreferencesCommand::QueryPreferencesCommand(QObject *parent) :
 }
 
 
-bool QueryPreferencesCommand::execute(GitlCommandParameter &rcInputArg, GitlCommandParameter &rcOutputArg)
+bool QueryPreferencesCommand::execute( GitlCommandParameter &, GitlCommandParameter &rcOutputArg)
 {
     ModelLocator* pModel = ModelLocator::getInstance();
     QString strCacheFolder = pModel->getPreferences().getCacheFolder();

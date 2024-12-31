@@ -8,7 +8,7 @@ ReloadFiltersCommand::ReloadFiltersCommand(QObject *parent) :
     setInWorkerThread(false);
 }
 
-bool ReloadFiltersCommand::execute( GitlCommandParameter& rcInputArg, GitlCommandParameter& rcOutputArg )
+bool ReloadFiltersCommand::execute( GitlCommandParameter& , GitlCommandParameter& rcOutputArg )
 {
 
     ModelLocator* pModel = ModelLocator::getInstance();

@@ -6,7 +6,7 @@ PrintScreenCommand::PrintScreenCommand()
 {
 }
 
-bool PrintScreenCommand::execute( GitlCommandParameter& rcInputArg, GitlCommandParameter& rcOutputArg )
+bool PrintScreenCommand::execute( GitlCommandParameter& , GitlCommandParameter& rcOutputArg )
 {
     ModelLocator* pModel = ModelLocator::getInstance();
     ComSequence *pcCurSeq = pModel->getSequenceManager().getCurrentSequence();

@@ -2,17 +2,16 @@
 #define PREDPARSER_H
 
 #include <QObject>
-#include <QTextStream>
 #include "model/common/comsequence.h"
 
 class PredParser : public QObject
 {
     Q_OBJECT
 public:
-    explicit PredParser(QObject *parent = 0);
-    bool parseFile(QTextStream* pcInputStream, ComSequence* pcSequence);
+    explicit PredParser(QObject* parent = 0);
+    bool parseFile(std::istream& pcInputStream, ComSequence* pcSequence);
 protected:
-    bool xReadPredMode(QTextStream* pcPredInfoStream, ComCU* pcCU);
+    size_t xReadPredMode(const std::vector<uchar>& vPCInfo, size_t s, ComSequence* sequence, ComCU* pcCU);
 signals:
 
 public slots:

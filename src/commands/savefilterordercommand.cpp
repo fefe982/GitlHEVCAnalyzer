@@ -6,7 +6,7 @@ SaveFilterOrderCommand::SaveFilterOrderCommand(QObject *parent) :
 {
 }
 
-bool SaveFilterOrderCommand::execute(GitlCommandParameter &rcInputArg, GitlCommandParameter &rcOutputArg)
+bool SaveFilterOrderCommand::execute(GitlCommandParameter &rcInputArg, GitlCommandParameter &)
 {
     ModelLocator* pModel = ModelLocator::getInstance();
     FilterLoader& rcFilterLoader = pModel->getDrawEngine().getFilterLoader();

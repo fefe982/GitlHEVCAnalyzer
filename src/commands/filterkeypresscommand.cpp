@@ -8,7 +8,7 @@ FilterKeyPressCommand::FilterKeyPressCommand(QObject *parent) :
 }
 
 
-bool FilterKeyPressCommand::execute(GitlCommandParameter &rcInputArg, GitlCommandParameter &rcOutputArg)
+bool FilterKeyPressCommand::execute(GitlCommandParameter &rcInputArg, GitlCommandParameter &)
 {
     int iPressedKey = rcInputArg.getParameter("pressed_key").toInt();
     ModelLocator* pModel = ModelLocator::getInstance();

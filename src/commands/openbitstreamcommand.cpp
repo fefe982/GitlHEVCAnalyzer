@@ -38,7 +38,7 @@ OpenBitstreamCommand::OpenBitstreamCommand(QObject *parent) :
 {
 }
 
-bool OpenBitstreamCommand::execute( GitlCommandParameter& rcInputArg, GitlCommandParameter& rcOutputArg )
+bool OpenBitstreamCommand::execute( GitlCommandParameter& rcInputArg, [[maybe_unused]] GitlCommandParameter& rcOutputArg )
 {
     ModelLocator* pModel = ModelLocator::getInstance();
 
@@ -52,7 +52,7 @@ bool OpenBitstreamCommand::execute( GitlCommandParameter& rcInputArg, GitlComman
     bool bSkipDecode = vValue.toBool();
     QString strDecoderPath = "./decoders";
     QString strDecoderOutputPath = pModel->getPreferences().getCacheFolder();
-    int iSequenceIndex = pModel->getSequenceManager().getAllSequences().size();
+    // int iSequenceIndex = pModel->getSequenceManager().getAllSequences().size();
     QFileInfo infoStreamFile = QFileInfo(strFilename);
     strDecoderOutputPath += QString("/%1").arg(infoStreamFile.baseName());
 
@@ -166,12 +166,9 @@ bool OpenBitstreamCommand::execute( GitlCommandParameter& rcInputArg, GitlComman
         Timer t("Pred file parsing finished");
         cDecodingStageInfo.setParameter("decoding_progress", "(6/11)Start Parsing Predction Mode...");
         dispatchEvt(cDecodingStageInfo);
-        QFile cPredFile(strPredFilename);
-        cPredFile.open(QIODevice::ReadOnly);
-        QTextStream cPredTextStream(&cPredFile);
+        std::ifstream cPredTextStream(strPredFilename.toLocal8Bit());
         PredParser cPredParser;
-        bSuccess = cPredParser.parseFile( &cPredTextStream, pcSequence );
-        cPredFile.close();
+        bSuccess = cPredParser.parseFile(cPredTextStream, pcSequence);
     }
 
     /// Parse decoder_mv.txt

@@ -5,7 +5,7 @@ PrevFrameCommand::PrevFrameCommand(QObject *parent) :
 {
 }
 
-bool PrevFrameCommand::execute( GitlCommandParameter& rcInputArg, GitlCommandParameter& rcOutputArg )
+bool PrevFrameCommand::execute( GitlCommandParameter&, GitlCommandParameter& rcOutputArg )
 {
     ModelLocator* pModel = ModelLocator::getInstance();
     ComSequence *pcCurSeq = pModel->getSequenceManager().getCurrentSequence();

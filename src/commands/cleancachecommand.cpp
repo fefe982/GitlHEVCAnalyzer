@@ -8,7 +8,7 @@ CleanCacheCommand::CleanCacheCommand(QObject *parent) :
 {
 }
 
-bool CleanCacheCommand::execute( GitlCommandParameter &rcInputArg, GitlCommandParameter &rcOutputArg )
+bool CleanCacheCommand::execute(GitlCommandParameter&, GitlCommandParameter&)
 {
     return true;
     //ModelLocator *pModel = ModelLocator::getInstance();
