@@ -10,9 +10,9 @@ class MergeParser : public QObject
     Q_OBJECT
 public:
     explicit MergeParser(QObject *parent = 0);
-    bool parseFile(QTextStream* pcInputStream, ComSequence* pcSequence);
+    bool parseFile(std::istream& pcInputStream, ComSequence* pcSequence);
 protected:
-    bool xReadMergeIndex(QTextStream* pcMergeIndexStream, ComCU* pcCU);
+    size_t xReadMergeIndex(std::vector<int> vPCInfo, size_t s, ComCU* pcCU);
 signals:
 
 public slots:

@@ -190,12 +190,9 @@ bool OpenBitstreamCommand::execute( GitlCommandParameter& rcInputArg, [[maybe_un
         Timer t("Merge file parsing finished");
         cDecodingStageInfo.setParameter("decoding_progress", "(8/11)Start Parsing Motion Merge Info...");
         dispatchEvt(cDecodingStageInfo);
-        QFile cMergeFile(strMergeFilename);
-        cMergeFile.open(QIODevice::ReadOnly);
-        QTextStream cMergeTextStream(&cMergeFile);
+        std::ifstream cMergeTextStream(strMergeFilename.toLocal8Bit());
         MergeParser cMergeParser;
-        bSuccess = cMergeParser.parseFile( &cMergeTextStream, pcSequence );
-        cMergeFile.close();
+        bSuccess = cMergeParser.parseFile(cMergeTextStream, pcSequence);
     }
 
     /// Parse decoder_intra.txt
