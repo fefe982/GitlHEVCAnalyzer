@@ -17,6 +17,7 @@
 #include <QDir>
 #include <chrono>
 #include <fstream>
+#include <memory>
 
 class Timer {
 private:
@@ -37,6 +38,13 @@ OpenBitstreamCommand::OpenBitstreamCommand(QObject *parent) :
     GitlAbstractCommand(parent)
 {
 }
+
+class ParserInfo {
+public:
+    QString fileName;
+    QString description;
+    std::unique_ptr<InfoParser> pParser;
+};
 
 bool OpenBitstreamCommand::execute(GitlCommandParameter& rcInputArg, [[maybe_unused]] GitlCommandParameter& rcOutputArg)
 {
@@ -136,93 +144,28 @@ bool OpenBitstreamCommand::execute(GitlCommandParameter& rcInputArg, [[maybe_unu
         cGeneralFile.close();
     }
 
-    /// Parse decoder_cupu.txt
-    QString strCUPUFilename = strDecoderOutputPath + "/decoder_cupu.txt";
-    if (bSuccess)
-    {
-        Timer t("CU&PU file parsing finished");
-        cDecodingStageInfo.setParameter("decoding_progress", "(4/11)Start Parsing CU & PU Structure...");
-        dispatchEvt(cDecodingStageInfo);
-        std::ifstream cCUPUTextStream(strCUPUFilename.toLocal8Bit());
-        CUPUParser cCUPUParser;
-        bSuccess = cCUPUParser.parseFile(cCUPUTextStream, pcSequence);
-    }
-    /// Parse deocder_tu.txt
-    QString strTUFilename = strDecoderOutputPath + "/decoder_tu.txt";
-    if (bSuccess)
-    {
-        Timer t("TU file parsing finished");
-        cDecodingStageInfo.setParameter("decoding_progress", "(5/11)Start Parsing TU Structure...");
-        dispatchEvt(cDecodingStageInfo);
-        std::ifstream cTUTextStream(strTUFilename.toLocal8Bit());
-        TUParser cTUParser;
-        bSuccess = cTUParser.parseFile(cTUTextStream, pcSequence);
-    }
+    ParserInfo infoFiles[] = {
+        {"/decoder_cupu.txt", "CU & PU structure", std::make_unique<CUPUParser>()},
+        {"/decoder_tu.txt","TU structure", std::make_unique<TUParser>()},
+        {"/decoder_pred.txt", "Predtion Mode", std::make_unique<PredParser>()},
+        {"/decoder_mv.txt", "Motion Vectors", std::make_unique<MVParser>()},
+        {"/decoder_merge.txt","Motion Vector Merge", std::make_unique<MergeParser>()},
+        {"/decoder_intra.txt","Intra Info", std::make_unique<IntraParser>()},
+        {"/decoder_bit_lcu.txt","Bits LCU", std::make_unique<BitParserLCU>()},
+        {"/decoder_bit_scu.txt", "Bits SCU", std::make_unique<BitParserSCU>()},
+    };
 
-    /// Parse decoder_pred.txt
-    QString strPredFilename = strDecoderOutputPath + "/decoder_pred.txt";
-    if (bSuccess)
-    {
-        Timer t("Pred file parsing finished");
-        cDecodingStageInfo.setParameter("decoding_progress", "(6/11)Start Parsing Predction Mode...");
-        dispatchEvt(cDecodingStageInfo);
-        std::ifstream cPredTextStream(strPredFilename.toLocal8Bit());
-        PredParser cPredParser;
-        bSuccess = cPredParser.parseFile(cPredTextStream, pcSequence);
-    }
-
-    /// Parse decoder_mv.txt
-    QString strMVFilename = strDecoderOutputPath + "/decoder_mv.txt";
-    if (bSuccess)
-    {
-        Timer t("MV file parsing finished");
-        cDecodingStageInfo.setParameter("decoding_progress", "(7/11)Start Parsing Motion Vectors...");
-        dispatchEvt(cDecodingStageInfo);
-        std::ifstream cMVTextStream(strMVFilename.toLocal8Bit());
-        MVParser cMVParser;
-        bSuccess = cMVParser.parseFile(cMVTextStream, pcSequence);
-    }
-
-    /// Parse decoder_merge.txt
-    QString strMergeFilename = strDecoderOutputPath + "/decoder_merge.txt";
-    if (bSuccess)
-    {
-        Timer t("Merge file parsing finished");
-        cDecodingStageInfo.setParameter("decoding_progress", "(8/11)Start Parsing Motion Merge Info...");
-        dispatchEvt(cDecodingStageInfo);
-        std::ifstream cMergeTextStream(strMergeFilename.toLocal8Bit());
-        MergeParser cMergeParser;
-        bSuccess = cMergeParser.parseFile(cMergeTextStream, pcSequence);
-    }
-
-    /// Parse decoder_intra.txt
-    QString strIntraFilename = strDecoderOutputPath + "/decoder_intra.txt";
-    if (bSuccess)
-    {
-        Timer t("Intra file parsing finished");
-        cDecodingStageInfo.setParameter("decoding_progress", "(9/11)Start Parsing Intra Info...");
-        dispatchEvt(cDecodingStageInfo);
-        std::ifstream cIntraTextStream(strIntraFilename.toLocal8Bit());
-        IntraParser cIntraParser;
-        bSuccess = cIntraParser.parseFile(cIntraTextStream, pcSequence);
-    }
-
-    /// Parse decoder_bit.txt
-    QString strLCUBitFilename = strDecoderOutputPath + "/decoder_bit_lcu.txt";
-    QString strSCUBitFilename = strDecoderOutputPath + "/decoder_bit_scu.txt";
-    if (bSuccess)
-    {
-        Timer t("Bit file parsing finished");
-        cDecodingStageInfo.setParameter("decoding_progress", "(10/11)Start Parsing Bits Info...");
-        dispatchEvt(cDecodingStageInfo);
-        std::ifstream cLCUBitTextStream(strLCUBitFilename.toLocal8Bit());
-
-        BitParserLCU cBitParserLCU;
-        bSuccess = cBitParserLCU.parseFile(cLCUBitTextStream, pcSequence);
-
-        BitParserSCU cBitParserSCU;
-        std::ifstream cSCUBitTextStream(strSCUBitFilename.toLocal8Bit());
-        bSuccess = bSuccess && cBitParserSCU.parseFile(cSCUBitTextStream, pcSequence);
+    int step = 4;
+    for (auto& parseInfo : infoFiles) {
+        QString strFilename = strDecoderOutputPath + parseInfo.fileName;
+        if (bSuccess)
+        {
+            Timer t(parseInfo.description + " parsing finished");
+            cDecodingStageInfo.setParameter("decoding_progress", QString("(%1/11)Start Parsing %2 ...").arg(step++).arg(parseInfo.description));
+            dispatchEvt(cDecodingStageInfo);
+            std::ifstream stream(strFilename.toLocal8Bit());
+            bSuccess = parseInfo.pParser->parseFile(stream, pcSequence);
+        }
     }
 
     ///*****STEP 3 : Open decoded YUV sequence*****
