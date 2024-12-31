@@ -9,11 +9,11 @@ class BitParser : public QObject
     Q_OBJECT
 public:
     explicit BitParser(QObject *parent = 0);
-    bool parseLCUBitFile(QTextStream* pcInputStream, ComSequence* pcSequence);
-    bool parseSCUBitFile(QTextStream* pcInputStream, ComSequence* pcSequence);
+    bool parseLCUBitFile(std::istream &pcInputStream, ComSequence* pcSequence);
+    bool parseSCUBitFile(std::istream &pcInputStream, ComSequence* pcSequence);
 
 protected:
-    bool xParseSCUBitFile(QTextStream* pcSCUBitInfoStream, ComCU* pcCU);
+    size_t xParseSCUBitFile(std::vector<int> vPCInfo, size_t s, ComCU* pcCU);
 signals:
     
 public slots:

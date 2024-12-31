@@ -1,6 +1,6 @@
 #include "bitparser.h"
-#include <QRegExp>
-#include <QIODevice>
+
+#include "streamreader.h"
 
 BitParser::BitParser(QObject *parent) :
     QObject(parent)
@@ -8,115 +8,59 @@ BitParser::BitParser(QObject *parent) :
 }
 
 
-bool BitParser::parseLCUBitFile(QTextStream* pcInputStream, ComSequence* pcSequence)
+bool BitParser::parseLCUBitFile(std::istream &pcInputStream, ComSequence* pcSequence)
 {
     Q_ASSERT( pcSequence != NULL );
-
-    QString strOneLine;
-    QRegExp cMatchTarget;
-
-
-    /// <0,0> 95
-    /// read one LCU
-    ComFrame* pcFrame = NULL;
-    ComCU* pcLCU = NULL;
-    cMatchTarget.setPattern("^<(-?[0-9]+),([0-9]+)> (.*)");
-
-    int iDecOrder = -1;
-    int iLastPOC  = -1;
-
-    while( !pcInputStream->atEnd() )
-    {
-
-        strOneLine = pcInputStream->readLine();
-        if( cMatchTarget.indexIn(strOneLine) != -1 )
-        {
-
-            /// poc and lcu addr
-            int iPoc = cMatchTarget.cap(1).toInt();
-            iDecOrder += (iLastPOC != iPoc);
-            iLastPOC = iPoc;
-
-            pcFrame = pcSequence->getFramesInDecOrder().at(iDecOrder);
-            int iAddr = cMatchTarget.cap(2).toInt();
-            pcLCU = pcFrame->getLCUs().at(iAddr);
-
-
-            ///
-            QString strBitInfo = cMatchTarget.cap(3);
-            int iLCUBit = strBitInfo.toInt();
+    size_t cuCnt = pcSequence->getNumberMaxCu();
+    size_t frames = pcSequence->getFramesInDisOrder().size();
+    auto fileStore = StreamReader::parse<int>(pcInputStream, frames, cuCnt);
+    for (int iFrame = 0; iFrame < frames; iFrame++) {
+        ComFrame* pcFrame = pcSequence->getFramesInDecOrder().at(iFrame);
+        for (int iAddr = 0; iAddr < cuCnt; iAddr++) {
+            auto pcLCU = pcFrame->getLCUs().at(iAddr);
+            int iLCUBit = fileStore[iFrame][iAddr][0];
             pcLCU->setBitCount(iLCUBit);
             pcFrame->getBitCount() += iLCUBit;
-
         }
-
     }
     return true;
 }
 
 
 
-bool BitParser::parseSCUBitFile(QTextStream* pcInputStream, ComSequence* pcSequence)
+bool BitParser::parseSCUBitFile(std::istream& pcInputStream, ComSequence* pcSequence)
 {
     Q_ASSERT( pcSequence != NULL );
-
-    QString strOneLine;
-    QRegExp cMatchTarget;
-
-
-    /// <0,8> 8 36 31 36 30 36 31 36 0 36 2 36 1 36 0 36 1 36
-    /// read one LCU
-    ComFrame* pcFrame = NULL;
-    ComCU* pcLCU = NULL;
-    cMatchTarget.setPattern("^<(-?[0-9]+),([0-9]+)> (.*)");
-    QTextStream cSCUBitInfoStream;
-    int iDecOrder = -1;
-    int iLastPOC  = -1;
-    while( !pcInputStream->atEnd() )
-    {
-
-        strOneLine = pcInputStream->readLine();
-        if( cMatchTarget.indexIn(strOneLine) != -1 )
-        {
-            /// poc and lcu addr
-            int iPoc = cMatchTarget.cap(1).toInt();
-            iDecOrder += (iLastPOC != iPoc);
-            iLastPOC = iPoc;
-
-            pcFrame = pcSequence->getFramesInDecOrder().at(iDecOrder);
-            int iAddr = cMatchTarget.cap(2).toInt();
-            pcLCU = pcFrame->getLCUs().at(iAddr);
-
-
-            ///
-            QString strSCUBitInfo = cMatchTarget.cap(3);
-            cSCUBitInfoStream.setString( &strSCUBitInfo, QIODevice::ReadOnly );
-            xParseSCUBitFile(&cSCUBitInfoStream, pcLCU);
-
+    size_t cuCnt = pcSequence->getNumberMaxCu();
+    size_t frames = pcSequence->getFramesInDisOrder().size();
+    auto fileStore = StreamReader::parse<int>(pcInputStream, frames, cuCnt);
+    for (int iFrame = 0; iFrame < frames; iFrame++) {
+        ComFrame* pcFrame = pcSequence->getFramesInDecOrder().at(iFrame);
+        for (int iAddr = 0; iAddr < cuCnt; iAddr++) {
+            auto pcLCU = pcFrame->getLCUs().at(iAddr);
+            xParseSCUBitFile(fileStore[iFrame][iAddr], 0, pcLCU);
         }
-
     }
     return true;
 }
 
 
-bool BitParser::xParseSCUBitFile(QTextStream* pcSCUBitInfoStream, ComCU* pcCU)
+size_t BitParser::xParseSCUBitFile(std::vector<int> vPCInfo, size_t s, ComCU* pcCU)
 {
-    if( !pcCU->getSCUs().empty() )
+    if (!pcCU->getSCUs().empty())
     {
         /// non-leaf node : recursive reading for children
-        xParseSCUBitFile(pcSCUBitInfoStream, pcCU->getSCUs().at(0));
-        xParseSCUBitFile(pcSCUBitInfoStream, pcCU->getSCUs().at(1));
-        xParseSCUBitFile(pcSCUBitInfoStream, pcCU->getSCUs().at(2));
-        xParseSCUBitFile(pcSCUBitInfoStream, pcCU->getSCUs().at(3));
+        s = xParseSCUBitFile(vPCInfo, s, pcCU->getSCUs().at(0));
+        s = xParseSCUBitFile(vPCInfo, s, pcCU->getSCUs().at(1));
+        s = xParseSCUBitFile(vPCInfo, s, pcCU->getSCUs().at(2));
+        s = xParseSCUBitFile(vPCInfo, s, pcCU->getSCUs().at(3));
     }
     else
     {
         /// leaf node : read data
-        Q_ASSERT(pcSCUBitInfoStream->atEnd()==false);
-        int iSCUBit;
-        *pcSCUBitInfoStream >> iSCUBit;
+        Q_ASSERT(s < vPCInfo.size());
+        int iSCUBit = vPCInfo[s++];
         pcCU->setBitCount(iSCUBit);
     }
-    return true;
+    return s;
 }

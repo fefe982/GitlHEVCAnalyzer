@@ -2,7 +2,7 @@
 #define INTRAPARSER_H
 
 #include <QObject>
-#include <QTextStream>
+
 #include "model/common/comsequence.h"
 
 class IntraParser : public QObject
@@ -10,10 +10,9 @@ class IntraParser : public QObject
     Q_OBJECT
 public:
     explicit IntraParser(QObject *parent = 0);
-    bool parseFile(QTextStream* pcInputStream, ComSequence* pcSequence);
-
+    bool parseFile(std::istream& pcInputStream, ComSequence* pcSequence);
 protected:
-    bool xReadIntraMode(QTextStream* pcCUInfoStream, ComCU* pcCU);
+    size_t xReadIntraMode(std::vector<uchar> &vPCInfo, size_t s, ComCU* pcCU);
 signals:
 
 public slots:
