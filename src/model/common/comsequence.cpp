@@ -87,3 +87,14 @@ ComTU* ComSequence::newComTU() {
     m_vTUStore.emplace_back();
     return &m_vTUStore.back();
 }
+
+void ComSequence::allocComMV(size_t sz) {
+    m_vMVStore.resize(0);
+    m_vMVStore.reserve(sz);
+}
+
+ComMV* ComSequence::newComMV() {
+    Q_ASSERT(m_vMVStore.size() < m_vMVStore.capacity());
+    m_vMVStore.emplace_back();
+    return &m_vMVStore.back();
+}

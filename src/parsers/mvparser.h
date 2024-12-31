@@ -1,18 +1,17 @@
 #ifndef MVPARSER_H
 #define MVPARSER_H
 
-#include <QObject>
-#include <QTextStream>
 #include "model/common/comsequence.h"
+#include <QObject>
 
 class MVParser : public QObject
 {
     Q_OBJECT
 public:
     explicit MVParser(QObject *parent = 0);
-    bool parseFile(QTextStream* pcInputStream, ComSequence* pcSequence);
+    bool parseFile(std::istream& pcInputStream, ComSequence* pcSequence);
 protected:
-    bool xReadMV(QTextStream* pcCUInfoStream, ComCU* pcCU);
+    size_t xReadMV(const std::vector<int>& vPCInfo, size_t s, ComSequence* sequence, ComCU* pcCU);
 signals:
 
 public slots:

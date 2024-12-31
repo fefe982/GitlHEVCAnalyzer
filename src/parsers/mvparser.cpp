@@ -1,65 +1,59 @@
 #include "mvparser.h"
-#include <QRegExp>
-#include <QIODevice>
+
+#include "streamreader.h"
 
 MVParser::MVParser(QObject *parent) :
     QObject(parent)
 {
 }
 
-bool MVParser::parseFile(QTextStream* pcInputStream, ComSequence* pcSequence)
+bool MVParser::parseFile(std::istream& pcInputStream, ComSequence* pcSequence)
 {
-    Q_ASSERT( pcSequence != NULL );
-
-    QString strOneLine;
-    QRegExp cMatchTarget;
-
-
-    /// <1,1> 1 -3 0 1 -3 0 1 -3 0 1 1 0 1 -3 0
-    /// read one LCU
-    ComFrame* pcFrame = NULL;
-    ComCU* pcLCU = NULL;
-    cMatchTarget.setPattern("^<(-?[0-9]+),([0-9]+)> (.*)");
-    QTextStream cMVInfoStream;
-    int iDecOrder = -1;
-    int iLastPOC  = -1;
-    while( !pcInputStream->atEnd() )
-    {
-
-        strOneLine = pcInputStream->readLine();
-        if( cMatchTarget.indexIn(strOneLine) != -1 )
-        {
-            /// poc and lcu addr
-            int iPoc = cMatchTarget.cap(1).toInt();
-            iDecOrder += (iLastPOC != iPoc);
-            iLastPOC = iPoc;
-
-            pcFrame = pcSequence->getFramesInDecOrder().at(iDecOrder);
-            int iAddr = cMatchTarget.cap(2).toInt();
-            pcLCU = pcFrame->getLCUs().at(iAddr);
-
-
-            ///
-            QString strMVInfo = cMatchTarget.cap(3);
-            cMVInfoStream.setString( &strMVInfo, QIODevice::ReadOnly );
-
-
-            xReadMV(&cMVInfoStream, pcLCU);
-
+    Q_ASSERT(pcSequence != NULL);
+    size_t cuCnt = pcSequence->getNumberMaxCu();
+    size_t frames = pcSequence->getFramesInDisOrder().size();
+    auto fileStore = StreamReader::parse<int>(pcInputStream, frames, cuCnt);
+    int iMVCnt = 0;
+    for (auto& frame : fileStore) {
+        for (auto& addr : frame) {
+            size_t i = 0;
+            while (i < addr.size()) {
+                if (addr[i] == 0) {
+                    i += 1;
+                }
+                else if (addr[i] == 1 || addr[i] == 2) {
+                    iMVCnt += 1;
+                    i += 4;
+                }
+                else if (addr[i] == 3) {
+                    iMVCnt += 2;
+                    i += 7;
+                }
+                else {
+                    Q_ASSERT(false);
+                }
+            }
         }
-
+    }
+    pcSequence->allocComMV(iMVCnt);
+    for (int iFrame = 0; iFrame < frames; iFrame++) {
+        ComFrame* pcFrame = pcSequence->getFramesInDecOrder().at(iFrame);
+        for (int iAddr = 0; iAddr < cuCnt; iAddr++) {
+            auto pcLCU = pcFrame->getLCUs().at(iAddr);
+            xReadMV(fileStore[iFrame][iAddr], 0, pcSequence, pcLCU);
+        }
     }
     return true;
 }
-bool MVParser::xReadMV(QTextStream* pcMVInfoStream, ComCU* pcCU)
+size_t MVParser::xReadMV(const std::vector<int>& vPCInfo, size_t s, ComSequence *sequence, ComCU* pcCU)
 {
-    if( !pcCU->getSCUs().empty() )
+    if (!pcCU->getSCUs().empty())
     {
         /// non-leaf node : recursive reading for children
-        xReadMV(pcMVInfoStream, pcCU->getSCUs().at(0));
-        xReadMV(pcMVInfoStream, pcCU->getSCUs().at(1));
-        xReadMV(pcMVInfoStream, pcCU->getSCUs().at(2));
-        xReadMV(pcMVInfoStream, pcCU->getSCUs().at(3));
+        s = xReadMV(vPCInfo, s, sequence, pcCU->getSCUs().at(0));
+        s = xReadMV(vPCInfo, s, sequence, pcCU->getSCUs().at(1));
+        s = xReadMV(vPCInfo, s, sequence, pcCU->getSCUs().at(2));
+        s = xReadMV(vPCInfo, s, sequence, pcCU->getSCUs().at(3));
     }
     else
     {
@@ -67,8 +61,8 @@ bool MVParser::xReadMV(QTextStream* pcMVInfoStream, ComCU* pcCU)
         int iInterDir;
         for(int i = 0; i < pcCU->getPUs().size(); i++)
         {
-            Q_ASSERT(!pcMVInfoStream->atEnd());
-            *pcMVInfoStream >> iInterDir;
+            Q_ASSERT(s < vPCInfo.size());
+            iInterDir = vPCInfo[s++];
             ComPU* pcPU = pcCU->getPUs().at(i);
             pcPU->setInterDir(iInterDir);
 
@@ -77,8 +71,10 @@ bool MVParser::xReadMV(QTextStream* pcMVInfoStream, ComCU* pcCU)
             ComMV* pcReadMV = NULL;
             if( iInterDir == 1 || iInterDir == 2)   //uni-prediction, 1 MV
             {
-                *pcMVInfoStream >> iRefPOC >> iHor >> iVer;
-                pcReadMV = new ComMV();
+                iRefPOC = vPCInfo[s++];
+                iHor = vPCInfo[s++];
+                iVer = vPCInfo[s++];
+                pcReadMV = sequence->newComMV();
                 pcReadMV->setRefPOC(iRefPOC);
                 pcReadMV->setHor(iHor);
                 pcReadMV->setVer(iVer);
@@ -86,15 +82,19 @@ bool MVParser::xReadMV(QTextStream* pcMVInfoStream, ComCU* pcCU)
             }
             else if( iInterDir == 3 )               //bi-prediction, 2 MVs
             {
-                *pcMVInfoStream >> iRefPOC >> iHor >> iVer;
-                pcReadMV = new ComMV();
+                iRefPOC = vPCInfo[s++];
+                iHor = vPCInfo[s++];
+                iVer = vPCInfo[s++];
+                pcReadMV = sequence->newComMV();
                 pcReadMV->setRefPOC(iRefPOC);
                 pcReadMV->setHor(iHor);
                 pcReadMV->setVer(iVer);
                 pcPU->getMVs().push_back(pcReadMV);
 
-                *pcMVInfoStream >> iRefPOC >> iHor >> iVer;
-                pcReadMV = new ComMV();
+                iRefPOC = vPCInfo[s++];
+                iHor = vPCInfo[s++];
+                iVer = vPCInfo[s++];
+                pcReadMV = sequence->newComMV();
                 pcReadMV->setRefPOC(iRefPOC);
                 pcReadMV->setHor(iHor);
                 pcReadMV->setVer(iVer);
@@ -102,5 +102,5 @@ bool MVParser::xReadMV(QTextStream* pcMVInfoStream, ComCU* pcCU)
             }
         }
     }
-    return true;
+    return s;
 }

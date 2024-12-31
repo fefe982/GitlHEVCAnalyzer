@@ -12,7 +12,7 @@ PredDisplayFilter::PredDisplayFilter(QObject *parent) :
     m_cConfigDialog.addSlider("Opaque", 0.0, 1.0, &m_cConfig.getOpaque());
 }
 
-bool PredDisplayFilter::config(FilterContext *pcContext)
+bool PredDisplayFilter::config(FilterContext *)
 {
     m_cConfigDialog.exec();
     m_cConfig.applyOpaque();

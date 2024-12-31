@@ -178,12 +178,9 @@ bool OpenBitstreamCommand::execute( GitlCommandParameter& rcInputArg, [[maybe_un
         Timer t("MV file parsing finished");
         cDecodingStageInfo.setParameter("decoding_progress", "(7/11)Start Parsing Motion Vectors...");
         dispatchEvt(cDecodingStageInfo);
-        QFile cMVFile(strMVFilename);
-        cMVFile.open(QIODevice::ReadOnly);
-        QTextStream cMVTextStream(&cMVFile);
+        std::ifstream cMVTextStream(strMVFilename.toLocal8Bit());
         MVParser cMVParser;
-        bSuccess = cMVParser.parseFile( &cMVTextStream, pcSequence );
-        cMVFile.close();
+        bSuccess = cMVParser.parseFile(cMVTextStream, pcSequence);
     }
 
     /// Parse decoder_merge.txt

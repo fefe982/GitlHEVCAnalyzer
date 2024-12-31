@@ -6,8 +6,9 @@
 class ComMV
 {
 public:
-    explicit ComMV(): m_iHor(0), m_iVer(0){}
-    explicit ComMV(int iHor, int iVer): m_iHor(iHor), m_iVer(iVer){}
+    explicit ComMV(): m_iRefPoc(0), m_iHor(0), m_iVer(0){}
+    explicit ComMV(int iHor, int iVer): m_iRefPoc(0), m_iHor(iHor), m_iVer(iVer){}
+    explicit ComMV(int iRefPoc, int iHor, int iVer) : m_iRefPoc(iRefPoc), m_iHor(iHor), m_iVer(iVer) {}
 
     int getLengthSquare() const
     {

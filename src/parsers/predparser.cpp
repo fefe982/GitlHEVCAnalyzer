@@ -18,22 +18,22 @@ bool PredParser::parseFile(std::istream& pcInputStream, ComSequence* pcSequence)
         ComFrame* pcFrame = pcSequence->getFramesInDecOrder().at(iFrame);
         for (int iAddr = 0; iAddr < cuCnt; iAddr++) {
             auto pcLCU = pcFrame->getLCUs().at(iAddr);
-            xReadPredMode(fileStore[iFrame][iAddr], 0, pcSequence, pcLCU);
+            xReadPredMode(fileStore[iFrame][iAddr], 0, pcLCU);
         }
     }
     return true;
 }
 
 
-size_t PredParser::xReadPredMode(const std::vector<uchar>& vPCInfo, size_t s, ComSequence* sequence, ComCU* pcCU)
+size_t PredParser::xReadPredMode(const std::vector<uchar>& vPCInfo, size_t s, ComCU* pcCU)
 {
     if (!pcCU->getSCUs().empty())
     {
         /// non-leaf node : recursive reading for children
-        s = xReadPredMode(vPCInfo, s, sequence, pcCU->getSCUs().at(0));
-        s = xReadPredMode(vPCInfo, s, sequence, pcCU->getSCUs().at(1));
-        s = xReadPredMode(vPCInfo, s, sequence, pcCU->getSCUs().at(2));
-        s = xReadPredMode(vPCInfo, s, sequence, pcCU->getSCUs().at(3));
+        s = xReadPredMode(vPCInfo, s, pcCU->getSCUs().at(0));
+        s = xReadPredMode(vPCInfo, s, pcCU->getSCUs().at(1));
+        s = xReadPredMode(vPCInfo, s, pcCU->getSCUs().at(2));
+        s = xReadPredMode(vPCInfo, s, pcCU->getSCUs().at(3));
     }
     else
     {

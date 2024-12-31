@@ -11,7 +11,7 @@ public:
     explicit PredParser(QObject* parent = 0);
     bool parseFile(std::istream& pcInputStream, ComSequence* pcSequence);
 protected:
-    size_t xReadPredMode(const std::vector<uchar>& vPCInfo, size_t s, ComSequence* sequence, ComCU* pcCU);
+    size_t xReadPredMode(const std::vector<uchar>& vPCInfo, size_t s, ComCU* pcCU);
 signals:
 
 public slots:
