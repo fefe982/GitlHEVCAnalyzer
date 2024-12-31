@@ -157,7 +157,7 @@ void MainWindow::on_nextFrame_clicked()
     cEvt.dispatch();
 }
 
-void MainWindow::on_progressBar_actionTriggered(int action)
+void MainWindow::on_progressBar_actionTriggered(int)
 {
     int iBarPercent = int(100*double(ui->progressBar->sliderPosition()-ui->progressBar->minimum()) /
                                        (ui->progressBar->maximum()-ui->progressBar->minimum()));

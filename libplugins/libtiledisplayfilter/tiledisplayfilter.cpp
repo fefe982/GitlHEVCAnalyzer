@@ -13,7 +13,7 @@ TileDisplayFilter::TileDisplayFilter(QObject *parent) :
 
 
 
-bool TileDisplayFilter::drawTile(FilterContext *pcContext, QPainter *pcPainter, ComTile *pcTile, double dScale, QRect *pcScaledArea)
+bool TileDisplayFilter::drawTile(FilterContext *, QPainter *pcPainter, ComTile *, double, QRect *pcScaledArea)
 {
 
     QPen iPen;
@@ -29,7 +29,7 @@ bool TileDisplayFilter::drawTile(FilterContext *pcContext, QPainter *pcPainter, 
 
 }
 
-bool TileDisplayFilter::config(FilterContext *pcContext)
+bool TileDisplayFilter::config(FilterContext *)
 {
     m_cConfigDialog.exec();
     return true;

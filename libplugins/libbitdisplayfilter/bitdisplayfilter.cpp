@@ -23,14 +23,14 @@ bool BitDisplayFilter::init(FilterContext* pcContext)
 
 }
 
-bool BitDisplayFilter::drawCTU  (FilterContext *pcContext, QPainter *pcPainter,
-                                ComCU *pcCTU, double dScale, QRect *pcScaledArea)
+bool BitDisplayFilter::drawCTU  (FilterContext *, QPainter *pcPainter,
+                                ComCU *pcCTU, double, QRect *pcScaledArea)
 {
     int iClip = VALUE_CLIP(240,359,pcCTU->getBitCount()/(m_dLCUAvgBit*5.0)*(359-240)+240);
 
     QColor cFill;
     double dHue = iClip/360.0;
-    cFill.setHsvF(dHue, 1.0, 1.0, 0.6);
+    cFill.setHsvF(dHue, 1.0f, 1.0f, 0.6f);
     pcPainter->setBrush(QBrush(cFill));
     pcPainter->setPen(Qt::NoPen);
     pcPainter->drawRect(*pcScaledArea);

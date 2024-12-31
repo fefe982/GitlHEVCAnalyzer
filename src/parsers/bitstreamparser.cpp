@@ -10,7 +10,7 @@
 #include <QRegExp>
 
 BitstreamParser::BitstreamParser(QObject *parent):
-    m_cDecoderProcess(this)
+    QObject(parent), m_cDecoderProcess(this)
 {
     connect(&m_cDecoderProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(displayDecoderOutput()));
     connect(qApp, SIGNAL(aboutToQuit()), &m_cDecoderProcess, SLOT(kill()));

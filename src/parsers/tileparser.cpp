@@ -38,7 +38,7 @@ bool TileParser::parseFile(QTextStream *pcInputStream, ComSequence *pcSequence)
 
             pcFrame = pcSequence->getFramesInDecOrder().at(iDecOrder);
 
-            int iTileNum = cMatchTarget.cap(2).toInt();
+            //int iTileNum = cMatchTarget.cap(2).toInt();
             //pcFrame->m_iTileNum = iTileNum;
 
             QString strTileInfo = cMatchTarget.cap(3);

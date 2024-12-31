@@ -9,7 +9,7 @@ TUDisplayFilter::TUDisplayFilter(QObject *parent) :
     m_cConfigDialog.addSlider("Opaque", 0.0, 1.0, &m_cConfig.getOpaque());
 }
 
-bool TUDisplayFilter::config(FilterContext *pcContext)
+bool TUDisplayFilter::config(FilterContext *)
 {
     m_cConfigDialog.exec();
     m_cConfig.applyOpaque();
@@ -17,8 +17,8 @@ bool TUDisplayFilter::config(FilterContext *pcContext)
 }
 
 
-bool TUDisplayFilter::drawTU   (FilterContext* pcContext, QPainter* pcPainter,
-                                ComTU *pcTU, double dScale,  QRect* pcScaledArea)
+bool TUDisplayFilter::drawTU   (FilterContext*, QPainter* pcPainter,
+                                ComTU *, double,  QRect* pcScaledArea)
 {
 
     /// Draw TU Rect

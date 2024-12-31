@@ -20,8 +20,8 @@ bool PredDisplayFilter::config(FilterContext *)
 }
 
 
-bool PredDisplayFilter::drawPU   (FilterContext* pcContext, QPainter* pcPainter,
-                                  ComPU *pcPU, double dScale,  QRect* pcScaledArea)
+bool PredDisplayFilter::drawPU   (FilterContext*, QPainter* pcPainter,
+                                  ComPU *pcPU, double,  QRect* pcScaledArea)
 {
 
     PredMode eMode = pcPU->getPredMode();

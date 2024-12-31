@@ -40,7 +40,7 @@ SequenceListItem::~SequenceListItem()
 }
 
 
-void SequenceListItem::mouseReleaseEvent ( QMouseEvent * e )
+void SequenceListItem::mouseReleaseEvent ( QMouseEvent *)
 {
     ui->radioButton->setChecked(true);
     emit sequenceRadioButtonClicked(m_pcSequence);

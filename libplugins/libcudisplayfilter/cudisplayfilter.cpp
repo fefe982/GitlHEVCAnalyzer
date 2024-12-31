@@ -36,7 +36,7 @@ CUDisplayFilter::CUDisplayFilter(QObject *parent) :
 
 }
 
-bool CUDisplayFilter::config   (FilterContext* pcContext)
+bool CUDisplayFilter::config   (FilterContext*)
 {
     m_cConfigDialog.exec();
     m_cConfig.applyOpaque();
@@ -47,8 +47,8 @@ bool CUDisplayFilter::config   (FilterContext* pcContext)
 }
 
 
-bool CUDisplayFilter::drawCTU  (FilterContext *pcContext, QPainter *pcPainter,
-                                ComCU *pcCTU, double dScale, QRect *pcScaledArea)
+bool CUDisplayFilter::drawCTU  (FilterContext *, QPainter *pcPainter,
+                                ComCU *, double, QRect *pcScaledArea)
 {
     pcPainter->setBrush(Qt::NoBrush);
     pcPainter->setPen(m_cLCUPen);
@@ -56,8 +56,8 @@ bool CUDisplayFilter::drawCTU  (FilterContext *pcContext, QPainter *pcPainter,
     return true;
 }
 
-bool CUDisplayFilter::drawCU   (FilterContext* pcContext, QPainter* pcPainter,
-                                ComCU *pcCU, double dScale,  QRect* pcScaledArea)
+bool CUDisplayFilter::drawCU   (FilterContext*, QPainter* pcPainter,
+                                ComCU *pcCU, double,  QRect* pcScaledArea)
 {
     /// only show LCU
     if(m_cConfig.getShowLCUOnly())
@@ -130,13 +130,13 @@ bool CUDisplayFilter::drawCU   (FilterContext* pcContext, QPainter* pcPainter,
 }
 
 
-bool CUDisplayFilter::mousePress(FilterContext *pcContext, QPainter *pcPainter, ComFrame *pcFrame, const QPointF *pcUnscaledPos, const QPointF *scaledPos, double dScale, Qt::MouseButton eMouseBtn)
+bool CUDisplayFilter::mousePress(FilterContext *pcContext, QPainter *, ComFrame *pcFrame, const QPointF *pcUnscaledPos, const QPointF *, double, Qt::MouseButton)
 {
     m_pcSelectedCU = pcContext->pcSelectionManager->getSCU(pcFrame, pcUnscaledPos);
     return true;
 }
 
-bool CUDisplayFilter::keyPress(FilterContext *pcContext, QPainter *pcPainter, ComFrame *pcFrame, int iKeyPressed)
+bool CUDisplayFilter::keyPress(FilterContext *, QPainter *, ComFrame *, int iKeyPressed)
 {
     if(iKeyPressed == Qt::Key_Escape)
         m_pcSelectedCU = NULL;

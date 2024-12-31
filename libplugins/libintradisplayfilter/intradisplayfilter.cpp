@@ -26,7 +26,7 @@ IntraDisplayFilter::IntraDisplayFilter(QObject *parent) :
 
 }
 
-bool IntraDisplayFilter::config   (FilterContext* pcContext)
+bool IntraDisplayFilter::config   (FilterContext*)
 {
     m_cConfigDialog.exec();
     m_cConfig.applyOpaque();
@@ -34,8 +34,8 @@ bool IntraDisplayFilter::config   (FilterContext* pcContext)
 }
 
 
-bool IntraDisplayFilter::drawPU   (FilterContext* pcContext, QPainter* pcPainter,
-                                                ComPU *pcPU, double dScale,  QRect* pcScaledArea)
+bool IntraDisplayFilter::drawPU   (FilterContext*, QPainter* pcPainter,
+                                                ComPU *pcPU, double,  QRect* pcScaledArea)
 {
 
     /// Set Pen

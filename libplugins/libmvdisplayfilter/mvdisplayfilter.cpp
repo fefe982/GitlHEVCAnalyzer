@@ -35,7 +35,7 @@ MVDisplayFilter::MVDisplayFilter(QObject *parent) :
     m_cConfigDialog.addSlider("MV Opaque", 0.1, 1.0, &m_cConfig.getOpaque() );
 }
 
-bool MVDisplayFilter::config  (FilterContext* pcContext)
+bool MVDisplayFilter::config  (FilterContext*)
 {
     m_cConfigDialog.exec();
     /// L0
@@ -51,7 +51,7 @@ bool MVDisplayFilter::config  (FilterContext* pcContext)
     return true;
 }
 
-bool MVDisplayFilter::drawPU  (FilterContext* pcContext, QPainter* pcPainter,
+bool MVDisplayFilter::drawPU  (FilterContext*, QPainter* pcPainter,
                                ComPU *pcPU, double dScale,  QRect* pcScaledArea)
 {
     int iInterDir = pcPU->getInterDir();

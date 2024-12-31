@@ -14,7 +14,7 @@
 using namespace std;
 
 
-static void xMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &strMsg)
+static void xMessageOutput(QtMsgType type, const QMessageLogContext &, const QString &strMsg)
 {
     QByteArray localMsg = strMsg.toLocal8Bit();
     switch (type) {
