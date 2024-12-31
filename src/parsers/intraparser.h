@@ -12,7 +12,7 @@ public:
     explicit IntraParser(QObject *parent = 0);
     bool parseFile(std::istream& pcInputStream, ComSequence* pcSequence);
 protected:
-    size_t xReadIntraMode(std::vector<uchar> &vPCInfo, size_t s, ComCU* pcCU);
+    size_t xReadIntraMode(std::vector<int> &vPCInfo, size_t s, ComCU* pcCU);
 signals:
 
 public slots:

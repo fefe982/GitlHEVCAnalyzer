@@ -18,7 +18,7 @@ bool TUParser::parseFile(std::istream &pcInputStream, ComSequence* pcSequence)
     size_t cuCnt = pcSequence->getNumberMaxCu();
     size_t frames = pcSequence->getFramesInDisOrder().size();
     size_t iSplitCount = 0;
-    auto fileStore = StreamReader::parse<uchar>(pcInputStream, frames, cuCnt);
+    auto fileStore = StreamReader::parse(pcInputStream, frames, cuCnt);
     for (auto& vFrame : fileStore) {
         for (auto& vPoc : vFrame) {
             for (int i : vPoc) {
@@ -40,7 +40,7 @@ bool TUParser::parseFile(std::istream &pcInputStream, ComSequence* pcSequence)
 }
 
 
-size_t TUParser::xReadTU(const std::vector<uchar>& vPCInfo, size_t s, ComSequence* sequence, ComCU* pcCU)
+size_t TUParser::xReadTU(const std::vector<int>& vPCInfo, size_t s, ComSequence* sequence, ComCU* pcCU)
 {
     if (!pcCU->getSCUs().empty())
     {
@@ -63,7 +63,7 @@ size_t TUParser::xReadTU(const std::vector<uchar>& vPCInfo, size_t s, ComSequenc
 }
 
 
-size_t TUParser::xReadTUHelper(const std::vector<uchar>& vPCInfo, size_t s, ComSequence* sequence, ComTU* pcTU)
+size_t TUParser::xReadTUHelper(const std::vector<int>& vPCInfo, size_t s, ComSequence* sequence, ComTU* pcTU)
 {
     int iTUMode;
     if (s > vPCInfo.size())

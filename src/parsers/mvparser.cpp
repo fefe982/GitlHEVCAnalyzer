@@ -12,7 +12,7 @@ bool MVParser::parseFile(std::istream& pcInputStream, ComSequence* pcSequence)
     Q_ASSERT(pcSequence != NULL);
     size_t cuCnt = pcSequence->getNumberMaxCu();
     size_t frames = pcSequence->getFramesInDisOrder().size();
-    auto fileStore = StreamReader::parse<int>(pcInputStream, frames, cuCnt);
+    auto fileStore = StreamReader::parse(pcInputStream, frames, cuCnt);
     int iMVCnt = 0;
     for (auto& frame : fileStore) {
         for (auto& addr : frame) {

@@ -13,7 +13,7 @@ bool BitParser::parseLCUBitFile(std::istream &pcInputStream, ComSequence* pcSequ
     Q_ASSERT( pcSequence != NULL );
     size_t cuCnt = pcSequence->getNumberMaxCu();
     size_t frames = pcSequence->getFramesInDisOrder().size();
-    auto fileStore = StreamReader::parse<int>(pcInputStream, frames, cuCnt);
+    auto fileStore = StreamReader::parse(pcInputStream, frames, cuCnt);
     for (int iFrame = 0; iFrame < frames; iFrame++) {
         ComFrame* pcFrame = pcSequence->getFramesInDecOrder().at(iFrame);
         for (int iAddr = 0; iAddr < cuCnt; iAddr++) {
@@ -33,7 +33,7 @@ bool BitParser::parseSCUBitFile(std::istream& pcInputStream, ComSequence* pcSequ
     Q_ASSERT( pcSequence != NULL );
     size_t cuCnt = pcSequence->getNumberMaxCu();
     size_t frames = pcSequence->getFramesInDisOrder().size();
-    auto fileStore = StreamReader::parse<int>(pcInputStream, frames, cuCnt);
+    auto fileStore = StreamReader::parse(pcInputStream, frames, cuCnt);
     for (int iFrame = 0; iFrame < frames; iFrame++) {
         ComFrame* pcFrame = pcSequence->getFramesInDecOrder().at(iFrame);
         for (int iAddr = 0; iAddr < cuCnt; iAddr++) {

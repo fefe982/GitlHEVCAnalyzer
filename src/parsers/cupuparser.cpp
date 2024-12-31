@@ -33,7 +33,7 @@ bool CUPUParser::parseFile(std::istream &pcInputStream, ComSequence* pcSequence)
     size_t frames = pcSequence->getFramesInDisOrder().size();
     size_t iSplitCount = 0;
     size_t iPUCount = 0;
-    auto fileStore = StreamReader::parse<uchar>(pcInputStream, frames, cuCnt);
+    auto fileStore = StreamReader::parse(pcInputStream, frames, cuCnt);
     for (auto& vFrame : fileStore) {
         for (auto& vPoc : vFrame) {
             for (int i : vPoc) {
@@ -76,7 +76,7 @@ bool CUPUParser::parseFile(std::istream &pcInputStream, ComSequence* pcSequence)
 
 
 
-size_t CUPUParser::xReadInCUMode(const std::vector<uchar>& vPCInfo, size_t s, ComSequence* sequence, ComCU* pcCU)
+size_t CUPUParser::xReadInCUMode(const std::vector<int>& vPCInfo, size_t s, ComSequence* sequence, ComCU* pcCU)
 {
     int iCUMode;
     if (s == vPCInfo.size())

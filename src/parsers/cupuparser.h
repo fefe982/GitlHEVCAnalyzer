@@ -24,7 +24,7 @@ public:
      */
     bool parseFile(std::istream& pcInputStream, ComSequence* pcSequence);
 protected:
-    size_t xReadInCUMode(const std::vector<uchar>& vPCInfo, size_t s, ComSequence* sequence, ComCU* pcCU);
+    size_t xReadInCUMode(const std::vector<int>& vPCInfo, size_t s, ComSequence* sequence, ComCU* pcCU);
 signals:
 
 public slots:

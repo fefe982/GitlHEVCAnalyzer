@@ -13,7 +13,7 @@ bool IntraParser::parseFile(std::istream & pcInputStream, ComSequence* pcSequenc
     Q_ASSERT( pcSequence != NULL );
     size_t cuCnt = pcSequence->getNumberMaxCu();
     size_t frames = pcSequence->getFramesInDisOrder().size();
-    auto fileStore = StreamReader::parse<uchar>(pcInputStream, frames, cuCnt);
+    auto fileStore = StreamReader::parse(pcInputStream, frames, cuCnt);
     for (int iFrame = 0; iFrame < frames; iFrame++) {
         ComFrame* pcFrame = pcSequence->getFramesInDecOrder().at(iFrame);
         for (int iAddr = 0; iAddr < cuCnt; iAddr++) {
@@ -25,7 +25,7 @@ bool IntraParser::parseFile(std::istream & pcInputStream, ComSequence* pcSequenc
 }
 
 
-size_t IntraParser::xReadIntraMode(std::vector<uchar>& vPCInfo, size_t s, ComCU* pcCU)
+size_t IntraParser::xReadIntraMode(std::vector<int>& vPCInfo, size_t s, ComCU* pcCU)
 {
     if (!pcCU->getSCUs().empty())
     {
