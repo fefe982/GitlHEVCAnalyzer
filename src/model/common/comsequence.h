@@ -69,6 +69,7 @@ public:
 
     ADD_CLASS_FIELD_PRIVATE(std::vector<ComCU>, vCUStore)
     ADD_CLASS_FIELD_PRIVATE(std::vector<ComPU>, vPUStore)
+    ADD_CLASS_FIELD_PRIVATE(std::vector<ComTU>, vTUStore)
 
 public:
     int getNumberMaxCu()const;
@@ -76,6 +77,8 @@ public:
     ComCU* newComCU(ComFrame* p);
     void allocComPU(size_t sz);
     ComPU* newComPU(ComCU* p);
+    void allocComTU(size_t sz);
+    ComTU* newComTU();
 };
 
 

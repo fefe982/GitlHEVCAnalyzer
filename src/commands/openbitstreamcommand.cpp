@@ -154,12 +154,9 @@ bool OpenBitstreamCommand::execute( GitlCommandParameter& rcInputArg, GitlComman
         Timer t("TU file parsing finished");
         cDecodingStageInfo.setParameter("decoding_progress", "(5/11)Start Parsing TU Structure...");
         dispatchEvt(cDecodingStageInfo);
-        QFile cTUFile(strTUFilename);
-        cTUFile.open(QIODevice::ReadOnly);
-        QTextStream cTUTextStream(&cTUFile);
+        std::ifstream cTUTextStream(strTUFilename.toLocal8Bit());
         TUParser cTUParser;
-        bSuccess = cTUParser.parseFile( &cTUTextStream, pcSequence );
-        cTUFile.close();
+        bSuccess = cTUParser.parseFile(cTUTextStream, pcSequence);
     }
 
     /// Parse decoder_pred.txt

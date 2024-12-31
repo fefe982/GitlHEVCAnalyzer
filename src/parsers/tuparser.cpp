@@ -1,9 +1,9 @@
 #include "tuparser.h"
-#include <QRegExp>
-#include <QDebug>
-#include <QIODevice>
 
-#define TU_SLIPT_FLAG 99
+#include "streamreader.h"
+#include <QDebug>
+
+constexpr auto TU_SLIPT_FLAG = 99;
 
 TUParser::TUParser(QObject *parent):
     QObject(parent)
@@ -11,61 +11,44 @@ TUParser::TUParser(QObject *parent):
 }
 
 
-bool TUParser::parseFile(QTextStream* pcInputStream, ComSequence* pcSequence)
+bool TUParser::parseFile(std::istream &pcInputStream, ComSequence* pcSequence)
 {
     Q_ASSERT( pcSequence != NULL );
 
-    QString strOneLine;
-    QRegExp cMatchTarget;
-
-
-    /// <1,1> 1 -3 0 1 -3 0 1 -3 0 1 1 0 1 -3 0
-    /// read one LCU
-    ComFrame* pcFrame = NULL;
-    ComCU* pcLCU = NULL;
-    cMatchTarget.setPattern("^<(-?[0-9]+),([0-9]+)> (.*)");
-    QTextStream cTUInfoStream;
-    int iDecOrder = -1;
-    int iLastPOC  = -1;
-    while( !pcInputStream->atEnd() )
-    {
-
-        strOneLine = pcInputStream->readLine();
-        if( cMatchTarget.indexIn(strOneLine) != -1 )
-        {
-            /// poc and lcu addr
-            int iPoc = cMatchTarget.cap(1).toInt();
-            iDecOrder += (iLastPOC != iPoc);
-            iLastPOC = iPoc;
-
-            pcFrame = pcSequence->getFramesInDecOrder().at(iDecOrder);
-            int iAddr = cMatchTarget.cap(2).toInt();
-            pcLCU = pcFrame->getLCUs().at(iAddr);
-
-
-            ///
-            QString strTUInfo = cMatchTarget.cap(3);
-            cTUInfoStream.setString( &strTUInfo, QIODevice::ReadOnly );
-
-
-            xReadTU(&cTUInfoStream, pcLCU);
-
+    size_t cuCnt = pcSequence->getNumberMaxCu();
+    size_t frames = pcSequence->getFramesInDisOrder().size();
+    size_t iSplitCount = 0;
+    auto fileStore = StreamReader::parse<uchar>(pcInputStream, frames, cuCnt);
+    for (auto& vFrame : fileStore) {
+        for (auto& vPoc : vFrame) {
+            for (int i : vPoc) {
+                if (i == TU_SLIPT_FLAG) {
+                    iSplitCount++;
+                }
+            }
         }
-
+    }
+    pcSequence->allocComTU(iSplitCount * 4);
+    for (int iFrame = 0; iFrame < frames; iFrame++) {
+        ComFrame* pcFrame = pcSequence->getFramesInDecOrder().at(iFrame);
+        for (int iAddr = 0; iAddr < cuCnt; iAddr++) {
+            auto pcLCU = pcFrame->getLCUs().at(iAddr);
+            xReadTU(fileStore[iFrame][iAddr], 0, pcSequence, pcLCU);
+        }
     }
     return true;
 }
 
 
-bool TUParser::xReadTU(QTextStream* pcTUInfoStream, ComCU* pcCU)
+size_t TUParser::xReadTU(const std::vector<uchar>& vPCInfo, size_t s, ComSequence* sequence, ComCU* pcCU)
 {
-    if( !pcCU->getSCUs().empty() )
+    if (!pcCU->getSCUs().empty())
     {
         /// non-leaf CU node : continue to leaf CU
-        xReadTU(pcTUInfoStream, pcCU->getSCUs().at(0));
-        xReadTU(pcTUInfoStream, pcCU->getSCUs().at(1));
-        xReadTU(pcTUInfoStream, pcCU->getSCUs().at(2));
-        xReadTU(pcTUInfoStream, pcCU->getSCUs().at(3));
+        s = xReadTU(vPCInfo, s, sequence, pcCU->getSCUs().at(0));
+        s = xReadTU(vPCInfo, s, sequence, pcCU->getSCUs().at(1));
+        s = xReadTU(vPCInfo, s, sequence, pcCU->getSCUs().at(2));
+        s = xReadTU(vPCInfo, s, sequence, pcCU->getSCUs().at(3));
     }
     else
     {
@@ -74,40 +57,36 @@ bool TUParser::xReadTU(QTextStream* pcTUInfoStream, ComCU* pcCU)
         pcTURoot->setX(pcCU->getX());
         pcTURoot->setY(pcCU->getY());
         pcTURoot->setSize(pcCU->getSize());
-        xReadTUHelper(pcTUInfoStream, &(pcCU->getTURoot()));
+        s = xReadTUHelper(vPCInfo, s, sequence, &(pcCU->getTURoot()));
     }
-    return true;
+    return s;
 }
 
 
-bool TUParser::xReadTUHelper(QTextStream* pcCUInfoStream, ComTU* pcTU)
+size_t TUParser::xReadTUHelper(const std::vector<uchar>& vPCInfo, size_t s, ComSequence* sequence, ComTU* pcTU)
 {
     int iTUMode;
-    if( pcCUInfoStream->atEnd() )
+    if (s > vPCInfo.size())
     {
         qCritical() << "TUParser Error! Illegal TU Mode!";
-        return false;
+        return size_t(-1);
     }
-    *pcCUInfoStream >> iTUMode;
+    iTUMode = vPCInfo[s++];
 
-    if( iTUMode == TU_SLIPT_FLAG )
+    if (iTUMode == TU_SLIPT_FLAG)
     {
         /// non-leaf node : add 4 children CUs
-        for(int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++)
         {
-            ComTU* pcChildNode = new ComTU();
-            pcChildNode->setSize(pcTU->getSize()/2);
-            int iSubCUX = pcTU->getX() + i%2 * (pcTU->getSize()/2);
-            int iSubCUY = pcTU->getY() + i/2 * (pcTU->getSize()/2);
+            ComTU* pcChildNode = sequence->newComTU();
+            pcChildNode->setSize(pcTU->getSize() / 2);
+            int iSubCUX = pcTU->getX() + i % 2 * (pcTU->getSize() / 2);
+            int iSubCUY = pcTU->getY() + i / 2 * (pcTU->getSize() / 2);
             pcChildNode->setX(iSubCUX);
             pcChildNode->setY(iSubCUY);
             pcTU->getTUs().push_back(pcChildNode);
-            xReadTUHelper(pcCUInfoStream, pcChildNode);
+            s = xReadTUHelper(vPCInfo, s, sequence, pcChildNode);
         }
     }
-    else
-    {
-        /// leaf TU node : DO NOTHING
-    }
-    return true;
+    return s;
 }
