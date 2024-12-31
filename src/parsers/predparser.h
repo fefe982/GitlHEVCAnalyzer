@@ -1,21 +1,13 @@
 #ifndef PREDPARSER_H
 #define PREDPARSER_H
 
-#include <QObject>
 #include "model/common/comsequence.h"
+#include "streamreader.h"
 
-class PredParser : public QObject
+class PredParser : public InfoParser
 {
-    Q_OBJECT
-public:
-    explicit PredParser(QObject* parent = 0);
-    bool parseFile(std::istream& pcInputStream, ComSequence* pcSequence);
 protected:
-    size_t xReadPredMode(const std::vector<int>& vPCInfo, size_t s, ComCU* pcCU);
-signals:
-
-public slots:
-
+    virtual size_t xReadCULeaf(const std::vector<int>& vPCInfo, size_t s, ComSequence* pcSequence, ComCU& pcCU)override;
 };
 
 #endif // PREDPARSER_H

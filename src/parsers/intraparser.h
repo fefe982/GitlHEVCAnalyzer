@@ -1,22 +1,13 @@
 #ifndef INTRAPARSER_H
 #define INTRAPARSER_H
 
-#include <QObject>
-
 #include "model/common/comsequence.h"
+#include "streamreader.h"
 
-class IntraParser : public QObject
+class IntraParser : public InfoParser
 {
-    Q_OBJECT
-public:
-    explicit IntraParser(QObject *parent = 0);
-    bool parseFile(std::istream& pcInputStream, ComSequence* pcSequence);
 protected:
-    size_t xReadIntraMode(std::vector<int> &vPCInfo, size_t s, ComCU* pcCU);
-signals:
-
-public slots:
-
+    virtual size_t xReadCULeaf(const std::vector<int> &vPCInfo, size_t s, ComSequence *pcSequence, ComCU& pcCU)override;
 };
 
 #endif // INTRAPARSER_H

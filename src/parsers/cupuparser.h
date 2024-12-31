@@ -1,34 +1,15 @@
 #ifndef CUPUPARSER_H
 #define CUPUPARSER_H
 
-#include <QObject>
-#include <QTextStream>
 #include "model/common/comsequence.h"
-//
-/*!
- * \brief The CUPUParser class
- * this class is used to parse the CU&PU structure file (i.e. the 'decoder_cupu.txt')
- *
- */
+#include "streamreader.h"
 
-class CUPUParser : public QObject
+class CUPUParser : public InfoParser
 {
-    Q_OBJECT
-public:
-    explicit CUPUParser(QObject *parent = 0);
-    /*!
-     * \brief parseFile
-     * \param pcInputStream input file stream
-     * \param pcSequence output sequence
-     * \return
-     */
-    bool parseFile(std::istream& pcInputStream, ComSequence* pcSequence);
 protected:
-    size_t xReadInCUMode(const std::vector<int>& vPCInfo, size_t s, ComSequence* sequence, ComCU* pcCU);
-signals:
-
-public slots:
-
+    virtual InfoParser::ContinueFlag withData(const std::vector<std::vector<std::vector<int>>>& fileStore, ComSequence* pcSequence) override;
+    virtual size_t xReadCU(const std::vector<int>& vPCInfo, size_t s, ComSequence* pcSequence, ComCU& pcCU) override;
+    virtual size_t xReadCULeaf(const std::vector<int>& vPCInfo, size_t s, ComSequence* pcSequence, ComCU& pcCU) override;
 };
 
 #endif // CUPUPARSER_H

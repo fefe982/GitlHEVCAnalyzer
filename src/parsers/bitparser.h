@@ -1,23 +1,21 @@
 #ifndef BITPARSER_H
 #define BITPARSER_H
 
-#include <QObject>
-#include <QTextStream>
 #include "model/common/comsequence.h"
-class BitParser : public QObject
-{
-    Q_OBJECT
-public:
-    explicit BitParser(QObject *parent = 0);
-    bool parseLCUBitFile(std::istream &pcInputStream, ComSequence* pcSequence);
-    bool parseSCUBitFile(std::istream &pcInputStream, ComSequence* pcSequence);
+#include "streamreader.h"
 
+class BitParserLCU : public InfoParser
+{
 protected:
-    size_t xParseSCUBitFile(std::vector<int> vPCInfo, size_t s, ComCU* pcCU);
-signals:
-    
-public slots:
-    
+    virtual InfoParser::ContinueFlag withData(const std::vector<std::vector<std::vector<int>>>& fileStore, ComSequence* pcSequence)override;
+    virtual size_t xReadCULeaf(const std::vector<int> &vPCInfo, size_t s, ComSequence* pcSequence, ComCU& pcCU)override;
 };
+
+class BitParserSCU : public InfoParser
+{
+protected:
+    virtual size_t xReadCULeaf(const std::vector<int> &vPCInfo, size_t s, ComSequence* pcSequence, ComCU& pcCU)override;
+};
+
 
 #endif // BITPARSER_H

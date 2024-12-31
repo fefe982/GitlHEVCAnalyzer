@@ -1,50 +1,15 @@
 #include "predparser.h"
 
-#include "streamreader.h"
 #include <QDebug>
 
-PredParser::PredParser(QObject *parent) :
-    QObject(parent)
+size_t PredParser::xReadCULeaf(const std::vector<int>& vPCInfo, size_t s, ComSequence*, ComCU& pcCU)
 {
-}
-
-bool PredParser::parseFile(std::istream& pcInputStream, ComSequence* pcSequence)
-{
-    Q_ASSERT(pcSequence != NULL);
-    size_t cuCnt = pcSequence->getNumberMaxCu();
-    size_t frames = pcSequence->getFramesInDisOrder().size();
-    auto fileStore = StreamReader::parse(pcInputStream, frames, cuCnt);
-    for (int iFrame = 0; iFrame < frames; iFrame++) {
-        ComFrame* pcFrame = pcSequence->getFramesInDecOrder().at(iFrame);
-        for (int iAddr = 0; iAddr < cuCnt; iAddr++) {
-            auto pcLCU = &pcFrame->getLCUs()[iAddr];
-            xReadPredMode(fileStore[iFrame][iAddr], 0, pcLCU);
-        }
-    }
-    return true;
-}
-
-
-size_t PredParser::xReadPredMode(const std::vector<int>& vPCInfo, size_t s, ComCU* pcCU)
-{
-    if (!pcCU->getSCUs().empty())
+    for (int i = 0; i < pcCU.getPUs().size(); i++)
     {
-        /// non-leaf node : recursive reading for children
-        s = xReadPredMode(vPCInfo, s, pcCU->getSCUs().at(0));
-        s = xReadPredMode(vPCInfo, s, pcCU->getSCUs().at(1));
-        s = xReadPredMode(vPCInfo, s, pcCU->getSCUs().at(2));
-        s = xReadPredMode(vPCInfo, s, pcCU->getSCUs().at(3));
-    }
-    else
-    {
-        int iPredMode;
-        for (int i = 0; i < pcCU->getPUs().size(); i++)
-        {
-            Q_ASSERT(s < vPCInfo.size());
-            iPredMode = vPCInfo[s++];
-            ComPU* pcPU = pcCU->getPUs().at(i);
-            pcPU->setPredMode((PredMode)iPredMode);
-        }
+        Q_ASSERT(s < vPCInfo.size());
+        int iPredMode = vPCInfo[s++];
+        ComPU* pcPU = pcCU.getPUs().at(i);
+        pcPU->setPredMode((PredMode)iPredMode);
     }
     return s;
 }

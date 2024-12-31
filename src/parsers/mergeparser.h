@@ -1,22 +1,13 @@
 #ifndef MERGEPARSER_H
 #define MERGEPARSER_H
 
-#include <QObject>
-#include <QTextStream>
 #include "model/common/comsequence.h"
+#include "streamreader.h"
 
-class MergeParser : public QObject
+class MergeParser : public InfoParser
 {
-    Q_OBJECT
-public:
-    explicit MergeParser(QObject *parent = 0);
-    bool parseFile(std::istream& pcInputStream, ComSequence* pcSequence);
 protected:
-    size_t xReadMergeIndex(std::vector<int> vPCInfo, size_t s, ComCU* pcCU);
-signals:
-
-public slots:
-
+    virtual size_t xReadCULeaf(const std::vector<int> &vPCInfo, size_t s, ComSequence *pcSequence, ComCU& pcCU)override;
 };
 
 #endif // MERGEPARSER_H

@@ -217,11 +217,12 @@ bool OpenBitstreamCommand::execute(GitlCommandParameter& rcInputArg, [[maybe_unu
         dispatchEvt(cDecodingStageInfo);
         std::ifstream cLCUBitTextStream(strLCUBitFilename.toLocal8Bit());
 
-        BitParser cBitParser;
-        bSuccess = cBitParser.parseLCUBitFile(cLCUBitTextStream, pcSequence);
+        BitParserLCU cBitParserLCU;
+        bSuccess = cBitParserLCU.parseFile(cLCUBitTextStream, pcSequence);
 
+        BitParserSCU cBitParserSCU;
         std::ifstream cSCUBitTextStream(strSCUBitFilename.toLocal8Bit());
-        bSuccess = bSuccess && cBitParser.parseSCUBitFile(cSCUBitTextStream, pcSequence);
+        bSuccess = bSuccess && cBitParserSCU.parseFile(cSCUBitTextStream, pcSequence);
     }
 
     ///*****STEP 3 : Open decoded YUV sequence*****

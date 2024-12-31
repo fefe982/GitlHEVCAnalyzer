@@ -268,9 +268,6 @@
     <ClInclude Include="commands\appfrontcontroller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <QtMoc Include="parsers\bitparser.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <ClInclude Include="exceptions\bitstreamnotfoundexception.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -319,9 +316,6 @@
     <QtMoc Include="commands\configfiltercommand.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="parsers\cupuparser.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="parsers\decodergeneralparser.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -364,9 +358,6 @@
     <QtMoc Include="views\gitlcolorpicker.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="parsers\intraparser.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <ClInclude Include="exceptions\invaildfilterindexexception.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -382,9 +373,6 @@
     <QtMoc Include="views\mainwindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="parsers\mergeparser.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="views\messageviewer.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -392,9 +380,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <QtMoc Include="commands\modifypreferencescommand.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="parsers\mvparser.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="commands\nextframecommand.h">
@@ -410,9 +395,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="views\pluginfilterlist.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="parsers\predparser.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="views\preferencedialog.h">
@@ -476,9 +458,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <QtMoc Include="views\timelineview.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="parsers\tuparser.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="model\io\yuv420rgbbuffer.h">
@@ -610,6 +589,27 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="parsers\streamreader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parsers\cupuparser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parsers\tuparser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parsers\predparser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parsers\mvparser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parsers\mergeparser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parsers\intraparser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parsers\bitparser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

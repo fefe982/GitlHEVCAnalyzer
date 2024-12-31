@@ -273,7 +273,7 @@
     <QtMoc Include="views\aboutdialog.h" />
     <ClInclude Include="model\drawengine\abstractfilter.h" />
     <ClInclude Include="commands\appfrontcontroller.h" />
-    <QtMoc Include="parsers\bitparser.h" />
+    <ClInclude Include="parsers\bitparser.h" />
     <ClInclude Include="exceptions\bitstreamnotfoundexception.h" />
     <QtMoc Include="parsers\bitstreamparser.h" />
     <QtMoc Include="views\bitstreamversionselector.h" />
@@ -290,7 +290,7 @@
     <ClInclude Include="model\common\comtile.h" />
     <ClInclude Include="model\common\comtu.h" />
     <QtMoc Include="commands\configfiltercommand.h" />
-    <QtMoc Include="parsers\cupuparser.h" />
+    <ClInclude Include="parsers\cupuparser.h" />
     <QtMoc Include="parsers\decodergeneralparser.h" />
     <ClInclude Include="exceptions\decodernotfoundexception.h" />
     <ClInclude Include="exceptions\decodingfailexception.h" />
@@ -305,23 +305,23 @@
     <QtMoc Include="commands\filtermousepresscommand.h" />
     <QtMoc Include="views\frameview.h" />
     <QtMoc Include="views\gitlcolorpicker.h" />
-    <QtMoc Include="parsers\intraparser.h" />
+    <ClInclude Include="parsers\intraparser.h" />
     <ClInclude Include="exceptions\invaildfilterindexexception.h" />
     <QtMoc Include="model\io\ioyuv.h" />
     <QtMoc Include="commands\jumptoframecommand.h" />
     <QtMoc Include="commands\jumptopercentcommand.h" />
     <QtMoc Include="views\mainwindow.h" />
-    <QtMoc Include="parsers\mergeparser.h" />
+    <ClInclude Include="parsers\mergeparser.h" />
     <QtMoc Include="views\messageviewer.h" />
     <ClInclude Include="model\modellocator.h" />
     <QtMoc Include="commands\modifypreferencescommand.h" />
-    <QtMoc Include="parsers\mvparser.h" />
+    <ClInclude Include="parsers\mvparser.h" />
     <QtMoc Include="commands\nextframecommand.h" />
     <ClInclude Include="exceptions\nosequencefoundexception.h" />
     <QtMoc Include="commands\openbitstreamcommand.h" />
     <QtMoc Include="views\pluginfilteritem.h" />
     <QtMoc Include="views\pluginfilterlist.h" />
-    <QtMoc Include="parsers\predparser.h" />
+    <ClInclude Include="parsers\predparser.h" />
     <QtMoc Include="views\preferencedialog.h" />
     <ClInclude Include="model\preferences.h" />
     <QtMoc Include="commands\prevframecommand.h" />
@@ -344,7 +344,7 @@
     <ClInclude Include="parsers\streamreader.h" />
     <ClInclude Include="views\timelineindicatoritem.h" />
     <QtMoc Include="views\timelineview.h" />
-    <QtMoc Include="parsers\tuparser.h" />
+    <ClInclude Include="parsers\tuparser.h" />
     <QtMoc Include="model\io\yuv420rgbbuffer.h" />
     <QtMoc Include="commands\zoomframecommand.h" />
   </ItemGroup>

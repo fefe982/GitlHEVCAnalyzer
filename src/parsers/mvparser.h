@@ -2,20 +2,13 @@
 #define MVPARSER_H
 
 #include "model/common/comsequence.h"
-#include <QObject>
+#include "streamreader.h"
 
-class MVParser : public QObject
+class MVParser : public InfoParser
 {
-    Q_OBJECT
-public:
-    explicit MVParser(QObject *parent = 0);
-    bool parseFile(std::istream& pcInputStream, ComSequence* pcSequence);
 protected:
-    size_t xReadMV(const std::vector<int>& vPCInfo, size_t s, ComSequence* sequence, ComCU* pcCU);
-signals:
-
-public slots:
-
+    virtual InfoParser::ContinueFlag withData(const std::vector<std::vector<std::vector<int>>> &fileStore, ComSequence* pcSequence)override;
+    virtual size_t xReadCULeaf(const std::vector<int>& vPCInfo, size_t s, ComSequence* pcSequence, ComCU& pcCU)override;
 };
 
 #endif // MVPARSER_H

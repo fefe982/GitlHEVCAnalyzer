@@ -1,24 +1,12 @@
 #include "tuparser.h"
 
-#include "streamreader.h"
 #include <QDebug>
 
 constexpr auto TU_SLIPT_FLAG = 99;
 
-TUParser::TUParser(QObject *parent):
-    QObject(parent)
+InfoParser::ContinueFlag TUParser::withData(const std::vector<std::vector<std::vector<int>>> &fileStore, ComSequence* pcSequence)
 {
-}
-
-
-bool TUParser::parseFile(std::istream &pcInputStream, ComSequence* pcSequence)
-{
-    Q_ASSERT( pcSequence != NULL );
-
-    size_t cuCnt = pcSequence->getNumberMaxCu();
-    size_t frames = pcSequence->getFramesInDisOrder().size();
     size_t iSplitCount = 0;
-    auto fileStore = StreamReader::parse(pcInputStream, frames, cuCnt);
     for (auto& vFrame : fileStore) {
         for (auto& vPoc : vFrame) {
             for (int i : vPoc) {
@@ -29,36 +17,18 @@ bool TUParser::parseFile(std::istream &pcInputStream, ComSequence* pcSequence)
         }
     }
     pcSequence->allocComTU(iSplitCount * 4);
-    for (int iFrame = 0; iFrame < frames; iFrame++) {
-        ComFrame* pcFrame = pcSequence->getFramesInDecOrder().at(iFrame);
-        for (int iAddr = 0; iAddr < cuCnt; iAddr++) {
-            auto pcLCU = &pcFrame->getLCUs()[iAddr];
-            xReadTU(fileStore[iFrame][iAddr], 0, pcSequence, pcLCU);
-        }
-    }
-    return true;
+    return ContinueFlag::CONTINUE;
 }
 
 
-size_t TUParser::xReadTU(const std::vector<int>& vPCInfo, size_t s, ComSequence* sequence, ComCU* pcCU)
+size_t TUParser::xReadCULeaf(const std::vector<int>& vPCInfo, size_t s, ComSequence* sequence, ComCU& pcCU)
 {
-    if (!pcCU->getSCUs().empty())
-    {
-        /// non-leaf CU node : continue to leaf CU
-        s = xReadTU(vPCInfo, s, sequence, pcCU->getSCUs().at(0));
-        s = xReadTU(vPCInfo, s, sequence, pcCU->getSCUs().at(1));
-        s = xReadTU(vPCInfo, s, sequence, pcCU->getSCUs().at(2));
-        s = xReadTU(vPCInfo, s, sequence, pcCU->getSCUs().at(3));
-    }
-    else
-    {
-        /// leaf CU node : read TU
-        ComTU* pcTURoot = &pcCU->getTURoot();
-        pcTURoot->setX(pcCU->getX());
-        pcTURoot->setY(pcCU->getY());
-        pcTURoot->setSize(pcCU->getSize());
-        s = xReadTUHelper(vPCInfo, s, sequence, &(pcCU->getTURoot()));
-    }
+
+    ComTU* pcTURoot = &pcCU.getTURoot();
+    pcTURoot->setX(pcCU.getX());
+    pcTURoot->setY(pcCU.getY());
+    pcTURoot->setSize(pcCU.getSize());
+    s = xReadTUHelper(vPCInfo, s, sequence, &(pcCU.getTURoot()));
     return s;
 }
 

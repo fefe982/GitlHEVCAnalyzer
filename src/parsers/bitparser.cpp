@@ -1,66 +1,26 @@
 #include "bitparser.h"
 
-#include "streamreader.h"
-
-BitParser::BitParser(QObject *parent) :
-    QObject(parent)
+size_t BitParserLCU::xReadCULeaf(const std::vector<int> &, size_t s, ComSequence*, ComCU& )
 {
+    return s;
 }
-
-
-bool BitParser::parseLCUBitFile(std::istream &pcInputStream, ComSequence* pcSequence)
+InfoParser::ContinueFlag BitParserLCU::withData(const std::vector<std::vector<std::vector<int>>> &fileStore, ComSequence* pcSequence)
 {
-    Q_ASSERT( pcSequence != NULL );
-    size_t cuCnt = pcSequence->getNumberMaxCu();
-    size_t frames = pcSequence->getFramesInDisOrder().size();
-    auto fileStore = StreamReader::parse(pcInputStream, frames, cuCnt);
-    for (int iFrame = 0; iFrame < frames; iFrame++) {
+    for (int iFrame = 0; iFrame < nFrames; iFrame++) {
         ComFrame* pcFrame = pcSequence->getFramesInDecOrder().at(iFrame);
-        for (int iAddr = 0; iAddr < cuCnt; iAddr++) {
+        for (int iAddr = 0; iAddr < nCu; iAddr++) {
             auto pcLCU = &pcFrame->getLCUs()[iAddr];
             int iLCUBit = fileStore[iFrame][iAddr][0];
             pcLCU->setBitCount(iLCUBit);
             pcFrame->getBitCount() += iLCUBit;
         }
     }
-    return true;
+    return ContinueFlag::STOP;
 }
 
-
-
-bool BitParser::parseSCUBitFile(std::istream& pcInputStream, ComSequence* pcSequence)
+size_t BitParserSCU::xReadCULeaf(const std::vector<int> &vPCInfo, size_t s, ComSequence*, ComCU& pcCU)
 {
-    Q_ASSERT( pcSequence != NULL );
-    size_t cuCnt = pcSequence->getNumberMaxCu();
-    size_t frames = pcSequence->getFramesInDisOrder().size();
-    auto fileStore = StreamReader::parse(pcInputStream, frames, cuCnt);
-    for (int iFrame = 0; iFrame < frames; iFrame++) {
-        ComFrame* pcFrame = pcSequence->getFramesInDecOrder().at(iFrame);
-        for (int iAddr = 0; iAddr < cuCnt; iAddr++) {
-            auto pcLCU = &pcFrame->getLCUs()[iAddr];
-            xParseSCUBitFile(fileStore[iFrame][iAddr], 0, pcLCU);
-        }
-    }
-    return true;
-}
-
-
-size_t BitParser::xParseSCUBitFile(std::vector<int> vPCInfo, size_t s, ComCU* pcCU)
-{
-    if (!pcCU->getSCUs().empty())
-    {
-        /// non-leaf node : recursive reading for children
-        s = xParseSCUBitFile(vPCInfo, s, pcCU->getSCUs().at(0));
-        s = xParseSCUBitFile(vPCInfo, s, pcCU->getSCUs().at(1));
-        s = xParseSCUBitFile(vPCInfo, s, pcCU->getSCUs().at(2));
-        s = xParseSCUBitFile(vPCInfo, s, pcCU->getSCUs().at(3));
-    }
-    else
-    {
-        /// leaf node : read data
-        Q_ASSERT(s < vPCInfo.size());
-        int iSCUBit = vPCInfo[s++];
-        pcCU->setBitCount(iSCUBit);
-    }
+    Q_ASSERT(s < vPCInfo.size());
+    pcCU.setBitCount(vPCInfo[s++]);
     return s;
 }
