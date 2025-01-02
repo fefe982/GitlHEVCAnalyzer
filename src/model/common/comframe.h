@@ -18,7 +18,7 @@ public:
 
     /*! CUs in one frame
       */
-    ADD_CLASS_FIELD_NOSETTER(QVector<ComCU>, cLCUs, getLCUs)
+    ADD_CLASS_FIELD_NOSETTER(std::vector<ComCU>, cLCUs, getLCUs)
 
     /*! Frame info
       */

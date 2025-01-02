@@ -22,7 +22,6 @@ InfoParser::ContinueFlag CUPUParser::withData(const std::vector<std::vector<std:
         }
     }
     int iLCUSize = pcSequence->getMaxCUSize();
-    pcSequence->allocComCU(iSplitCount * 4);
     pcSequence->allocComPU(iPUCount);
     for (int iFrame = 0; iFrame < nFrames; iFrame++) {
         ComFrame* pcFrame = pcSequence->getFramesInDecOrder().at(iFrame);
@@ -57,10 +56,10 @@ size_t CUPUParser::xReadCU(const std::vector<int>& vPCInfo, size_t s, ComSequenc
     {
         int iMaxDepth = pcCU.getFrame()->getSequence()->getMaxCUDepth();
         int iTotalNumPart = 1 << ((iMaxDepth - pcCU.getDepth()) << 1);
-        /// non-leaf node : add 4 children CUs
+        pcCU.getSCUs().reserve(4);
         for (int i = 0; i < 4; i++)
         {
-            ComCU* pcChildNode = pcSequence->newComCU(pcCU.getFrame());
+            ComCU* pcChildNode = &pcCU.getSCUs().emplace_back(pcCU.getFrame());
             pcChildNode->setAddr(pcCU.getAddr());
             pcChildNode->setDepth(pcCU.getDepth() + 1);
             pcChildNode->setZorder(pcCU.getZorder() + (iTotalNumPart / 4) * i);
@@ -69,7 +68,6 @@ size_t CUPUParser::xReadCU(const std::vector<int>& vPCInfo, size_t s, ComSequenc
             int iSubCUY = pcCU.getY() + i / 2 * (pcCU.getSize() / 2);
             pcChildNode->setX(iSubCUX);
             pcChildNode->setY(iSubCUY);
-            pcCU.getSCUs().push_back(pcChildNode);
             s = xReadCU(vPCInfo, s, pcSequence, *pcChildNode);
         }
     }

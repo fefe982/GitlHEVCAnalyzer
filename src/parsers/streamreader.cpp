@@ -4,7 +4,7 @@
 #include <string>
 
 std::vector<std::vector<std::vector<int>>> StreamReader::parse(std::vector<char>& pcInputStream, size_t frames, size_t cuCnt) {
-    std::vector<std::vector<std::vector<int>>> fileStore(frames);
+    std::vector<std::vector<std::vector<int>>> fileStore(frames, std::vector<std::vector<int>>(cuCnt));
     size_t iLastPoc = (size_t)-1;
     size_t iDecOrder = (size_t)-1;
     size_t iCU = cuCnt;
@@ -52,9 +52,6 @@ std::vector<std::vector<std::vector<int>>> StreamReader::parse(std::vector<char>
         }
         Q_ASSERT(iCU == iAddr);
         Q_ASSERT(iDecOrder < frames);
-        if (fileStore[iDecOrder].empty()) {
-            fileStore[iDecOrder].resize(cuCnt);
-        }
         char* sPos = endPos;
         fileStore[iDecOrder][iAddr].reserve(nBlank);
         for (;;) {
@@ -100,7 +97,7 @@ size_t InfoParser::xReadCU(const std::vector<int>& vPCInfo, size_t s, ComSequenc
     if (!pcCU.getSCUs().empty())
     {
         for (int i = 0; i < 4; i++) {
-            s = xReadCU(vPCInfo, s, pcSequence, *pcCU.getSCUs()[i]);
+            s = xReadCU(vPCInfo, s, pcSequence, pcCU.getSCUs()[i]);
         }
     }
     else

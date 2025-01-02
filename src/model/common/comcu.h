@@ -38,7 +38,7 @@ public:
     /*!
      * Sub-CUs (four at most)
      */
-    ADD_CLASS_FIELD(QVector<ComCU*>, apcSCUs, getSCUs, setSCUs)
+    ADD_CLASS_FIELD(std::vector<ComCU>, apcSCUs, getSCUs, setSCUs)
 
     /*!
      * PUs & TUs in this CU (only for leaf-CUs)

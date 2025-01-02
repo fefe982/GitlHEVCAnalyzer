@@ -13,7 +13,7 @@ QPixmap* DrawEngine::drawFrame( ComSequence* pcSequence, int iPoc, QPixmap *pcPi
 {
     ComFrame* pcFrame = pcSequence->getFramesInDisOrder().at(iPoc);
     m_pcCurFrame = pcFrame;
-    int iLCUTotalNum = pcFrame->getLCUs().size();
+    size_t iLCUTotalNum = pcFrame->getLCUs().size();
 
     m_iMaxCUSize = pcSequence ->getMaxCUSize();
 
@@ -25,7 +25,7 @@ QPixmap* DrawEngine::drawFrame( ComSequence* pcSequence, int iPoc, QPixmap *pcPi
      *               Followings are for drawing filters                    *
      ***********************************************************************/
     /// draw TU
-    for( int iAddr = 0; iAddr < iLCUTotalNum; iAddr++ )
+    for(size_t iAddr = 0; iAddr < iLCUTotalNum; iAddr++ )
     {
         ComCU* pcLCU = &pcFrame->getLCUs()[iAddr];
         xDrawTU( &cPainter, pcLCU );
@@ -33,7 +33,7 @@ QPixmap* DrawEngine::drawFrame( ComSequence* pcSequence, int iPoc, QPixmap *pcPi
 
 
     /// draw PU
-    for( int iAddr = 0; iAddr < iLCUTotalNum; iAddr++ )
+    for(size_t iAddr = 0; iAddr < iLCUTotalNum; iAddr++ )
     {
         ComCU* pcLCU = &pcFrame->getLCUs()[iAddr];        
         xDrawPU( &cPainter, pcLCU );
@@ -41,14 +41,14 @@ QPixmap* DrawEngine::drawFrame( ComSequence* pcSequence, int iPoc, QPixmap *pcPi
 
     /// draw CU
     QRect cScaledCUArea;
-    for( int iAddr = 0; iAddr < iLCUTotalNum; iAddr++ )
+    for(size_t iAddr = 0; iAddr < iLCUTotalNum; iAddr++ )
     {
         ComCU* pcLCU = &pcFrame->getLCUs()[iAddr];
         xDrawCU( &cPainter, pcLCU );
     }
 
     /// draw CTU (i.e. LCU)
-    for( int iAddr = 0; iAddr < iLCUTotalNum; iAddr++ )
+    for(size_t iAddr = 0; iAddr < iLCUTotalNum; iAddr++ )
     {
         ComCU* pcLCU = &pcFrame->getLCUs()[iAddr];
         int iPixelX = pcLCU->getX();
@@ -134,7 +134,7 @@ bool DrawEngine::xDrawPU( QPainter* pcPainter,  ComCU* pcCU )
     {
         for(int iSub = 0; iSub < 4; iSub++)
         {
-            xDrawPU ( pcPainter, pcCU->getSCUs().at(iSub) );
+            xDrawPU ( pcPainter, &pcCU->getSCUs().at(iSub) );
         }
     }
     return true;
@@ -159,7 +159,7 @@ bool DrawEngine::xDrawCU( QPainter* pcPainter,  ComCU* pcCU )
     {
         for(int iSub = 0; iSub < 4; iSub++)
         {
-            xDrawCU ( pcPainter, pcCU->getSCUs().at(iSub) );
+            xDrawCU ( pcPainter, &pcCU->getSCUs().at(iSub) );
         }
     }
     return true;
@@ -180,7 +180,7 @@ bool DrawEngine::xDrawTU(QPainter* pcPainter,  ComCU *pcCU )
     {
         for(int iSub = 0; iSub < 4; iSub++)
         {
-            xDrawTU ( pcPainter, pcCU->getSCUs().at(iSub) );
+            xDrawTU ( pcPainter, &pcCU->getSCUs().at(iSub) );
         }
     }
     return true;

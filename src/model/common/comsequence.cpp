@@ -55,17 +55,6 @@ int ComSequence::getNumberMaxCu() const {
     return ((m_iWidth + m_iMaxCUSize - 1) / m_iMaxCUSize) * ((m_iHeight + m_iMaxCUSize) / m_iMaxCUSize);
 }
 
-void ComSequence::allocComCU(size_t sz) {
-    m_vCUStore.resize(0);
-    m_vCUStore.reserve(sz);
-}
-
-ComCU* ComSequence::newComCU(ComFrame* p) {
-    Q_ASSERT(m_vCUStore.size() < m_vCUStore.capacity());
-    m_vCUStore.emplace_back(p);
-    return &m_vCUStore.back();
-}
-
 void ComSequence::allocComPU(size_t sz) {
     m_vPUStore.resize(0);
     m_vPUStore.reserve(sz);
