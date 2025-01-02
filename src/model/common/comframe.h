@@ -3,6 +3,7 @@
 
 #include "comcu.h"
 #include "comtile.h"
+#include <QVector>
 class ComSequence;
 
 class ComFrame

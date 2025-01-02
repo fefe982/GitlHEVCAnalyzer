@@ -1,7 +1,6 @@
 #ifndef COMPU_H
 #define COMPU_H
 
-#include <QVector>
 #include "commv.h"
 
 enum PredMode
@@ -22,18 +21,34 @@ public:
     }
 
     ~ComPU() = default;
+    int getX() const { return m_iX; }
+    void setX(int iX) { m_iX = iX; }
+    int getY() const { return m_iY; }
+    void setY(int iY) { m_iY = iY; }
+    int getWidth() const { return m_iWidth; }
+    void setWidth(int iWidth) { m_iWidth = iWidth; }
+    int getHeight() const { return m_iHeight; }
+    void setHeight(int iHeight) { m_iHeight = iHeight; }
+    PredMode getPredMode() const { return m_ePredMode; }
+    void setPredMode(PredMode ePredMode) { m_ePredMode = ePredMode; }
+    int getMergeIndex() const { return m_mergeIndex; }
+    void setMergeIndex(int mergeIndex) { m_mergeIndex = mergeIndex; }
+    int getInterDir() const { return m_iInterDir; }
+    void setInterDir(int iInterDir) { m_iInterDir = iInterDir; }
+    int getIntraDirLuma() const { return m_iIntraDirLuma; }
+    void setIntraDirLuma(int iIntraDirLuma) { m_iIntraDirLuma = iIntraDirLuma; }
+    int getIntraDirChroma() const { return m_iIntraDirChroma; }
+    void setIntraDirChroma(int iIntraDirChroma) { m_iIntraDirChroma = iIntraDirChroma; }
+    const std::vector<ComMV>& getMVs()const { return m_apcMVs; }
+    std::vector<ComMV>& getMVs() { return m_apcMVs; }
 private:
-    ADD_CLASS_FIELD( int, iX, getX, setX )
-    ADD_CLASS_FIELD( int, iY, getY, setY )
-    ADD_CLASS_FIELD( int, iWidth, getWidth, setWidth )
-    ADD_CLASS_FIELD( int, iHeight, getHeight, setHeight )
-    ADD_CLASS_FIELD( PredMode, ePredMode, getPredMode, setPredMode )
-    ADD_CLASS_FIELD( int, mergeIndex, getMergeIndex, setMergeIndex )
-    ADD_CLASS_FIELD( int, iInterDir, getInterDir, setInterDir)
-    ADD_CLASS_FIELD( int, iIntraDirLuma, getIntraDirLuma, setIntraDirLuma)
-    ADD_CLASS_FIELD( int, iIntraDirChroma, getIntraDirChroma, setIntraDirChroma)
-    ADD_CLASS_FIELD( std::vector<ComMV>, apcMVs, getMVs, setMVs)
-
-
+    int m_iX, m_iY;
+    int m_iWidth, m_iHeight;
+    PredMode m_ePredMode;
+    int m_mergeIndex;
+    int m_iInterDir;
+    int m_iIntraDirLuma;
+    int m_iIntraDirChroma;
+    std::vector<ComMV> m_apcMVs;
 };
 #endif // COMPU_H

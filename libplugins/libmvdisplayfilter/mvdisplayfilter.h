@@ -44,24 +44,19 @@ public:
                            QRect *pcScaledArea);
 
 
+
 signals:
     
 public slots:
 
     ADD_CLASS_FIELD_PRIVATE(MVDisplayFilterConfig, cConfig)     ///< filter configurations
     ADD_CLASS_FIELD_PRIVATE(FilterConfigDialog, cConfigDialog)  ///< config GUI
-
     ADD_CLASS_FIELD_PRIVATE(bool, bShowRefPOC)  ///< show reference POC or not
-
-    ADD_CLASS_FIELD_PRIVATE(QPen, cPenL0)       ///< for drawing L0 MV
-    ADD_CLASS_FIELD_PRIVATE(QPen, cPenL1)       ///< for drawing L1 MV
     ADD_CLASS_FIELD_PRIVATE(QPen, cPenText)     ///< for drawing text
-
-
-    ADD_CLASS_FIELD_PRIVATE(QBrush, cCircleL0Fill)  ///< for filling L0 mv circles
-    ADD_CLASS_FIELD_PRIVATE(QBrush, cCircleL1Fill)  ///< for filling L1 mv circles
-
-
+private:
+    QPen m_cPenL[2];
+    QBrush m_cCircleLFill[2];
+    void drawMV(ComMV& pcMV, QPainter* pcPainter, QPoint& cCenter, double dScale, int dir);
 };
 
 #endif // MVDISPLAYFILTER_H
