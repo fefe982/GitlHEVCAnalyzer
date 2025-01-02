@@ -17,16 +17,12 @@ class ComCU;
 class ComPU
 {
 public:
-    ComPU(ComCU* pcParent) :m_pcCU(pcParent), m_iX(-1), m_iY(-1), m_iWidth(-1), m_iHeight(-1), m_ePredMode(PredMode::MODE_NONE), m_mergeIndex(-1), m_iInterDir(-1), m_iIntraDirLuma(-1), m_iIntraDirChroma(-1)
-    {
-    }
-    ComPU() :ComPU(nullptr)
+    ComPU() :m_iX(-1), m_iY(-1), m_iWidth(-1), m_iHeight(-1), m_ePredMode(PredMode::MODE_NONE), m_mergeIndex(-1), m_iInterDir(-1), m_iIntraDirLuma(-1), m_iIntraDirChroma(-1)
     {
     }
 
     ~ComPU() = default;
 private:
-    ADD_CLASS_FIELD( ComCU*, pcCU, getCU, setCU)
     ADD_CLASS_FIELD( int, iX, getX, setX )
     ADD_CLASS_FIELD( int, iY, getY, setY )
     ADD_CLASS_FIELD( int, iWidth, getWidth, setWidth )

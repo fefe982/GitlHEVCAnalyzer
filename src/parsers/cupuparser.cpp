@@ -28,7 +28,6 @@ bool CUPUParser::parseSequence()
         for (int iAddr = 0; iAddr < m_nCu; iAddr++) {
             ComCU* pcLCU = &pcFrame->getLCUs()[iAddr];
             pcLCU->setAddr(iAddr);
-            pcLCU->setFrame(pcFrame);
             pcLCU->setDepth(0);
             pcLCU->setZorder(0);
             pcLCU->setSize(iLCUSize);
@@ -53,12 +52,12 @@ size_t CUPUParser::xReadCU(const std::vector<int>& vPCInfo, size_t s, ComCU& pcC
 
     if (iCUMode == CU_SLIPT_FLAG)
     {
-        int iMaxDepth = pcCU.getFrame()->getSequence()->getMaxCUDepth();
+        int iMaxDepth = m_pcSequence->getMaxCUDepth();
         int iTotalNumPart = 1 << ((iMaxDepth - pcCU.getDepth()) << 1);
         pcCU.getSCUs().reserve(4);
         for (int i = 0; i < 4; i++)
         {
-            ComCU* pcChildNode = &pcCU.getSCUs().emplace_back(pcCU.getFrame());
+            ComCU* pcChildNode = &pcCU.getSCUs().emplace_back();
             pcChildNode->setAddr(pcCU.getAddr());
             pcChildNode->setDepth(pcCU.getDepth() + 1);
             pcChildNode->setZorder(pcCU.getZorder() + (iTotalNumPart / 4) * i);
@@ -77,7 +76,7 @@ size_t CUPUParser::xReadCU(const std::vector<int>& vPCInfo, size_t s, ComCU& pcC
         pcCU.getPUs().reserve(iPUCount);
         for (int i = 0; i < iPUCount; i++)
         {
-            ComPU* pcPU = &pcCU.getPUs().emplace_back(&pcCU);
+            ComPU* pcPU = &pcCU.getPUs().emplace_back();
             int iPUOffsetX, iPUOffsetY, iPUWidth, iPUHeight;
             ComCU::getPUOffsetAndSize(pcCU.getSize(), (PartSize)iCUMode, i, iPUOffsetX, iPUOffsetY, iPUWidth, iPUHeight);
             int iPUX = pcCU.getX() + iPUOffsetX;
