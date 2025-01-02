@@ -185,7 +185,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\src\model\common\comcu.cpp" />
     <ClCompile Include="..\..\src\model\common\comframe.cpp" />
-    <ClCompile Include="..\..\src\model\common\comsequence.cpp" />
     <ClCompile Include="..\..\src\model\common\comtu.cpp" />
     <ClCompile Include="..\..\src\views\filterconfigcheckbox.cpp" />
     <ClCompile Include="..\..\src\views\filterconfigcombobox.cpp" />
@@ -193,7 +192,6 @@
     <ClCompile Include="..\..\src\views\filterconfigradios.cpp" />
     <ClCompile Include="..\..\src\views\filterconfigslider.cpp" />
     <ClCompile Include="..\..\src\views\gitlcolorpicker.cpp" />
-    <ClCompile Include="..\..\src\model\sequencemanager.cpp" />
     <ClCompile Include="tiledisplayfilter.cpp" />
   </ItemGroup>
   <ItemGroup>

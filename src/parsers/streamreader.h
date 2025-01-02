@@ -1,9 +1,10 @@
 #pragma once
-#include "model/common/comsequence.h"
-
 #include <QDebug>
 
 #include <vector>
+
+class ComSequence;
+class ComCU;
 
 class StreamReader {
 public:
@@ -11,20 +12,19 @@ public:
 };
 
 class InfoParser {
-protected:
-    size_t nFrames;
-    size_t nCu;
 public:
-    InfoParser() = default;
+    InfoParser();
     virtual ~InfoParser() = default;
     bool parseFile(std::vector<char>& pcInputStream, ComSequence* pcSequence);
+    bool parseFrame(size_t iFrame);
 protected:
-    enum class ContinueFlag {
-        CONTINUE,
-        STOP,
-        ERROR
-    };
-    virtual ContinueFlag withData(const std::vector<std::vector<std::vector<int>>>& fileStore, ComSequence* pcSequence);
-    virtual size_t xReadCU(const std::vector<int>& vPCInfo, size_t s, ComSequence* pcSequence, ComCU& pcCU);
-    virtual size_t xReadCULeaf(const std::vector<int>& vPCInfo, size_t s, ComSequence* pcSequence, ComCU& pcCU)=0;
+    size_t m_nFrames;
+    size_t m_nCu;
+    bool m_delayed;
+    ComSequence* m_pcSequence;
+    std::vector<std::vector<std::vector<int>>> m_fileStore;
+protected:
+    virtual bool parseSequence();
+    virtual size_t xReadCU(const std::vector<int>& vPCInfo, size_t s, ComCU& pcCU);
+    virtual size_t xReadCULeaf(const std::vector<int>& vPCInfo, size_t s, ComCU& pcCU)=0;
 };

@@ -11,6 +11,7 @@ DrawEngine::DrawEngine()
 
 QPixmap* DrawEngine::drawFrame( ComSequence* pcSequence, int iPoc, QPixmap *pcPixmap )
 {
+    pcSequence->parseFrame(size_t(iPoc));
     ComFrame* pcFrame = pcSequence->getFramesInDisOrder().at(iPoc);
     m_pcCurFrame = pcFrame;
     size_t iLCUTotalNum = pcFrame->getLCUs().size();

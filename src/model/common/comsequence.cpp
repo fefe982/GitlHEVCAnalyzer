@@ -1,5 +1,11 @@
 #include "comsequence.h"
-
+#include "parsers/cupuparser.h"
+#include "parsers/tuparser.h"
+#include "parsers/predparser.h"
+#include "parsers/mvparser.h"
+#include "parsers/mergeparser.h"
+#include "parsers/intraparser.h"
+#include "parsers/bitparser.h"
 
 ComSequence::ComSequence()
 {
@@ -53,4 +59,16 @@ void ComSequence::init()
 
 int ComSequence::getNumberMaxCu() const {
     return ((m_iWidth + m_iMaxCUSize - 1) / m_iMaxCUSize) * ((m_iHeight + m_iMaxCUSize) / m_iMaxCUSize);
+}
+
+void ComSequence::addDelyedParser(std::unique_ptr<InfoParser> &&parser) {
+    m_vDelayedParser.emplace_back(std::move(parser));
+}
+
+bool ComSequence::parseFrame(size_t iFrame) {
+    bool res = true;
+    for (auto& parser : m_vDelayedParser) {
+        res == res && parser->parseFrame(iFrame);
+    }
+    return res;
 }

@@ -4,35 +4,19 @@
 
 constexpr auto TU_SLIPT_FLAG = 99;
 
-InfoParser::ContinueFlag TUParser::withData(const std::vector<std::vector<std::vector<int>>> &fileStore, ComSequence* pcSequence)
-{
-    size_t iSplitCount = 0;
-    for (auto& vFrame : fileStore) {
-        for (auto& vPoc : vFrame) {
-            for (int i : vPoc) {
-                if (i == TU_SLIPT_FLAG) {
-                    iSplitCount++;
-                }
-            }
-        }
-    }
-    return ContinueFlag::CONTINUE;
-}
-
-
-size_t TUParser::xReadCULeaf(const std::vector<int>& vPCInfo, size_t s, ComSequence* sequence, ComCU& pcCU)
+size_t TUParser::xReadCULeaf(const std::vector<int>& vPCInfo, size_t s, ComCU& pcCU)
 {
 
     ComTU* pcTURoot = &pcCU.getTURoot();
     pcTURoot->setX(pcCU.getX());
     pcTURoot->setY(pcCU.getY());
     pcTURoot->setSize(pcCU.getSize());
-    s = xReadTUHelper(vPCInfo, s, sequence, &(pcCU.getTURoot()));
+    s = xReadTUHelper(vPCInfo, s, &(pcCU.getTURoot()));
     return s;
 }
 
 
-size_t TUParser::xReadTUHelper(const std::vector<int>& vPCInfo, size_t s, ComSequence* sequence, ComTU* pcTU)
+size_t TUParser::xReadTUHelper(const std::vector<int>& vPCInfo, size_t s, ComTU* pcTU)
 {
     int iTUMode;
     if (s > vPCInfo.size())
@@ -54,7 +38,7 @@ size_t TUParser::xReadTUHelper(const std::vector<int>& vPCInfo, size_t s, ComSeq
             int iSubCUY = pcTU->getY() + i / 2 * (pcTU->getSize() / 2);
             pcChildNode->setX(iSubCUX);
             pcChildNode->setY(iSubCUY);
-            s = xReadTUHelper(vPCInfo, s, sequence, pcChildNode);
+            s = xReadTUHelper(vPCInfo, s, pcChildNode);
         }
     }
     return s;

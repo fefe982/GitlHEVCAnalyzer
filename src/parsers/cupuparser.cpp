@@ -2,14 +2,14 @@
 #include <QDebug>
 constexpr auto CU_SLIPT_FLAG = 99;      ///< CU splitting flag in file
 
-InfoParser::ContinueFlag CUPUParser::withData(const std::vector<std::vector<std::vector<int>>> &fileStore, ComSequence* pcSequence)
+bool CUPUParser::parseSequence()
 {
-    int iSeqWidth = pcSequence->getWidth();
-    int iMaxCUSize = pcSequence->getMaxCUSize();
+    int iSeqWidth = m_pcSequence->getWidth();
+    int iMaxCUSize = m_pcSequence->getMaxCUSize();
     int iCUOneRow = (iSeqWidth+iMaxCUSize-1)/iMaxCUSize;
     size_t iSplitCount = 0;
     size_t iPUCount = 0;
-    for (auto& vFrame : fileStore) {
+    for (auto& vFrame : m_fileStore) {
         for (auto& vPoc : vFrame) {
             for (int i : vPoc) {
                 if (i == CU_SLIPT_FLAG) {
@@ -21,11 +21,11 @@ InfoParser::ContinueFlag CUPUParser::withData(const std::vector<std::vector<std:
             }
         }
     }
-    int iLCUSize = pcSequence->getMaxCUSize();
-    for (int iFrame = 0; iFrame < nFrames; iFrame++) {
-        ComFrame* pcFrame = pcSequence->getFramesInDecOrder().at(iFrame);
-        pcFrame->getLCUs().resize(nCu);
-        for (int iAddr = 0; iAddr < nCu; iAddr++) {
+    int iLCUSize = m_pcSequence->getMaxCUSize();
+    for (int iFrame = 0; iFrame < m_nFrames; iFrame++) {
+        ComFrame* pcFrame = m_pcSequence->getFramesInDecOrder().at(iFrame);
+        pcFrame->getLCUs().resize(m_nCu);
+        for (int iAddr = 0; iAddr < m_nCu; iAddr++) {
             ComCU* pcLCU = &pcFrame->getLCUs()[iAddr];
             pcLCU->setAddr(iAddr);
             pcLCU->setFrame(pcFrame);
@@ -38,10 +38,10 @@ InfoParser::ContinueFlag CUPUParser::withData(const std::vector<std::vector<std:
             pcLCU->setY(iPixelY);
         }
     }
-    return ContinueFlag::CONTINUE;
+    return true;
 }
 
-size_t CUPUParser::xReadCU(const std::vector<int>& vPCInfo, size_t s, ComSequence* pcSequence, ComCU& pcCU)
+size_t CUPUParser::xReadCU(const std::vector<int>& vPCInfo, size_t s, ComCU& pcCU)
 {
     int iCUMode;
     if (s == vPCInfo.size())
@@ -67,7 +67,7 @@ size_t CUPUParser::xReadCU(const std::vector<int>& vPCInfo, size_t s, ComSequenc
             int iSubCUY = pcCU.getY() + i / 2 * (pcCU.getSize() / 2);
             pcChildNode->setX(iSubCUX);
             pcChildNode->setY(iSubCUY);
-            s = xReadCU(vPCInfo, s, pcSequence, *pcChildNode);
+            s = xReadCU(vPCInfo, s, *pcChildNode);
         }
     }
     else
@@ -90,4 +90,4 @@ size_t CUPUParser::xReadCU(const std::vector<int>& vPCInfo, size_t s, ComSequenc
     }
     return s;
 }
-size_t CUPUParser::xReadCULeaf(const std::vector<int>&, size_t s, ComSequence*, ComCU&) { return s; }
+size_t CUPUParser::xReadCULeaf(const std::vector<int>&, size_t s, ComCU&) { return s; }

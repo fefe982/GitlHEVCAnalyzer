@@ -7,7 +7,7 @@
 class MergeParser : public InfoParser
 {
 protected:
-    virtual size_t xReadCULeaf(const std::vector<int> &vPCInfo, size_t s, ComSequence *pcSequence, ComCU& pcCU)override;
+    virtual size_t xReadCULeaf(const std::vector<int> &vPCInfo, size_t s, ComCU& pcCU)override;
 };
 
 #endif // MERGEPARSER_H

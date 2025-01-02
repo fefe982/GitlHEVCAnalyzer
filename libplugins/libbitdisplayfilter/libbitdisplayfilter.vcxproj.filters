@@ -73,6 +73,9 @@
     <ClCompile Include="..\..\src\model\sequencemanager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\parsers\streamreader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="bitdisplayfilter.h">

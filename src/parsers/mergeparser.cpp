@@ -1,6 +1,6 @@
 #include "mergeparser.h"
 
-size_t MergeParser::xReadCULeaf(const std::vector<int>& vPCInfo, size_t s, ComSequence*, ComCU& pcCU)
+size_t MergeParser::xReadCULeaf(const std::vector<int>& vPCInfo, size_t s, ComCU& pcCU)
 {
     /// leaf node : read data
     int iMergeIndex;

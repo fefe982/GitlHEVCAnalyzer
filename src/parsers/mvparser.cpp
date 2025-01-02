@@ -1,32 +1,6 @@
 #include "mvparser.h"
 
-InfoParser::ContinueFlag MVParser::withData(const std::vector<std::vector<std::vector<int>>> &fileStore, ComSequence* pcSequence)
-{
-    int iMVCnt = 0;
-    for (auto& frame : fileStore) {
-        for (auto& addr : frame) {
-            size_t i = 0;
-            while (i < addr.size()) {
-                if (addr[i] == 0) {
-                    i += 1;
-                }
-                else if (addr[i] == 1 || addr[i] == 2) {
-                    iMVCnt += 1;
-                    i += 4;
-                }
-                else if (addr[i] == 3) {
-                    iMVCnt += 2;
-                    i += 7;
-                }
-                else {
-                    Q_ASSERT(false);
-                }
-            }
-        }
-    }
-    return ContinueFlag::CONTINUE;
-}
-size_t MVParser::xReadCULeaf(const std::vector<int>& vPCInfo, size_t s, ComSequence* pcSequence, ComCU& pcCU)
+size_t MVParser::xReadCULeaf(const std::vector<int>& vPCInfo, size_t s, ComCU& pcCU)
 {
     int iInterDir;
     for (int i = 0; i < pcCU.getPUs().size(); i++)

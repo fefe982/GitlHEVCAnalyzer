@@ -1,5 +1,7 @@
 #include "streamreader.h"
 
+#include "model/common/comsequence.h"
+
 #include <iostream>
 #include <string>
 
@@ -66,43 +68,55 @@ std::vector<std::vector<std::vector<int>>> StreamReader::parse(std::vector<char>
     return fileStore;
 }
 
+InfoParser::InfoParser() : m_nFrames(0), m_nCu(0), m_delayed(true), m_pcSequence(nullptr) {}
 
 bool InfoParser::parseFile(std::vector<char>& pcInputStream, ComSequence* pcSequence)
 {
     Q_ASSERT(pcSequence != NULL);
-    nFrames = pcSequence->getFramesInDisOrder().size();
-    nCu = pcSequence->getNumberMaxCu();
-    auto fileStore = StreamReader::parse(pcInputStream, nFrames, nCu);
-    auto flag = withData(fileStore, pcSequence);
-    if (flag == ContinueFlag::STOP) {
+    m_pcSequence = pcSequence;
+    m_nFrames = pcSequence->getFramesInDisOrder().size();
+    m_nCu = pcSequence->getNumberMaxCu();
+    m_fileStore = StreamReader::parse(pcInputStream, m_nFrames, m_nCu);
+    auto flag = parseSequence();
+    if (!m_delayed) {
+        m_fileStore.clear();
+    }
+    return flag;
+}
+
+bool InfoParser::parseFrame(size_t iFrame)
+{
+    if (!m_delayed) {
         return true;
     }
-    else if (flag == ContinueFlag::ERROR) {
+    if (m_pcSequence == nullptr) {
         return false;
     }
-    for (int iFrame = 0; iFrame < nFrames; iFrame++) {
-        ComFrame* pcFrame = pcSequence->getFramesInDecOrder().at(iFrame);
-        for (int iAddr = 0; iAddr < nCu; iAddr++) {
-            if (xReadCU(fileStore[iFrame][iAddr], 0, pcSequence, pcFrame->getLCUs()[iAddr]) == size_t(-1)) {
-                return false;
-            }
+    if (m_fileStore[iFrame].empty()) {
+        return true;
+    }
+    ComFrame* pcFrame = m_pcSequence->getFramesInDecOrder().at(iFrame);
+    for (int iAddr = 0; iAddr < m_nCu; iAddr++) {
+        if (xReadCU(m_fileStore[iFrame][iAddr], 0, pcFrame->getLCUs()[iAddr]) == size_t(-1)) {
+            return false;
         }
     }
+    m_fileStore[iFrame].clear();
     return true;
 }
 
-InfoParser::ContinueFlag InfoParser::withData(const std::vector<std::vector<std::vector<int>>>&, ComSequence*) { return ContinueFlag::CONTINUE; }
+bool InfoParser::parseSequence() { return true; }
 
-size_t InfoParser::xReadCU(const std::vector<int>& vPCInfo, size_t s, ComSequence* pcSequence, ComCU& pcCU) {
+size_t InfoParser::xReadCU(const std::vector<int>& vPCInfo, size_t s, ComCU& pcCU) {
     if (!pcCU.getSCUs().empty())
     {
         for (int i = 0; i < 4; i++) {
-            s = xReadCU(vPCInfo, s, pcSequence, pcCU.getSCUs()[i]);
+            s = xReadCU(vPCInfo, s, pcCU.getSCUs()[i]);
         }
     }
     else
     {
-        s = xReadCULeaf(vPCInfo, s, pcSequence, pcCU);
+        s = xReadCULeaf(vPCInfo, s, pcCU);
     }
     return s;
 }

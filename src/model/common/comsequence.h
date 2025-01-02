@@ -3,6 +3,7 @@
 #include <QString>
 #include <QMetaType>
 #include "comframe.h"
+#include "parsers/streamreader.h"
 
 enum YUVRole
 {
@@ -13,10 +14,6 @@ enum YUVRole
 };
 
 Q_DECLARE_METATYPE(YUVRole)
-
-/*!
- * \brief This class represents a video sequence
- */
 
 class ComSequence
 {
@@ -67,8 +64,12 @@ public:
         ADD_CLASS_FIELD(double, dSameCUModePercent, getSameCUModePercent, setSameCUModePercent)
         ADD_CLASS_FIELD(double, dMeanCUDepthError, getMeanCUDepthError, setMeanCUDepthError)
 
+private:
+    std::vector<std::unique_ptr<InfoParser>> m_vDelayedParser;
 public:
     int getNumberMaxCu()const;
+    void addDelyedParser(std::unique_ptr<InfoParser> &&parser);
+    bool parseFrame(size_t iFrame);
 };
 
 

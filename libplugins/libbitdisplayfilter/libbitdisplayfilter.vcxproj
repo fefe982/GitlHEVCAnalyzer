@@ -183,6 +183,7 @@
     </QtUic>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\parsers\streamreader.cpp" />
     <ClCompile Include="bitdisplayfilter.cpp" />
     <ClCompile Include="..\..\src\model\common\comcu.cpp" />
     <ClCompile Include="..\..\src\model\common\comframe.cpp" />

@@ -1,24 +1,28 @@
 #include "bitparser.h"
 
-size_t BitParserLCU::xReadCULeaf(const std::vector<int> &, size_t s, ComSequence*, ComCU& )
+BitParserLCU::BitParserLCU() {
+    m_delayed = false;
+}
+
+size_t BitParserLCU::xReadCULeaf(const std::vector<int> &, size_t s, ComCU& )
 {
     return s;
 }
-InfoParser::ContinueFlag BitParserLCU::withData(const std::vector<std::vector<std::vector<int>>> &fileStore, ComSequence* pcSequence)
+bool BitParserLCU::parseSequence()
 {
-    for (int iFrame = 0; iFrame < nFrames; iFrame++) {
-        ComFrame* pcFrame = pcSequence->getFramesInDecOrder().at(iFrame);
-        for (int iAddr = 0; iAddr < nCu; iAddr++) {
+    for (int iFrame = 0; iFrame < m_nFrames; iFrame++) {
+        ComFrame* pcFrame = m_pcSequence->getFramesInDecOrder().at(iFrame);
+        for (int iAddr = 0; iAddr < m_nCu; iAddr++) {
             auto pcLCU = &pcFrame->getLCUs()[iAddr];
-            int iLCUBit = fileStore[iFrame][iAddr][0];
+            int iLCUBit = m_fileStore[iFrame][iAddr][0];
             pcLCU->setBitCount(iLCUBit);
             pcFrame->getBitCount() += iLCUBit;
         }
     }
-    return ContinueFlag::STOP;
+    return true;
 }
 
-size_t BitParserSCU::xReadCULeaf(const std::vector<int> &vPCInfo, size_t s, ComSequence*, ComCU& pcCU)
+size_t BitParserSCU::xReadCULeaf(const std::vector<int> &vPCInfo, size_t s, ComCU& pcCU)
 {
     Q_ASSERT(s < vPCInfo.size());
     pcCU.setBitCount(vPCInfo[s++]);

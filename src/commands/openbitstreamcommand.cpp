@@ -171,6 +171,7 @@ bool OpenBitstreamCommand::execute(GitlCommandParameter& rcInputArg, [[maybe_unu
             stream.read(fileContent.data(), fileSz);
             fileContent[fileSz] = 0;
             bSuccess = parseInfo.pParser->parseFile(fileContent, pcSequence);
+            pcSequence->addDelyedParser(std::move(parseInfo.pParser));
         }
     }
 

@@ -2,7 +2,7 @@
 
 #include <QDebug>
 
-size_t IntraParser::xReadCULeaf(const std::vector<int>& vPCInfo, size_t s, ComSequence*, ComCU& pcCU)
+size_t IntraParser::xReadCULeaf(const std::vector<int>& vPCInfo, size_t s, ComCU& pcCU)
 {
     int iIntraDirLuma;
     int iIntraDirChroma;
