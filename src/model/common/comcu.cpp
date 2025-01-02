@@ -1,25 +1,10 @@
 #include "comcu.h"
 
-ComCU::ComCU(ComFrame* pcParent)
-{
-    m_pcFrame = pcParent;
-    m_iAddr = -1;
-    m_iZorder = -1;
-    m_iDepth = -1;
-    m_iX = -1;
-    m_iY = -1;
-    m_iSize = -1;
-    m_ePartSize = SIZE_NONE;
-    m_iBitCount = 0;
-}
+ComCU::ComCU(ComFrame* pcParent) : m_pcFrame(pcParent), m_ePartSize(PartSize::SIZE_NONE), m_iX(-1), m_iY(-1), m_iSize(-1), m_iAddr(-1), m_iZorder(-1), m_iDepth(-1), m_iBitCount(-1) {}
 
-ComCU::ComCU() :ComCU(nullptr)
-{
-}
+ComCU::ComCU() :ComCU(nullptr) {}
 
-ComCU::~ComCU()
-{
-}
+ComCU::~ComCU() = default;
 
 int ComCU::getPUNum( PartSize ePartSize )
 {

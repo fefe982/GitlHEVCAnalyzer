@@ -54,36 +54,3 @@ void ComSequence::init()
 int ComSequence::getNumberMaxCu() const {
     return ((m_iWidth + m_iMaxCUSize - 1) / m_iMaxCUSize) * ((m_iHeight + m_iMaxCUSize) / m_iMaxCUSize);
 }
-
-void ComSequence::allocComPU(size_t sz) {
-    m_vPUStore.resize(0);
-    m_vPUStore.reserve(sz);
-}
-
-ComPU* ComSequence::newComPU(ComCU* p) {
-    Q_ASSERT(m_vPUStore.size() < m_vPUStore.capacity());
-    m_vPUStore.emplace_back(p);
-    return &m_vPUStore.back();
-}
-
-void ComSequence::allocComTU(size_t sz) {
-    m_vTUStore.resize(0);
-    m_vTUStore.reserve(sz);
-}
-
-ComTU* ComSequence::newComTU() {
-    Q_ASSERT(m_vTUStore.size() < m_vTUStore.capacity());
-    m_vTUStore.emplace_back();
-    return &m_vTUStore.back();
-}
-
-void ComSequence::allocComMV(size_t sz) {
-    m_vMVStore.resize(0);
-    m_vMVStore.reserve(sz);
-}
-
-ComMV* ComSequence::newComMV() {
-    Q_ASSERT(m_vMVStore.size() < m_vMVStore.capacity());
-    m_vMVStore.emplace_back();
-    return &m_vMVStore.back();
-}

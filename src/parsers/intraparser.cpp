@@ -11,8 +11,8 @@ size_t IntraParser::xReadCULeaf(const std::vector<int>& vPCInfo, size_t s, ComSe
         Q_ASSERT(s < vPCInfo.size());
         iIntraDirLuma = vPCInfo[s++];
         iIntraDirChroma = vPCInfo[s++];
-        pcCU.getPUs().at(i)->setIntraDirLuma(iIntraDirLuma);
-        pcCU.getPUs().at(i)->setIntraDirChroma(iIntraDirChroma);
+        pcCU.getPUs()[i].setIntraDirLuma(iIntraDirLuma);
+        pcCU.getPUs()[i].setIntraDirChroma(iIntraDirChroma);
     }
     return s;
 }

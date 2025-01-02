@@ -16,7 +16,6 @@ InfoParser::ContinueFlag TUParser::withData(const std::vector<std::vector<std::v
             }
         }
     }
-    pcSequence->allocComTU(iSplitCount * 4);
     return ContinueFlag::CONTINUE;
 }
 
@@ -46,15 +45,15 @@ size_t TUParser::xReadTUHelper(const std::vector<int>& vPCInfo, size_t s, ComSeq
     if (iTUMode == TU_SLIPT_FLAG)
     {
         /// non-leaf node : add 4 children CUs
+        pcTU->getTUs().reserve(4);
         for (int i = 0; i < 4; i++)
         {
-            ComTU* pcChildNode = sequence->newComTU();
+            ComTU* pcChildNode = &pcTU->getTUs().emplace_back();
             pcChildNode->setSize(pcTU->getSize() / 2);
             int iSubCUX = pcTU->getX() + i % 2 * (pcTU->getSize() / 2);
             int iSubCUY = pcTU->getY() + i / 2 * (pcTU->getSize() / 2);
             pcChildNode->setX(iSubCUX);
             pcChildNode->setY(iSubCUY);
-            pcTU->getTUs().push_back(pcChildNode);
             s = xReadTUHelper(vPCInfo, s, sequence, pcChildNode);
         }
     }

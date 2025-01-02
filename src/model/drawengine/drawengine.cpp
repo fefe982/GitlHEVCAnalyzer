@@ -121,7 +121,7 @@ bool DrawEngine::xDrawPU( QPainter* pcPainter,  ComCU* pcCU )
         QRect cScaledPUArea;
         for( int iPUIdx = 0; iPUIdx < pcCU->getPUs().size(); iPUIdx++ )
         {
-            ComPU* pcPU = pcCU->getPUs().at(iPUIdx);
+            ComPU* pcPU = &pcCU->getPUs()[iPUIdx];
 
             /// draw PU
             cScaledPUArea.setCoords( pcPU->getX(), pcPU->getY(), (pcPU->getX()+pcPU->getWidth())-1, (pcPU->getY()+pcPU->getHeight())-1 );
@@ -188,12 +188,12 @@ bool DrawEngine::xDrawTU(QPainter* pcPainter,  ComCU *pcCU )
 
 bool DrawEngine::xDrawTUHelper( QPainter* pcPainter,  ComTU* pcTU )
 {
-    int iSubTUNum = pcTU->getTUs().size();
+    size_t iSubTUNum = pcTU->getTUs().size();
     if( iSubTUNum != 0 )
     {
-        for(int i = 0; i < iSubTUNum; i++ )
+        for(size_t i = 0; i < iSubTUNum; i++ )
         {
-            xDrawTUHelper(pcPainter, pcTU->getTUs().at(i));
+            xDrawTUHelper(pcPainter, &pcTU->getTUs()[i]);
         }
     }
     else

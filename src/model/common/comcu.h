@@ -44,7 +44,7 @@ public:
      * PUs & TUs in this CU (only for leaf-CUs)
      */
     ADD_CLASS_FIELD(PartSize, ePartSize, getPartSize, setPartSize)
-    ADD_CLASS_FIELD(QVector<ComPU*>, apcPUs, getPUs, setPUs)
+    ADD_CLASS_FIELD(std::vector<ComPU>, apcPUs, getPUs, setPUs)
     ADD_CLASS_FIELD_NOSETTER(ComTU, cTURoot, getTURoot)
 
 

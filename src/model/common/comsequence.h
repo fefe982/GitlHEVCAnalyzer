@@ -67,18 +67,8 @@ public:
         ADD_CLASS_FIELD(double, dSameCUModePercent, getSameCUModePercent, setSameCUModePercent)
         ADD_CLASS_FIELD(double, dMeanCUDepthError, getMeanCUDepthError, setMeanCUDepthError)
 
-    ADD_CLASS_FIELD_PRIVATE(std::vector<ComPU>, vPUStore)
-    ADD_CLASS_FIELD_PRIVATE(std::vector<ComTU>, vTUStore)
-    ADD_CLASS_FIELD_PRIVATE(std::vector<ComMV>, vMVStore)
-
 public:
     int getNumberMaxCu()const;
-    void allocComPU(size_t sz);
-    ComPU* newComPU(ComCU* p);
-    void allocComTU(size_t sz);
-    ComTU* newComTU();
-    void allocComMV(size_t sz);
-    ComMV* newComMV();
 };
 
 

@@ -8,7 +8,7 @@ size_t PredParser::xReadCULeaf(const std::vector<int>& vPCInfo, size_t s, ComSeq
     {
         Q_ASSERT(s < vPCInfo.size());
         int iPredMode = vPCInfo[s++];
-        ComPU* pcPU = pcCU.getPUs().at(i);
+        ComPU* pcPU = &pcCU.getPUs()[i];
         pcPU->setPredMode((PredMode)iPredMode);
     }
     return s;

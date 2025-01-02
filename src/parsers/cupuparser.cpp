@@ -22,7 +22,6 @@ InfoParser::ContinueFlag CUPUParser::withData(const std::vector<std::vector<std:
         }
     }
     int iLCUSize = pcSequence->getMaxCUSize();
-    pcSequence->allocComPU(iPUCount);
     for (int iFrame = 0; iFrame < nFrames; iFrame++) {
         ComFrame* pcFrame = pcSequence->getFramesInDecOrder().at(iFrame);
         pcFrame->getLCUs().resize(nCu);
@@ -75,9 +74,10 @@ size_t CUPUParser::xReadCU(const std::vector<int>& vPCInfo, size_t s, ComSequenc
     {
         pcCU.setPartSize((PartSize)iCUMode);
         int iPUCount = ComCU::getPUNum((PartSize)iCUMode);
+        pcCU.getPUs().reserve(iPUCount);
         for (int i = 0; i < iPUCount; i++)
         {
-            ComPU* pcPU = pcSequence->newComPU(&pcCU);
+            ComPU* pcPU = &pcCU.getPUs().emplace_back(&pcCU);
             int iPUOffsetX, iPUOffsetY, iPUWidth, iPUHeight;
             ComCU::getPUOffsetAndSize(pcCU.getSize(), (PartSize)iCUMode, i, iPUOffsetX, iPUOffsetY, iPUWidth, iPUHeight);
             int iPUX = pcCU.getX() + iPUOffsetX;
@@ -86,7 +86,6 @@ size_t CUPUParser::xReadCU(const std::vector<int>& vPCInfo, size_t s, ComSequenc
             pcPU->setY(iPUY);
             pcPU->setWidth(iPUWidth);
             pcPU->setHeight(iPUHeight);
-            pcCU.getPUs().push_back(pcPU);
         }
     }
     return s;

@@ -24,7 +24,6 @@ InfoParser::ContinueFlag MVParser::withData(const std::vector<std::vector<std::v
             }
         }
     }
-    pcSequence->allocComMV(iMVCnt);
     return ContinueFlag::CONTINUE;
 }
 size_t MVParser::xReadCULeaf(const std::vector<int>& vPCInfo, size_t s, ComSequence* pcSequence, ComCU& pcCU)
@@ -34,7 +33,7 @@ size_t MVParser::xReadCULeaf(const std::vector<int>& vPCInfo, size_t s, ComSeque
     {
         Q_ASSERT(s < vPCInfo.size());
         iInterDir = vPCInfo[s++];
-        ComPU* pcPU = pcCU.getPUs().at(i);
+        ComPU* pcPU = &pcCU.getPUs()[i];
         pcPU->setInterDir(iInterDir);
 
         int iRefPOC;
@@ -45,31 +44,28 @@ size_t MVParser::xReadCULeaf(const std::vector<int>& vPCInfo, size_t s, ComSeque
             iRefPOC = vPCInfo[s++];
             iHor = vPCInfo[s++];
             iVer = vPCInfo[s++];
-            pcReadMV = pcSequence->newComMV();
+            pcReadMV = &pcPU->getMVs().emplace_back();
             pcReadMV->setRefPOC(iRefPOC);
             pcReadMV->setHor(iHor);
             pcReadMV->setVer(iVer);
-            pcPU->getMVs().push_back(pcReadMV);
         }
         else if (iInterDir == 3)               //bi-prediction, 2 MVs
         {
             iRefPOC = vPCInfo[s++];
             iHor = vPCInfo[s++];
             iVer = vPCInfo[s++];
-            pcReadMV = pcSequence->newComMV();
+            pcReadMV = &pcPU->getMVs().emplace_back();
             pcReadMV->setRefPOC(iRefPOC);
             pcReadMV->setHor(iHor);
             pcReadMV->setVer(iVer);
-            pcPU->getMVs().push_back(pcReadMV);
 
             iRefPOC = vPCInfo[s++];
             iHor = vPCInfo[s++];
             iVer = vPCInfo[s++];
-            pcReadMV = pcSequence->newComMV();
+            pcReadMV = &pcPU->getMVs().emplace_back();
             pcReadMV->setRefPOC(iRefPOC);
             pcReadMV->setHor(iHor);
             pcReadMV->setVer(iVer);
-            pcPU->getMVs().push_back(pcReadMV);
         }
     }
     return s;

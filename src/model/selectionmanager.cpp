@@ -50,12 +50,12 @@ ComPU *SelectionManager::getPU(ComFrame* pcFrame, const QPointF* pcUnscaledPos)
     ComCU* pcSCU = getSCU(pcFrame, pcUnscaledPos);
     if(pcSCU != NULL)
     {
-        foreach(ComPU* pcPU, pcSCU->getPUs())
+        for(auto& pcPU: pcSCU->getPUs())
         {
-            QRectF cPURect(pcPU->getX(), pcPU->getY(), pcPU->getWidth(), pcPU->getHeight());
+            QRectF cPURect(pcPU.getX(), pcPU.getY(), pcPU.getWidth(), pcPU.getHeight());
             if(cPURect.contains(*pcUnscaledPos))
             {
-                return pcPU;
+                return &pcPU;
             }
         }
     }
@@ -71,12 +71,12 @@ ComTU *SelectionManager::getTU(ComFrame* pcFrame, const QPointF* pcUnscaledPos)
         ComTU* pcCurTU = &pcSCU->getTURoot();
         while(!pcCurTU->getTUs().empty())
         {
-            foreach(ComTU* pcTU, pcCurTU->getTUs())
+            for (auto& pcTU : pcCurTU->getTUs())
             {
-                QRectF cTURect(pcTU->getX(), pcTU->getY(), pcTU->getSize(), pcTU->getSize());
-                if(cTURect.contains(*pcUnscaledPos))
+                QRectF cTURect(pcTU.getX(), pcTU.getY(), pcTU.getSize(), pcTU.getSize());
+                if (cTURect.contains(*pcUnscaledPos))
                 {
-                    pcCurTU = pcTU;
+                    pcCurTU = &pcTU;
                     break;
                 }
             }

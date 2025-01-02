@@ -70,7 +70,7 @@ bool MVDisplayFilter::drawPU  (FilterContext*, QPainter* pcPainter,
     else if( iInterDir == 1 )  /// uni-directional prediction
     {
         /// Get MV of PU
-        pcMV = pcPU->getMVs().at(0);
+        pcMV = &pcPU->getMVs()[0];
         if(!m_cConfig.getShowZeroMV() && pcMV->isZero())
             return true;
 
@@ -89,7 +89,7 @@ bool MVDisplayFilter::drawPU  (FilterContext*, QPainter* pcPainter,
     else if( iInterDir == 2 )  /// uni-directional prediction
     {
         /// Get MV of PU
-        pcMV = pcPU->getMVs().at(0);
+        pcMV = &pcPU->getMVs()[0];
         if(!m_cConfig.getShowZeroMV() && pcMV->isZero())
             return true;
 
@@ -108,7 +108,7 @@ bool MVDisplayFilter::drawPU  (FilterContext*, QPainter* pcPainter,
     else if( iInterDir == 3 )  /// bi-directional prediction
     {
         /// Get MV of PU ( first direction )
-        pcMV = pcPU->getMVs().at(0);
+        pcMV = &pcPU->getMVs()[0];
         if(m_cConfig.getShowZeroMV() || !pcMV->isZero())
         {
             pcPainter->setPen(m_cPenL0);
@@ -120,7 +120,7 @@ bool MVDisplayFilter::drawPU  (FilterContext*, QPainter* pcPainter,
             pcPainter->drawLine(cCenter, cCenter+QPoint(pcMV->getHor(),pcMV->getVer())*dScale/4);
         }
         /// Get MV of PU ( second direction)
-        pcMV = pcPU->getMVs().at(1);
+        pcMV = &pcPU->getMVs()[1];
         if(m_cConfig.getShowZeroMV() || !pcMV->isZero())
         {
             pcPainter->setPen(m_cPenL1);
@@ -132,7 +132,7 @@ bool MVDisplayFilter::drawPU  (FilterContext*, QPainter* pcPainter,
             pcPainter->drawLine(cCenter, cCenter+QPoint(pcMV->getHor(),pcMV->getVer())*dScale/4);
         }
         if(m_bShowRefPOC)
-            pcPainter->drawText(*pcScaledArea, Qt::AlignCenter, QString("L0 %1 L1 %2").arg(pcPU->getMVs().at(0)->getRefPOC()).arg(pcPU->getMVs().at(1)->getRefPOC()));
+            pcPainter->drawText(*pcScaledArea, Qt::AlignCenter, QString("L0 %1 L1 %2").arg(pcPU->getMVs()[0].getRefPOC()).arg(pcPU->getMVs()[1].getRefPOC()));
     }
     return true;
 
