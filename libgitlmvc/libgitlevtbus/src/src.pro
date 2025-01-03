@@ -7,7 +7,7 @@
 QT       += core
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-CONFIG   += c++11
+CONFIG   += c++20
 CONFIG(debug, debug|release){
     TARGET = GitlEvtBusd
 }
@@ -17,8 +17,8 @@ CONFIG(release, debug|release){
 
 DESTDIR = $${OUT_PWD}/..
 
-# c++11 enalbed
-CONFIG += c++11
+# c++20 enalbed
+CONFIG += c++20
 CONFIG += console
 CONFIG += staticlib
 CONFIG -= app_bundle

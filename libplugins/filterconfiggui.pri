@@ -1,4 +1,4 @@
-CONFIG += c++11
+CONFIG += c++20
 
 INCLUDEPATH  += ../../src \
                 ../../libgitlmvc/libgitlevtbus/src

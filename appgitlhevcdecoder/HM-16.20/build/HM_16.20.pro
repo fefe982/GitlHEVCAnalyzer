@@ -4,6 +4,7 @@
 
 TEMPLATE = subdirs
 CONFIG += ordered
+CONFIG += c++20
 SUBDIRS += \
     HM/TAppCommon.pro \
     HM/TLibCommon.pro \

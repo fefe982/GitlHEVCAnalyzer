@@ -14,8 +14,8 @@ TARGET = Gitl_HEVC_Analyzer
 
 DESTDIR = $${OUT_PWD}/..
 
-# c++11 enalbed
-CONFIG += c++11
+# c++20 enalbed
+CONFIG += c++20
 
 CONFIG -= app_bundle
 CONFIG -= console
