@@ -1,20 +1,18 @@
 #ifndef SPSPARSER_H
 #define SPSPARSER_H
 
-#include <QObject>
 #include <QTextStream>
 #include "model/common/comsequence.h"
 
-class SpsParser : public QObject
+class SpsParser
 {
-    Q_OBJECT
 public:
-    explicit SpsParser(QObject *parent = 0);
     bool parseFile(QTextStream* pcInputStream, ComSequence* pcSequence);
-signals:
+};
 
-public slots:
-
+class VpsParser {
+public:
+    bool parseFile(QTextStream* pcInputStream, ComSequence* pcSequence);
 };
 
 #endif // SPSPARSER_H

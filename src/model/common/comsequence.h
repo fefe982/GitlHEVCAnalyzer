@@ -24,6 +24,10 @@ public:
     /*! Initialization
       */
     void init();
+    int getNumUnitsInTick() const { return m_iNumUnitsInTick; }
+    void setNumUnitsInTick(int iNumUnitsInTick) { m_iNumUnitsInTick = iNumUnitsInTick; }
+    int getTimeScale() const { return m_iTimeScale; }
+    void setTimeScale(int iTimeScale) { m_iTimeScale = iTimeScale; }
 
     /*! Frames in this sequence */
     ADD_CLASS_FIELD(QVector<ComFrame*>, cFramesInDisOrder, getFramesInDisOrder, setFramesInDisOrder)    /// frames in displaying order    0 1 2 3 4 ...
@@ -66,6 +70,8 @@ public:
 
 private:
     std::vector<std::unique_ptr<InfoParser>> m_vDelayedParser;
+    int m_iNumUnitsInTick;
+    int m_iTimeScale;
 public:
     int getNumberMaxCu()const;
     void addDelyedParser(std::unique_ptr<InfoParser> &&parser);

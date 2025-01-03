@@ -334,7 +334,7 @@
     <QtMoc Include="views\sequencelist.h" />
     <QtMoc Include="views\sequencelistitem.h" />
     <ClInclude Include="model\sequencemanager.h" />
-    <QtMoc Include="parsers\spsparser.h" />
+    <ClInclude Include="parsers\spsparser.h" />
     <QtMoc Include="commands\switchfiltercommand.h" />
     <QtMoc Include="commands\switchsequencecommand.h" />
     <QtMoc Include="commands\switchthemecommand.h" />

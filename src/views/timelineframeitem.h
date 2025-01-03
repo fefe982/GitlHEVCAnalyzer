@@ -11,7 +11,7 @@ class TimeLineFrameItem : public QObject, public QGraphicsItemGroup
 {
     Q_OBJECT
 public:
-    explicit TimeLineFrameItem(int iPercent = 0, int iPOC = -1, int iQp = -1, int iBits = -1);
+    explicit TimeLineFrameItem(int iPercent = 0, int iPOC = -1, int iQp = -1, int iBits = -1, double dFrameRate = 60.0);
     void setHeightPercent(int iPercent);
     int getQp() const { return m_iQp; }
     int getBits() const { return m_iBits; }
@@ -34,6 +34,7 @@ signals:
 private:
     int m_iQp;
     int m_iBits;
+    double m_dFrameRate;
 };
 
 #endif // TIMELINEFRAMEITEM_H

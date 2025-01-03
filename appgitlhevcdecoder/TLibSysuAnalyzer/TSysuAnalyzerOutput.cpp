@@ -14,6 +14,7 @@ TSysuAnalyzerOutput::TSysuAnalyzerOutput()
 {
 
   m_cSpsOut.open     ("decoder_sps.txt",  ios::out);
+  m_cVpsOut.open("decoder_vps.txt", ios::out);
   m_cPredOutput.open ("decoder_pred.txt", ios::out);
   m_cCUPUOutput.open ("decoder_cupu.txt", ios::out);
   m_cMVOutput.open   ("decoder_mv.txt",   ios::out);
@@ -365,20 +366,15 @@ Void TSysuAnalyzerOutput::writeOutSps   ( TComSPS* pcSPS )
   m_cSpsOut << "HM_VERSOIN: " << HM_VERSION << endl;
 }
 
-
-TSysuAnalyzerOutput::~TSysuAnalyzerOutput()
-{
-  m_cCUPUOutput.close();
-  m_cMVOutput.close();
-  m_cPredOutput.close();
-  m_cSpsOut.close();
-  m_cIntraOutput.close();
-  m_cTUOutput.close();
-  m_cBitOutputLCU.close();
-  m_cBitOutputSCU.close();
-  m_cMEOutput.close();
-
-#if (HM_VERSION >40)
-   m_cTileOutPut.close();
-#endif
+Void TSysuAnalyzerOutput::writeOutVps(TComVPS* pcVPS) {
+    m_cVpsOut << "{";
+    auto timingInfo = pcVPS->getTimingInfo();
+    if (timingInfo->getTimingInfoPresentFlag()) {
+        writeOstream(m_cVpsOut, "vps_num_nunits_in_tick", timingInfo->getNumUnitsInTick());
+        writeOstream(m_cVpsOut, "vps_time_scale", timingInfo->getTimeScale());
+    }
+    m_cVpsOut << "}" << std::endl;
 }
+
+
+TSysuAnalyzerOutput::~TSysuAnalyzerOutput() = default;

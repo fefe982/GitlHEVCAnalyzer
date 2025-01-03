@@ -29,6 +29,7 @@ public:
   
   /// Sequence parameter set output
   Void writeOutSps         ( TComSPS* pcSPS );
+  Void writeOutVps(TComVPS* pcVPS);
 
 
   ///write out tile info
@@ -54,6 +55,7 @@ private:
 
   /// Decoder output ( extracted from bitstream )
   std::ofstream m_cSpsOut;          ///< SPS info
+  std::ofstream m_cVpsOut;
   std::ofstream m_cPredOutput;      ///< Prediction mode info output
   std::ofstream m_cCUPUOutput;      ///< CU info output
   std::ofstream m_cMVOutput;        ///< MV info output

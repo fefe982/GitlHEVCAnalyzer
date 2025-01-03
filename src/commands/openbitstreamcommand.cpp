@@ -129,6 +129,15 @@ bool OpenBitstreamCommand::execute(GitlCommandParameter& rcInputArg, [[maybe_unu
         SpsParser cSpsParser;
         bSuccess = cSpsParser.parseFile(&cSPSTextStream, pcSequence);
         cSPSFile.close();
+
+        QString strVPSFilenmae = strDecoderOutputPath + "/decoder_vps.txt";
+        QFile cVPSFile(strVPSFilenmae);
+        if (cVPSFile.open(QIODevice::ReadOnly)) {
+            QTextStream cVPSTextStream(&cVPSFile);
+            VpsParser cVpsParser;
+            bSuccess = bSuccess && cVpsParser.parseFile(&cVPSTextStream, pcSequence);
+            cVPSFile.close();
+        }
     }
     /// Parse decoder_general.txt
     QString strGeneralFilename = strDecoderOutputPath + "/decoder_general.txt";

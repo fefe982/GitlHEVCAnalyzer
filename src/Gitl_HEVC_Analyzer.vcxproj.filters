@@ -433,9 +433,6 @@
     <ClInclude Include="model\sequencemanager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <QtMoc Include="parsers\spsparser.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="commands\switchfiltercommand.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -610,6 +607,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="parsers\bitparser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parsers\spsparser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

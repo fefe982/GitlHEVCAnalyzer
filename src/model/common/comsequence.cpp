@@ -55,6 +55,8 @@ void ComSequence::init()
     m_dTotalEncTime = -1;
     m_dSameCUModePercent = -1;
     m_dMeanCUDepthError = -1;
+    m_iNumUnitsInTick = 1;
+    m_iTimeScale = 60;
 }
 
 int ComSequence::getNumberMaxCu() const {

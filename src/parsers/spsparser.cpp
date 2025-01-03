@@ -3,11 +3,6 @@
 #include <qjsondocument.h>
 #include <qjsonobject.h>
 
-SpsParser::SpsParser(QObject *parent) :
-    QObject(parent)
-{
-}
-
 /** --- SAMPLE TEXT ---
   * Resolution:176x144
   * Max CU Size:64
@@ -123,5 +118,26 @@ bool SpsParser::parseFile(QTextStream* pcInputStream, ComSequence* pcSequence)
         }
     }
 
+    qWarning("Video does not contain Matrix Coeffs, assuming BT709");
+    pcSequence->setMatrixCoeffs(1);
+
+    return true;
+}
+
+bool VpsParser::parseFile(QTextStream* pcInputStream, ComSequence* pcSequence) {
+    Q_ASSERT(pcSequence != NULL);
+    QString strOneLine;
+    strOneLine = pcInputStream->readLine();
+    QJsonObject doc = QJsonDocument::fromJson(strOneLine.toUtf8()).object();
+    if (!doc.contains("vps_num_units_in_tick")) {
+        pcSequence->setNumUnitsInTick(1);
+    } else {
+        pcSequence->setNumUnitsInTick(doc["vps_num_units_in_tick"].toInt());
+    }
+    if (!doc.contains("vps_time_scale")) {
+        pcSequence->setTimeScale(60);
+    } else {
+        pcSequence->setTimeScale(doc["vps_time_scale"].toInt());
+    }
     return true;
 }
