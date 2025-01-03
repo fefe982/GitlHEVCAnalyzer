@@ -16,6 +16,8 @@ public:
     {
         return (m_iFrameCount < cOther.m_iFrameCount);
     }
+    int getQp() const { return m_iQp; }
+    void setQp(int iQp) { m_iQp = iQp; }
 
     /*! CUs in one frame
       */
@@ -48,7 +50,8 @@ public:
     ADD_CLASS_FIELD(double, dPSNR, getPSNR, setPSNR)
     ADD_CLASS_FIELD(double, dBitrate, getBitrate, setBitrate)
     ADD_CLASS_FIELD(double, dTotalEncTime, getTotalEncTime, setTotalEncTime)
-
+private:
+    int m_iQp;
 
 
 };

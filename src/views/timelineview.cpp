@@ -106,7 +106,7 @@ void TimeLineView::xDrawFrameBars(ComSequence* pcSequence)
     {
         int iPercent = pcFrame->getBitCount()*100/m_iMaxBitForFrame;
         iPercent = VALUE_CLIP(0, 100, iPercent);
-        TimeLineFrameItem* pRectItem = new TimeLineFrameItem(iPercent, pcFrame->getFrameCount());
+        TimeLineFrameItem* pRectItem = new TimeLineFrameItem(iPercent, pcFrame->getFrameCount(), pcFrame->getQp(), pcFrame->getBitCount());
         connect(pRectItem, SIGNAL(barClick(int)), this, SLOT(frameBarClicked(int)));
         pRectItem->setPos(iCounter*(cRect.width()+iGap), 0);
         pRectItem->setPOC(pcFrame->getFrameCount());

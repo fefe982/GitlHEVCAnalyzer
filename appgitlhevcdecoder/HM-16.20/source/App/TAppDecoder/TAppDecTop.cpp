@@ -142,6 +142,7 @@ Void TAppDecTop::decode()
     AnnexBStats stats = AnnexBStats();
 
     InputNALUnit nalu;
+    printf("file position: %lld\n", std::streamoff(bitstreamFile.tellg()));
     byteStreamNALUnit(bytestream, nalu.getBitstream().getFifo(), stats);
 
     // call actual decoding function

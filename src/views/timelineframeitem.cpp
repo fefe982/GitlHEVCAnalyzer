@@ -4,11 +4,13 @@
 #include <QFont>
 #include <QBrush>
 #include <QColor>
-TimeLineFrameItem::TimeLineFrameItem(int iPercent, int iPOC)
+TimeLineFrameItem::TimeLineFrameItem(int iPercent, int iPOC, int iQp, int iBits)
 {
     m_iMaxWidth = 20;
     m_iMaxHeight = 50;
     m_iPOC = iPOC;
+    m_iQp = iQp;
+    m_iBits = iBits;
 
     /// layout
     m_cFrameBar.setRect(0,0,m_iMaxWidth,m_iMaxHeight);
@@ -19,11 +21,11 @@ TimeLineFrameItem::TimeLineFrameItem(int iPercent, int iPOC)
     m_cPocText.setPos(0,0);
 
     QFont cFont;
-    cFont.setPointSize(12);
-    cFont.setBold(true);
+    cFont.setPointSize(10);
+    // cFont.setBold(true);
     m_cPocText.setFont(cFont);
     m_cPocText.setBrush(QBrush(QColor(Qt::gray)));
-    m_cPocText.setText(QString("#%1").arg(m_iPOC));
+    m_cPocText.setText(QString("%1 %2 %3").arg(m_iPOC).arg(m_iQp).arg(m_iBits));
     m_cPocText.setPos(19,10);
     m_cPocText.setRotation(90);
 
