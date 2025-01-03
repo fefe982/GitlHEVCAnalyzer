@@ -29,26 +29,21 @@ struct FilterContext
  * \brief The AbstractFilter class
  * Interface of the filter plugins
  */
-class AbstractFilter
-{
+class AbstractFilter {
 public:
-    AbstractFilter()
-    {
+    AbstractFilter() {
         m_bEnable = false;
         m_strName = "UNKNOWN";
     }
 
-    virtual ~AbstractFilter()
-    {
-    }
+    virtual ~AbstractFilter() {}
 
     /*!
      * \brief init is called as soon as loaded in
      * \param pcContext \see FilterContext
      * \return
      */
-    virtual bool init     ([[maybe_unused]] FilterContext* pcContext)
-    {
+    virtual bool init([[maybe_unused]] FilterContext* pcContext) {
         return true;
     }
 
@@ -57,8 +52,7 @@ public:
      * \param pcContext \see FilterContext
      * \return
      */
-    virtual bool uninit    ([[maybe_unused]] FilterContext* pcContext)
-    {
+    virtual bool uninit([[maybe_unused]] FilterContext* pcContext) {
         return true;
     }
 
@@ -68,8 +62,7 @@ public:
      * \param pcContext \see FilterContext
      * \return
      */
-    virtual bool config   ([[maybe_unused]] FilterContext* pcContext)
-    {
+    virtual bool config([[maybe_unused]] FilterContext* pcContext) {
         return true;
     }
 
@@ -82,8 +75,7 @@ public:
      * \return true - success   false - fail
      */
     virtual bool drawFrame([[maybe_unused]] FilterContext* pcContext, [[maybe_unused]] QPainter* pcPainter,
-        [[maybe_unused]] ComFrame *pcFrame, [[maybe_unused]] double dScale, [[maybe_unused]] QRect* pcScaledArea)
-    {
+        [[maybe_unused]] ComFrame* pcFrame, [[maybe_unused]] double dScale, [[maybe_unused]] QRect* pcScaledArea) {
         return true;
     }
 
@@ -98,8 +90,7 @@ public:
      * \param iPoc the POC of currently displaying frame (begin with 0)
      * \return true - success   false - fail
      */
-    virtual bool drawTile([[maybe_unused]] FilterContext *pcContext, [[maybe_unused]] QPainter *pcPainter, [[maybe_unused]] ComTile *pcTile, [[maybe_unused]] double dScale, [[maybe_unused]] QRect *pcScaledArea)
-    {
+    virtual bool drawTile([[maybe_unused]] FilterContext* pcContext, [[maybe_unused]] QPainter* pcPainter, [[maybe_unused]] ComTile* pcTile, [[maybe_unused]] double dScale, [[maybe_unused]] QRect* pcScaledArea) {
         return true;
     }
 
@@ -115,8 +106,7 @@ public:
      * \return
      */
     virtual bool drawCTU([[maybe_unused]] FilterContext* pcContext, [[maybe_unused]] QPainter* pcPainter,
-        [[maybe_unused]] ComCU* pcCTU, [[maybe_unused]] double dScale, [[maybe_unused]] QRect* pcScaledArea)
-    {
+        [[maybe_unused]] ComCU* pcCTU, [[maybe_unused]] double dScale, [[maybe_unused]] QRect* pcScaledArea) {
         return true;
     }
 
@@ -124,15 +114,14 @@ public:
     /*!
      * \brief drawCU is called for each leaf CU (each leaf node of the Coding Tree Unit )
      * \param pcContext \see FilterContext
-     * \param pcPainter the QPainter of the QPixmap object which is being displayed on screen     
+     * \param pcPainter the QPainter of the QPixmap object which is being displayed on screen
      * \param pcCU the CU to be draw
      * \param dScale the scale of current display
      * \param pcScaledArea the scaled size of current PU
      * \return
      */
-    virtual bool drawCU   ([[maybe_unused]] FilterContext* pcContext, [[maybe_unused]] QPainter* pcPainter,
-        [[maybe_unused]] ComCU *pcCU, [[maybe_unused]] double dScale, [[maybe_unused]] QRect* pcScaledArea)
-    {
+    virtual bool drawCU([[maybe_unused]] FilterContext* pcContext, [[maybe_unused]] QPainter* pcPainter,
+        [[maybe_unused]] ComCU* pcCU, [[maybe_unused]] double dScale, [[maybe_unused]] QRect* pcScaledArea) {
         return true;
     }
 
@@ -145,9 +134,8 @@ public:
      * \param pcScaledArea the scaled size of current PU
      * \return
      */
-    virtual bool drawPU   ([[maybe_unused]] FilterContext* pcContext, [[maybe_unused]] QPainter* pcPainter,
-        [[maybe_unused]] ComPU *pcPU, [[maybe_unused]] double dScale, [[maybe_unused]] QRect* pcScaledArea)
-    {
+    virtual bool drawPU([[maybe_unused]] FilterContext* pcContext, [[maybe_unused]] QPainter* pcPainter,
+        [[maybe_unused]] ComPU* pcPU, [[maybe_unused]] double dScale, [[maybe_unused]] QRect* pcScaledArea) {
         return true;
     }
 
@@ -160,9 +148,8 @@ public:
      * \param pcScaledArea the scaled size of current PU
      * \return
      */
-    virtual bool drawTU   ([[maybe_unused]] FilterContext* pcContext, [[maybe_unused]] QPainter* pcPainter,
-        [[maybe_unused]] ComTU *pcTU, [[maybe_unused]] double dScale, [[maybe_unused]] QRect* pcScaledArea)
-    {
+    virtual bool drawTU([[maybe_unused]] FilterContext* pcContext, [[maybe_unused]] QPainter* pcPainter,
+        [[maybe_unused]] ComTU* pcTU, [[maybe_unused]] double dScale, [[maybe_unused]] QRect* pcScaledArea) {
         return true;
     }
 
@@ -178,10 +165,9 @@ public:
      * \param eMouseBtn mouse button that is pressed
      * \return
      */
-    virtual bool mousePress([[maybe_unused]] FilterContext* pcContext, [[maybe_unused]] QPainter* pcPainter, [[maybe_unused]] ComFrame *pcFrame,
+    virtual bool mousePress([[maybe_unused]] FilterContext* pcContext, [[maybe_unused]] QPainter* pcPainter, [[maybe_unused]] ComFrame* pcFrame,
         [[maybe_unused]] const QPointF* pcUnscaledPos, [[maybe_unused]] const QPointF* pcScaledPos,
-        [[maybe_unused]] double dScale, [[maybe_unused]] Qt::MouseButton eMouseBtn)
-    {
+        [[maybe_unused]] double dScale, [[maybe_unused]] Qt::MouseButton eMouseBtn) {
         return true;
     }
 
@@ -192,27 +178,27 @@ public:
      * \param iKeyPressed position in the unscaled frame
      * \return
      */
-    virtual bool keyPress  ([[maybe_unused]] FilterContext* pcContext, [[maybe_unused]] QPainter* pcPainter, [[maybe_unused]] ComFrame *pcFrame,
-        [[maybe_unused]] int iKeyPressed)
-    {
+    virtual bool keyPress([[maybe_unused]] FilterContext* pcContext, [[maybe_unused]] QPainter* pcPainter, [[maybe_unused]] ComFrame* pcFrame,
+        [[maybe_unused]] int iKeyPressed) {
         return true;
     }
 
+    const QString& getName() const { return m_strName; }
+    void setName(QString strName) { m_strName = strName; }
+
+
+    bool getEnable()const { return m_bEnable; }
+    void setEnable(bool bEnable) { m_bEnable = bEnable; }
+
+private:
     /*! This is the filter name displayed in the user interface
      */
-    ADD_CLASS_FIELD(QString, strName, getName, setName)
-
-
+    QString m_strName;
     /*! This is the switch for turn off or on this filter
      *  false - this filter will not be applied
      *  true  - this filter will be applied
      */
-    ADD_CLASS_FIELD(bool, bEnable, getEnable, setEnable)
-
-
-
-
-
+    bool m_bEnable;
 };
 
 /// This is required by the Qt plugin system.

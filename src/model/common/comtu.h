@@ -1,15 +1,21 @@
 #ifndef COMTU_H
 #define COMTU_H
-#include "gitldef.h"
-class ComTU
-{
+#include <vector>
+class ComTU {
 public:
     ComTU();
-    ADD_CLASS_FIELD(std::vector<ComTU>, apcTUs, getTUs, setTUs)
-    ADD_CLASS_FIELD(short, iX, getX, setX)                                        ///< X Position in frame
-    ADD_CLASS_FIELD(short, iY, getY, setY)                                        ///< Y Position in frame
-    ADD_CLASS_FIELD(short, iSize, getSize, setSize)                               ///< CU Size
-
+    std::vector<ComTU>& getTUs() { return m_apcTUs; }
+    const std::vector<ComTU>& getTUs() const { return m_apcTUs; }
+    short getX() { return m_iX; }
+    void setX(short iX) { m_iX = iX; }
+    short getY() { return m_iY; }
+    void setY(short iY) { m_iY = iY; }
+    short getSize() { return m_iSize; }
+    void setSize(short iSize) { m_iSize = iSize; }
+private:
+    std::vector<ComTU> m_apcTUs;
+    short m_iX;                                        ///< X Position in frame
+    short m_iY;                                        ///< Y Position in frame
+    short m_iSize;                               ///< CU Size
 };
-
 #endif // COMTU_H

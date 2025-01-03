@@ -34,46 +34,50 @@ public:
     {
         return (m_iAddr < cOther.m_iAddr);
     }
-    /*!
-     * Sub-CUs (four at most)
-     */
-    ADD_CLASS_FIELD(std::vector<ComCU>, apcSCUs, getSCUs, setSCUs)
-
-    /*!
-     * PUs & TUs in this CU (only for leaf-CUs)
-     */
-    ADD_CLASS_FIELD(PartSize, ePartSize, getPartSize, setPartSize)
-    ADD_CLASS_FIELD(std::vector<ComPU>, apcPUs, getPUs, setPUs)
-    ADD_CLASS_FIELD_NOSETTER(ComTU, cTURoot, getTURoot)
-
-
-    /*!
-     * Regular infomations of CU
-     */
-    ADD_CLASS_FIELD(short, iX, getX, setX)                                        ///< X Position in frame
-    ADD_CLASS_FIELD(short, iY, getY, setY)                                        ///< Y Position in frame
-    ADD_CLASS_FIELD(int, iSize, getSize, setSize)                               ///< CU Size
-    ADD_CLASS_FIELD(int, iAddr, getAddr, setAddr)                               ///< Raster index of LCU (which the sub-CU belongs to)
-    ADD_CLASS_FIELD(short, iZorder, getZorder, setZorder)                         ///< Z-Order of CU
-    ADD_CLASS_FIELD(short, iDepth, getDepth, setDepth)                            ///< Depth of CU
-
-    /*!
-     * Bit info (only for LCU)
-     */
-    ADD_CLASS_FIELD(int, iBitCount, getBitCount, setBitCount)                ///< Bits comsumed by this LCU
+    std::vector<ComCU>& getSCUs() { return m_apcSCUs; }
+    const std::vector<ComCU>& getSCUs()const { return m_apcSCUs; }
+    PartSize getPartSize() const { return m_ePartSize; }
+    void setPartSize(PartSize ePartSize) { m_ePartSize = ePartSize; }
+    std::vector<ComPU>& getPUs() { return m_apcPUs; }
+    const std::vector<ComPU>& getPUs() const { return m_apcPUs; }
+    ComTU& getTURoot() { return m_cTURoot; }
+    const ComTU& getTURoot() const { return m_cTURoot; }
+    short getX() const { return m_iX; }
+    void setX(short iX) { m_iX = iX; }
+    short getY() const { return m_iY; }
+    void setY(short iY) { m_iY = iY; }
+    int getSize() const { return m_iSize; }
+    void setSize(int iSize) { m_iSize = iSize; }
+    int getAddr() const { return m_iAddr; }
+    void setAddr(int iAddr) { m_iAddr = iAddr; }
+    short getZorder() const { return m_iZorder; }
+    void setZorder(short iZorder) { m_iZorder = iZorder; }
+    short getDepth() const { return m_iDepth; }
+    void setDepth(short iDepth) { m_iDepth = iDepth; }
+    int getBitCount() const { return m_iBitCount; }
+    void setBitCount(int iBitCount) { m_iBitCount = iBitCount; }
+private:
+    std::vector<ComCU> m_apcSCUs;
+    PartSize m_ePartSize;
+    std::vector<ComPU> m_apcPUs;
+    ComTU m_cTURoot;
+    short m_iX;
+    short m_iY;                                        ///< Y Position in frame
+    int m_iSize;                               ///< CU Size
+    int m_iAddr;                               ///< Raster index of LCU (which the sub-CU belongs to)
+    short m_iZorder;                         ///< Z-Order of CU
+    short m_iDepth;                            ///< Depth of CU
+    int m_iBitCount;                ///< Bits comsumed by this LCU
 
 public:
-    static int getPUNum( PartSize ePartSize );
-    static void getPUOffsetAndSize( int        iLeafCUSize,
-                                    PartSize   ePartSize,
-                                    int        uiPUIdx,
-                                    int&       riXOffset,
-                                    int&       riYOffset,
-                                    int&       riWidth,
-                                    int&       riHeight );
-
-
-
+    static int getPUNum(PartSize ePartSize);
+    static void getPUOffsetAndSize(int        iLeafCUSize,
+        PartSize   ePartSize,
+        int        uiPUIdx,
+        int& riXOffset,
+        int& riYOffset,
+        int& riWidth,
+        int& riHeight);
 };
 
 #endif // COMCU_H
