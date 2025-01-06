@@ -28,7 +28,7 @@ TimeLineFrameItem::TimeLineFrameItem(int iPercent, int iPOC, int iQp, int iBits,
     // cFont.setBold(true);
     m_cPocText.setFont(cFont);
     m_cPocText.setBrush(QBrush(QColor(Qt::gray)));
-    double bps = m_iBits * m_dFrameRate;
+    double bps = m_iBits * m_dFrameRate * 8;
     QString sBps;
     if (bps < 1024.0) {
         sBps = QString::number(bps);
@@ -44,7 +44,7 @@ TimeLineFrameItem::TimeLineFrameItem(int iPercent, int iPOC, int iQp, int iBits,
             sBps = ss.str().c_str();
         }
     }
-    m_cPocText.setText(QString("%1 %2 %3").arg(m_iPOC).arg(m_iQp).arg(sBps));
+    m_cPocText.setText(QString("%1(%2)%3").arg(m_iPOC).arg(m_iQp).arg(sBps));
     m_cPocText.setPos(19,10);
     m_cPocText.setRotation(90);
 
