@@ -215,10 +215,10 @@ Void TDecSlice::decompressSlice(TComInputBitstream** ppcSubstreams, TComPic* pcP
       }
     }
 #if ENABLE_ANAYSIS_OUTPUT
-    UInt uiBefore = ppcSubstreams[uiSubStrm]->getByteLocation();
+    UInt uiBefore = m_pcEntropyDecoder->getEntropyDecoder()->getBitPos();
     TSysuAnalyzerOutput::getInstance()->aiCUBits.clear();
-    m_pcCuDecoder->decodeCtu(ppcSubstreams[uiSubStrm], pCtu, isLastCtuOfSliceSegment);
-    pCtu->getTotalBits() = ppcSubstreams[uiSubStrm]->getByteLocation() - uiBefore;
+    m_pcCuDecoder->decodeCtu(pCtu, isLastCtuOfSliceSegment);
+    pCtu->getTotalBits() = m_pcEntropyDecoder->getEntropyDecoder()->getBitPos() - uiBefore;
 #else
     m_pcCuDecoder->decodeCtu     ( pCtu, isLastCtuOfSliceSegment );
 #endif

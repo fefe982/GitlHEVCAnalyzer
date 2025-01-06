@@ -142,6 +142,9 @@ public:
   Void  parseScalingList ( TComScalingList* /*scalingList*/ ) {}
 
   Void  parseExplicitRdpcmMode( TComTU &rTu, ComponentID compID );
+#ifdef ENABLE_ANAYSIS_OUTPUT
+  virtual UInt getBitPos() override;
+#endif
 
 private:
   ContextModel         m_contextModels[MAX_NUM_CTX_MOD];

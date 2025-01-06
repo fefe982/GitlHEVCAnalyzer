@@ -2101,6 +2101,10 @@ Void TDecCavlc::parseExplicitRdpcmMode( TComTU& /*rTu*/, ComponentID /*compID*/ 
   assert(0);
 }
 
-
+#ifdef ENABLE_ANAYSIS_OUTPUT
+UInt TDecCavlc::getBitPos() {
+    return m_pcBitstream->getFifo().size() * 8 - m_pcBitstream->getNumBitsLeft();
+}
+#endif
 //! \}
 

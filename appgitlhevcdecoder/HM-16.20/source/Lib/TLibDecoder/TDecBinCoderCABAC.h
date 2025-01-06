@@ -77,6 +77,9 @@ public:
   Void  copyState         ( const TDecBinIf* pcTDecBinIf );
   TDecBinCABAC* getTDecBinCABAC()             { return this; }
   const TDecBinCABAC* getTDecBinCABAC() const { return this; }
+#ifdef ENABLE_ANAYSIS_OUTPUT
+  virtual UInt getBitPos() override;
+#endif
 
 private:
   TComInputBitstream* m_pcTComBitstream;

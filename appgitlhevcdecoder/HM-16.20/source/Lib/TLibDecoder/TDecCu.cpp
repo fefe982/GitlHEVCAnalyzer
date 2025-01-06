@@ -142,13 +142,7 @@ Void TDecCu::destroy()
  \param    pCtu                      [in/out] pointer to CTU data structure
  \param    isLastCtuOfSliceSegment   [out]    true, if last CTU of the slice segment
  */
-#ifdef ENABLE_ANAYSIS_OUTPUT
-Void TDecCu::decodeCtu(TComInputBitstream *pcSubstreams,
-                       TComDataCU *pCtu,
-                       Bool &isLastCtuOfSliceSegment)
-#else
 Void TDecCu::decodeCtu( TComDataCU* pCtu, Bool& isLastCtuOfSliceSegment )
-#endif
 {
   if ( pCtu->getSlice()->getPPS()->getUseDQP() )
   {
@@ -161,11 +155,7 @@ Void TDecCu::decodeCtu( TComDataCU* pCtu, Bool& isLastCtuOfSliceSegment )
   }
 
   // start from the top level CU
-#ifdef ENABLE_ANAYSIS_OUTPUT
-  xDecodeCU(pcSubstreams, pCtu, 0, 0, isLastCtuOfSliceSegment);
-#else
   xDecodeCU(pCtu, 0, 0, isLastCtuOfSliceSegment);
-#endif
 }
 
 /** 
@@ -202,15 +192,7 @@ Bool TDecCu::xDecodeSliceEnd( TComDataCU* pcCU, UInt uiAbsPartIdx )
 }
 
 //! decode CU block recursively
-#if ENABLE_ANAYSIS_OUTPUT
-Void TDecCu::xDecodeCU(TComInputBitstream *pcSubstreams,
-                       TComDataCU *const pcCU,
-                       const UInt uiAbsPartIdx,
-                       const UInt uiDepth,
-                       Bool &isLastCtuOfSliceSegment)
-#else
 Void TDecCu::xDecodeCU( TComDataCU*const pcCU, const UInt uiAbsPartIdx, const UInt uiDepth, Bool &isLastCtuOfSliceSegment)
-#endif
 {
   TComPic* pcPic        = pcCU->getPic();
   const TComSPS &sps    = pcPic->getPicSym()->getSPS();
@@ -226,6 +208,10 @@ Void TDecCu::xDecodeCU( TComDataCU*const pcCU, const UInt uiAbsPartIdx, const UI
   UInt uiRPelX   = uiLPelX + (maxCuWidth>>uiDepth)  - 1;
   UInt uiTPelY   = pcCU->getCUPelY() + g_auiRasterToPelY[ g_auiZscanToRaster[uiAbsPartIdx] ];
   UInt uiBPelY   = uiTPelY + (maxCuHeight>>uiDepth) - 1;
+
+#if ENABLE_ANAYSIS_OUTPUT
+  UInt uiByteLocation = m_pcEntropyDecoder->getEntropyDecoder()->getBitPos();
+#endif
 
   if( ( uiRPelX < sps.getPicWidthInLumaSamples() ) && ( uiBPelY < sps.getPicHeightInLumaSamples() ) )
   {
@@ -256,11 +242,7 @@ Void TDecCu::xDecodeCU( TComDataCU*const pcCU, const UInt uiAbsPartIdx, const UI
 
       if ( !isLastCtuOfSliceSegment && ( uiLPelX < sps.getPicWidthInLumaSamples() ) && ( uiTPelY < sps.getPicHeightInLumaSamples() ) )
       {
-#ifdef ENABLE_ANAYSIS_OUTPUT
-          xDecodeCU(pcSubstreams, pcCU, uiIdx, uiDepth + 1, isLastCtuOfSliceSegment);
-#else
           xDecodeCU(pcCU, uiIdx, uiDepth + 1, isLastCtuOfSliceSegment);
-#endif
       }
       else
       {
@@ -282,9 +264,7 @@ Void TDecCu::xDecodeCU( TComDataCU*const pcCU, const UInt uiAbsPartIdx, const UI
     }
     return;
   }
-#if ENABLE_ANAYSIS_OUTPUT
-  UInt uiByteLocation = pcSubstreams->getByteLocation();
-#endif
+
   if( uiDepth <= pps.getMaxCuDQPDepth() && pps.getUseDQP())
   {
     setdQPFlag(true);
@@ -346,7 +326,7 @@ Void TDecCu::xDecodeCU( TComDataCU*const pcCU, const UInt uiAbsPartIdx, const UI
     }
     xFinishDecodeCU( pcCU, uiAbsPartIdx, uiDepth, isLastCtuOfSliceSegment );
 #if ENABLE_ANAYSIS_OUTPUT
-    UInt iByteConsumed = pcSubstreams->getByteLocation() - uiByteLocation;
+    UInt iByteConsumed = m_pcEntropyDecoder->getEntropyDecoder()->getBitPos() - uiByteLocation;
     TSysuAnalyzerOutput::getInstance()->aiCUBits.push_back(iByteConsumed);
 #endif
     return;
@@ -363,7 +343,7 @@ Void TDecCu::xDecodeCU( TComDataCU*const pcCU, const UInt uiAbsPartIdx, const UI
     {
       xFinishDecodeCU( pcCU, uiAbsPartIdx, uiDepth, isLastCtuOfSliceSegment );
 #if ENABLE_ANAYSIS_OUTPUT
-      UInt iByteConsumed = pcSubstreams->getByteLocation() - uiByteLocation;
+      UInt iByteConsumed = m_pcEntropyDecoder->getEntropyDecoder()->getBitPos() - uiByteLocation;
       TSysuAnalyzerOutput::getInstance()->aiCUBits.push_back(iByteConsumed);
 #endif
       return;
@@ -381,7 +361,7 @@ Void TDecCu::xDecodeCU( TComDataCU*const pcCU, const UInt uiAbsPartIdx, const UI
   setdQPFlag( bCodeDQP );
   xFinishDecodeCU( pcCU, uiAbsPartIdx, uiDepth, isLastCtuOfSliceSegment );
 #if ENABLE_ANAYSIS_OUTPUT
-  UInt iByteConsumed = pcSubstreams->getByteLocation() - uiByteLocation;
+  UInt iByteConsumed = m_pcEntropyDecoder->getEntropyDecoder()->getBitPos() - uiByteLocation;
   TSysuAnalyzerOutput::getInstance()->aiCUBits.push_back(iByteConsumed);
 #endif
 }

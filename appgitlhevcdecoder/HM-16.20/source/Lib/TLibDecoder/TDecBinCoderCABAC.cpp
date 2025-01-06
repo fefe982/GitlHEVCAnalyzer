@@ -381,3 +381,9 @@ Void  TDecBinCABAC::xReadPCMCode(UInt uiLength, UInt& ruiCode)
 #endif
 }
 //! \}
+
+#ifdef ENABLE_ANAYSIS_OUTPUT
+UInt TDecBinCABAC::getBitPos() {
+    return (m_pcTComBitstream->getFifo().size() * 8 - m_pcTComBitstream->getNumBitsLeft()) + m_bitsNeeded;
+}
+#endif

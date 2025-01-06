@@ -91,28 +91,16 @@ public:
   Void  destroy                 ();
 
   /// decode Ctu information
-#if ENABLE_ANAYSIS_OUTPUT
-  Void decodeCtu(TComInputBitstream *pcSubstreams, TComDataCU *pcCU, Bool &isLastCtuOfSliceSegment);
-#else
   Void  decodeCtu               ( TComDataCU* pCtu, Bool &isLastCtuOfSliceSegment );
-#endif
 
   /// reconstruct Ctu information
   Void  decompressCtu           ( TComDataCU* pCtu );
 
 protected:
-#if ENABLE_ANAYSIS_OUTPUT
-    Void xDecodeCU(TComInputBitstream *pcSubstreams,
-                   TComDataCU *const pcCU,
-                   const UInt uiAbsPartIdx,
-                   const UInt uiDepth,
-                   Bool &isLastCtuOfSliceSegment);
-#else
     Void xDecodeCU(TComDataCU *const pcCU,
                    const UInt uiAbsPartIdx,
                    const UInt uiDepth,
                    Bool &isLastCtuOfSliceSegment);
-#endif
     Void xFinishDecodeCU(TComDataCU *pcCU,
                          UInt uiAbsPartIdx,
                          UInt uiDepth,

@@ -28,7 +28,7 @@ TimeLineFrameItem::TimeLineFrameItem(int iPercent, int iPOC, int iQp, int iBits,
     // cFont.setBold(true);
     m_cPocText.setFont(cFont);
     m_cPocText.setBrush(QBrush(QColor(Qt::gray)));
-    double bps = m_iBits * m_dFrameRate * 8;
+    double bps = m_iBits * m_dFrameRate;
     QString sBps;
     if (bps < 1024.0) {
         sBps = QString::number(bps);
