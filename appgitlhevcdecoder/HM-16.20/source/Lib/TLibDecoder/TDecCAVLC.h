@@ -116,7 +116,7 @@ public:
   Void xDecodeScalingList    ( TComScalingList *scalingList, UInt sizeId, UInt listId);
 
   Void  parseExplicitRdpcmMode( TComTU &rTu, ComponentID compID );
-#ifdef ENABLE_ANAYSIS_OUTPUT
+#if ENABLE_ANAYSIS_OUTPUT
   virtual UInt getBitPos() override;
 #endif
 protected:

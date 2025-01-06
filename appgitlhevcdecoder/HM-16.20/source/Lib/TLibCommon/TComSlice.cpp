@@ -174,6 +174,9 @@ Void TComSlice::initSlice()
   m_substreamSizes.clear();
   m_cabacInitFlag        = false;
   m_enableTMVPFlag = true;
+#if ENABLE_ANAYSIS_OUTPUT
+  m_uiByteCount = 0;
+#endif
 }
 
 Bool TComSlice::getRapPicFlag() const

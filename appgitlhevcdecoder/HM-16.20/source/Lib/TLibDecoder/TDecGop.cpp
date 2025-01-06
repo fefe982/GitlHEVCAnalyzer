@@ -130,6 +130,9 @@ Void TDecGop::decompressSlice(TComInputBitstream* pcBitstream, TComPic* pcPic)
   delete[] ppcSubstreams;
 
   m_dDecTime += (Double)(clock()-iBeforeTime) / CLOCKS_PER_SEC;
+#if ENABLE_ANAYSIS_OUTPUT
+  pcSlice->setByteCount(pcBitstream->getFifo().size());
+#endif
 }
 
 Void TDecGop::filterPicture(TComPic* pcPic)
@@ -163,6 +166,10 @@ Void TDecGop::filterPicture(TComPic* pcPic)
                                                   pcSlice->getTLayer(),
                                                   c,
                                                   pcSlice->getSliceQp() );
+
+#if ENABLE_ANAYSIS_OUTPUT
+  printf("[SZ %u] ", pcSlice->getByteCount());
+#endif
 
   m_dDecTime += (Double)(clock()-iBeforeTime) / CLOCKS_PER_SEC;
   printf ("[DT %6.3f] ", m_dDecTime );

@@ -1317,7 +1317,9 @@ private:
   Bool                       m_enableTMVPFlag;
 
   SliceType                  m_encCABACTableIdx;           // Used to transmit table selection across slices.
-
+#if ENABLE_ANAYSIS_OUTPUT
+  UInt m_uiByteCount;
+#endif
 public:
                               TComSlice();
   virtual                     ~TComSlice();
@@ -1537,6 +1539,11 @@ public:
 
   Void                        setEncCABACTableIdx( SliceType idx )                   { m_encCABACTableIdx = idx;                                     }
   SliceType                   getEncCABACTableIdx() const                            { return m_encCABACTableIdx;                                    }
+
+#if ENABLE_ANAYSIS_OUTPUT
+  void setByteCount(UInt uiByteCount) { m_uiByteCount = uiByteCount; }
+  UInt getByteCount() const { return m_uiByteCount; }
+#endif
 
 protected:
   TComPic*                    xGetRefPic        (TComList<TComPic*>& rcListPic, Int poc);

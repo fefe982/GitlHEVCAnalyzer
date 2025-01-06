@@ -109,7 +109,7 @@ public:
   virtual Void parseTransformSkipFlags ( class TComTU &rTu, ComponentID component ) = 0;
 
   virtual Void parseExplicitRdpcmMode ( TComTU &rTu, ComponentID compID ) = 0;
-#ifdef ENABLE_ANAYSIS_OUTPUT
+#if ENABLE_ANAYSIS_OUTPUT
   virtual UInt getBitPos() = 0;
 #endif
 

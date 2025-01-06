@@ -79,7 +79,7 @@ public:
   virtual Void  copyState         ( const TDecBinIf* pcTDecBinIf )            = 0;
   virtual TDecBinCABAC*   getTDecBinCABAC   ()             { return 0; }
   virtual const TDecBinCABAC*   getTDecBinCABAC   () const { return 0; }
-#ifdef ENABLE_ANAYSIS_OUTPUT
+#if ENABLE_ANAYSIS_OUTPUT
   virtual UInt getBitPos() = 0;
 #endif
 };

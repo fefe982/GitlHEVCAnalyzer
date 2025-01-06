@@ -16,7 +16,6 @@ bool BitParserLCU::parseSequence()
             auto pcLCU = &pcFrame->getLCUs()[iAddr];
             int iLCUBit = m_fileStore[iFrame][iAddr][0];
             pcLCU->setBitCount(iLCUBit);
-            pcFrame->getBitCount() += iLCUBit;
         }
     }
     return true;

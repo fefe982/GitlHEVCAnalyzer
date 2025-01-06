@@ -1893,7 +1893,7 @@ Void TDecSbac::parseExplicitRdpcmMode( TComTU &rTu, ComponentID compID )
     }
   }
 }
-#ifdef ENABLE_ANAYSIS_OUTPUT
+#if ENABLE_ANAYSIS_OUTPUT
 UInt TDecSbac::getBitPos() {
     return m_pcTDecBinIf->getBitPos();
 }
