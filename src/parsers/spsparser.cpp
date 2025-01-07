@@ -37,6 +37,16 @@ bool SpsParser::parseFile(QTextStream* pcInputStream, ComSequence* pcSequence)
         else {
             pcSequence->setMatrixCoeffs(doc["matrix_coeffs"].GetInt());
         }
+        if (!doc.HasMember("vui_num_units_in_tick")) {
+            pcSequence->setNumUnitsInTick(1);
+        } else {
+            pcSequence->setNumUnitsInTick(doc["vui_num_units_in_tick"].GetInt());
+        }
+        if (!doc.HasMember("vui_time_scale")) {
+            pcSequence->setTimeScale(60);
+        } else {
+            pcSequence->setTimeScale(doc["vui_time_scale"].GetInt());
+        }
         return true;
     }
 
@@ -130,14 +140,10 @@ bool VpsParser::parseFile(QTextStream* pcInputStream, ComSequence* pcSequence) {
     strOneLine = pcInputStream->readLine();
     rapidjson::Document doc;
     doc.Parse(strOneLine.toUtf8());
-    if (!doc.HasMember("vps_num_units_in_tick")) {
-        pcSequence->setNumUnitsInTick(1);
-    } else {
+    if (doc.HasMember("vps_num_units_in_tick")) {
         pcSequence->setNumUnitsInTick(doc["vps_num_units_in_tick"].GetInt());
     }
-    if (!doc.HasMember("vps_time_scale")) {
-        pcSequence->setTimeScale(60);
-    } else {
+    if (doc.HasMember("vps_time_scale")) {
         pcSequence->setTimeScale(doc["vps_time_scale"].GetInt());
     }
     return true;

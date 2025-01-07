@@ -307,16 +307,18 @@ Void TSysuAnalyzerOutput::writeOutSps   ( TComSPS* pcSPS )
     doc.AddMember("MaxInterTUDepth", pcSPS->getQuadtreeTUMaxDepthInter(), doc.GetAllocator());
     doc.AddMember("MaxIntraTUDepth", pcSPS->getQuadtreeTUMaxDepthIntra(), doc.GetAllocator());
     doc.AddMember("InputBitDepth", pcSPS->getBitDepth(CHANNEL_TYPE_LUMA), doc.GetAllocator());
-    doc.AddMember("vui_parameters_present_flag", pcSPS->getVuiParametersPresentFlag(), doc.GetAllocator());
     if (pcSPS->getVuiParametersPresentFlag()) {
         auto vui = pcSPS->getVuiParameters();
-        doc.AddMember("video_signal_type_present_flag", vui->getVideoSignalTypePresentFlag(), doc.GetAllocator());
         if (vui->getVideoSignalTypePresentFlag()) {
             doc.AddMember("video_full_range_flag", vui->getVideoFullRangeFlag(), doc.GetAllocator());
-            doc.AddMember("colour_description_present_flag", vui->getColourDescriptionPresentFlag(), doc.GetAllocator());
             if (vui->getColourDescriptionPresentFlag()) {
                 doc.AddMember("matrix_coeffs", vui->getMatrixCoefficients(), doc.GetAllocator());
             }
+        }
+        auto timing_info = vui->getTimingInfo();
+        if (timing_info->getTimingInfoPresentFlag()) {
+            doc.AddMember("vui_num_units_in_tick", timing_info->getNumUnitsInTick(), doc.GetAllocator());
+            doc.AddMember("vui_time_scale", timing_info->getTimeScale(), doc.GetAllocator());
         }
     }
     doc.Accept(w);
