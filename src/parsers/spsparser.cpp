@@ -1,7 +1,6 @@
 #include "spsparser.h"
 #include <QRegExp>
-#include <qjsondocument.h>
-#include <qjsonobject.h>
+#include "rapidjson/document.h"
 
 /** --- SAMPLE TEXT ---
   * Resolution:176x144
@@ -20,22 +19,23 @@ bool SpsParser::parseFile(QTextStream* pcInputStream, ComSequence* pcSequence)
 
     strOneLine = pcInputStream->readLine();
     if (strOneLine[0] == '{') {
-        QJsonObject doc = QJsonDocument::fromJson(strOneLine.toUtf8()).object();
+        rapidjson::Document doc;
+        doc.Parse(strOneLine.toUtf8());
 
-        pcSequence->setWidth(doc["ResolutionX"].toInt());
-        pcSequence->setHeight(doc["ResolutionY"].toInt());
-        pcSequence->setMaxCUSize(doc["MaxCuSize"].toInt());
-        pcSequence->setMaxCUDepth(doc["MaxCuDepth"].toInt());
-        pcSequence->setMaxInterTUDepth(doc["MaxInterTUDepth"].toInt());
-        pcSequence->setMaxIntraTUDepth(doc["MaxIntraTUDepth"].toInt());
-        pcSequence->setInputBitDepth(doc["InputBitDepth"].toInt());
-        pcSequence->setIsFullRange(doc["video_full_range_flag"].toInt() == 1);
-        if (!doc.contains("matrix_coeffs")) {
+        pcSequence->setWidth(doc["ResolutionX"].GetInt());
+        pcSequence->setHeight(doc["ResolutionY"].GetInt());
+        pcSequence->setMaxCUSize(doc["MaxCuSize"].GetInt());
+        pcSequence->setMaxCUDepth(doc["MaxCuDepth"].GetInt());
+        pcSequence->setMaxInterTUDepth(doc["MaxInterTUDepth"].GetInt());
+        pcSequence->setMaxIntraTUDepth(doc["MaxIntraTUDepth"].GetInt());
+        pcSequence->setInputBitDepth(doc["InputBitDepth"].GetInt());
+        pcSequence->setIsFullRange(doc.HasMember("video_full_range_flag") && doc["video_full_range_flag"].GetBool());
+        if (!doc.HasMember("matrix_coeffs")) {
             qWarning("Video does not contain Matrix Coeffs, assuming BT709");
             pcSequence->setMatrixCoeffs(1);
         }
         else {
-            pcSequence->setMatrixCoeffs(doc["matrix_coeffs"].toInt());
+            pcSequence->setMatrixCoeffs(doc["matrix_coeffs"].GetInt());
         }
         return true;
     }
@@ -128,16 +128,17 @@ bool VpsParser::parseFile(QTextStream* pcInputStream, ComSequence* pcSequence) {
     Q_ASSERT(pcSequence != NULL);
     QString strOneLine;
     strOneLine = pcInputStream->readLine();
-    QJsonObject doc = QJsonDocument::fromJson(strOneLine.toUtf8()).object();
-    if (!doc.contains("vps_num_units_in_tick")) {
+    rapidjson::Document doc;
+    doc.Parse(strOneLine.toUtf8());
+    if (!doc.HasMember("vps_num_units_in_tick")) {
         pcSequence->setNumUnitsInTick(1);
     } else {
-        pcSequence->setNumUnitsInTick(doc["vps_num_units_in_tick"].toInt());
+        pcSequence->setNumUnitsInTick(doc["vps_num_units_in_tick"].GetInt());
     }
-    if (!doc.contains("vps_time_scale")) {
+    if (!doc.HasMember("vps_time_scale")) {
         pcSequence->setTimeScale(60);
     } else {
-        pcSequence->setTimeScale(doc["vps_time_scale"].toInt());
+        pcSequence->setTimeScale(doc["vps_time_scale"].GetInt());
     }
     return true;
 }

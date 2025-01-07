@@ -1,12 +1,6 @@
 #include "TSysuAnalyzerOutput.h"
-
-template <typename T>
-void writeOstream(std::ostream& s, const std::string &key, T val, bool first = false) {
-    if (!first) {
-        s << ",";
-    }
-    s << '"' << key << "\":" << val;
-}
+#include "rapidjson/document.h"
+#include "rapidjson/writer.h"
 
 TSysuAnalyzerOutput* TSysuAnalyzerOutput::m_instance = NULL;
 
@@ -298,32 +292,35 @@ Void TSysuAnalyzerOutput::xWriteOutTUInfo  ( TComDataCU* pcCU, Int iLength, Int 
 
 Void TSysuAnalyzerOutput::writeOutSps   ( TComSPS* pcSPS )
 {
-    m_cSpsOut << "{";
-    writeOstream(m_cSpsOut, "HM_VERSION", HM_VERSION, true);
-    writeOstream(m_cSpsOut, "ResolutionX", pcSPS->getPicWidthInLumaSamples()
+    rapidjson::StringBuffer sb;
+    rapidjson::Writer w(sb);
+    rapidjson::Document doc(rapidjson::kObjectType);
+    doc.AddMember("HM_VERSION", HM_VERSION, doc.GetAllocator());
+    doc.AddMember("ResolutionX", pcSPS->getPicWidthInLumaSamples()
         - pcSPS->getConformanceWindow().getWindowLeftOffset()
-        - pcSPS->getConformanceWindow().getWindowRightOffset());
-    writeOstream(m_cSpsOut, "ResolutionY", pcSPS->getPicHeightInLumaSamples()
+        - pcSPS->getConformanceWindow().getWindowRightOffset(), doc.GetAllocator());
+    doc.AddMember("ResolutionY", pcSPS->getPicHeightInLumaSamples()
         - pcSPS->getConformanceWindow().getWindowTopOffset()
-        - pcSPS->getConformanceWindow().getWindowBottomOffset());
-    writeOstream(m_cSpsOut, "MaxCuSize", pcSPS->getMaxCUHeight());
-    writeOstream(m_cSpsOut, "MaxCuDepth", pcSPS->getMaxTotalCUDepth());
-    writeOstream(m_cSpsOut, "MaxInterTUDepth", pcSPS->getQuadtreeTUMaxDepthInter());
-    writeOstream(m_cSpsOut, "MaxIntraTUDepth", pcSPS->getQuadtreeTUMaxDepthIntra());
-    writeOstream(m_cSpsOut, "InputBitDepth", pcSPS->getBitDepth(CHANNEL_TYPE_LUMA));
-    writeOstream(m_cSpsOut, "vui_parameters_present_flag", pcSPS->getVuiParametersPresentFlag());
+        - pcSPS->getConformanceWindow().getWindowBottomOffset(), doc.GetAllocator());
+    doc.AddMember("MaxCuSize", pcSPS->getMaxCUHeight(), doc.GetAllocator());
+    doc.AddMember("MaxCuDepth", pcSPS->getMaxTotalCUDepth(), doc.GetAllocator());
+    doc.AddMember("MaxInterTUDepth", pcSPS->getQuadtreeTUMaxDepthInter(), doc.GetAllocator());
+    doc.AddMember("MaxIntraTUDepth", pcSPS->getQuadtreeTUMaxDepthIntra(), doc.GetAllocator());
+    doc.AddMember("InputBitDepth", pcSPS->getBitDepth(CHANNEL_TYPE_LUMA), doc.GetAllocator());
+    doc.AddMember("vui_parameters_present_flag", pcSPS->getVuiParametersPresentFlag(), doc.GetAllocator());
     if (pcSPS->getVuiParametersPresentFlag()) {
         auto vui = pcSPS->getVuiParameters();
-        writeOstream(m_cSpsOut, "video_signal_type_present_flag", vui->getVideoSignalTypePresentFlag());
+        doc.AddMember("video_signal_type_present_flag", vui->getVideoSignalTypePresentFlag(), doc.GetAllocator());
         if (vui->getVideoSignalTypePresentFlag()) {
-            writeOstream(m_cSpsOut, "video_full_range_flag", vui->getVideoFullRangeFlag());
-            writeOstream(m_cSpsOut, "colour_description_present_flag", vui->getColourDescriptionPresentFlag());
+            doc.AddMember("video_full_range_flag", vui->getVideoFullRangeFlag(), doc.GetAllocator());
+            doc.AddMember("colour_description_present_flag", vui->getColourDescriptionPresentFlag(), doc.GetAllocator());
             if (vui->getColourDescriptionPresentFlag()) {
-                writeOstream(m_cSpsOut, "matrix_coeffs", vui->getMatrixCoefficients());
+                doc.AddMember("matrix_coeffs", vui->getMatrixCoefficients(), doc.GetAllocator());
             }
         }
     }
-    m_cSpsOut << "}" << std::endl;
+    doc.Accept(w);
+    m_cSpsOut << sb.GetString() << std::endl;
 #if (HM_VERSION >= 100)
     m_cSpsOut << "Resolution:"
               << (pcSPS->getPicWidthInLumaSamples()
@@ -367,13 +364,16 @@ Void TSysuAnalyzerOutput::writeOutSps   ( TComSPS* pcSPS )
 }
 
 Void TSysuAnalyzerOutput::writeOutVps(TComVPS* pcVPS) {
-    m_cVpsOut << "{";
+    rapidjson::StringBuffer sb;
+    rapidjson::Writer w(sb);
+    rapidjson::Document doc(rapidjson::kObjectType);
     auto timingInfo = pcVPS->getTimingInfo();
     if (timingInfo->getTimingInfoPresentFlag()) {
-        writeOstream(m_cVpsOut, "vps_num_nunits_in_tick", timingInfo->getNumUnitsInTick());
-        writeOstream(m_cVpsOut, "vps_time_scale", timingInfo->getTimeScale());
+        doc.AddMember("vps_num_nunits_in_tick", timingInfo->getNumUnitsInTick(), doc.GetAllocator());
+        doc.AddMember("vps_time_scale", timingInfo->getTimeScale(), doc.GetAllocator());
     }
-    m_cVpsOut << "}" << std::endl;
+    doc.Accept(w);
+    m_cVpsOut << sb.GetString() << std::endl;
 }
 
 

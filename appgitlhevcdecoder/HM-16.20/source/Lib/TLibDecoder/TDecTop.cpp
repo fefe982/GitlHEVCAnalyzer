@@ -788,6 +788,9 @@ Void TDecTop::xDecodeVPS(const std::vector<UChar> &naluData)
 
   m_cEntropyDecoder.decodeVPS( vps );
   m_parameterSetManager.storeVPS(vps, naluData);
+#if ENABLE_ANAYSIS_OUTPUT
+  TSysuAnalyzerOutput::getInstance()->writeOutVps(vps);
+#endif
 }
 
 Void TDecTop::xDecodeSPS(const std::vector<UChar> &naluData)
