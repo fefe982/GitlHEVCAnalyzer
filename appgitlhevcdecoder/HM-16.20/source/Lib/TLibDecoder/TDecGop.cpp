@@ -168,7 +168,7 @@ Void TDecGop::filterPicture(TComPic* pcPic)
                                                   pcSlice->getSliceQp() );
 
 #if ENABLE_ANAYSIS_OUTPUT
-  printf("[SZ %u] ", pcSlice->getByteCount());
+  printf("[SZ %u] ", pcSlice->getByteCount() + 4);
 #endif
 
   m_dDecTime += (Double)(clock()-iBeforeTime) / CLOCKS_PER_SEC;
