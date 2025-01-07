@@ -72,7 +72,7 @@ bool BitstreamParser::parseFile(QString strDecoderFolder,
     }
 
     m_cDecoderProcess.setWorkingDirectory(strOutputPath);
-    QString strStandardOutputFile = strOutputPath+"/decoder_general.txt";
+    QString strStandardOutputFile = strOutputPath+"/decoder_output.txt";
     m_cStdOutputFile.setFileName(strStandardOutputFile);
     m_cStdOutputFile.open(QIODevice::WriteOnly);
     strDecoderPath = QDir::toNativeSeparators(strDecoderPath);              /// convert to native path

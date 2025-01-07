@@ -6,7 +6,7 @@ TSysuAnalyzerOutput* TSysuAnalyzerOutput::m_instance = NULL;
 
 TSysuAnalyzerOutput::TSysuAnalyzerOutput()
 {
-
+  m_cGeneralOut.open("decoder_general.txt", ios::out);
   m_cSpsOut.open     ("decoder_sps.txt",  ios::out);
   m_cVpsOut.open("decoder_vps.txt", ios::out);
   m_cPredOutput.open ("decoder_pred.txt", ios::out);
@@ -376,5 +376,25 @@ Void TSysuAnalyzerOutput::writeOutVps(TComVPS* pcVPS) {
     m_cVpsOut << sb.GetString() << std::endl;
 }
 
+Void TSysuAnalyzerOutput::writeOutGeneral(TComSlice* pcSlice, double decodeTime) {
+    rapidjson::Document doc(rapidjson::kObjectType);
+    doc.AddMember("POC", pcSlice->getPOC(), doc.GetAllocator());
+    doc.AddMember("byte_count", pcSlice->getByteCount() + 4, doc.GetAllocator());
+    doc.AddMember("QP", pcSlice->getSliceQp(), doc.GetAllocator());
+    doc.AddMember("decode_time", decodeTime, doc.GetAllocator());
+    rapidjson::Value v_ref_list(rapidjson::kArrayType);
+    for (Int iRefList = 0; iRefList < 2; iRefList++) {
+        rapidjson::Value v_ref_list_i(rapidjson::kArrayType);
+        for (Int iRefIndex = 0; iRefIndex < pcSlice->getNumRefIdx(RefPicList(iRefList)); iRefIndex++) {
+            v_ref_list_i.PushBack(pcSlice->getRefPOC(RefPicList(iRefList), iRefIndex), doc.GetAllocator());
+        }
+        v_ref_list.PushBack(std::move(v_ref_list_i), doc.GetAllocator());
+    }
+    doc.AddMember("ref_list", std::move(v_ref_list), doc.GetAllocator());
+    rapidjson::StringBuffer sb;
+    rapidjson::Writer w(sb);
+    doc.Accept(w);
+    m_cGeneralOut << sb.GetString() << std::endl;
+}
 
 TSysuAnalyzerOutput::~TSysuAnalyzerOutput() = default;

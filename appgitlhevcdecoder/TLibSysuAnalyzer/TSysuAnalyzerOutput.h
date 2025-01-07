@@ -34,7 +34,7 @@ public:
 
   ///write out tile info
   Void writeOutTileInfo(TComPic * pcPic);
-
+  Void writeOutGeneral(TComSlice* pcSlice, double decodeTime);
 
 
   std::vector<int> aiCUBits;
@@ -54,6 +54,7 @@ public:
 private:
 
   /// Decoder output ( extracted from bitstream )
+  std::ofstream m_cGeneralOut;
   std::ofstream m_cSpsOut;          ///< SPS info
   std::ofstream m_cVpsOut;
   std::ofstream m_cPredOutput;      ///< Prediction mode info output

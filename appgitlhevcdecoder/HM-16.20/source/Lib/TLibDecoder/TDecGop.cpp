@@ -44,6 +44,9 @@
 #include "TLibCommon/SEI.h"
 
 #include <time.h>
+#if ENABLE_ANAYSIS_OUTPUT
+#include "TLibSysuAnalyzer/TSysuAnalyzerOutput.h"
+#endif
 
 //! \ingroup TLibDecoder
 //! \{
@@ -167,13 +170,8 @@ Void TDecGop::filterPicture(TComPic* pcPic)
                                                   c,
                                                   pcSlice->getSliceQp() );
 
-#if ENABLE_ANAYSIS_OUTPUT
-  printf("[SZ %u] ", pcSlice->getByteCount() + 4);
-#endif
-
   m_dDecTime += (Double)(clock()-iBeforeTime) / CLOCKS_PER_SEC;
   printf ("[DT %6.3f] ", m_dDecTime );
-  m_dDecTime  = 0;
 
   for (Int iRefList = 0; iRefList < 2; iRefList++)
   {
@@ -199,6 +197,10 @@ Void TDecGop::filterPicture(TComPic* pcPic)
 
   pcPic->setOutputMark(pcPic->getSlice(0)->getPicOutputFlag() ? true : false);
   pcPic->setReconMark(true);
+#if ENABLE_ANAYSIS_OUTPUT
+  TSysuAnalyzerOutput::getInstance()->writeOutGeneral(pcSlice, m_dDecTime);
+#endif
+  m_dDecTime = 0;
 }
 
 /**

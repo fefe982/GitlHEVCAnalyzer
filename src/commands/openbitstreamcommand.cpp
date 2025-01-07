@@ -146,12 +146,9 @@ bool OpenBitstreamCommand::execute(GitlCommandParameter& rcInputArg, [[maybe_unu
         Timer t("Decoder general file parsing finished");
         cDecodingStageInfo.setParameter("message", "(3/11)Start Parsing Decoder Std Output File...");
         dispatchEvt(cDecodingStageInfo);
-        QFile cGeneralFile(strGeneralFilename);
-        cGeneralFile.open(QIODevice::ReadOnly);
-        QTextStream cGeneralTextStream(&cGeneralFile);
+        std::ifstream cGeneralTextStream(strGeneralFilename.toLocal8Bit());
         DecoderGeneralParser cDecoderGeneralParser;
-        bSuccess = cDecoderGeneralParser.parseFile(&cGeneralTextStream, pcSequence);
-        cGeneralFile.close();
+        bSuccess = cDecoderGeneralParser.parseFile(cGeneralTextStream, pcSequence);
     }
 
     ParserInfo infoFiles[] = {

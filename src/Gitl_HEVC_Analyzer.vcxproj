@@ -291,7 +291,7 @@
     <ClInclude Include="model\common\comtu.h" />
     <QtMoc Include="commands\configfiltercommand.h" />
     <ClInclude Include="parsers\cupuparser.h" />
-    <QtMoc Include="parsers\decodergeneralparser.h" />
+    <ClInclude Include="parsers\decodergeneralparser.h" />
     <ClInclude Include="exceptions\decodernotfoundexception.h" />
     <ClInclude Include="exceptions\decodingfailexception.h" />
     <QtMoc Include="model\drawengine\drawengine.h" />

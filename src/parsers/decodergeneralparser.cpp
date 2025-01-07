@@ -2,6 +2,7 @@
 #include <QRegExp>
 #include <QTextStream>
 #include <QDebug>
+#include "rapidjson/document.h"
 
 /// rearrange frames into POC ascending order
 static bool xFrameSortingOrder(ComFrame* pcFrameFirst, ComFrame* pcFrameSecond)
@@ -10,10 +11,7 @@ static bool xFrameSortingOrder(ComFrame* pcFrameFirst, ComFrame* pcFrameSecond)
 }
 
 
-DecoderGeneralParser::DecoderGeneralParser(QObject *parent) :
-    QObject(parent)
-{
-}
+DecoderGeneralParser::DecoderGeneralParser() = default;
 
 static void readIntArray(QVector<int>* paiArr, QString* pstrArrStr)
 {
@@ -27,86 +25,35 @@ static void readIntArray(QVector<int>* paiArr, QString* pstrArrStr)
     }
 }
 
-bool DecoderGeneralParser::parseFile(QTextStream* pcInputStream, ComSequence* pcSequence)
+bool DecoderGeneralParser::parseFile(std::istream &pcInputStream, ComSequence* pcSequence)
 {
-    Q_ASSERT( pcSequence != NULL );
-
-    QString strOneLine;
-    QRegExp cMatchTarget;
-
-
-    //HM software: Decoder Version [5.2][Windows][VS 1500][32 bit]
-    cMatchTarget.setPattern("HM software: Decoder Version \\[([0-9.]+)\\].*");
-    while( !pcInputStream->atEnd() ) {
-        strOneLine = pcInputStream->readLine();
-        if( cMatchTarget.indexIn(strOneLine) != -1 ) {
-            QString strEncoderVersion = cMatchTarget.cap(1);
-            pcSequence->setEncoderVersion(strEncoderVersion);
-            break;
+    std::string line;
+    while (std::getline(pcInputStream, line)) {
+        rapidjson::Document doc;
+        doc.Parse(line.c_str());
+        if (doc.HasParseError()) {
+            continue;
         }
+        ComFrame* pcFrame = new ComFrame(pcSequence);
+
+        /// POC & Decoding time
+        pcFrame->setPOC(doc["POC"].GetInt());
+        pcFrame->setQp(doc["QP"].GetInt());
+        pcFrame->setBitCount(doc["byte_count"].GetInt() * 8);
+        pcFrame->setTotalDecTime(doc["decode_time"].GetDouble());
+
+        for (auto& poc : doc["ref_list"][0].GetArray()) {
+            pcFrame->getL0List().push_back(poc.GetInt());
+        }
+        for (auto& poc : doc["ref_list"][1].GetArray()) {
+            pcFrame->getL1List().push_back(poc.GetInt());
+        }
+        pcSequence->getFramesInDecOrder().push_back(pcFrame);
+        pcSequence->getFramesInDisOrder().push_back(pcFrame);
     }
-
-
-    // POC   18 TId: 0 ( B-SLICE, QP 33 ) [DT  0.005] [L0 17 16 15 14 ] [L1 17 16 15 14 ] [LC 17 16 15 14 ] [MD5:f2984e1c87633f1c2476eb2ddb844a53,(OK)]
-    // read one frame
-
-    ComFrame *pcFrame = NULL;
-    cMatchTarget.setPattern("POC *(-?[0-9]+).*QP ([0-9]+).*\\[SZ ([0-9]+)\\] \\[DT *([0-9.]+) *\\] \\[L0(( -?[0-9]+){0,}) \\] \\[L1(( -?[0-9]+){0,}) \\] (\\[LC(( -?[0-9]+){0,}) \\])?");
-    // pcInputStream->readLine();///< Skip a empty line
-    while( !pcInputStream->atEnd() )
-    {
-
-        while( !pcInputStream->atEnd() )
-        {
-            strOneLine = pcInputStream->readLine();
-            if(cMatchTarget.indexIn(strOneLine) != -1)
-                break;
-        }
-        if( cMatchTarget.indexIn(strOneLine) != -1 ) {
-            pcFrame = new ComFrame(pcSequence);
-
-            /// POC & Decoding time
-            pcFrame->setPOC(cMatchTarget.cap(1).toInt());
-            pcFrame->setQp(cMatchTarget.cap(2).toInt());
-            pcFrame->setBitCount(cMatchTarget.cap(3).toInt() * 8);
-            pcFrame->setTotalDecTime(cMatchTarget.cap(4).toDouble());
-
-            /// L0 L1 LC
-            QString strL0, strL1, strLC;
-            strL0 = cMatchTarget.cap(5); strL1 = cMatchTarget.cap(7); strLC = cMatchTarget.cap(9);
-            readIntArray(&pcFrame->getL0List(), &strL0);
-            readIntArray(&pcFrame->getL1List(), &strL1);
-            readIntArray(&pcFrame->getLCList(), &strLC);
-
-            pcSequence->getFramesInDecOrder().push_back(pcFrame);
-            pcSequence->getFramesInDisOrder().push_back(pcFrame);
-
-
-        }
-        else    // frames finish
-        {
-
-            pcSequence->setTotalFrames(pcSequence->getFramesInDisOrder().size());
-
-            // Total Time:     2070.335 sec.
-
-            cMatchTarget.setPattern(" Total Time: *([0-9.]+).*");
-
-            {
-                strOneLine = pcInputStream->readLine();
-                if( cMatchTarget.indexIn(strOneLine) != -1 ) {
-                    pcSequence->setTotalDecTime(cMatchTarget.cap(1).toDouble());
-                    break;
-                }
-            }
-        }
-
-    }
-
+    pcSequence->setTotalFrames(pcSequence->getFramesInDisOrder().size());
     /// sort & calculate frame displaying order according to POC
     xSortByFrameCount(pcSequence);
-
-
 
     return true;
 }

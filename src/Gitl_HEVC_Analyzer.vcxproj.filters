@@ -316,9 +316,6 @@
     <QtMoc Include="commands\configfiltercommand.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="parsers\decodergeneralparser.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <ClInclude Include="exceptions\decodernotfoundexception.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -610,6 +607,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="parsers\spsparser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parsers\decodergeneralparser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
