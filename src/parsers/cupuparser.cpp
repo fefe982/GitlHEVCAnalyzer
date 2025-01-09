@@ -40,7 +40,7 @@ bool CUPUParser::parseSequence()
     return true;
 }
 
-size_t CUPUParser::xReadCU(const std::vector<int>& vPCInfo, size_t s, ComCU& pcCU)
+size_t CUPUParser::xReadCU(const StreamReader::TCUStore& vPCInfo, size_t s, ComCU& pcCU)
 {
     int iCUMode;
     if (s == vPCInfo.size())
@@ -89,4 +89,4 @@ size_t CUPUParser::xReadCU(const std::vector<int>& vPCInfo, size_t s, ComCU& pcC
     }
     return s;
 }
-size_t CUPUParser::xReadCULeaf(const std::vector<int>&, size_t s, ComCU&) { return s; }
+size_t CUPUParser::xReadCULeaf(const StreamReader::TCUStore&, size_t s, ComCU&) { return s; }

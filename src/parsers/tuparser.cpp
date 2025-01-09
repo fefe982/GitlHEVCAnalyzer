@@ -4,7 +4,7 @@
 
 constexpr auto TU_SLIPT_FLAG = 99;
 
-size_t TUParser::xReadCULeaf(const std::vector<int>& vPCInfo, size_t s, ComCU& pcCU)
+size_t TUParser::xReadCULeaf(const StreamReader::TCUStore& vPCInfo, size_t s, ComCU& pcCU)
 {
 
     ComTU* pcTURoot = &pcCU.getTURoot();
@@ -16,7 +16,7 @@ size_t TUParser::xReadCULeaf(const std::vector<int>& vPCInfo, size_t s, ComCU& p
 }
 
 
-size_t TUParser::xReadTUHelper(const std::vector<int>& vPCInfo, size_t s, ComTU* pcTU)
+size_t TUParser::xReadTUHelper(const StreamReader::TCUStore& vPCInfo, size_t s, ComTU* pcTU)
 {
     int iTUMode;
     if (s > vPCInfo.size())

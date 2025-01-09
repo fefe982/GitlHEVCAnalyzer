@@ -1,6 +1,6 @@
 #include "mvparser.h"
 
-size_t MVParser::xReadCULeaf(const std::vector<int>& vPCInfo, size_t s, ComCU& pcCU)
+size_t MVParser::xReadCULeaf(const StreamReader::TCUStore& vPCInfo, size_t s, ComCU& pcCU)
 {
     int iInterDir;
     for (int i = 0; i < pcCU.getPUs().size(); i++)

@@ -5,8 +5,8 @@
 #include <iostream>
 #include <string>
 
-std::vector<std::vector<std::vector<int>>> StreamReader::parse(std::vector<char>& pcInputStream, size_t frames, size_t cuCnt) {
-    std::vector<std::vector<std::vector<int>>> fileStore(frames, std::vector<std::vector<int>>(cuCnt));
+StreamReader::TFileStore StreamReader::parse(std::vector<char>& pcInputStream, size_t frames, size_t cuCnt) {
+    TFileStore fileStore(frames, std::vector<TCUStore>(cuCnt));
     size_t iLastPoc = (size_t)-1;
     size_t iDecOrder = (size_t)-1;
     size_t iCU = cuCnt;
@@ -107,7 +107,7 @@ bool InfoParser::parseFrame(size_t iFrame)
 
 bool InfoParser::parseSequence() { return true; }
 
-size_t InfoParser::xReadCU(const std::vector<int>& vPCInfo, size_t s, ComCU& pcCU) {
+size_t InfoParser::xReadCU(const StreamReader::TCUStore& vPCInfo, size_t s, ComCU& pcCU) {
     if (!pcCU.getSCUs().empty())
     {
         for (int i = 0; i < 4; i++) {

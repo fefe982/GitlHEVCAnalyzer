@@ -4,8 +4,7 @@ BitParserLCU::BitParserLCU() {
     m_delayed = false;
 }
 
-size_t BitParserLCU::xReadCULeaf(const std::vector<int> &, size_t s, ComCU& )
-{
+size_t BitParserLCU::xReadCULeaf(const StreamReader::TCUStore&, size_t s, ComCU&) {
     return s;
 }
 bool BitParserLCU::parseSequence()
@@ -21,8 +20,7 @@ bool BitParserLCU::parseSequence()
     return true;
 }
 
-size_t BitParserSCU::xReadCULeaf(const std::vector<int> &vPCInfo, size_t s, ComCU& pcCU)
-{
+size_t BitParserSCU::xReadCULeaf(const StreamReader::TCUStore& vPCInfo, size_t s, ComCU& pcCU) {
     Q_ASSERT(s < vPCInfo.size());
     pcCU.setBitCount(vPCInfo[s++]);
     return s;
