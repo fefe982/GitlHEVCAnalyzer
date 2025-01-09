@@ -1,7 +1,7 @@
 #include "streamreader.h"
 
 #include "model/common/comsequence.h"
-
+#include "../appgitlhevcdecoder/TLibSysuAnalyzer/CUInfo.h"
 #include <iostream>
 #include <string>
 
@@ -11,9 +11,14 @@ namespace {
         pcInputStream += sizeof(T);
         return val;
     }
-    template<typename T> void read_vec(const char*& pcInputStream, std::vector<short>& v) {
-        int sz = read<char>(pcInputStream);
-        read_vec_len<T>(pcInputStream, v, sz);
+    template<CUInfoParts Part> void read_vec(const char*& pcInputStream, std::vector<short>& v) {
+        int sz;
+        if constexpr (CUInfoPartTrait<Part>::len == 0) {
+            sz = read<char>(pcInputStream);
+        } else {
+            sz = CUInfoPartTrait<Part>::len;
+        }
+        read_vec_len<typename CUInfoPartTrait<Part>::value_type>(pcInputStream, v, sz);
     }
     template<typename T> void read_vec_len(const char*& pcInputStream, std::vector<short>& v, int sz) {
         v.resize(sz);
@@ -37,14 +42,14 @@ std::vector<StreamReader::TFileStore> StreamReader::parse(const char* pcInputStr
                 Q_ASSERT(iPoc == iLastPoc);
             }
             Q_ASSERT(iCU == iAddr);
-            read_vec<signed char>(pcInputStream, fileStore[0][iFrame][iCU]);
-            read_vec<signed char>(pcInputStream, fileStore[1][iFrame][iCU]);
-            read_vec<signed char>(pcInputStream, fileStore[2][iFrame][iCU]);
-            read_vec<signed char>(pcInputStream, fileStore[3][iFrame][iCU]);
-            read_vec<signed char>(pcInputStream, fileStore[4][iFrame][iCU]);
-            read_vec<signed char>(pcInputStream, fileStore[5][iFrame][iCU]);
-            read_vec_len<short>(pcInputStream, fileStore[6][iFrame][iCU], 1);
-            read_vec<short>(pcInputStream, fileStore[7][iFrame][iCU]);
+            read_vec<CUInfoParts::CUPU>(pcInputStream, fileStore[0][iFrame][iCU]);
+            read_vec<CUInfoParts::TU>(pcInputStream, fileStore[1][iFrame][iCU]);
+            read_vec<CUInfoParts::PRED>(pcInputStream, fileStore[2][iFrame][iCU]);
+            read_vec<CUInfoParts::MV>(pcInputStream, fileStore[3][iFrame][iCU]);
+            read_vec<CUInfoParts::MERGE>(pcInputStream, fileStore[4][iFrame][iCU]);
+            read_vec<CUInfoParts::INTRA>(pcInputStream, fileStore[5][iFrame][iCU]);
+            read_vec<CUInfoParts::BIT_LCU>(pcInputStream, fileStore[6][iFrame][iCU]);
+            read_vec<CUInfoParts::BIT_SCU>(pcInputStream, fileStore[7][iFrame][iCU]);
         }
     }
     return fileStore;

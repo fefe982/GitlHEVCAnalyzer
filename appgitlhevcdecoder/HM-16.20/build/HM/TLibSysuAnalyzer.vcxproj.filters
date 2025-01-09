@@ -41,7 +41,7 @@
     <ClInclude Include="..\..\..\TLibSysuAnalyzer\TSysuAnalyzerOutput.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CUInfo.h">
+    <ClInclude Include="..\..\..\TLibSysuAnalyzer\CUInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
