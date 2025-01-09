@@ -7,8 +7,9 @@
 #include "TLibCommon/TComDataCU.h"
 #include "TLibCommon/TComSlice.h"
 #include "TLibDecoder/TDecCu.h"
+#include "CUInfo.h"
 
-
+#define WRITE_TEXT_OUTPUT 1
 
 class TSysuAnalyzerOutput
 {
@@ -24,8 +25,8 @@ public:
 
   /// splitting mode
   Void writeOutCUInfo   ( TComDataCU* pcCU );
-  Void xWriteOutCUInfo  ( TComDataCU* pcCU, Int iLength, Int iOffset, UInt iDepth);
-  Void xWriteOutTUInfo  ( TComDataCU* pcCU, Int iLength, Int iOffset, UInt iDepth);
+  Void xWriteOutCUInfo(TComDataCU* pcCU, Int iLength, Int iOffset, UInt iDepth, CUInfo& frameInfo);
+  Void xWriteOutTUInfo(TComDataCU* pcCU, Int iLength, Int iOffset, UInt iDepth, CUInfo& frameInfo);
   
   /// Sequence parameter set output
   Void writeOutSps         ( TComSPS* pcSPS );
@@ -57,6 +58,8 @@ private:
   std::ofstream m_cGeneralOut;
   std::ofstream m_cSpsOut;          ///< SPS info
   std::ofstream m_cVpsOut;
+  std::ofstream m_decoderBinOut;
+#if WRITE_TEXT_OUTPUT
   std::ofstream m_cPredOutput;      ///< Prediction mode info output
   std::ofstream m_cCUPUOutput;      ///< CU info output
   std::ofstream m_cMVOutput;        ///< MV info output
@@ -69,7 +72,7 @@ private:
 
   /// Encoder output ( extracted in the encoding process
   std::ofstream m_cMEOutput;    ///< ME info (search point number, SAD, cost, etc)
-
+#endif
   static TSysuAnalyzerOutput* m_instance;
 
 };

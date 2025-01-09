@@ -41,6 +41,9 @@
     <ClInclude Include="..\..\..\TLibSysuAnalyzer\TSysuAnalyzerOutput.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CUInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="x64\Debug\$(TargetName)\qt\qmake\moc_predefs.h.cbt">

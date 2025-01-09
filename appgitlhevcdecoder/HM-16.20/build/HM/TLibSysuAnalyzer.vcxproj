@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\TLibSysuAnalyzer\TComSysuCuMDTools.h" />
     <ClInclude Include="..\..\..\TLibSysuAnalyzer\TSysuAnalyzerOutput.h" />
+    <ClInclude Include="CUInfo.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="x64\Debug\$(TargetName)\qt\qmake\moc_predefs.h.cbt">
