@@ -8,7 +8,7 @@ TSysuAnalyzerOutput::TSysuAnalyzerOutput() {
     m_cGeneralOut.open("decoder_general.txt", ios::out);
     m_cSpsOut.open("decoder_sps.txt", ios::out);
     m_cVpsOut.open("decoder_vps.txt", ios::out);
-    m_decoderBinOut.open("decoder_bin.txt", ios::out | ios::binary);
+    m_decoderBinOut.open("decoder_info.bin", ios::out | ios::binary);
 #if WRITE_TEXT_OUTPUT
     m_cPredOutput.open("decoder_pred.txt", ios::out);
     m_cCUPUOutput.open("decoder_cupu.txt", ios::out);
@@ -73,8 +73,8 @@ void TSysuAnalyzerOutput::writeOutTileInfo(TComPic* pcPic) {
             m_cTileOutPut << "<" << iPoc << "," << (iTileNumCols) * (iTileNumRows) << ">"
                 << " " << uiFirstCUAddr << " " << uiTileWidth << " " << uiTileHeight
                 << endl;
-        }
 #endif
+        }
 }
 
 #endif

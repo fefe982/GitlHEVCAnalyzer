@@ -9,7 +9,7 @@
 #include "TLibDecoder/TDecCu.h"
 #include "CUInfo.h"
 
-#define WRITE_TEXT_OUTPUT 1
+#define WRITE_TEXT_OUTPUT 0
 
 class TSysuAnalyzerOutput
 {

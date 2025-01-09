@@ -162,21 +162,27 @@ bool OpenBitstreamCommand::execute(GitlCommandParameter& rcInputArg, [[maybe_unu
         {"/decoder_bit_scu.txt", "Bits SCU", std::make_unique<BitParserSCU>()},
     };
 
+    std::vector<StreamReader::TFileStore> fileStores;
+    {
+        Timer t("read bin file");
+        QString strFilename = strDecoderOutputPath + "/decoder_info.bin";
+        auto fileNameLocal = std::string(strFilename.toLocal8Bit());
+        size_t fileSz = std::filesystem::file_size(fileNameLocal);
+        std::ifstream stream(fileNameLocal, std::ios::binary);
+        std::vector<char> fileContent(fileSz);
+        stream.read(fileContent.data(), fileSz);
+        fileStores = StreamReader::parse(fileContent.data(), pcSequence->getFramesInDisOrder().size(), pcSequence->getNumberMaxCu());
+    }
+
     int step = 4;
-    for (auto& parseInfo : infoFiles) {
-        QString strFilename = strDecoderOutputPath + parseInfo.fileName;
+    for (int i = 0; i < sizeof(infoFiles)/sizeof(ParserInfo); i++) {
+        auto& parseInfo = infoFiles[i];
         if (bSuccess)
         {
             Timer t(parseInfo.description + " parsing finished");
             cDecodingStageInfo.setParameter("decoding_progress", QString("(%1/11)Start Parsing %2 ...").arg(step++).arg(parseInfo.description));
             dispatchEvt(cDecodingStageInfo);
-            auto fileNameLocal = std::string(strFilename.toLocal8Bit());
-            size_t fileSz = std::filesystem::file_size(fileNameLocal);
-            std::ifstream stream(fileNameLocal, std::ios::binary);
-            std::vector<char> fileContent(fileSz + 1);
-            stream.read(fileContent.data(), fileSz);
-            fileContent[fileSz] = 0;
-            bSuccess = parseInfo.pParser->parseFile(fileContent, pcSequence);
+            bSuccess = parseInfo.pParser->parseFile(std::move(fileStores[i]), pcSequence);
             pcSequence->addDelyedParser(std::move(parseInfo.pParser));
         }
     }

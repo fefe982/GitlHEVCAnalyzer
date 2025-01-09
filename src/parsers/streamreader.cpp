@@ -5,64 +5,46 @@
 #include <iostream>
 #include <string>
 
-StreamReader::TFileStore StreamReader::parse(std::vector<char>& pcInputStream, size_t frames, size_t cuCnt) {
-    TFileStore fileStore(frames, std::vector<TCUStore>(cuCnt));
+namespace {
+    template<typename T> T read(const char*& pcInputStream) {
+        T val = *(T*)pcInputStream;
+        pcInputStream += sizeof(T);
+        return val;
+    }
+    template<typename T> void read_vec(const char*& pcInputStream, std::vector<short>& v) {
+        int sz = read<char>(pcInputStream);
+        read_vec_len<T>(pcInputStream, v, sz);
+    }
+    template<typename T> void read_vec_len(const char*& pcInputStream, std::vector<short>& v, int sz) {
+        v.resize(sz);
+        for (int i = 0; i < sz; i++) {
+            v[i] = read<T>(pcInputStream);
+        }
+    }
+}
+
+std::vector<StreamReader::TFileStore> StreamReader::parse(const char* pcInputStream, size_t frames, size_t cuCnt) {
+    std::vector<TFileStore> fileStore(8, TFileStore(frames, std::vector<TCUStore>(cuCnt)));
     size_t iLastPoc = (size_t)-1;
-    size_t iDecOrder = (size_t)-1;
-    size_t iCU = cuCnt;
-    char* lineStart;
-    char* lineEnd = pcInputStream.data() - 1;
-    char* contentEnd = pcInputStream.data() + pcInputStream.size();
-    for(;;)
-    {
-        lineStart = lineEnd + 1;
-        while (lineStart < contentEnd && (*lineStart == '\r' || *lineStart == '\n')) {
-            lineStart++;
-        }
-        if (lineStart >= contentEnd) {
-            break;
-        }
-        lineEnd = lineStart + 1;
-        int nBlank=0;
-        while (lineEnd < contentEnd && *lineEnd != '\r' && *lineEnd != '\n') {
-            if (*lineEnd == ' ') {
-                nBlank++;
+    for (int iFrame = 0; iFrame < frames; iFrame++ ){
+        for (int iCU = 0; iCU < cuCnt; iCU++) {
+            int iPoc = read<short>(pcInputStream);
+            int iAddr = read<short>(pcInputStream);
+            if (iCU == 0) {
+                Q_ASSERT(iPoc != iLastPoc);
+                iLastPoc = iPoc;
+            } else {
+                Q_ASSERT(iPoc == iLastPoc);
             }
-            lineEnd++;
-        }
-        if (lineEnd < contentEnd) {
-            *lineEnd = 0;
-        }
-        if (lineStart + 1 == lineEnd || *lineStart != '<') {
-            continue;
-        }
-        char* endPos = lineStart + 1;
-        int iPoc = std::strtol(endPos, &endPos, 10);
-        Q_ASSERT(*endPos = ',');
-        int iAddr = std::strtol(endPos + 1, &endPos, 10);
-        Q_ASSERT(*endPos = '>');
-        endPos++;
-        iCU += 1;
-        if (iCU >= cuCnt) {
-            iCU = 0;
-            iDecOrder += 1;
-            Q_ASSERT(iPoc != iLastPoc);
-            iLastPoc = iPoc;
-        }
-        else {
-            Q_ASSERT(iPoc == iLastPoc);
-        }
-        Q_ASSERT(iCU == iAddr);
-        Q_ASSERT(iDecOrder < frames);
-        char* sPos = endPos;
-        fileStore[iDecOrder][iAddr].reserve(nBlank);
-        for (;;) {
-            int i = std::strtol(sPos, &endPos, 10);
-            if (sPos == endPos) {
-                break;
-            }
-            fileStore[iDecOrder][iAddr].push_back(i);
-            sPos = endPos;
+            Q_ASSERT(iCU == iAddr);
+            read_vec<signed char>(pcInputStream, fileStore[0][iFrame][iCU]);
+            read_vec<signed char>(pcInputStream, fileStore[1][iFrame][iCU]);
+            read_vec<signed char>(pcInputStream, fileStore[2][iFrame][iCU]);
+            read_vec<signed char>(pcInputStream, fileStore[3][iFrame][iCU]);
+            read_vec<signed char>(pcInputStream, fileStore[4][iFrame][iCU]);
+            read_vec<signed char>(pcInputStream, fileStore[5][iFrame][iCU]);
+            read_vec_len<short>(pcInputStream, fileStore[6][iFrame][iCU], 1);
+            read_vec<short>(pcInputStream, fileStore[7][iFrame][iCU]);
         }
     }
     return fileStore;
@@ -70,13 +52,13 @@ StreamReader::TFileStore StreamReader::parse(std::vector<char>& pcInputStream, s
 
 InfoParser::InfoParser() : m_nFrames(0), m_nCu(0), m_delayed(true), m_pcSequence(nullptr) {}
 
-bool InfoParser::parseFile(std::vector<char>& pcInputStream, ComSequence* pcSequence)
+bool InfoParser::parseFile(StreamReader::TFileStore &&fileStore, ComSequence* pcSequence)
 {
     Q_ASSERT(pcSequence != NULL);
     m_pcSequence = pcSequence;
     m_nFrames = pcSequence->getFramesInDisOrder().size();
     m_nCu = pcSequence->getNumberMaxCu();
-    m_fileStore = StreamReader::parse(pcInputStream, m_nFrames, m_nCu);
+    m_fileStore = std::move(fileStore);
     auto flag = parseSequence();
     if (!m_delayed) {
         m_fileStore.clear();
@@ -106,6 +88,10 @@ bool InfoParser::parseFrame(size_t iFrame)
 }
 
 bool InfoParser::parseSequence() { return true; }
+
+bool InfoParser::delayed() const {
+    return m_delayed;
+}
 
 size_t InfoParser::xReadCU(const StreamReader::TCUStore& vPCInfo, size_t s, ComCU& pcCU) {
     if (!pcCU.getSCUs().empty())

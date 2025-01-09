@@ -11,15 +11,16 @@ public:
     typedef short TElemType;
     typedef std::vector<TElemType> TCUStore;
     typedef std::vector<std::vector<TCUStore>> TFileStore;
-    static TFileStore parse(std::vector<char>& pcInputStream, size_t frames, size_t cuCnt);
+    static std::vector<TFileStore> parse(const char* pcInputStream, size_t frames, size_t cuCnt);
 };
 
 class InfoParser {
 public:
     InfoParser();
     virtual ~InfoParser() = default;
-    bool parseFile(std::vector<char>& pcInputStream, ComSequence* pcSequence);
+    bool parseFile(StreamReader::TFileStore&& fileStore, ComSequence* pcSequence);
     bool parseFrame(size_t iFrame);
+    bool delayed() const;
 protected:
     size_t m_nFrames;
     size_t m_nCu;

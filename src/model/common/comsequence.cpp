@@ -64,7 +64,9 @@ int ComSequence::getNumberMaxCu() const {
 }
 
 void ComSequence::addDelyedParser(std::unique_ptr<InfoParser> &&parser) {
-    m_vDelayedParser.emplace_back(std::move(parser));
+    if (parser->delayed()) {
+        m_vDelayedParser.emplace_back(std::move(parser));
+    }
 }
 
 bool ComSequence::parseFrame(size_t iFrame) {
