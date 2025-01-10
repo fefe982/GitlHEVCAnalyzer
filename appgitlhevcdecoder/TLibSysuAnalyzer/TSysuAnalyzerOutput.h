@@ -26,7 +26,6 @@ public:
   /// splitting mode
   Void writeOutCUInfo   ( TComDataCU* pcCU );
   Void xWriteOutCUInfo(TComDataCU* pcCU, Int iLength, Int iOffset, UInt iDepth, CUInfo& frameInfo);
-  Void xWriteOutTUInfo(TComDataCU* pcCU, Int iLength, Int iOffset, UInt iDepth, CUInfo& frameInfo);
   
   /// Sequence parameter set output
   Void writeOutSps         ( TComSPS* pcSPS );
@@ -53,6 +52,8 @@ public:
   static TSysuAnalyzerOutput* getInstance() { if( m_instance == NULL ) m_instance = new TSysuAnalyzerOutput(); return m_instance;}
 
 private:
+    Void xWriteOutTUInfo(const TComDataCU* pcCU, Int iLength, Int iOffset, UInt iDepth, CUInfo& cuInfo);
+    Void xWriteOutTUInfoInner(const TComDataCU* pcCU, Int iLength, Int iOffset, UInt iDepth, UInt id, CUInfo& cuInfo);
 
   /// Decoder output ( extracted from bitstream )
   std::ofstream m_cGeneralOut;

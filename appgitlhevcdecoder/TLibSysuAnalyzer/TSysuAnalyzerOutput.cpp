@@ -303,21 +303,34 @@ void TSysuAnalyzerOutput::xWriteOutCUInfo(TComDataCU* pcCU, Int iLength, Int iOf
 }
 
 
-Void TSysuAnalyzerOutput::xWriteOutTUInfo(TComDataCU* pcCU, Int iLength, Int iOffset, UInt iDepth, CUInfo& cuInfo) {
-    UChar* puhTranIdx = pcCU->getTransformIdx();
-    if (puhTranIdx[iOffset] <= iDepth) {
+Void TSysuAnalyzerOutput::xWriteOutTUInfo(const TComDataCU* pcCU, Int iLength, Int iOffset, UInt iDepth, CUInfo& cuInfo) {
+    UChar TransIdx = pcCU->getTransformIdx(iOffset);
+    if (TransIdx <= iDepth) {
         /// Write TU info
 #if WRITE_TEXT_OUTPUT
-        m_cTUOutput << (Int)(puhTranIdx[iOffset]) << " ";
+        m_cTUOutput << 0 << " ";
 #endif
-        cuInfo.push_tu(puhTranIdx[iOffset]);
+        cuInfo.push_tu(0);
     } else {
+        xWriteOutTUInfoInner(pcCU, iLength, iOffset, iDepth, 0, cuInfo);
+    }
+}
+
+Void TSysuAnalyzerOutput::xWriteOutTUInfoInner(const TComDataCU* pcCU, Int iLength, Int iOffset, UInt iDepth, UInt id, CUInfo& cuInfo) {
+    UChar TransIdx = pcCU->getTransformIdx(iOffset);
+    if (TransIdx > iDepth) {
+        // iDpeth   idOffset  id + idOffset
+        // 0        1         1
+        // 1        2         2 ... 5
+        // 2        6         6 ... 21
+        // 3        22        22 ... 85
+        UInt idOffset = ((1 << (iDepth << 1)) - 1) / 3 + 1;
 #if WRITE_TEXT_OUTPUT
-        m_cTUOutput << "99" << " ";
+        m_cTUOutput << (idOffset + id) << " ";
 #endif
-        cuInfo.push_tu(99);
+        cuInfo.push_tu(idOffset + id);
         for (UInt i = 0; i < 4; i++) {
-            xWriteOutTUInfo(pcCU, iLength / 4, iOffset + iLength / 4 * i, iDepth + 1, cuInfo);
+            xWriteOutTUInfoInner(pcCU, iLength / 4, iOffset + iLength / 4 * i, iDepth + 1, id * 4 + i, cuInfo);
         }
     }
 }
