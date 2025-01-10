@@ -6,6 +6,7 @@
 
 class IntraParser : public InfoParser
 {
+    using InfoParser::InfoParser;
 protected:
     virtual size_t xReadCULeaf(const StreamReader::TCUStore &vPCInfo, size_t s, ComCU& pcCU)override;
 };

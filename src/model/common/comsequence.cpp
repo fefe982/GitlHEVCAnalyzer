@@ -6,6 +6,7 @@
 #include "parsers/mergeparser.h"
 #include "parsers/intraparser.h"
 #include "parsers/bitparser.h"
+#include "parsers/streamreader.h"
 
 ComSequence::ComSequence()
 {
@@ -64,15 +65,36 @@ int ComSequence::getNumberMaxCu() const {
 }
 
 void ComSequence::addDelyedParser(std::unique_ptr<InfoParser> &&parser) {
-    if (parser->delayed()) {
-        m_vDelayedParser.emplace_back(std::move(parser));
-    }
+    m_vDelayedParser.emplace_back(std::move(parser));
 }
 
 bool ComSequence::parseFrame(size_t iFrame) {
-    bool res = true;
-    for (auto& parser : m_vDelayedParser) {
-        res == res && parser->parseFrame(iFrame);
+    if (m_vFramePointers[iFrame] == nullptr) {
+        return true;
     }
+    // TODO: handle display order and decode order difference
+    StreamReader::TFileStore fileStore = StreamReader::parse(m_vFramePointers[iFrame], getNumberMaxCu());
+    bool res = true;
+    for (int i = 0; i < m_vDelayedParser.size(); i++) {
+        auto& parser = m_vDelayedParser[i];
+        res == res && parser->parseFrame(fileStore[i], *getFramesInDisOrder()[iFrame]);
+    }
+    m_vFramePointers[iFrame] = nullptr;
     return res;
+}
+
+std::vector<char>& ComSequence::getFileStore() {
+    return m_vFileStore;
+}
+
+const std::vector<char>& ComSequence::getFileStore() const {
+    return m_vFileStore;
+}
+
+std::vector<const char*>& ComSequence::getFramePointer() {
+    return m_vFramePointers;
+}
+
+const char* ComSequence::getFramePointer(int iFrame) {
+    return m_vFramePointers[iFrame];
 }

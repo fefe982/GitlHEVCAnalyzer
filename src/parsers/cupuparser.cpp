@@ -2,40 +2,32 @@
 #include <QDebug>
 constexpr auto CU_SLIPT_FLAG = 99;      ///< CU splitting flag in file
 
-bool CUPUParser::parseSequence()
-{
+bool CUPUParser::parseSequence(const std::vector<StreamReader::TCUStore>& vCuInfo, ComFrame& frame) {
     int iSeqWidth = m_pcSequence->getWidth();
     int iMaxCUSize = m_pcSequence->getMaxCUSize();
-    int iCUOneRow = (iSeqWidth+iMaxCUSize-1)/iMaxCUSize;
+    int iCUOneRow = (iSeqWidth + iMaxCUSize - 1) / iMaxCUSize;
     size_t iSplitCount = 0;
     size_t iPUCount = 0;
-    for (auto& vFrame : m_fileStore) {
-        for (auto& vPoc : vFrame) {
-            for (int i : vPoc) {
-                if (i == CU_SLIPT_FLAG) {
-                    iSplitCount++;
-                }
-                else {
-                    iPUCount += ComCU::getPUNum((PartSize)i);
-                }
+    for (auto& vPoc : vCuInfo) {
+        for (int i : vPoc) {
+            if (i == CU_SLIPT_FLAG) {
+                iSplitCount++;
+            } else {
+                iPUCount += ComCU::getPUNum((PartSize)i);
             }
         }
     }
-    int iLCUSize = m_pcSequence->getMaxCUSize();
-    for (int iFrame = 0; iFrame < m_nFrames; iFrame++) {
-        ComFrame* pcFrame = m_pcSequence->getFramesInDecOrder().at(iFrame);
-        pcFrame->getLCUs().resize(m_nCu);
-        for (int iAddr = 0; iAddr < m_nCu; iAddr++) {
-            ComCU& pcLCU = pcFrame->getLCUs()[iAddr];
-            pcLCU.setAddr(iAddr);
-            pcLCU.setDepth(0);
-            pcLCU.setZorder(0);
-            pcLCU.setSize(iLCUSize);
-            int iPixelX = (pcLCU.getAddr() % iCUOneRow) * iMaxCUSize;
-            int iPixelY = (pcLCU.getAddr() / iCUOneRow) * iMaxCUSize;
-            pcLCU.setX(iPixelX);
-            pcLCU.setY(iPixelY);
-        }
+    frame.getLCUs().resize(vCuInfo.size());
+    for (int iAddr = 0; iAddr < vCuInfo.size(); iAddr++) {
+        ComCU& pcLCU = frame.getLCUs()[iAddr];
+        pcLCU.setAddr(iAddr);
+        pcLCU.setDepth(0);
+        pcLCU.setZorder(0);
+        pcLCU.setSize(iMaxCUSize);
+        int iPixelX = (pcLCU.getAddr() % iCUOneRow) * iMaxCUSize;
+        int iPixelY = (pcLCU.getAddr() / iCUOneRow) * iMaxCUSize;
+        pcLCU.setX(iPixelX);
+        pcLCU.setY(iPixelY);
     }
     return true;
 }

@@ -65,31 +65,31 @@ public:
     void push_bitSCU(int val) {
         push(m_bitSCUInfo, val);
     }
-    void write_cupu(std::ofstream& of) const {
+    void write_cupu(std::ostream& of) const {
         write_vec<CUInfoParts::CUPU>(of, m_cupuInfo);
     }
-    void write_tu(std::ofstream& of) const {
+    void write_tu(std::ostream& of) const {
         write_vec<CUInfoParts::TU>(of, m_tuInfo);
     }
-    void write_pred(std::ofstream& of) const {
+    void write_pred(std::ostream& of) const {
         write_vec<CUInfoParts::PRED>(of, m_predInfo);
     }
-    void write_mv(std::ofstream& of) const {
+    void write_mv(std::ostream& of) const {
         write_vec<CUInfoParts::MV>(of, m_mvInfo);
     }
-    void write_merge(std::ofstream& of) const {
+    void write_merge(std::ostream& of) const {
         write_vec<CUInfoParts::MERGE>(of, m_mergeInfo);
     }
-    void write_intra(std::ofstream& of) const {
+    void write_intra(std::ostream& of) const {
         write_vec<CUInfoParts::INTRA>(of, m_intraInfo);
     }
-    void write_bitLCU(std::ofstream& of) const {
+    void write_bitLCU(std::ostream& of) const {
         write_vec<CUInfoParts::BIT_LCU>(of, m_bitLCUInfo);
     }
-    void write_bitSCU(std::ofstream& of) const {
+    void write_bitSCU(std::ostream& of) const {
         write_vec<CUInfoParts::BIT_SCU>(of, m_bitSCUInfo);
     }
-    void write_all(std::ofstream& of) const {
+    void write_all(std::ostream& of) const {
         write_cupu(of);
         write_tu(of);
         write_pred(of);
@@ -109,7 +109,7 @@ private:
     std::vector<short> m_bitLCUInfo;
     std::vector<short> m_bitSCUInfo;
     template<CUInfoParts Part>
-    static void write_vec(std::ofstream& of, const std::vector<typename CUInfoPartTrait<Part>::value_type>& v) {
+    static void write_vec(std::ostream& of, const std::vector<typename CUInfoPartTrait<Part>::value_type>& v) {
         assert(v.size() < 128);
         if constexpr (CUInfoPartTrait<Part>::len == 0) {
             char sz = (char)v.size();

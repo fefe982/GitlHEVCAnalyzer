@@ -1,21 +1,19 @@
 #include "bitparser.h"
 
-BitParserLCU::BitParserLCU() {
-    m_delayed = false;
+BitParserLCU::BitParserLCU() :BitParserLCU(nullptr) {
+}
+
+BitParserLCU::BitParserLCU(ComSequence* pcSequence) : InfoParser(pcSequence) {
+    m_has_leaf = false;
 }
 
 size_t BitParserLCU::xReadCULeaf(const StreamReader::TCUStore&, size_t s, ComCU&) {
     return s;
 }
-bool BitParserLCU::parseSequence()
-{
-    for (int iFrame = 0; iFrame < m_nFrames; iFrame++) {
-        ComFrame* pcFrame = m_pcSequence->getFramesInDecOrder().at(iFrame);
-        for (int iAddr = 0; iAddr < m_nCu; iAddr++) {
-            auto pcLCU = &pcFrame->getLCUs()[iAddr];
-            int iLCUBit = m_fileStore[iFrame][iAddr][0];
-            pcLCU->setBitCount(iLCUBit);
-        }
+bool BitParserLCU::parseSequence(const std::vector<StreamReader::TCUStore>& vCuInfo, ComFrame& frame) {
+    for (int iAddr = 0; iAddr < vCuInfo.size(); iAddr++) {
+        int iLCUBit = vCuInfo[iAddr][0];
+        frame.getLCUs()[iAddr].setBitCount(iLCUBit);
     }
     return true;
 }

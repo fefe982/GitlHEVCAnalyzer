@@ -80,8 +80,9 @@ void TSysuAnalyzerOutput::writeOutTileInfo(TComPic* pcPic) {
 #endif
 
 namespace {
-    void write_short(std::ostream& os, short i) {
-        os.write((char*)&i, sizeof(short));
+    template<typename T>
+    void write(std::ostream& os, T i) {
+        os.write((char*)&i, sizeof(T));
     }
 }
 void TSysuAnalyzerOutput::writeOutCUInfo(TComDataCU* pcCU) {
@@ -94,8 +95,7 @@ void TSysuAnalyzerOutput::writeOutCUInfo(TComDataCU* pcCU) {
 #endif
     Int iTotalNumPart = pcCU->getTotalNumPart();
 
-    write_short(m_decoderBinOut, iPoc);
-    write_short(m_decoderBinOut, iAddr);
+    write(m_frameBuffer, iAddr);
 #if WRITE_TEXT_OUTPUT
     m_cPredOutput << "<" << iPoc << "," << iAddr << ">" << " ";  ///< Write out prediction info
     m_cCUPUOutput << "<" << iPoc << "," << iAddr << ">" << " ";  ///< Write out CU & PU splitting info
@@ -119,7 +119,7 @@ void TSysuAnalyzerOutput::writeOutCUInfo(TComDataCU* pcCU) {
         m_cBitOutputSCU << aiCUBits.at(i) << " "; ///< Bit info
 #endif
     }
-    cuInfo.write_all(m_decoderBinOut);
+    cuInfo.write_all(m_frameBuffer);
 #if WRITE_TEXT_OUTPUT
     m_cPredOutput << endl;
     m_cCUPUOutput << endl;
@@ -442,6 +442,12 @@ Void TSysuAnalyzerOutput::writeOutGeneral(TComSlice* pcSlice, double decodeTime)
     rapidjson::Writer w(sb);
     doc.Accept(w);
     m_cGeneralOut << sb.GetString() << std::endl;
+
+    std::string_view framebuffer = m_frameBuffer.view();
+    printf("%08x\n", framebuffer.size());
+    write(m_decoderBinOut, (int)framebuffer.size());
+    m_decoderBinOut.write(framebuffer.data(), framebuffer.size());
+    m_frameBuffer = std::ostringstream{ std::ios::binary };
 }
 
 TSysuAnalyzerOutput::~TSysuAnalyzerOutput() = default;

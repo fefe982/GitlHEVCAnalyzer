@@ -60,6 +60,7 @@ private:
   std::ofstream m_cSpsOut;          ///< SPS info
   std::ofstream m_cVpsOut;
   std::ofstream m_decoderBinOut;
+  std::ostringstream m_frameBuffer{ std::ios::binary };
 #if WRITE_TEXT_OUTPUT
   std::ofstream m_cPredOutput;      ///< Prediction mode info output
   std::ofstream m_cCUPUOutput;      ///< CU info output

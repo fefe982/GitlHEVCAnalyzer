@@ -72,10 +72,16 @@ private:
     std::vector<std::unique_ptr<InfoParser>> m_vDelayedParser;
     int m_iNumUnitsInTick;
     int m_iTimeScale;
+    std::vector<char> m_vFileStore;
+    std::vector<const char*> m_vFramePointers;
 public:
     int getNumberMaxCu()const;
     void addDelyedParser(std::unique_ptr<InfoParser> &&parser);
     bool parseFrame(size_t iFrame);
+    std::vector<char>& getFileStore();
+    const std::vector<char>& getFileStore()const;
+    std::vector<const char*>& getFramePointer();
+    const char* getFramePointer(int iFrame);
 };
 
 

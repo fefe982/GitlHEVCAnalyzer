@@ -1,6 +1,6 @@
 #include "streamreader.h"
 
-#include "model/common/comsequence.h"
+#include "model/common/comframe.h"
 #include "../appgitlhevcdecoder/TLibSysuAnalyzer/CUInfo.h"
 #include <iostream>
 #include <string>
@@ -28,75 +28,53 @@ namespace {
     }
 }
 
-std::vector<StreamReader::TFileStore> StreamReader::parse(const char* pcInputStream, size_t frames, size_t cuCnt) {
-    std::vector<TFileStore> fileStore(8, TFileStore(frames, std::vector<TCUStore>(cuCnt)));
-    size_t iLastPoc = (size_t)-1;
-    for (int iFrame = 0; iFrame < frames; iFrame++ ){
-        for (int iCU = 0; iCU < cuCnt; iCU++) {
-            int iPoc = read<short>(pcInputStream);
-            int iAddr = read<short>(pcInputStream);
-            if (iCU == 0) {
-                Q_ASSERT(iPoc != iLastPoc);
-                iLastPoc = iPoc;
-            } else {
-                Q_ASSERT(iPoc == iLastPoc);
-            }
-            Q_ASSERT(iCU == iAddr);
-            read_vec<CUInfoParts::CUPU>(pcInputStream, fileStore[0][iFrame][iCU]);
-            read_vec<CUInfoParts::TU>(pcInputStream, fileStore[1][iFrame][iCU]);
-            read_vec<CUInfoParts::PRED>(pcInputStream, fileStore[2][iFrame][iCU]);
-            read_vec<CUInfoParts::MV>(pcInputStream, fileStore[3][iFrame][iCU]);
-            read_vec<CUInfoParts::MERGE>(pcInputStream, fileStore[4][iFrame][iCU]);
-            read_vec<CUInfoParts::INTRA>(pcInputStream, fileStore[5][iFrame][iCU]);
-            read_vec<CUInfoParts::BIT_LCU>(pcInputStream, fileStore[6][iFrame][iCU]);
-            read_vec<CUInfoParts::BIT_SCU>(pcInputStream, fileStore[7][iFrame][iCU]);
-        }
+std::vector<const char*> StreamReader::getFramePointer(const char* pcInputStream, size_t frames) {
+    std::vector<const char*> framePointer(frames);
+    for (int iFrame = 0; iFrame < frames; iFrame++) {
+        int iFrameSize = read<int>(pcInputStream);
+        framePointer[iFrame] = pcInputStream;
+        pcInputStream += iFrameSize;
+    }
+    return framePointer;
+}
+StreamReader::TFileStore StreamReader::parse(const char* pcInputStream, size_t cuCnt) {
+    TFileStore fileStore(8, std::vector<TCUStore>(cuCnt));
+    for (int iCU = 0; iCU < cuCnt; iCU++) {
+        int iAddr = read<int>(pcInputStream);
+        Q_ASSERT(iCU == iAddr);
+        read_vec<CUInfoParts::CUPU>(pcInputStream, fileStore[0][iCU]);
+        read_vec<CUInfoParts::TU>(pcInputStream, fileStore[1][iCU]);
+        read_vec<CUInfoParts::PRED>(pcInputStream, fileStore[2][iCU]);
+        read_vec<CUInfoParts::MV>(pcInputStream, fileStore[3][iCU]);
+        read_vec<CUInfoParts::MERGE>(pcInputStream, fileStore[4][iCU]);
+        read_vec<CUInfoParts::INTRA>(pcInputStream, fileStore[5][iCU]);
+        read_vec<CUInfoParts::BIT_LCU>(pcInputStream, fileStore[6][iCU]);
+        read_vec<CUInfoParts::BIT_SCU>(pcInputStream, fileStore[7][iCU]);
     }
     return fileStore;
 }
 
-InfoParser::InfoParser() : m_nFrames(0), m_nCu(0), m_delayed(true), m_pcSequence(nullptr) {}
+InfoParser::InfoParser(ComSequence *pcSequence) : m_has_leaf(true), m_pcSequence(pcSequence) {}
 
-bool InfoParser::parseFile(StreamReader::TFileStore &&fileStore, ComSequence* pcSequence)
-{
-    Q_ASSERT(pcSequence != NULL);
-    m_pcSequence = pcSequence;
-    m_nFrames = pcSequence->getFramesInDisOrder().size();
-    m_nCu = pcSequence->getNumberMaxCu();
-    m_fileStore = std::move(fileStore);
-    auto flag = parseSequence();
-    if (!m_delayed) {
-        m_fileStore.clear();
-    }
-    return flag;
-}
+InfoParser::InfoParser() : InfoParser(nullptr) {}
 
-bool InfoParser::parseFrame(size_t iFrame)
+bool InfoParser::parseFrame(const std::vector<StreamReader::TCUStore>& vCuInfo, ComFrame& pcFrame)
 {
-    if (!m_delayed) {
-        return true;
-    }
-    if (m_pcSequence == nullptr) {
+    if (!parseSequence(vCuInfo, pcFrame)) {
         return false;
     }
-    if (m_fileStore[iFrame].empty()) {
+    if (!m_has_leaf) {
         return true;
     }
-    ComFrame* pcFrame = m_pcSequence->getFramesInDecOrder().at(iFrame);
-    for (int iAddr = 0; iAddr < m_nCu; iAddr++) {
-        if (xReadCU(m_fileStore[iFrame][iAddr], 0, pcFrame->getLCUs()[iAddr]) == size_t(-1)) {
+    for (int iAddr = 0; iAddr < vCuInfo.size(); iAddr++) {
+        if (xReadCU(vCuInfo[iAddr], 0, pcFrame.getLCUs()[iAddr]) == size_t(-1)) {
             return false;
         }
     }
-    m_fileStore[iFrame].clear();
     return true;
 }
 
-bool InfoParser::parseSequence() { return true; }
-
-bool InfoParser::delayed() const {
-    return m_delayed;
-}
+bool InfoParser::parseSequence(const std::vector<StreamReader::TCUStore>&, ComFrame&) { return true; }
 
 size_t InfoParser::xReadCU(const StreamReader::TCUStore& vPCInfo, size_t s, ComCU& pcCU) {
     if (!pcCU.getSCUs().empty())

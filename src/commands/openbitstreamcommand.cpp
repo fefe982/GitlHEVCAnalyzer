@@ -152,14 +152,14 @@ bool OpenBitstreamCommand::execute(GitlCommandParameter& rcInputArg, [[maybe_unu
     }
 
     ParserInfo infoFiles[] = {
-        {"/decoder_cupu.txt", "CU & PU structure", std::make_unique<CUPUParser>()},
-        {"/decoder_tu.txt","TU structure", std::make_unique<TUParser>()},
-        {"/decoder_pred.txt", "Predtion Mode", std::make_unique<PredParser>()},
-        {"/decoder_mv.txt", "Motion Vectors", std::make_unique<MVParser>()},
-        {"/decoder_merge.txt","Motion Vector Merge", std::make_unique<MergeParser>()},
-        {"/decoder_intra.txt","Intra Info", std::make_unique<IntraParser>()},
-        {"/decoder_bit_lcu.txt","Bits LCU", std::make_unique<BitParserLCU>()},
-        {"/decoder_bit_scu.txt", "Bits SCU", std::make_unique<BitParserSCU>()},
+        {"/decoder_cupu.txt", "CU & PU structure", std::make_unique<CUPUParser>(pcSequence)},
+        {"/decoder_tu.txt","TU structure", std::make_unique<TUParser>(pcSequence)},
+        {"/decoder_pred.txt", "Predtion Mode", std::make_unique<PredParser>(pcSequence)},
+        {"/decoder_mv.txt", "Motion Vectors", std::make_unique<MVParser>(pcSequence)},
+        {"/decoder_merge.txt","Motion Vector Merge", std::make_unique<MergeParser>(pcSequence)},
+        {"/decoder_intra.txt","Intra Info", std::make_unique<IntraParser>(pcSequence)},
+        {"/decoder_bit_lcu.txt","Bits LCU", std::make_unique<BitParserLCU>(pcSequence)},
+        {"/decoder_bit_scu.txt", "Bits SCU", std::make_unique<BitParserSCU>(pcSequence)},
     };
 
     std::vector<StreamReader::TFileStore> fileStores;
@@ -169,9 +169,10 @@ bool OpenBitstreamCommand::execute(GitlCommandParameter& rcInputArg, [[maybe_unu
         auto fileNameLocal = std::string(strFilename.toLocal8Bit());
         size_t fileSz = std::filesystem::file_size(fileNameLocal);
         std::ifstream stream(fileNameLocal, std::ios::binary);
-        std::vector<char> fileContent(fileSz);
+        std::vector<char>& fileContent = pcSequence->getFileStore();
+        fileContent.resize(fileSz);
         stream.read(fileContent.data(), fileSz);
-        fileStores = StreamReader::parse(fileContent.data(), pcSequence->getFramesInDisOrder().size(), pcSequence->getNumberMaxCu());
+        pcSequence->getFramePointer() = StreamReader::getFramePointer(fileContent.data(), pcSequence->getFramesInDisOrder().size());
     }
 
     int step = 4;
@@ -182,7 +183,6 @@ bool OpenBitstreamCommand::execute(GitlCommandParameter& rcInputArg, [[maybe_unu
             Timer t(parseInfo.description + " parsing finished");
             cDecodingStageInfo.setParameter("decoding_progress", QString("(%1/11)Start Parsing %2 ...").arg(step++).arg(parseInfo.description));
             dispatchEvt(cDecodingStageInfo);
-            bSuccess = parseInfo.pParser->parseFile(std::move(fileStores[i]), pcSequence);
             pcSequence->addDelyedParser(std::move(parseInfo.pParser));
         }
     }
